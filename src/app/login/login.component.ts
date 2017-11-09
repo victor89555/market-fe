@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  title = environment.title;
+  // title = environment.title;
   loginForm: FormGroup;
   showError: boolean;
 

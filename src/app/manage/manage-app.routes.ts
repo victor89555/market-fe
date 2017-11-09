@@ -3,6 +3,7 @@ import { ManageAppComponent } from './manage-app.component';
 import { AuthLoginPermission } from 'rebirth-permission';
 import { OrderMockComponent } from './order-mock/order-mock.component';
 import { UserMockComponent } from './user-mock/user-mock.component';
+import { InlineComponent } from './order/order-list.component';
 
 export const ROUTER_CONFIG: Routes = [
   {
@@ -16,6 +17,7 @@ export const ROUTER_CONFIG: Routes = [
       { path: 'order', component: OrderMockComponent },
       { path: 'user', component: UserMockComponent },
       { path: 'document', component: UserMockComponent },
+      { path: 'inline', component: InlineComponent },
     ]
   }
 ];

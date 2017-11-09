@@ -14,8 +14,6 @@ import { Router } from '@angular/router';
     <div class="root-router-outlet">
       <router-outlet></router-outlet>
     </div>
-    <app-page-footer></app-page-footer>
-
   `,
   styleUrls: ['./app.component.scss']
 })

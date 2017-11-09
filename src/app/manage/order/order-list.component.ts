@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
 @Component({
   selector: 'app-inline',
-  templateUrl: './inline.component.html',
+  templateUrl: './order-list.component.html',
   styleUrls: [
     './themes/material.scss',
     './themes/dark.scss',
@@ -30,8 +30,7 @@ export class InlineComponent {
     this.curState = state;
   }
 
-  version: string = "1";
   constructor(location: Location) {
-    this.state = location.path(true);
+    this.curState = location.path(true);
   }
 }
