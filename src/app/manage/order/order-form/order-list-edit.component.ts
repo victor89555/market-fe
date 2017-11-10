@@ -1,5 +1,5 @@
-import { Component, EventEmitter, ComponentFactoryResolver, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { Modal, ModalService } from 'rebirth-ng';
+import {Component, ComponentFactoryResolver, EventEmitter, OnInit} from "@angular/core";
+import {Modal, ModalService} from "rebirth-ng";
 
 @Component({
   selector: 'app-inline-edit-demo',
@@ -18,34 +18,19 @@ import { Modal, ModalService } from 'rebirth-ng';
         [rowHeight]="'auto'"
         [rows]="rows">
         <ngx-datatable-column name="Name">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <span
-              title="Double click to edit"
-              (dblclick)="editing[rowIndex + '-name'] = true"
-              *ngIf="!editing[rowIndex + '-name']">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row" >
+            <span title="双击修改" (dblclick)="editing[rowIndex + '-name'] = true" *ngIf="!editing[rowIndex + '-name']">
               {{value}}
             </span>
-            <input
-              autofocus
-              (blur)="updateValue($event, 'name', rowIndex)"
-              *ngIf="editing[rowIndex+ '-name']"
-              type="text"
-              [value]="value"
-            />
+            <input autofocus (blur)="updateValue($event, 'name', rowIndex)" *ngIf="editing[rowIndex+ '-name']" type="text" [value]="value"/>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="Gender">
           <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
-             <span
-               title="Double click to edit"
-               (dblclick)="editing[rowIndex + '-gender'] = true"
-               *ngIf="!editing[rowIndex + '-gender']">
+             <span title="双击修改" (dblclick)="editing[rowIndex + '-gender'] = true" *ngIf="!editing[rowIndex + '-gender']">
               {{value}}
             </span>
-            <select
-              *ngIf="editing[rowIndex + '-gender']"
-              (change)="updateValue($event, 'gender', rowIndex)"
-              [value]="value">
+            <select *ngIf="editing[rowIndex + '-gender']" (change)="updateValue($event, 'gender', rowIndex)" [value]="value">
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
