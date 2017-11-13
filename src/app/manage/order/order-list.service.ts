@@ -10,11 +10,6 @@ export class OrderListService extends RebirthHttp {
     super(http);
   }
 
-  // article(): Observable {
-  //   return this.getArticles()
-  //
-  // }
-  //
   @GET("article")
   getArticles(@Query("pageIndex") pageIndex = 1,
               @Query("pageSize") pageSize = 10): Observable<SearchResult<Article>> {
