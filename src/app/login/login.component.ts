@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { environment } from '../../environments/environment';
-import { LoginService } from './login.service';
-import { Router } from '@angular/router';
+import {Component} from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {LoginService} from "./login.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -28,7 +27,7 @@ export class LoginComponent {
 
     this.loginService.login(this.loginForm.value)
       .subscribe(
-        (user) => this.router.navigateByUrl('/manage/home'),
+        (user) => this.router.navigateByUrl('/manage/inline'),
         () => this.showError = true
       );
   }
