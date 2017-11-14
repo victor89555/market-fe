@@ -8,6 +8,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CoreModule} from "./core/core.module";
 import {SharedModule} from "./shared/shared.module";
 import {FormsModule} from "@angular/forms";
+import {ManageAppModule} from "./manage/manage-app.module"
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {FormsModule} from "@angular/forms";
     CoreModule,
     FormsModule,
     SharedModule,
+    ManageAppModule,
     RouterModule.forRoot(ROUTER_CONFIG)
   ],
   providers: [],

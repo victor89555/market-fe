@@ -27,7 +27,7 @@ export class LoginComponent {
 
     this.loginService.login(this.loginForm.value)
       .subscribe(
-        (user) => this.router.navigateByUrl('/manage/inline'),
+        (user) => this.router.navigateByUrl('/manage/orders'),
         () => this.showError = true
       );
   }
