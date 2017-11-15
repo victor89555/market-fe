@@ -1,44 +1,84 @@
-<div>
-  <ngx-datatable
-    #mydatatable
-    class="material"
-    [headerHeight]="50"
-    [limit]="10"
-    [columnMode]="'force'"
-    [footerHeight]="50"
-    [rowHeight]="'auto'"
-    [rows]="rows">
-    <ngx-datatable-column name="姓名" prop="name">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-            <span title="双击修改" (dblclick)="editing[rowIndex + '-name'] = true" *ngIf="!editing[rowIndex + '-name']">
+<div class="portlet light bordered">
+  <div class="portlet-title">
+    <div class="caption">
+      <i class="icon-basket font-red"></i>
+      <span class="caption-subject bold font-red ">订单信息</span>
+    </div>
+    <div class="actions">
+      <a href="javascript:;" class="btn btn-default btn-sm" (click)="add()" has-permission="FUC_ORDER_ADD">
+        <i class="fa fa-plus"></i> 新增
+      </a>
+    </div>
+  </div>
+  <div class="portlet-body">
+    <div class="table-toolbar">
+      <div class="form-inline">
+        <div class="form-group">
+          <label class="sr-only">姓名：</label>
+          <input type="text" class="form-control" [(ngModel)]="qry_name" placeholder="姓名">
+        </div>
+        <!--<div class="form-group">
+          <label class="sr-only">执行人：</label>
+          <select worker-select="" header-value="" header-text="-执行人-" ng-model="conditions._filter_like_execUser"
+                  class="form-control input-small ng-pristine ng-untouched ng-valid ng-scope ng-empty">
+            &lt;!&ndash; ngRepeat: worker in _selectWorkers &ndash;&gt;
+            <option ng-repeat="worker in _selectWorkers" value="" class="ng-binding ng-scope">-执行人-</option>
+            &lt;!&ndash; end ngRepeat: worker in _selectWorkers &ndash;&gt;
+            <option ng-repeat="worker in _selectWorkers" value="169" class="ng-binding ng-scope">阿彬</option>
+            &lt;!&ndash; end ngRepeat: worker in _selectWorkers &ndash;&gt;
+            <option ng-repeat="worker in _selectWorkers" value="170" class="ng-binding ng-scope">婉霖</option>
+            &lt;!&ndash; end ngRepeat: worker in _selectWorkers &ndash;&gt;
+            <option ng-repeat="worker in _selectWorkers" value="171" class="ng-binding ng-scope">秀腾</option>
+            &lt;!&ndash; end ngRepeat: worker in _selectWorkers &ndash;&gt;
+          </select>
+        </div>-->
+        <button type="button" class="btn sbold green" (click)="query()">查询</button>
+        <button type="button" class="btn sbold green" (click)="reset()">重置</button>
+      </div>
+    </div>
+    <div class="dataTables_wrapper no-footer">
+      <ngx-datatable
+        #mydatatable
+        class="material"
+        [headerHeight]="50"
+        [limit]="10"
+        [columnMode]="'force'"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [rows]="orders">
+        <ngx-datatable-column name="订单号" prop="orderNo">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="order">
+            <span title="双击修改" (dblclick)="editing[rowIndex + '-orderNo'] = true" *ngIf="!editing[rowIndex + '-orderNo']">
               {{value}}
             </span>
-        <input autofocus (blur)="updateValue($event, 'name', rowIndex)" *ngIf="editing[rowIndex+ '-name']"
-               type="text" [value]="value"/>
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="性别" prop="gender">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
-             <span title="双击修改" (dblclick)="editing[rowIndex + '-gender'] = true"
-                   *ngIf="!editing[rowIndex + '-gender']">
+            <input autofocus (blur)="updateValue($event, 'orderNo', rowIndex)" *ngIf="editing[rowIndex+ '-orderNo']"
+                   type="text" [value]="value"/>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="买家" prop="buyer">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="order" let-value="value">
+             <span title="双击修改" (dblclick)="editing[rowIndex + '-buyer'] = true"
+                   *ngIf="!editing[rowIndex + '-buyer']">
               {{value}}
             </span>
-        <select *ngIf="editing[rowIndex + '-gender']" (change)="updateValue($event, 'gender', rowIndex)"
-                [value]="value">
-          <option value="male">男</option>
-          <option value="female">女</option>
-        </select>
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="年龄" prop="age">
-      <ng-template ngx-datatable-cell-template let-value="value">
-        {{value}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column>
-      <ng-template ngx-datatable-cell-template let-value="value">
-        <button class="btn btn-default" (click)="openModal(value);">修改</button>
-      </ng-template>
-    </ngx-datatable-column>
-  </ngx-datatable>
+            <!--<select *ngIf="editing[rowIndex + '-buyer']" (change)="updateValue($event, 'gender', rowIndex)"
+                    [value]="value">
+              <option value="male">男</option>
+              <option value="female">女</option>
+            </select>-->
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="付款时间" prop="payTime">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column prop="id">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="order">
+            <button class="btn btn-default" (click)="edit(value);">修改</button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
 </div>

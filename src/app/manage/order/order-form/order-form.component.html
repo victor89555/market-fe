@@ -1,22 +1,25 @@
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
     <span aria-hidden="true">&times;</span></button>
-  <h4 class="modal-title">I'm a rebirth modal!</h4>
+  <h4 class="modal-title">详情</h4>
 </div>
 <div class="modal-body">
   <form class="form-horizontal">
     <div class="form-group">
-      <label for="textInput" class="col-sm-2 control-label">Text:</label>
+      <label class="col-sm-2 control-label">订单编号:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="textInput" name="text" [(ngModel)]="context.text" />
+        <input type="text" class="form-control" name="text" [(ngModel)]="order.orderNo" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">买家:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="text" [(ngModel)]="order.buyer" />
       </div>
     </div>
   </form>
-  <hr>
-  <strong>Modal context:</strong> <pre>{{context | json}}</pre>
-  <hr>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-primary" (click)="ok()">Ok</button>
-  <button type="button" class="btn btn-warning" (click)="cancel()">Cancel</button>
+  <button type="button" class="btn btn-primary" (click)="save()">保存</button>
+  <button type="button" class="btn btn-warning" (click)="cancel()">取消</button>
 </div>

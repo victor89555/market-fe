@@ -1,14 +1,6 @@
 @import "variables";
 @import "mixins";
 
-.flex-line {
-  display: -webkit-flex; /* Safari */
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: baseline;
-
-  .flex-line-item {
-    flex: auto;
-  }
+re-modal-window {
+  top: 0 !important;
 }

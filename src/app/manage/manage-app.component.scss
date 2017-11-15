@@ -4,7 +4,12 @@
   }
 }
 
-app-menu-bar {
+.page-content {
+  padding: 0px;
+  margin-left: 215px;
+}
+
+/*app-menu-bar {
   max-width: 300px;
   display: block;
   width: 245px;
@@ -33,9 +38,4 @@ app-menu-bar {
       padding-left: 20px;
     }
   }
-}
-
-.page-container {
-  margin-top: 70px;
-  margin-bottom: 20px;
-}
+}*/

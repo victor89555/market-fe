@@ -1,0 +1,13 @@
+.page-header.navbar.navbar-fixed-top {
+   z-index: 1000;
+}
+
+.modal {
+  z-index: 10050;
+  outline: none;
+  overflow-y: auto;
+}
+
+.modal-open {
+  overflow: hidden !important;
+}

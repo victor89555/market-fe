@@ -2,13 +2,17 @@
 <!--<re-menu-bar [menuOptions]="menus" [type]="'sidebar'"></re-menu-bar>-->
 <!--<button class="btn btn-primary" (click)="menuBar.toggle()">toggle</button>-->
 <div class="page-container">
-  <app-menu-bar #menuBar="menuBar" [menuConfig]="menuConfig"></app-menu-bar>
-  <div class="main">
-    <!--test-->
-    <router-outlet></router-outlet>
+  <div class="page-sidebar-wrapperpage-sidebar-wrapper ng-scope">
+    <app-menu-bar #menuBar="menuBar" [menuConfig]="menuConfig"></app-menu-bar>
+  </div>
+  <div class="page-content-wrapper">
+    <div class="page-content">
+      <!--test-->
+      <router-outlet></router-outlet>
 
-    <!--<h2>Main content</h2>-->
-    <!--<button class="btn btn-primary">test</button>-->
+      <!--<h2>Main content</h2>-->
+      <!--<button class="btn btn-primary">test</button>-->
+    </div>
   </div>
 </div>
 

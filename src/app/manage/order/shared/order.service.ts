@@ -1,4 +1,4 @@
-import {GET, Query, RebirthHttp} from "rebirth-http";
+import {Body, GET, Path, POST, Query, RebirthHttp} from "rebirth-http";
 import {Observable} from "rxjs/Observable";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
@@ -12,8 +12,19 @@ export class OrderService extends RebirthHttp {
   }
 
   @GET("orders")
-  queryOrders(@Query("pageIndex") pageIndex = 1,
-              @Query("pageSize") pageSize = 10): Observable<Order[]> {
+  query(@Query("name") name = "", @Query("pageIndex") pageIndex = 1,
+        @Query("pageSize") pageSize = 10): Observable<Order[]> {
     return null;
   }
+
+  @GET("orders/:id")
+  get(@Path("id") id: number): Observable<Order> {
+    return null
+  }
+
+  @POST('login')
+  save(@Body order: Order): Observable<Order> {
+    return null;
+  }
+
 }

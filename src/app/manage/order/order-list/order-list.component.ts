@@ -1,7 +1,8 @@
-import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from '@angular/core'
 import {ModalService} from 'rebirth-ng'
 import {OrderFormComponent} from '../order-form/order-form.component'
 import {OrderService} from "../shared/order.service"
+import {Order} from "../shared/order.model"
 
 @Component({
   selector: 'app-order-list',
@@ -19,8 +20,9 @@ import {OrderService} from "../shared/order.service"
 
 export class OrderListComponent implements OnInit {
 
-  editing = {};
-  rows = [];
+  editing = {}
+  orders = []
+  qry_name: string = ""
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
@@ -28,69 +30,61 @@ export class OrderListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.orderService.queryOrders(1, 10).subscribe(
+    this.orderService.query().subscribe(
       (orders) => {
-        this.rows = orders
+        this.orders = orders
       }
     )
   }
 
-  openModal() {
-    this.modalService.open<string>({
+  query() {
+    this.orderService.query(this.qry_name).subscribe(
+      (orders) => {
+        this.orders = orders
+      }
+    )
+  }
+
+  reset() {
+    this.orderService.query().subscribe(
+      (orders) => {
+        this.orders = orders
+      }
+    )
+  }
+
+  add() {
+    this.modalService.open<Order>({
       component: OrderFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
-        text: 'I am from resolve data!'
       }
-    }).subscribe(data => {
-      console.log('Rebirth Modal -> Get ok with result:', data);
+    }).subscribe(order => {
+      console.log('Rebirth Modal -> Get ok with result:', order)
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error);
-    });
+      console.error('Rebirth Modal -> Get cancel with result:', error)
+    })
   }
 
-  fetch(cb) {
-    cb([
-      {
-        "name": "Ethel Price",
-        "gender": "female",
-        "company": "Johnson, Johnson and Partners, LLC CMP DDC",
-        "age": 22
-      },
-      {
-        "name": "Claudine Neal",
-        "gender": "female",
-        "company": "Sealoud",
-        "age": 55
-      },
-      {
-        "name": "Beryl Rice",
-        "gender": "female",
-        "company": "Velity",
-        "age": 67
-      },
-      {
-        "name": "Wilder Gonzales",
-        "gender": "male",
-        "company": "Geekko"
-      },
-      {
-        "name": "Georgina Schultz",
-        "gender": "female",
-        "company": "Suretech"
-      },
-      {
-        "name": "Carroll Buchanan",
-        "gender": "male",
-        "company": "Ecosys"
-      }])
+  edit(id: number) {
+    this.modalService.open<Order>({
+      component: OrderFormComponent,
+      componentFactoryResolver: this.componentFactoryResolver,
+      resolve: {
+        id: id
+      }
+    }).subscribe(order => {
+      console.log('Rebirth Modal -> Get ok with result:', order)
+    }, error => {
+      console.error('Rebirth Modal -> Get cancel with result:', error)
+    })
   }
 
   updateValue(event, cell, rowIndex) {
     console.log('order editing rowIndex', rowIndex)
-    this.editing[rowIndex + '-' + cell] = false;
-    this.rows[rowIndex][cell] = event.target.value;
-    this.rows = [...this.rows];
-    console.log('UPDATED!', this.rows[rowIndex][cell]);
+    this.editing[rowIndex + '-' + cell] = false
+    this.orders[rowIndex][cell] = event.target.value
+    this.orders = [...this.orders]
+    console.log('UPDATED!', this.orders[rowIndex][cell])
   }
 }
