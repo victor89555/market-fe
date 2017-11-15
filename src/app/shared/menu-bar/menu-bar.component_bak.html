@@ -1,0 +1,39 @@
+<ul class="nav nav-pills nav-stacked nav-container" *ngIf="menuConfig?.menus">
+  <li class="nav-item nav-row" *ngFor="let data of menuConfig?.menus">
+    <div>
+      <div class="column icon-menu" (click)="showTextMenuBar($event)">
+        <a class="nav-link"
+           [routerLink]="data.link"
+           routerLinkActive="active">
+          <i *ngIf="data.svgClass" [class]="data.svgClass"></i>
+          <img *ngIf="!data.svgClass" [src]="data.svgPath" class="nav-icon"/>
+        </a>
+      </div>
+      <div class="column text-menu">
+        <ul class="nav nav-pills nav-stacked nav-inner">
+          <li class="nav-item">
+            <a class="nav-link"
+               *ngIf="!data.children?.length"
+               [routerLink]="data.link"
+               [routerLinkActive]="data.children?.length ? '' : 'active'">{{data.name}}</a>
+
+            <a class="nav-link"
+               *ngIf="data.children?.length"
+               [routerLink]="data.link"
+               [routerLinkActive]="data.children?.length ? '' : 'active'">
+              {{data.name}}
+              <i class="fa fa-caret-up navigator" aria-hidden="true" *ngIf="shouldShowUpArrow(data.link)"></i>
+              <i class="fa fa-caret-down navigator" aria-hidden="true" *ngIf="!shouldShowUpArrow(data.link)"></i>
+            </a>
+          </li>
+          <li class="nav-item" *ngFor="let children of data.children; let i = index;">
+            <a class="nav-link"
+               [appCollapse]="!shouldShowUpArrow(data.link)"
+               [routerLink]="children.link"
+               [routerLinkActive]="'active'">{{children.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </li>
+</ul>

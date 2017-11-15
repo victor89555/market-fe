@@ -12,7 +12,7 @@ export class OrderService extends RebirthHttp {
   }
 
   @GET("orders")
-  getArticles(@Query("pageIndex") pageIndex = 1,
+  queryOrders(@Query("pageIndex") pageIndex = 1,
               @Query("pageSize") pageSize = 10): Observable<Order[]> {
     return null;
   }

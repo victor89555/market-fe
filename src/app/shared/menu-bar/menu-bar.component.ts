@@ -1,11 +1,12 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { WindowRef } from 'rebirth-ng';
-import { MenuConfig } from './menu-config.model';
-import { Router } from '@angular/router';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {WindowRef} from 'rebirth-ng';
+import {MenuConfig} from './menu-config.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-menu-bar',
   templateUrl: './menu-bar.component.html',
+  // templateUrl: './menu-bar.component_bak.html',
   styleUrls: ['./menu-bar.component.scss'],
   host: {
     '[class]': `getClassNames()`,

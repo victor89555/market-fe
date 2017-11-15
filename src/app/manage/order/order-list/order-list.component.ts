@@ -1,9 +1,10 @@
-import {Component, ComponentFactoryResolver, ViewEncapsulation} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from '@angular/core';
 import {ModalService} from 'rebirth-ng'
 import {OrderFormComponent} from '../order-form/order-form.component'
+import {OrderService} from "../shared/order.service"
 
 @Component({
-  selector: 'app-inline',
+  selector: 'app-order-list',
   templateUrl: './order-list.component.html',
   styleUrls: [
     "./order-list.component.scss",
@@ -16,16 +17,22 @@ import {OrderFormComponent} from '../order-form/order-form.component'
   providers: [],
 })
 
-export class OrderListComponent {
+export class OrderListComponent implements OnInit {
 
   editing = {};
   rows = [];
 
-  constructor(private modalService: ModalService, private componentFactoryResolver: ComponentFactoryResolver) {
+  constructor(private modalService: ModalService,
+              private componentFactoryResolver: ComponentFactoryResolver,
+              private orderService: OrderService) {
+  }
 
-    this.fetch((data) => {
-      this.rows = data;
-    });
+  ngOnInit(): void {
+    this.orderService.queryOrders(1, 10).subscribe(
+      (orders) => {
+        this.rows = orders
+      }
+    )
   }
 
   openModal() {
