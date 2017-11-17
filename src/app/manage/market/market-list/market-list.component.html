@@ -1,0 +1,77 @@
+<div class="portlet light bordered">
+  <div class="portlet-title">
+    <div class="caption">
+      <i class="icon-basket font-red"></i>
+      <span class="caption-subject bold font-red ">市场信息</span>
+    </div>
+    <div class="actions">
+      <a href="javascript:;" class="btn btn-default btn-sm" (click)="add()" has-permission="FUC_ORDER_ADD">
+        <i class="fa fa-plus"></i> 新增
+      </a>
+    </div>
+  </div>
+  <div class="portlet-body">
+    <div class="table-toolbar">
+      <div class="form-inline">
+        <div class="form-group">
+          <label class="sr-only">市场：</label>
+          <input type="text" class="form-control" [(ngModel)]="qry_name" placeholder="市场">
+        </div>
+        <button type="button" class="btn sbold green" (click)="query()">查询</button>
+        <button type="button" class="btn sbold green" (click)="reset()">重置</button>
+      </div>
+    </div>
+    <div class="dataTables_wrapper no-footer">
+      <ngx-datatable
+        #mydatatable
+        class="material"
+        [headerHeight]="50"
+        [limit]="5"
+        [columnMode]="'force'"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [rows]="markets">
+        <ngx-datatable-column name="地址" prop="addr">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="market">
+            <span title="双击修改" (dblclick)="editing[rowIndex + '-addr'] = true" *ngIf="!editing[rowIndex + '-addr']">
+              {{value}}
+            </span>
+            <input autofocus (blur)="updateValue($event, 'addr', rowIndex)" *ngIf="editing[rowIndex+ '-addr']"
+                   type="text" [value]="value"/>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="市场名" prop="name">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="market" let-value="value">
+             <span title="双击修改" (dblclick)="editing[rowIndex + '-name'] = true"
+                   *ngIf="!editing[rowIndex + '-name']">
+              {{value}}
+            </span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="市场代码" prop="code">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="market" let-value="value">
+             <span title="双击修改" (dblclick)="editing[rowIndex + '-code'] = true"
+                   *ngIf="!editing[rowIndex + '-code']">
+              {{value}}
+            </span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="市场摊位总数" prop="stallLimit">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="已入驻摊位数" prop="stallNum">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="编辑" prop="id">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="market">
+            <button class="btn btn-default" (click)="edit(value);">修改</button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>
