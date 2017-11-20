@@ -14,6 +14,9 @@ import {OrderService} from "./order/shared/order.service";
 import {MarketFormComponent} from "./market/market-form/market-form.component";
 import {MarketListComponent} from "./market/market-list/market-list.component";
 import {MarketService} from "./market/shared/market.service";
+import {StallListComponent} from "./stall/stall-list/stall-list.component";
+import {StallFormComponent} from "./stall/stall-form/stall-form.component";
+import {StallService} from "./stall/shared/stall.service";
 
 @NgModule({
   imports: [
@@ -30,15 +33,19 @@ import {MarketService} from "./market/shared/market.service";
     OrderFormComponent,
     MarketFormComponent,
     MarketListComponent,
+    StallListComponent,
+    StallFormComponent,
   ],
   entryComponents: [
     OrderFormComponent,
     MarketFormComponent,
+    StallFormComponent
   ],
   providers: [
     MenuService,
     OrderService,
     MarketService,
+    StallService
   ],
 })
 export class ManageAppModule {

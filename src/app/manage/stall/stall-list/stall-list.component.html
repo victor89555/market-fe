@@ -1,0 +1,80 @@
+<div class="portlet light bordered">
+  <div class="portlet-title">
+    <div class="caption">
+      <i class="icon-basket font-red"></i>
+      <span class="caption-subject bold font-red ">摊位信息</span>
+    </div>
+    <div class="actions">
+      <a href="javascript:;" class="btn btn-default btn-sm" (click)="add()" has-permission="FUC_ORDER_ADD">
+        <i class="fa fa-plus"></i> 新增
+      </a>
+    </div>
+  </div>
+  <div class="portlet-body">
+    <div class="table-toolbar">
+      <div class="form-inline">
+        <div class="form-group">
+          <label class="sr-only">摊位名：</label>
+          <input type="text" class="form-control" [(ngModel)]="qry_name" placeholder="摊位名">
+        </div>
+        <button type="button" class="btn sbold green" (click)="query()">查询</button>
+        <button type="button" class="btn sbold green" (click)="reset()">重置</button>
+      </div>
+    </div>
+    <div class="dataTables_wrapper no-footer">
+      <ngx-datatable
+        #mydatatable
+        class="material"
+        [headerHeight]="50"
+        [limit]="10"
+        [columnMode]="'force'"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [rows]="stalls">
+        <ngx-datatable-column name="摊位名" prop="name">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="stall">
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="摊位面积" prop="area">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="stall" let-value="value">
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="所属市场" prop="marketId">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            <select class="form-control" (change)="updateValue($event, 'marketId', rowIndex)" [value]="value">
+              <option value="1">湖头市场</option>
+              <option value="2">湖头市场1</option>
+              <option value="3">湖头市场2</option>
+            </select>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="功能区域" prop="funcType">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            <select class="form-control" (change)="updateValue($event, 'funcType', rowIndex)" [value]="value">
+              <option value="1">服装</option>
+              <option value="2">儿童</option>
+              <option value="3">小吃</option>
+            </select>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="状态" prop="status">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            <select class="form-control" (change)="updateValue($event, 'status', rowIndex)" [value]="value">
+              <option value="0">可用</option>
+              <option value="1">在用</option>
+            </select>
+
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="操作" prop="id">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="order">
+            <button class="btn btn-default" (click)="edit(value);">修改</button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>
