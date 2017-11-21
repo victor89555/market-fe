@@ -8,3 +8,9 @@ $fa-font-path: "../../node_modules/font-awesome/fonts";
 
 @import "./loading";
 @import "./modules/forms";
+
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+
+@import "custom";

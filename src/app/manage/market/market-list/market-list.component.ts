@@ -3,6 +3,7 @@ import {ModalService} from "rebirth-ng";
 import {MarketFormComponent} from "../market-form/market-form.component";
 import {MarketService} from "../shared/market.service";
 import {Market} from "../shared/market.model";
+import {Page} from "../../../thurder-ng/models/page.model"
 
 @Component({
   selector: 'app-market-list',
@@ -17,7 +18,7 @@ import {Market} from "../shared/market.model";
 export class MarketListComponent implements OnInit {
 
   editing = {}
-  markets = []
+  page: Page<any> = new Page()
   qry_name: string = ""
 
   constructor(private modalService: ModalService,
@@ -27,24 +28,29 @@ export class MarketListComponent implements OnInit {
 
   ngOnInit(): void {
     this.marketService.query().subscribe(
-      (markets) => {
-        this.markets = markets
+      (page) => {
+        this.page = page
       }
     )
   }
 
   query() {
-    this.marketService.query(this.qry_name).subscribe(
-      (markets) => {
-        this.markets = markets
+    this.marketService.query(this.qry_name, this.page.pageNo).subscribe(
+      (page) => {
+        this.page = page
       }
     )
   }
 
+  setPage(pageInfo) {
+    this.page.pageNo = pageInfo.offset + 1
+    this.query()
+  }
+
   reset() {
     this.marketService.query().subscribe(
-      (markets) => {
-        this.markets = markets
+      (page) => {
+        this.page = page
       }
     )
   }
@@ -53,8 +59,7 @@ export class MarketListComponent implements OnInit {
     this.modalService.open<Market>({
       component: MarketFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
-      resolve: {
-      }
+      resolve: {}
     }).subscribe(market => {
       console.log('Rebirth Modal -> Get ok with result:', market)
     }, error => {
@@ -76,11 +81,4 @@ export class MarketListComponent implements OnInit {
     })
   }
 
-  updateValue(event, cell, rowIndex) {
-    console.log('order editing rowIndex', rowIndex)
-    this.editing[rowIndex + '-' + cell] = false
-    this.markets[rowIndex][cell] = event.target.value
-    this.markets = [...this.markets]
-    console.log('UPDATED!', this.markets[rowIndex][cell])
-  }
 }

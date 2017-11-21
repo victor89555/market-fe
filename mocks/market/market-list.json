@@ -1,74 +1,90 @@
-[
-  {
-    "id": 1,
-    "addr": "福建泉州湖头",
-    "code": "HTSC",
-    "name": "湖头市场1",
-    "stallLimit": 100,
-    "stallNum": 50
-  },
-  {
-    "id": 2,
-    "addr": "福建泉州湖头",
-    "code": "HTSC2",
-    "name": "湖头市场2",
-    "stallLimit": 110,
-    "stallNum": 60
-  },
-  {
-    "id": 3,
-    "addr": "福建泉州湖头",
-    "code": "HTSC3",
-    "name": "湖头市场3",
-    "stallLimit": 111,
-    "stallNum": 61
-  },
-  {
-    "id": 4,
-    "addr": "福建泉州湖头",
-    "code": "HTSC4",
-    "name": "湖头市场",
-    "stallLimit": 140,
-    "stallNum": 64
-  },
-  {
-    "id": 5,
-    "addr": "福建泉州湖头",
-    "code": "HTSC5",
-    "name": "湖头市场4",
-    "stallLimit": 150,
-    "stallNum": 50
-  },
-  {
-    "id": 6,
-    "addr": "福建泉州湖头",
-    "code": "HTSC6",
-    "name": "湖头市场5",
-    "stallLimit": 160,
-    "stallNum": 60
-  },
-  {
-    "id": 7,
-    "addr": "福建泉州湖头",
-    "code": "HTSC7",
-    "name": "湖头市场6",
-    "stallLimit": 170,
-    "stallNum": 70
-  },
-  {
-    "id": 8,
-    "addr": "福建泉州湖头",
-    "code": "HTSC8",
-    "name": "湖头市场7",
-    "stallLimit": 180,
-    "stallNum": 80
-  },
-  {
-    "id": 9,
-    "addr": "福建泉州湖头",
-    "code": "HTSC9",
-    "name": "湖头市场8",
-    "stallLimit": 190,
-    "stallNum": 90
-  }
-]
+{
+  "beginIndex": 0,
+  "endIndex": 1,
+  "firstPage": true,
+  "hasNextPage": false,
+  "hasPrePage": false,
+  "items": [
+    {
+      "id": 1,
+      "addr": "福建泉州湖头",
+      "code": "HTSC",
+      "name": "湖头市场1",
+      "stall_limit": 100,
+      "stall_num": 50
+    },
+    {
+      "id": 2,
+      "addr": "福建泉州湖头",
+      "code": "HTSC2",
+      "name": "湖头市场2",
+      "stall_limit": 110,
+      "stall_num": 60
+    },
+    {
+      "id": 3,
+      "addr": "福建泉州湖头",
+      "code": "HTSC3",
+      "name": "湖头市场3",
+      "stall_limit": 111,
+      "stall_num": 61
+    },
+    {
+      "id": 4,
+      "addr": "福建泉州湖头",
+      "code": "HTSC4",
+      "name": "湖头市场",
+      "stall_limit": 140,
+      "stall_num": 64
+    },
+    {
+      "id": 5,
+      "addr": "福建泉州湖头",
+      "code": "HTSC5",
+      "name": "湖头市场4",
+      "stall_limit": 150,
+      "stall_num": 50
+    },
+    {
+      "id": 6,
+      "addr": "福建泉州湖头",
+      "code": "HTSC6",
+      "name": "湖头市场5",
+      "stall_limit": 160,
+      "stall_num": 60
+    },
+    {
+      "id": 7,
+      "addr": "福建泉州湖头",
+      "code": "HTSC7",
+      "name": "湖头市场6",
+      "stall_limit": 170,
+      "stall_num": 70
+    },
+    {
+      "id": 8,
+      "addr": "福建泉州湖头",
+      "code": "HTSC8",
+      "name": "湖头市场7",
+      "stall_limit": 180,
+      "stall_num": 80
+    },
+    {
+      "id": 9,
+      "addr": "福建泉州湖头",
+      "code": "HTSC9",
+      "name": "湖头市场8",
+      "stall_limit": 190,
+      "stall_num": 90
+    }
+  ],
+  "lastPage": true,
+  "nextPage": 1,
+  "offset": 0,
+  "pageNo": 1,
+  "pageSize": 10,
+  "prePage": 1,
+  "totalCount": 100,
+  "totalPages": 1
+}
+

@@ -26,46 +26,21 @@
         #mydatatable
         class="material"
         [headerHeight]="50"
-        [limit]="5"
-        [columnMode]="'force'"
         [footerHeight]="50"
+        [limit]="page?.pageSize"
+        [columnMode]="'standard'"
         [rowHeight]="'auto'"
-        [rows]="markets">
-        <ngx-datatable-column name="地址" prop="addr">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="market">
-            <span title="双击修改" (dblclick)="editing[rowIndex + '-addr'] = true" *ngIf="!editing[rowIndex + '-addr']">
-              {{value}}
-            </span>
-            <input autofocus (blur)="updateValue($event, 'addr', rowIndex)" *ngIf="editing[rowIndex+ '-addr']"
-                   type="text" [value]="value"/>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="市场名" prop="name">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="market" let-value="value">
-             <span title="双击修改" (dblclick)="editing[rowIndex + '-name'] = true"
-                   *ngIf="!editing[rowIndex + '-name']">
-              {{value}}
-            </span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="市场代码" prop="code">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="market" let-value="value">
-             <span title="双击修改" (dblclick)="editing[rowIndex + '-code'] = true"
-                   *ngIf="!editing[rowIndex + '-code']">
-              {{value}}
-            </span>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="市场摊位总数" prop="stallLimit">
-          <ng-template ngx-datatable-cell-template let-value="value">
-            {{value}}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="已入驻摊位数" prop="stallNum">
-          <ng-template ngx-datatable-cell-template let-value="value">
-            {{value}}
-          </ng-template>
-        </ngx-datatable-column>
+        [externalPaging]="true"
+        [count]="page?.totalCount"
+        [offset]="page?.pageNo-1"
+        [rows]="page?.items"
+        (page)='setPage($event)'
+      >
+        <ngx-datatable-column name="地址" prop="addr"></ngx-datatable-column>
+        <ngx-datatable-column name="市场名" prop="name"></ngx-datatable-column>
+        <ngx-datatable-column name="市场代码" prop="code"></ngx-datatable-column>
+        <ngx-datatable-column name="市场摊位总数" prop="stall_limit"></ngx-datatable-column>
+        <ngx-datatable-column name="已入驻摊位数" prop="stall_num"></ngx-datatable-column>
         <ngx-datatable-column name="编辑" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="market">
             <button class="btn btn-default" (click)="edit(value);">修改</button>
