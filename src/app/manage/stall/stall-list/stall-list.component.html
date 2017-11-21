@@ -43,29 +43,17 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="所属市场" prop="marketId">
           <ng-template ngx-datatable-cell-template let-value="value">
-            <select class="form-control" (change)="updateValue($event, 'marketId', rowIndex)" [value]="value">
-              <option value="1">湖头市场</option>
-              <option value="2">湖头市场1</option>
-              <option value="3">湖头市场2</option>
-            </select>
+            {{value}}
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="功能区域" prop="funcType">
           <ng-template ngx-datatable-cell-template let-value="value">
-            <select class="form-control" (change)="updateValue($event, 'funcType', rowIndex)" [value]="value">
-              <option value="1">服装</option>
-              <option value="2">儿童</option>
-              <option value="3">小吃</option>
-            </select>
+            {{value|dictConvert:"FUNC_TYPE"}}
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="状态" prop="status">
           <ng-template ngx-datatable-cell-template let-value="value">
-            <select class="form-control" (change)="updateValue($event, 'status', rowIndex)" [value]="value">
-              <option value="0">可用</option>
-              <option value="1">在用</option>
-            </select>
-
+            {{value|dictConvert:"ENABLE_STATUS"}}
           </ng-template>
         </ngx-datatable-column>
 
