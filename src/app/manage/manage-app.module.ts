@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
 import {RouterModule} from "@angular/router";
 
 import {ManageAppComponent} from "./manage-app.component";
@@ -17,11 +17,13 @@ import {MarketService} from "./market/shared/market.service";
 import {StallListComponent} from "./stall/stall-list/stall-list.component";
 import {StallFormComponent} from "./stall/stall-form/stall-form.component";
 import {StallService} from "./stall/shared/stall.service";
+import {ThurderNGModule} from "../thurder-ng/thurder-ng.module"
 
 @NgModule({
   imports: [
-    SharedModule,
     FormsModule,
+    SharedModule,
+    ThurderNGModule,
     RouterModule.forChild(ROUTER_CONFIG),
     NgxDatatableModule,
   ],
@@ -47,6 +49,7 @@ import {StallService} from "./stall/shared/stall.service";
     MarketService,
     StallService
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ManageAppModule {
 

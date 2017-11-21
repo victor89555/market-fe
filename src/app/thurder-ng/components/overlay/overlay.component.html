@@ -1,0 +1,5 @@
+<div #overlayBody class="overlay-body" style="z-index: 1050;top:300px;left: 200px;">
+  <div *ngIf="overlayOptions?.html" [innerHTML]="overlayOptions.html"></div>
+  <tg-overlay-content #overlayContent style="display: none;"></tg-overlay-content>
+</div>
+<tg-modal-backdrop [isOpen]="true" [modalOptions]="overlayOptions"></tg-modal-backdrop>

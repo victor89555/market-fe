@@ -17,12 +17,17 @@ export class MarketService extends RebirthHttp {
     return null;
   }
 
-  @GET("market/:id")
+  @GET("markets")
+  getAll(@Query("name") name = ""): Observable<Market[]> {
+    return null;
+  }
+
+  @GET("markets/:id")
   get(@Path("id") id: number): Observable<Market> {
     return null
   }
 
-  @POST('login')
+  @POST('markets')
   save(@Body market: Market): Observable<Market> {
     return null;
   }

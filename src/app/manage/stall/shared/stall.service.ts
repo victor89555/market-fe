@@ -22,7 +22,7 @@ export class StallService extends RebirthHttp {
     return null
   }
 
-  @POST('login')
+  @POST('stalls')
   save(@Body stall: Stall): Observable<Stall> {
     return null;
   }

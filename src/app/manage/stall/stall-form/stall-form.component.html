@@ -8,42 +8,33 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">摊位名:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" [(ngModel)]="stall.name" />
+        <input type="text" class="form-control" [(ngModel)]="stall.name"/>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-2 control-label">摊位面积:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" [(ngModel)]="stall.area" />
+        <input type="text" class="form-control" [(ngModel)]="stall.area"/>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-2 control-label">所属市场:</label>
       <div class="col-sm-10">
         <select type="text" class="form-control" [value]="stall.marketId">
-          <option value="1">湖头市场</option>
-          <option value="2">湖头市场1</option>
-          <option value="3">湖头市场2</option>
+          <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
         </select>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-2 control-label">功能区域:</label>
       <div class="col-sm-10">
-        <select type="text" class="form-control" [value]="stall.funcType">
-          <option value="0">小吃</option>
-          <option value="1">服装</option>
-          <option value="2">儿童</option>
-        </select>
+        <tg-dict-select dictName="FUNC_TYPE" [(ngModel)]="stall.funcType"></tg-dict-select>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-2 control-label">状态:</label>
       <div class="col-sm-10">
-        <select type="text" class="form-control" [value]="stall.status">
-          <option value="0">可用</option>
-          <option value="1">在用</option>
-        </select>
+        <tg-dict-select dictName="ENABLE_STATUS" [(ngModel)]="stall.status"></tg-dict-select>
       </div>
     </div>
   </div>
