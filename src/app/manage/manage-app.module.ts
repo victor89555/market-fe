@@ -24,6 +24,9 @@ import {ShopFormComponent} from "./shop/shop-form/shop-form.component";
 import {ShopListComponent} from "./shop/shop-list/shop-list.component";
 import {OperatorService} from "./operator/shared/operator.service";
 import {ShopService} from "./shop/shared/shop.service";
+import {ElectronicScaleListComponent} from "./electronicScale/electronicScale-list/electronicScale-list.component";
+import {ElectronicScaleFormComponent} from "./electronicScale/electronicScale-form/electronicScale-form.component";
+import {ElectronicScaleService} from "./electronicScale/shared/electronicScale.service";
 
 @NgModule({
   imports: [
@@ -46,14 +49,17 @@ import {ShopService} from "./shop/shared/shop.service";
     OperatorListComponent,
     OperatorFormComponent,
     ShopFormComponent,
-    ShopListComponent
+    ShopListComponent,
+    ElectronicScaleListComponent,
+    ElectronicScaleFormComponent
   ],
   entryComponents: [
     OrderFormComponent,
     MarketFormComponent,
     StallFormComponent,
     OperatorFormComponent,
-    ShopFormComponent
+    ShopFormComponent,
+    ElectronicScaleFormComponent
   ],
   providers: [
     MenuService,
@@ -61,7 +67,8 @@ import {ShopService} from "./shop/shared/shop.service";
     MarketService,
     StallService,
     OperatorService,
-    ShopService
+    ShopService,
+    ElectronicScaleService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

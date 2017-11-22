@@ -7,6 +7,7 @@ import {MarketListComponent} from "./market/market-list/market-list.component";
 import {StallListComponent} from "./stall/stall-list/stall-list.component";
 import {OperatorListComponent} from "./operator/operator-list/operator-list.component";
 import {ShopListComponent} from "./shop/shop-list/shop-list.component";
+import {ElectronicScaleListComponent} from "./electronicScale/electronicScale-list/electronicScale-list.component";
 
 export const ROUTER_CONFIG: Routes = [
   {
@@ -21,6 +22,7 @@ export const ROUTER_CONFIG: Routes = [
       {path: 'stalls', component: StallListComponent},
       {path: 'operators', component: OperatorListComponent},
       {path: 'shops', component: ShopListComponent},
+      {path: 'electronicScales', component: ElectronicScaleListComponent},
       {path: 'user', component: UserMockComponent},
       {path: 'document', component: UserMockComponent},
     ]

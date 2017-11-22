@@ -1,18 +1,15 @@
-import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from '@angular/core'
-import {ModalService} from 'rebirth-ng'
-import {OrderFormComponent} from '../order-form/order-form.component'
-import {OrderService} from "../shared/order.service"
-import {Order} from "../shared/order.model"
+import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
+import {ModalService} from "rebirth-ng";
+import {OrderFormComponent} from "../order-form/order-form.component";
+import {OrderService} from "../shared/order.service";
+import {Order} from "../shared/order.model";
+import {Page} from "../../../thurder-ng/models/page.model";
 
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
   styleUrls: [
     "./order-list.component.scss",
-    // '../themes/material.scss',
-    // './themes/dark.scss',
-    // './themes/bootstrap.scss',
-    // './themes/app.css'
   ],
   encapsulation: ViewEncapsulation.None,
   providers: [],
@@ -21,7 +18,7 @@ import {Order} from "../shared/order.model"
 export class OrderListComponent implements OnInit {
 
   editing = {}
-  orders = []
+  page: Page<any> = new Page()
   qry_name: string = ""
 
   constructor(private modalService: ModalService,
@@ -30,27 +27,20 @@ export class OrderListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.orderService.query().subscribe(
-      (orders) => {
-        this.orders = orders
-      }
-    )
+    this.query()
   }
 
   query() {
-    this.orderService.query(this.qry_name).subscribe(
-      (orders) => {
-        this.orders = orders
+    this.orderService.query(this.qry_name, this.page.pageNo).subscribe(
+      (page) => {
+        this.page = page
       }
     )
   }
 
   reset() {
-    this.orderService.query().subscribe(
-      (orders) => {
-        this.orders = orders
-      }
-    )
+    this.qry_name="";
+    this.query()
   }
 
   add() {
@@ -80,11 +70,4 @@ export class OrderListComponent implements OnInit {
     })
   }
 
-  updateValue(event, cell, rowIndex) {
-    console.log('order editing rowIndex', rowIndex)
-    this.editing[rowIndex + '-' + cell] = false
-    this.orders[rowIndex][cell] = event.target.value
-    this.orders = [...this.orders]
-    console.log('UPDATED!', this.orders[rowIndex][cell])
-  }
 }

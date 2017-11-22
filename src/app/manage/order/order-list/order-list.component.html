@@ -41,39 +41,20 @@
         #mydatatable
         class="material"
         [headerHeight]="50"
-        [limit]="10"
-        [columnMode]="'force'"
         [footerHeight]="50"
+        [limit]="page?.pageSize"
+        [columnMode]="'force'"
         [rowHeight]="'auto'"
-        [rows]="orders">
-        <ngx-datatable-column name="订单号" prop="orderNo">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="order">
-            <span title="双击修改" (dblclick)="editing[rowIndex + '-orderNo'] = true" *ngIf="!editing[rowIndex + '-orderNo']">
-              {{value}}
-            </span>
-            <input autofocus (blur)="updateValue($event, 'orderNo', rowIndex)" *ngIf="editing[rowIndex+ '-orderNo']"
-                   type="text" [value]="value"/>
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="买家" prop="buyer">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="order" let-value="value">
-             <span title="双击修改" (dblclick)="editing[rowIndex + '-buyer'] = true"
-                   *ngIf="!editing[rowIndex + '-buyer']">
-              {{value}}
-            </span>
-            <!--<select *ngIf="editing[rowIndex + '-buyer']" (change)="updateValue($event, 'gender', rowIndex)"
-                    [value]="value">
-              <option value="male">男</option>
-              <option value="female">女</option>
-            </select>-->
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="付款时间" prop="payTime">
-          <ng-template ngx-datatable-cell-template let-value="value">
-            {{value}}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column prop="id">
+        [externalPaging]="true"
+        [count]="page?.totalCount"
+        [offset]="page?.pageNo-1"
+        [rows]="page?.items"
+        (page)='setPage($event)'
+      >
+        <ngx-datatable-column name="订单号" prop="order_no"></ngx-datatable-column>
+        <ngx-datatable-column name="买家" prop="buyer"></ngx-datatable-column>
+        <ngx-datatable-column name="付款时间" prop="pay_time"></ngx-datatable-column>
+        <ngx-datatable-column name="编辑" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="order">
             <button class="btn btn-default" (click)="edit(value);">修改</button>
           </ng-template>

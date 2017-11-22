@@ -28,7 +28,7 @@
         [headerHeight]="50"
         [footerHeight]="50"
         [limit]="page?.pageSize"
-        [columnMode]="'standard'"
+        [columnMode]="'force'"
         [rowHeight]="'auto'"
         [externalPaging]="true"
         [count]="page?.totalCount"
@@ -39,7 +39,7 @@
         <ngx-datatable-column name="摊位名" prop="name"></ngx-datatable-column>
         <ngx-datatable-column name="摊位面积" prop="area"></ngx-datatable-column>
         <ngx-datatable-column name="所属市场" prop="market_id"></ngx-datatable-column>
-        <ngx-datatable-column name="功能区域" prop="funcType">
+        <ngx-datatable-column name="功能区域" prop="func_type">
           <ng-template ngx-datatable-cell-template let-value="value">
             {{value|dictConvert:"FUNC_TYPE"}}
           </ng-template>
@@ -51,7 +51,7 @@
         </ngx-datatable-column>
 
         <ngx-datatable-column name="操作" prop="id">
-          <ng-template ngx-datatable-cell-template let-value="value" let-row="order">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="stall">
             <button class="btn btn-default" (click)="edit(value);">修改</button>
           </ng-template>
         </ngx-datatable-column>

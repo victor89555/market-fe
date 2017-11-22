@@ -10,7 +10,7 @@
       "market_id": 3,
       "name": "55摊位",
       "area": 20.1,
-      "funcType": 1,
+      "func_type": 1,
       "status": 1
     },
     {
@@ -18,7 +18,7 @@
       "market_id": 2,
       "name": "555摊位",
       "area": 20.12,
-      "funcType": 2,
+      "func_type": 2,
       "status": 1
     },
     {
@@ -26,7 +26,7 @@
       "market_id": 1,
       "name": "5555摊位",
       "area": 60.12,
-      "funcType": 3,
+      "func_type": 3,
       "status": 0
     }
   ],
