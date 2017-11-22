@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import "rxjs/add/operator/map";
 import {Operator} from "./operator.model";
+import {Page} from "../../../thurder-ng/models/page.model";
 
 @Injectable()
 export class OperatorService extends RebirthHttp {
@@ -12,8 +13,13 @@ export class OperatorService extends RebirthHttp {
   }
 
   @GET("operators")
-  query(@Query("name") name = "", @Query("pageIndex") pageIndex = 1,
-        @Query("pageSize") pageSize = 10): Observable<Operator[]> {
+  query(@Query("name") name = "", @Query("pageNo") pageNo = 1,
+        @Query("pageSize") pageSize = 10): Observable<Page<any>> {
+    return null;
+  }
+
+  @GET("operators")
+  getAll(@Query("name") name = ""): Observable<Operator[]> {
     return null;
   }
 
@@ -22,7 +28,7 @@ export class OperatorService extends RebirthHttp {
     return null
   }
 
-  @POST('login')
+  @POST('operators')
   save(@Body operator: Operator): Observable<Operator> {
     return null;
   }

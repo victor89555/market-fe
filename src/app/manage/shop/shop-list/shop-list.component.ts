@@ -3,6 +3,7 @@ import {ModalService} from "rebirth-ng";
 import {ShopFormComponent} from "../shop-form/shop-form.component";
 import {ShopService} from "../shared/shop.service";
 import {Shop} from "../shared/shop.model";
+import {Page} from "../../../thurder-ng/models/page.model";
 
 @Component({
   selector: 'app-shop-list',
@@ -17,7 +18,7 @@ import {Shop} from "../shared/shop.model";
 export class ShopListComponent implements OnInit {
 
   editing = {}
-  shops = []
+  page: Page<any> = new Page()
   qry_name: string = ""
 
   constructor(private modalService: ModalService,
@@ -26,27 +27,20 @@ export class ShopListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.shopService.query().subscribe(
-      (shops) => {
-        this.shops = shops
-      }
-    )
+    this.query()
   }
 
   query() {
-    this.shopService.query(this.qry_name).subscribe(
-      (shops) => {
-        this.shops = shops
+    this.shopService.query(this.qry_name, this.page.pageNo).subscribe(
+      (page) => {
+        this.page = page
       }
     )
   }
 
   reset() {
-    this.shopService.query().subscribe(
-      (shops) => {
-        this.shops = shops
-      }
-    )
+    this.qry_name = ""
+    this.query()
   }
 
   add() {
@@ -76,11 +70,4 @@ export class ShopListComponent implements OnInit {
     })
   }
 
-  updateValue(event, cell, rowIndex) {
-    console.log('order editing rowIndex', rowIndex)
-    this.editing[rowIndex + '-' + cell] = false
-    this.shops[rowIndex][cell] = event.target.value
-    this.shops = [...this.shops]
-    console.log('UPDATED!', this.shops[rowIndex][cell])
-  }
 }

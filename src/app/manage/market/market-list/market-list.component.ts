@@ -3,7 +3,7 @@ import {ModalService} from "rebirth-ng";
 import {MarketFormComponent} from "../market-form/market-form.component";
 import {MarketService} from "../shared/market.service";
 import {Market} from "../shared/market.model";
-import {Page} from "../../../thurder-ng/models/page.model"
+import {Page} from "../../../thurder-ng/models/page.model";
 
 @Component({
   selector: 'app-market-list',
@@ -27,11 +27,7 @@ export class MarketListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.marketService.query().subscribe(
-      (page) => {
-        this.page = page
-      }
-    )
+    this.query()
   }
 
   query() {
@@ -48,11 +44,8 @@ export class MarketListComponent implements OnInit {
   }
 
   reset() {
-    this.marketService.query().subscribe(
-      (page) => {
-        this.page = page
-      }
-    )
+    this.qry_name = ""
+    this.query()
   }
 
   add() {

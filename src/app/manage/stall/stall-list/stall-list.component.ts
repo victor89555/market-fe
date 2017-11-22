@@ -4,6 +4,7 @@ import {StallFormComponent} from "../stall-form/stall-form.component";
 import {StallService} from "../shared/stall.service";
 import {Stall} from "../shared/stall.model";
 import {MarketService} from "../../market/shared/market.service";
+import {Page} from "../../../thurder-ng/models/page.model";
 
 @Component({
   selector: 'app-stall-list',
@@ -18,7 +19,7 @@ import {MarketService} from "../../market/shared/market.service";
 export class StallListComponent implements OnInit {
 
   editing = {}
-  stalls = []
+  page: Page<any> = new Page()
   qry_name: string = ""
 
   constructor(private modalService: ModalService,
@@ -28,26 +29,19 @@ export class StallListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.stallService.query().subscribe(
-      (stalls) => {
-        this.stalls = stalls
-      }
-    )
+    this.query()
   }
   query() {
-    this.stallService.query(this.qry_name).subscribe(
-      (stalls) => {
-        this.stalls = stalls
+    this.stallService.query(this.qry_name, this.page.pageNo).subscribe(
+      (page) => {
+        this.page = page
       }
     )
   }
 
   reset() {
-    this.stallService.query().subscribe(
-      (stalls) => {
-        this.stalls = stalls
-      }
-    )
+    this.qry_name = ""
+    this.query()
   }
 
   add() {
@@ -77,11 +71,4 @@ export class StallListComponent implements OnInit {
     })
   }
 
-  updateValue(event, cell, rowIndex) {
-    console.log('order editing rowIndex', rowIndex)
-    this.editing[rowIndex + '-' + cell] = false
-    this.stalls[rowIndex][cell] = event.target.value
-    this.stalls = [...this.stalls]
-    console.log('UPDATED!', this.stalls[rowIndex][cell])
-  }
 }

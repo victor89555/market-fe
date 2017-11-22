@@ -26,46 +26,29 @@
         #mydatatable
         class="material"
         [headerHeight]="50"
-        [limit]="10"
-        [columnMode]="'force'"
         [footerHeight]="50"
+        [limit]="page?.pageSize"
+        [columnMode]="'standard'"
         [rowHeight]="'auto'"
-        [rows]="operators">
-        <ngx-datatable-column name="姓名" prop="name">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="operator">
-            {{value}}
-          </ng-template>
-        </ngx-datatable-column>
+        [externalPaging]="true"
+        [count]="page?.totalCount"
+        [offset]="page?.pageNo-1"
+        [rows]="page?.items"
+        (page)='setPage($event)'
+      >
+        <ngx-datatable-column name="姓名" prop="name"></ngx-datatable-column>
+        <ngx-datatable-column name="昵称" prop="nick_name"></ngx-datatable-column>
+        <ngx-datatable-column name="身份证" prop="idCard_no"></ngx-datatable-column>
+        <ngx-datatable-column name="手机号" prop="mobile"></ngx-datatable-column>
+        <ngx-datatable-column name="座机" prop="tel"></ngx-datatable-column>
         <ngx-datatable-column name="性别" prop="sex">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="operator" let-value="value">
-            <select class="form-control" [value]="value" disabled>
-              <option value="0">男</option>
-              <option value="1">女</option>
-            </select>
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{value|dictConvert:"SEX"}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="昵称" prop="nickname">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="operator" let-value="value">
-            {{value}}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="身份证" prop="idCardNo">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="operator" let-value="value">
-            {{value}}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="手机号" prop="mobile">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="operator" let-value="value">
-            {{value}}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="座机" prop="tel">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="operator" let-value="value">
-            {{value}}
-          </ng-template>
-        </ngx-datatable-column>
+
         <ngx-datatable-column name="操作" prop="id">
-          <ng-template ngx-datatable-cell-template let-value="value" let-row="order">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="operator">
             <button class="btn btn-default" (click)="edit(value);">修改</button>
           </ng-template>
         </ngx-datatable-column>

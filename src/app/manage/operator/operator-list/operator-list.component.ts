@@ -3,6 +3,7 @@ import {ModalService} from "rebirth-ng";
 import {OperatorFormComponent} from "../operator-form/operator-form.component";
 import {OperatorService} from "../shared/operator.service";
 import {Operator} from "../shared/operator.model";
+import {Page} from "../../../thurder-ng/models/page.model";
 
 @Component({
   selector: 'app-operator-list',
@@ -17,7 +18,7 @@ import {Operator} from "../shared/operator.model";
 export class OperatorListComponent implements OnInit {
 
   editing = {}
-  operators = []
+  page: Page<any> = new Page()
   qry_name: string = ""
 
   constructor(private modalService: ModalService,
@@ -26,26 +27,24 @@ export class OperatorListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.operatorService.query().subscribe(
-      (operators) => {
-        this.operators = operators
-      }
-    )
+    this.query()
   }
   query() {
-    this.operatorService.query(this.qry_name).subscribe(
-      (operators) => {
-        this.operators = operators
+    this.operatorService.query(this.qry_name, this.page.pageNo).subscribe(
+      (page) => {
+        this.page = page
       }
     )
   }
 
+  setPage(pageInfo) {
+    this.page.pageNo = pageInfo.offset + 1
+    this.query()
+  }
+
   reset() {
-    this.operatorService.query().subscribe(
-      (operators) => {
-        this.operators = operators
-      }
-    )
+    this.qry_name = ""
+    this.query()
   }
 
   add() {
@@ -75,11 +74,4 @@ export class OperatorListComponent implements OnInit {
     })
   }
 
-  updateValue(event, cell, rowIndex) {
-    console.log('order editing rowIndex', rowIndex)
-    this.editing[rowIndex + '-' + cell] = false
-    this.operators[rowIndex][cell] = event.target.value
-    this.operators = [...this.operators]
-    console.log('UPDATED!', this.operators[rowIndex][cell])
-  }
 }

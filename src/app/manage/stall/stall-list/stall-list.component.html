@@ -26,26 +26,19 @@
         #mydatatable
         class="material"
         [headerHeight]="50"
-        [limit]="10"
-        [columnMode]="'force'"
         [footerHeight]="50"
+        [limit]="page?.pageSize"
+        [columnMode]="'standard'"
         [rowHeight]="'auto'"
-        [rows]="stalls">
-        <ngx-datatable-column name="摊位名" prop="name">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="stall">
-            {{value}}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="摊位面积" prop="area">
-          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="stall" let-value="value">
-            {{value}}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="所属市场" prop="marketId">
-          <ng-template ngx-datatable-cell-template let-value="value">
-            {{value}}
-          </ng-template>
-        </ngx-datatable-column>
+        [externalPaging]="true"
+        [count]="page?.totalCount"
+        [offset]="page?.pageNo-1"
+        [rows]="page?.items"
+        (page)='setPage($event)'
+      >
+        <ngx-datatable-column name="摊位名" prop="name"></ngx-datatable-column>
+        <ngx-datatable-column name="摊位面积" prop="area"></ngx-datatable-column>
+        <ngx-datatable-column name="所属市场" prop="market_id"></ngx-datatable-column>
         <ngx-datatable-column name="功能区域" prop="funcType">
           <ng-template ngx-datatable-cell-template let-value="value">
             {{value|dictConvert:"FUNC_TYPE"}}

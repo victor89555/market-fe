@@ -16,5 +16,15 @@ export const dicts = {
   "ENABLE_STATUS": {
     0: "不可用",
     1: "可用",
+  },
+
+  "SEX": {
+    0: "男",
+    1: "女"
+  },
+
+  "SHOP_STATUS": {
+    0: "无效",
+    1: "有效"
   }
 }
