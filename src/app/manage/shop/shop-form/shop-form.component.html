@@ -1,0 +1,52 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title">详情</h4>
+</div>
+<div class="modal-body">
+  <div class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-3 control-label">商户名:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" [(ngModel)]="shop.name" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">经营者标识:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" [(ngModel)]="shop.operatorId" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">状态:</label>
+      <div class="col-sm-9">
+        <select type="text" class="form-control" [(ngModel)]="shop.status">
+          <option value="0">无效</option>
+          <option value="1">有效</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">功能区域:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" [(ngModel)]="shop.funcType" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">摊位标识:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" [(ngModel)]="shop.stallId" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">市场标识:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" [(ngModel)]="shop.marketId" />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="save()">保存</button>
+  <button type="button" class="btn btn-warning" (click)="cancel()">取消</button>
+</div>

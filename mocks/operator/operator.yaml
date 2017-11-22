@@ -1,0 +1,46 @@
+
+- request:
+    url: /api/operators$
+    method: GET
+  response:
+    status: 200
+    latency: 500
+    headers:
+       Content-Type: application/json
+       Access-Control-Allow-Origin: '*'
+       Access-Control-Allow-Credentials: true
+       Access-Control-Allow-Methods: 'GET, POST, PUT, DELETE, OPTIONS'
+       api-version: "1.0"
+    file: operator-list.json
+
+- request:
+    url: /api/operators/1$
+    method: GET
+  response:
+    status: 200
+    latency: 500
+    headers:
+       Content-Type: application/json
+       Access-Control-Allow-Origin: '*'
+       Access-Control-Allow-Credentials: true
+       Access-Control-Allow-Methods: 'GET, POST, PUT, DELETE, OPTIONS'
+       api-version: "1.0"
+    file: operator-detail.json
+
+- request:
+    url: /api/operators$
+    method: GET
+  response:
+    status: 400
+    latency: 500
+    headers:
+       Content-Type: application/json
+       Access-Control-Allow-Origin: '*'
+       Access-Control-Allow-Credentials: true
+       Access-Control-Allow-Methods: 'GET, POST, PUT, DELETE, OPTIONS'
+       api-version: "1.0"
+    body:  >
+      {
+        "error": "文件不存在."
+      }
+

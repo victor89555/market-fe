@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "marketId": 2,
+    "stallId": 1,
+    "name": "经营者",
+    "funcType": 2,
+    "operatorId": 1,
+    "status": 0
+  },
+  {
+    "id": 2,
+    "marketId": 3,
+    "stallId": 2,
+    "name": "洪",
+    "funcType": 1,
+    "operatorId": 2,
+    "status": 1
+  },
+  {
+    "id": 3,
+    "marketId": 1,
+    "stallId": 3,
+    "name": "江",
+    "funcType": 3,
+    "operatorId": 1,
+    "status": 0
+  },
+  {
+    "id": 4,
+    "marketId": 4,
+    "stallId": 4,
+    "name": "李",
+    "funcType": 2,
+    "operatorId": 3,
+    "status": 1
+  }
+]

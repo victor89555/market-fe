@@ -1,0 +1,9 @@
+export interface Shop {
+  id: number
+  marketId: number
+  stallId: number
+  name: string
+  funcType: number
+  operatorId: number
+  status: number
+}

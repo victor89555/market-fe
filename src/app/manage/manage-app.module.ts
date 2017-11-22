@@ -17,7 +17,13 @@ import {MarketService} from "./market/shared/market.service";
 import {StallListComponent} from "./stall/stall-list/stall-list.component";
 import {StallFormComponent} from "./stall/stall-form/stall-form.component";
 import {StallService} from "./stall/shared/stall.service";
-import {ThurderNGModule} from "../thurder-ng/thurder-ng.module"
+import {ThurderNGModule} from "../thurder-ng/thurder-ng.module";
+import {OperatorListComponent} from "./operator/operator-list/operator-list.component";
+import {OperatorFormComponent} from "./operator/operator-form/operator-form.component";
+import {ShopFormComponent} from "./shop/shop-form/shop-form.component";
+import {ShopListComponent} from "./shop/shop-list/shop-list.component";
+import {OperatorService} from "./operator/shared/operator.service";
+import {ShopService} from "./shop/shared/shop.service";
 
 @NgModule({
   imports: [
@@ -37,17 +43,25 @@ import {ThurderNGModule} from "../thurder-ng/thurder-ng.module"
     MarketListComponent,
     StallListComponent,
     StallFormComponent,
+    OperatorListComponent,
+    OperatorFormComponent,
+    ShopFormComponent,
+    ShopListComponent
   ],
   entryComponents: [
     OrderFormComponent,
     MarketFormComponent,
-    StallFormComponent
+    StallFormComponent,
+    OperatorFormComponent,
+    ShopFormComponent
   ],
   providers: [
     MenuService,
     OrderService,
     MarketService,
-    StallService
+    StallService,
+    OperatorService,
+    ShopService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

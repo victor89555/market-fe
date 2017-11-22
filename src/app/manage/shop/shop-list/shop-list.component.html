@@ -1,0 +1,75 @@
+<div class="portlet light bordered">
+  <div class="portlet-title">
+    <div class="caption">
+      <i class="icon-basket font-red"></i>
+      <span class="caption-subject bold font-red ">商户信息</span>
+    </div>
+    <div class="actions">
+      <a href="javascript:;" class="btn btn-default btn-sm" (click)="add()" has-permission="FUC_ORDER_ADD">
+        <i class="fa fa-plus"></i> 新增
+      </a>
+    </div>
+  </div>
+  <div class="portlet-body">
+    <div class="table-toolbar">
+      <div class="form-inline">
+        <div class="form-group">
+          <label class="sr-only">商户名：</label>
+          <input type="text" class="form-control" [(ngModel)]="qry_name" placeholder="商户名">
+        </div>
+        <button type="button" class="btn sbold green" (click)="query()">查询</button>
+        <button type="button" class="btn sbold green" (click)="reset()">重置</button>
+      </div>
+    </div>
+    <div class="dataTables_wrapper no-footer">
+      <ngx-datatable
+        #mydatatable
+        class="material"
+        [headerHeight]="50"
+        [limit]="10"
+        [columnMode]="'force'"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [rows]="shops">
+        <ngx-datatable-column name="商户名" prop="name">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="shop">
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="状态" prop="status">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="shop" let-value="value">
+            <select class="form-control" [value]="value" disabled>
+              <option value="0">无效</option>
+              <option value="1">有效</option>
+            </select>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="经营者标识" prop="operatorId">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="shop" let-value="value">
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="功能区域" prop="funcType">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="shop" let-value="value">
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="摊位标识" prop="stallId">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="operator" let-value="value">
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="市场标识" prop="marketId">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="operator" let-value="value">
+            {{value}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="操作" prop="id">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="order">
+            <button class="btn btn-default" (click)="edit(value);">修改</button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>
