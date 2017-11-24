@@ -8,6 +8,7 @@ import {StallListComponent} from "./stall/stall-list/stall-list.component";
 import {OperatorListComponent} from "./operator/operator-list/operator-list.component";
 import {ShopListComponent} from "./shop/shop-list/shop-list.component";
 import {ElectronicScaleListComponent} from "./electronicScale/electronicScale-list/electronicScale-list.component";
+import {ContractListComponent} from "./contract/contract-list/contract-list.component";
 
 export const ROUTER_CONFIG: Routes = [
   {
@@ -23,6 +24,7 @@ export const ROUTER_CONFIG: Routes = [
       {path: 'operators', component: OperatorListComponent},
       {path: 'shops', component: ShopListComponent},
       {path: 'electronicScales', component: ElectronicScaleListComponent},
+      {path: 'contracts', component: ContractListComponent},
       {path: 'user', component: UserMockComponent},
       {path: 'document', component: UserMockComponent},
     ]

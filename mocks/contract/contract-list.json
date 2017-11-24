@@ -1,0 +1,58 @@
+{
+  "beginIndex": 0,
+  "endIndex": 1,
+  "firstPage": true,
+  "hasNextPage": false,
+  "hasPrePage": false,
+  "items": [
+    {
+      "id": 1,
+      "market_id": 2,
+      "shop_id": 1,
+      "sign_time": "2017-01-23 09:23:55",
+      "validity_time": "2019-01-23 09:23:5",
+      "total_amount": 20000,
+      "paid_amount": 20000,
+      "status": 0
+    },
+    {
+      "id": 2,
+      "market_id": 3,
+      "shop_id": 2,
+      "sign_time": "2017-03-23 09:23:55",
+      "validity_time": "2019-04-23 09:23:5",
+      "total_amount": 202200,
+      "paid_amount": 20220,
+      "status": 1
+    },
+    {
+      "id": 3,
+      "market_id": 1,
+      "shop_id": 3,
+      "sign_time": "2027-01-23 09:23:55",
+      "validity_time": "2029-01-23 09:23:5",
+      "total_amount": 30000,
+      "paid_amount": 20000,
+      "status": 0
+    },
+    {
+      "id": 4,
+      "market_id": 4,
+      "shop_id": 4,
+      "sign_time": "2117-01-23 09:23:55",
+      "validity_time": "2119-01-23 09:23:5",
+      "total_amount": 20990,
+      "paid_amount": 20090,
+      "status": 0
+    }
+  ],
+  "lastPage": true,
+  "nextPage": 1,
+  "offset": 0,
+  "pageNo": 1,
+  "pageSize": 10,
+  "prePage": 1,
+  "totalCount": 100,
+  "totalPages": 1
+}
+

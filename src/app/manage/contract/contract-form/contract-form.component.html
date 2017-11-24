@@ -1,0 +1,79 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel()">
+    <span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title">详情</h4>
+</div>
+<div class="modal-body">
+  <div class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-3 control-label">市场:</label>
+      <div class="col-sm-9">
+        <select type="text" class="form-control" [(ngModel)]="contract.marketId">
+          <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">商户:</label>
+      <div class="col-sm-9">
+        <select type="text" class="form-control" [(ngModel)]="contract.shopId">
+          <option *ngFor="let shop of shops" [value]="shop.id">{{shop.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">签约时间:</label>
+      <div class="col-sm-9">
+        <div class="input-group">
+          <input class="form-control" [showTimePicker]="true" [dateFormat]="dateFormat" [(ngModel)]="contract.signTime"
+                 reDatePicker #datePicker1="datePicker">
+          <div class="input-group-addon" (click)="datePicker1.toggle($event)">
+            <i class="glyphicon glyphicon-calendar"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">到期时间:</label>
+      <div class="col-sm-9">
+        <div class="input-group">
+          <input class="form-control" [showTimePicker]="true" [dateFormat]="dateFormat" [(ngModel)]="contract.validityTime"
+                 reDatePicker #datePicker2="datePicker">
+          <div class="input-group-addon" (click)="datePicker2.toggle($event)">
+            <i class="glyphicon glyphicon-calendar"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">合同总金额:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" [(ngModel)]="contract.totalAmount"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">已付金额:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" [(ngModel)]="contract.paidAmount"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">状态:</label>
+      <div class="col-sm-9">
+        <tg-dict-select dictName="SHOP_STATUS" [(ngModel)]="contract.status"></tg-dict-select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">附件:</label>
+      <div class="col-sm-9">
+        <re-file-upload [multiple]="true" (removeFiles)="onRemoveDone($event)" uploadParamName="files"
+                        (uploadFilesChange)="uploadFilesChange($event)"
+                        uploadUrl="http://localhost:8000/upload"></re-file-upload>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="save()">保存</button>
+  <button type="button" class="btn btn-warning" (click)="cancel()">取消</button>
+</div>

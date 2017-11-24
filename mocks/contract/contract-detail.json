@@ -1,0 +1,10 @@
+{
+  "id": 1,
+  "marketId": 2,
+  "shopId": 1,
+  "signTime": "2017-01-23 09:23:55",
+  "validityTime": "2019-01-23 09:23:5",
+  "totalAmount": 20000,
+  "paidAmount": 20000,
+  "status": 0
+}

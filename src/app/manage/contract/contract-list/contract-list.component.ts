@@ -1,29 +1,29 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
 import {ModalService} from "rebirth-ng";
-import {MarketFormComponent} from "../market-form/market-form.component";
-import {MarketService} from "../shared/market.service";
-import {Market} from "../shared/market.model";
+import {ContractFormComponent} from "../contract-form/contract-form.component";
+import {ContractService} from "../shared/contract.service";
+import {Contract} from "../shared/contract.model";
 import {Page} from "../../../thurder-ng/models/page.model";
 
 @Component({
-  selector: 'app-market-list',
-  templateUrl: './market-list.component.html',
+  selector: 'app-contract-list',
+  templateUrl: './contract-list.component.html',
   styleUrls: [
-    "./market-list.component.scss",
+    "./contract-list.component.scss",
   ],
   encapsulation: ViewEncapsulation.None,
   providers: [],
 })
 
-export class MarketListComponent implements OnInit {
+export class ContractListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
   qry_name: string = ""
-  qry_code: string = ""
+
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
-              private marketService: MarketService) {
+              private contractService: ContractService) {
   }
 
   ngOnInit(): void {
@@ -31,16 +31,11 @@ export class MarketListComponent implements OnInit {
   }
 
   query() {
-    this.marketService.query(this.qry_name, this.page.pageNo).subscribe(
+    this.contractService.query(this.qry_name, this.page.pageNo).subscribe(
       (page) => {
         this.page = page
       }
     )
-  }
-
-  setPage(pageInfo) {
-    this.page.pageNo = pageInfo.offset + 1
-    this.query()
   }
 
   reset() {
@@ -49,26 +44,27 @@ export class MarketListComponent implements OnInit {
   }
 
   add() {
-    this.modalService.open<Market>({
-      component: MarketFormComponent,
+    this.modalService.open<Contract>({
+      component: ContractFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
-      resolve: {}
-    }).subscribe(market => {
-      console.log('Rebirth Modal -> Get ok with result:', market)
+      resolve: {
+      }
+    }).subscribe(contract => {
+      console.log('Rebirth Modal -> Get ok with result:', contract)
     }, error => {
       console.error('Rebirth Modal -> Get cancel with result:', error)
     })
   }
 
   edit(id: number) {
-    this.modalService.open<Market>({
-      component: MarketFormComponent,
+    this.modalService.open<Contract>({
+      component: ContractFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
         id: id
       }
-    }).subscribe(market => {
-      console.log('Rebirth Modal -> Get ok with result:', market)
+    }).subscribe(contract => {
+      console.log('Rebirth Modal -> Get ok with result:', contract)
     }, error => {
       console.error('Rebirth Modal -> Get cancel with result:', error)
     })
