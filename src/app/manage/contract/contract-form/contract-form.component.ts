@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, OnInit} from "@angular/core";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit} from "@angular/core";
 import {Modal} from "rebirth-ng";
 import {Contract} from "../shared/contract.model";
 import {ContractService} from "../shared/contract.service";
@@ -19,9 +19,11 @@ export class ContractFormComponent implements Modal, OnInit {
   contract: any = {}
   markets: Market[]
   shops: Shop[]
-  constructor(private contractService: ContractService,
-                private marketService: MarketService,
-                private shopService: ShopService) {
+
+  constructor(private changeDetectorRef: ChangeDetectorRef,
+              private contractService: ContractService,
+              private marketService: MarketService,
+              private shopService: ShopService) {
   }
 
   ngOnInit(): void {
@@ -39,6 +41,7 @@ export class ContractFormComponent implements Modal, OnInit {
     this.contractService.get(this.context.id).subscribe(
       (contract) => {
         this.contract = contract
+        this.changeDetectorRef.markForCheck()
       }
     )
   }
