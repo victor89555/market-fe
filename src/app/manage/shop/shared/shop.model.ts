@@ -6,4 +6,6 @@ export interface Shop {
   funcType: number
   operatorId: number
   status: number
+  electronicScaleId: number
+  contractId: number
 }

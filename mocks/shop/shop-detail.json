@@ -5,5 +5,7 @@
   "name": "经营者",
   "funcType": 2,
   "operatorId": 1,
-  "status": 0
+  "status": 0,
+  "electronicScaleId": 2,
+  "contractId": 3
 }

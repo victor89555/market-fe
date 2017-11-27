@@ -8,7 +8,7 @@
     <div class="form-group">
       <label class="col-sm-3 control-label">商户名:</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" [(ngModel)]="shop.name" />
+        <input type="text" class="form-control" [(ngModel)]="shop.name"/>
       </div>
     </div>
     <div class="form-group">
@@ -46,6 +46,50 @@
           <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
         </select>
       </div>
+    </div>
+    <div class="form-group">
+      <re-tabs>
+        <re-tab id="tab1" title="电子秤">
+          <ng-template reTabContent>
+            <button class="btn sbold green" (click)="allotment(autoComplete1.value)">分配</button>
+            <input type="text" class="form-control" [minLength]="0"
+                   [(ngModel)]="shop.electronicScaleId" reAutoComplete [dataSource]="electronicScale"
+                   #autoComplete1="autoComplete"/>
+            <table id="table2">
+              <tr>
+                <th>序列号</th>
+                <th>版本</th>
+              </tr>
+              <tr *ngFor="let sc of shop_con">
+                <td>{{sc.sequenceNo}}</td>
+                <td>{{sc.softVersion}}</td>
+              </tr>
+            </table>
+          </ng-template>
+        </re-tab>
+        <re-tab id="tab2" title="合同">
+          <ng-template reTabContent>
+            <input type="text" class="form-control" [minLength]="0"
+                   [(ngModel)]="shop.contractId" reAutoComplete [dataSource]="contract"/>
+            <table id="table">
+              <tr>
+                <th>签约时间</th>
+                <th>到期时间</th>
+                <th>合同总金额</th>
+                <th>已付金额</th>
+                <th>合同状态</th>
+              </tr>
+              <tr *ngFor="let con of contracts">
+                <td *ngIf="con.shop_id == shop.contractId">{{con.sign_time}}</td>
+                <td *ngIf="con.shop_id == shop.contractId">{{con.validity_time}}</td>
+                <td *ngIf="con.shop_id == shop.contractId">{{con.total_amount}}</td>
+                <td *ngIf="con.shop_id == shop.contractId">{{con.paid_amount}}</td>
+                <td *ngIf="con.shop_id == shop.contractId">{{con.status}}</td>
+              </tr>
+            </table>
+          </ng-template>
+        </re-tab>
+      </re-tabs>
     </div>
   </div>
 </div>

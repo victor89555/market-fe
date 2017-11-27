@@ -6,7 +6,9 @@
     "name": "经营者",
     "func_type": 2,
     "operator_id": 1,
-    "status": 0
+    "status": 0,
+    "electronic_scale_id": 2,
+    "contract_id": 3
   },
   {
     "id": 2,
@@ -15,7 +17,9 @@
     "name": "洪",
     "func_type": 1,
     "operator_id": 2,
-    "status": 1
+    "status": 1,
+    "electronic_scale_id": 1,
+    "contract_id": 2
   },
   {
     "id": 3,
@@ -24,7 +28,9 @@
     "name": "江",
     "func_type": 3,
     "operator_id": 1,
-    "status": 0
+    "status": 0,
+    "electronic_scale_id": 3,
+    "contract_id": 3
   },
   {
     "id": 4,
@@ -33,6 +39,8 @@
     "name": "李",
     "func_type": 2,
     "operator_id": 3,
-    "status": 1
+    "status": 1,
+    "electronic_scale_id": 3,
+    "contract_id": 2
   }
 ]
