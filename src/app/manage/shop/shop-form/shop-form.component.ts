@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit} from "@angular/core";
-import {Modal} from "rebirth-ng";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, ComponentFactoryResolver} from "@angular/core";
+import {Modal,DialogService,ModalService} from "rebirth-ng";
 import {Shop} from "../shared/shop.model";
 import {ShopService} from "../shared/shop.service";
 import {Market} from "../../market/shared/market.model";
@@ -13,6 +13,7 @@ import {ElectronicScale} from "../../electronicScale/shared/electronicScale.mode
 import {Contract} from "../../contract/shared/contract.model";
 import {ContractService} from "../../contract/shared/contract.service";
 import {HttpClient} from "@angular/common/http";
+import {ContractFormComponent} from "../../contract/contract-form/contract-form.component";
 
 @Component({
   selector: 'app-shop-form',
@@ -28,7 +29,7 @@ export class ShopFormComponent implements Modal, OnInit {
   markets: Market[]
   stalls: Stall[]
   operators: Operator[]
-  electronicScales: ElectronicScale[]
+  electronicScales: any[]
   contracts: Contract[]
   electronicScale = []
   contract = []
@@ -41,7 +42,10 @@ export class ShopFormComponent implements Modal, OnInit {
               private operatorService: OperatorService,
               private electronicScaleService: ElectronicScaleService,
               private contractService: ContractService,
-              private httpClient: HttpClient) {
+              private httpClient: HttpClient,
+              private modalService: ModalService,
+              private dialogService: DialogService,
+              private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   ngOnInit(): void {
@@ -61,7 +65,7 @@ export class ShopFormComponent implements Modal, OnInit {
         this.operators = operators
       }
     )
-    this.electronicScaleService.getAll().subscribe(
+    this.electronicScaleService.getAll("", true).subscribe(
       (electronicScales) => {
         this.electronicScales = electronicScales
         this.getDetail()
@@ -94,13 +98,35 @@ export class ShopFormComponent implements Modal, OnInit {
       this.electronicScale.push(this.electronicScales[i].id)
     }
   }
-
-  allotment(val) {
+  alert(title,content) {  //弹框提示
+    this.dialogService.alert({
+      title: title,
+      content: content,
+      yes: '确定',
+      icon: 'icon-success',
+      html: true,
+    })
+      .subscribe(
+        data => console.log('Rebirth alert get yes result:', data),
+        error => console.error('Rebirth alert get no result:', error)
+      );
+  }
+  isEletronicExist(id){   //判断电子称是否存在
+       for(let i = 0; i<this.shop_con.length;i++){
+          if(id==this.shop_con[i].id){
+            this.alert('提示框','该电子秤已选择。');
+            return true;
+          }
+       }
+       return false;
+  }
+  allotment(val) {   //添加电子秤
     for (var i = 0; i < this.electronicScales.length; i++) {
-      if (val == this.electronicScales[i].id) {
+      if (val == this.electronicScales[i].id && !this.isEletronicExist(val)) {
         this.shop_con.push({
-          "sequenceNo": this.electronicScales[i].sequenceNo,
-          "softVersion": this.electronicScales[i].softVersion
+          "sequenceNo": this.electronicScales[i].sequence_no,
+          "softVersion": this.electronicScales[i].soft_version,
+          "id":this.electronicScales[i].id
         })
       }
     }
@@ -108,6 +134,25 @@ export class ShopFormComponent implements Modal, OnInit {
 
   cancel() {
     this.dismiss.error(this.shop);
+  }
+
+  delElectronicScale(sequenceNo) { //删除电子秤
+     console.log('删除'+ sequenceNo)
+     this.shop_con = this.shop_con.filter((sc)=>sc.sequenceNo!=sequenceNo);
+  }
+
+  addContract(id:number){
+    this.modalService.open<Contract>({
+      component: ContractFormComponent,
+      componentFactoryResolver: this.componentFactoryResolver,
+      resolve: {
+        id: id
+      }
+    }).subscribe(contract => {
+      console.log('Rebirth Modal -> Get ok with result:', contract)
+    }, error => {
+      console.error('Rebirth Modal -> Get cancel with result:', error)
+    })
   }
 }
 

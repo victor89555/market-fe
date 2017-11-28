@@ -19,7 +19,7 @@ export class ElectronicScaleService extends RebirthHttp {
   }
 
   @GET("electronicScales")
-  getAll(@Query("name") name = ""): Observable<ElectronicScale[]> {
+  getAll(@Query("name") name = "", @Query("usable") usable = true): Observable<ElectronicScale[]> {
     return null;
   }
 

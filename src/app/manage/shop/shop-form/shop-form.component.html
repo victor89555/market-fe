@@ -51,26 +51,29 @@
       <re-tabs>
         <re-tab id="tab1" title="电子秤">
           <ng-template reTabContent>
-            <button class="btn sbold green" (click)="allotment(autoComplete1.value)">分配</button>
-            <input type="text" class="form-control" [minLength]="0"
-                   [(ngModel)]="shop.electronicScaleId" reAutoComplete [dataSource]="electronicScale"
-                   #autoComplete1="autoComplete"/>
+            <div class="same-line">
+              <input type="text" class="form-control" [minLength]="0" placeholder="请选择需要的电子秤序列号。"
+                     [(ngModel)]="shop.electronicScaleId" reAutoComplete [dataSource]="electronicScale"
+                     #autoComplete1="autoComplete"/>
+              <button class="btn sbold green line-btn" (click)="allotment(autoComplete1.value)">分配</button>
+            </div>
             <table id="table2">
               <tr>
                 <th>序列号</th>
                 <th>版本</th>
+                <th>操作</th>
               </tr>
               <tr *ngFor="let sc of shop_con">
                 <td>{{sc.sequenceNo}}</td>
                 <td>{{sc.softVersion}}</td>
+                <td (click)="delElectronicScale(sc.sequenceNo)">删除</td>
               </tr>
             </table>
           </ng-template>
         </re-tab>
         <re-tab id="tab2" title="合同">
           <ng-template reTabContent>
-            <input type="text" class="form-control" [minLength]="0"
-                   [(ngModel)]="shop.contractId" reAutoComplete [dataSource]="contract"/>
+            <button class="btn sbold green" (click)="addContract(shop.operatorId)">增加合同</button>
             <table id="table">
               <tr>
                 <th>签约时间</th>
