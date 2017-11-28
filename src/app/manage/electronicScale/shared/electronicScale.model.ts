@@ -1,4 +1,4 @@
-export  interface ElectronicScale {
+export interface ElectronicScale {
   id: number
   lastUpdateUser: string
   sequenceNo: string
