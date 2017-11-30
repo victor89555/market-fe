@@ -13,8 +13,9 @@ export class ShopService extends RebirthHttp {
   }
 
   @GET("shops")
-  query(@Query("name") name = "", @Query("pageNo") pageNo = 1,
-        @Query("pageSize") pageSize = 10): Observable<Page<any>> {
+  query(@Query("_filter_eq_market") market = "",@Query("_filter_like_shop") shop = "",
+        @Query("_filter_like_stall") stall = "", @Query("_filter_eq_state") state = "",
+        @Query("pageNo") pageNo = 1, @Query("pageSize") pageSize = 10): Observable<Page<any>> {
     return null;
   }
 

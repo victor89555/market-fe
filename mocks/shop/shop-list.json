@@ -8,21 +8,27 @@
     {
       "id": 1,
       "market_id": 2,
+      "market_name":"市场1",
       "stall_id": 1,
-      "name": "经营者",
+      "stall_name":"摊位1",
+      "name": "商户1",
       "func_type": 2,
       "operator_id": 1,
-      "status": 0,
+      "operator_name":"经营者1",
+      "status": 2,
       "electronic_scale_id": 2,
       "contract_id": 3
     },
     {
       "id": 2,
       "market_id": 3,
+      "market_name":"市场2",
       "stall_id": 2,
+      "stall_name":"摊位2",
       "name": "洪",
       "func_type": 1,
       "operator_id": 2,
+      "operator_name":"经营者2",
       "status": 1,
       "electronic_scale_id": 1,
       "contract_id": 2
@@ -30,10 +36,13 @@
     {
       "id": 3,
       "market_id": 1,
+      "market_name":"市场3",
       "stall_id": 3,
+      "stall_name":"摊位3",
       "name": "江",
       "func_type": 3,
       "operator_id": 1,
+      "operator_name":"经营者3",
       "status": 0,
       "electronic_scale_id": 3,
       "contract_id": 3
@@ -41,11 +50,14 @@
     {
       "id": 4,
       "market_id": 4,
+      "market_name":"市场4",
       "stall_id": 4,
+      "stall_name":"摊位4",
       "name": "李",
       "func_type": 2,
       "operator_id": 3,
-      "status": 1,
+      "operator_name":"经营者4",
+      "status": 2,
       "electronic_scale_id": 3,
       "contract_id": 2
     }

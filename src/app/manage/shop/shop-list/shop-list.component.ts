@@ -19,7 +19,8 @@ export class ShopListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  qry_name: string = ""
+  qry = {market:'',shop:'',stall:'',state:''}
+  shop_state:boolean
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
@@ -30,16 +31,19 @@ export class ShopListComponent implements OnInit {
     this.query()
   }
 
-  query() {
-    this.shopService.query(this.qry_name, this.page.pageNo).subscribe(
+  query() { //全部商户
+    this.shopService.query(this.qry.market, this.qry.shop, this.qry.stall, this.qry.state, this.page.pageNo).subscribe(
       (page) => {
         this.page = page
+        console.log(page);
       }
     )
   }
-
   reset() {
-    this.qry_name = ""
+    this.qry.market = ''
+    this.qry.shop = ''
+    this.qry.stall = ''
+    this.qry.state = ''
     this.query()
   }
 

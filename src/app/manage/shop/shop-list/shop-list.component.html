@@ -15,7 +15,10 @@
       <div class="form-inline">
         <div class="form-group">
           <label class="sr-only">商户名：</label>
-          <input type="text" class="form-control" [(ngModel)]="qry_name" placeholder="商户名">
+          <input type="text" class="form-control" [(ngModel)]="qry.market" placeholder="市场名称">
+          <input type="text" class="form-control" [(ngModel)]="qry.shop" placeholder="商户名称">
+          <input type="text" class="form-control" [(ngModel)]="qry.stall" placeholder="摊位编号">
+          <input type="text" class="form-control" [(ngModel)]="qry.state" placeholder="状态">
         </div>
         <button type="button" class="btn sbold green" (click)="query()">查询</button>
         <button type="button" class="btn sbold green" (click)="reset()">重置</button>
@@ -36,20 +39,22 @@
         [rows]="page?.items"
         (page)='setPage($event)'
       >
-        <ngx-datatable-column name="商户名" prop="name"></ngx-datatable-column>
-        <ngx-datatable-column name="状态" prop="status">
-          <ng-template ngx-datatable-cell-template let-value="value">
-            {{value|dictConvert:"SHOP_STATUS"}}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="经营者" prop="operator_id"></ngx-datatable-column>
+        <ngx-datatable-column name="商户" prop="name"></ngx-datatable-column>
+        <ngx-datatable-column name="市场" prop="market_name"></ngx-datatable-column>
+        <ngx-datatable-column name="摊位" prop="stall_name"></ngx-datatable-column>
+        <ngx-datatable-column name="经营者" prop="operator_name"></ngx-datatable-column>
         <ngx-datatable-column name="功能区域" prop="func_type">
           <ng-template ngx-datatable-cell-template let-value="value">
             {{value|dictConvert:"FUNC_TYPE"}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="摊位" prop="stall_id"></ngx-datatable-column>
-        <ngx-datatable-column name="市场" prop="market_id"></ngx-datatable-column>
+        <ngx-datatable-column name="状态" prop="status" cellClass="outOfDate">
+          <ng-template ngx-datatable-cell-template let-value="value">
+             <div [ngClass]="{'outOfDate': value ==2}">
+               {{value|dictConvert:"SHOP_STATUS"}}
+             </div>
+          </ng-template>
+        </ngx-datatable-column>
         <ngx-datatable-column name="操作" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="shop">
             <button class="btn btn-default" (click)="edit(value);">修改</button>
