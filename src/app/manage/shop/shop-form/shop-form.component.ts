@@ -31,7 +31,7 @@ export class ShopFormComponent implements Modal, OnInit {
   operators: Operator[]
   electronicScales: any[]
   contracts: Contract[]
-  electronicScale = []
+  allotElectronicScales = []
   contract = []
   shop_con = []
 
@@ -50,41 +50,57 @@ export class ShopFormComponent implements Modal, OnInit {
 
   ngOnInit(): void {
     console.log('ModalTestComponent init....');
+    this.loadStall();
+    this.loadMarket();
+    this.loadOperator();
+    this.loadElectronicScale();
+    this.loadContractor();
+    this.loadShop();
+  }
+  loadStall(){  //摊位
     this.stallService.getAll().subscribe(
       (stalls) => {
         this.stalls = stalls
       }
     )
+  }
+  loadMarket(){ //市场
     this.marketService.getAll().subscribe(
       (markets) => {
         this.markets = markets
       }
     )
+  }
+  loadOperator(){ //操作者
     this.operatorService.getAll().subscribe(
       (operators) => {
         this.operators = operators
       }
     )
+  }
+  loadElectronicScale(){ // 电子秤
     this.electronicScaleService.getAll("", true).subscribe(
       (electronicScales) => {
         this.electronicScales = electronicScales
         this.getDetail()
       }
     )
+  }
+  loadContractor(){ // 获取合同
     this.contractService.getAll().subscribe(
       (contracts) => {
         this.contracts = contracts
       }
     )
+  }
+  loadShop(){ // 商户
     this.shopService.get(this.context.id).subscribe(
       (shop) => {
         this.shop = shop
         this.changeDetectorRef.markForCheck()
       }
     )
-
   }
-
   save() {
     this.shopService.save(this.shop).subscribe(
       (shop) => {
@@ -95,10 +111,10 @@ export class ShopFormComponent implements Modal, OnInit {
 
   getDetail() {
     for (var i = 0; i < this.electronicScales.length; i++) {
-      this.electronicScale.push(this.electronicScales[i].id)
+      this.allotElectronicScales.push(this.electronicScales[i].sequence_no)
     }
   }
-  alert(title,content) {  //弹框提示
+  alert(title,content) {  // 弹框提示
     this.dialogService.alert({
       title: title,
       content: content,
@@ -111,7 +127,7 @@ export class ShopFormComponent implements Modal, OnInit {
         error => console.error('Rebirth alert get no result:', error)
       );
   }
-  isEletronicExist(id){   //判断电子称是否存在
+  isEletronicExist(id){   // 判断电子称是否存在
        for(let i = 0; i<this.shop_con.length;i++){
           if(id==this.shop_con[i].id){
             this.alert('提示框','该电子秤已选择。');
@@ -121,8 +137,8 @@ export class ShopFormComponent implements Modal, OnInit {
        return false;
   }
   allotment(val) {   //添加电子秤
-    for (var i = 0; i < this.electronicScales.length; i++) {
-      if (val == this.electronicScales[i].id && !this.isEletronicExist(val)) {
+    for (let i = 0; i < this.electronicScales.length; i++) {
+      if (val == this.electronicScales[i].sequence_no && !this.isEletronicExist(this.electronicScales[i].id)) {
         this.shop_con.push({
           "sequenceNo": this.electronicScales[i].sequence_no,
           "softVersion": this.electronicScales[i].soft_version,
@@ -141,15 +157,18 @@ export class ShopFormComponent implements Modal, OnInit {
      this.shop_con = this.shop_con.filter((sc)=>sc.sequenceNo!=sequenceNo);
   }
 
-  addContract(id:number){
+  addContract(id:number){ //增加合同
     this.modalService.open<Contract>({
       component: ContractFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
-        id: id
+        id: id,
+        isShopForm: true, //判断是否从商户管理进入。
+        marketId:''
+
       }
     }).subscribe(contract => {
-      console.log('Rebirth Modal -> Get ok with result:', contract)
+      this.loadContractor();
     }, error => {
       console.error('Rebirth Modal -> Get cancel with result:', error)
     })

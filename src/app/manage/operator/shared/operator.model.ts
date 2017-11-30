@@ -3,7 +3,7 @@ export interface Operator {
   idCardNo: string
   mobile: string
   name: string
-  nickname: string
+  nickName: string
   sex: number
   tel: string
 }

@@ -32,5 +32,4 @@ export class ContractService extends RebirthHttp {
   save(@Body contract: Contract): Observable<Contract> {
     return null;
   }
-
 }

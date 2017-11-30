@@ -53,9 +53,9 @@
           <ng-template reTabContent>
             <div class="same-line">
               <input type="text" class="form-control" [minLength]="0" placeholder="请选择需要的电子秤序列号。"
-                     [(ngModel)]="shop.electronicScaleId" reAutoComplete [dataSource]="electronicScale"
-                     #autoComplete1="autoComplete"/>
-              <button class="btn sbold green line-btn" (click)="allotment(autoComplete1.value)">分配</button>
+                      reAutoComplete [dataSource]="allotElectronicScales"
+                     #scaleSelect/>
+              <button class="btn sbold green line-btn" (click)="allotment(scaleSelect.value)">分配</button>
             </div>
             <table id="table2">
               <tr>
