@@ -1,65 +1,58 @@
-<div class="portlet light bordered">
-  <div class="portlet-title">
-    <div class="caption">
-      <i class="icon-basket font-red"></i>
-      <span class="caption-subject bold font-red ">订单信息</span>
-    </div>
-    <div class="actions">
-      <a href="javascript:;" class="btn btn-default btn-sm" (click)="add()" has-permission="FUC_ORDER_ADD">
-        <i class="fa fa-plus"></i> 新增
+
+<div class="page-head">
+  <div class="page-title">
+    <h1><span class="glyphicon glyphicon-shopping-cart"></span>
+      订单信息
+      <!--<small>dashboard &amp; statistics</small>-->
+    </h1>
+  </div>
+  <div class="page-toolbar">
+    <div class="pull-right tooltips" >
+      <a href="javascript:;" class="btn btn-danger">
+        <i class="glyphicon glyphicon-plus"></i> 新增
       </a>
     </div>
   </div>
-  <div class="portlet-body">
-    <div class="table-toolbar">
-      <div class="form-inline">
-        <div class="form-group">
-          <label class="sr-only">姓名：</label>
-          <input type="text" class="form-control" [(ngModel)]="qry_name" placeholder="姓名">
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <form class="form-inline">
+      <div class="form-group">
+        <div class="input-group">
+          <input type="text" class="form-control" id="exampleInputAmount" placeholder="订单名">
         </div>
-        <!--<div class="form-group">
-          <label class="sr-only">执行人：</label>
-          <select worker-select="" header-value="" header-text="-执行人-" ng-model="conditions._filter_like_execUser"
-                  class="form-control input-small ng-pristine ng-untouched ng-valid ng-scope ng-empty">
-            &lt;!&ndash; ngRepeat: worker in _selectWorkers &ndash;&gt;
-            <option ng-repeat="worker in _selectWorkers" value="" class="ng-binding ng-scope">-执行人-</option>
-            &lt;!&ndash; end ngRepeat: worker in _selectWorkers &ndash;&gt;
-            <option ng-repeat="worker in _selectWorkers" value="169" class="ng-binding ng-scope">阿彬</option>
-            &lt;!&ndash; end ngRepeat: worker in _selectWorkers &ndash;&gt;
-            <option ng-repeat="worker in _selectWorkers" value="170" class="ng-binding ng-scope">婉霖</option>
-            &lt;!&ndash; end ngRepeat: worker in _selectWorkers &ndash;&gt;
-            <option ng-repeat="worker in _selectWorkers" value="171" class="ng-binding ng-scope">秀腾</option>
-            &lt;!&ndash; end ngRepeat: worker in _selectWorkers &ndash;&gt;
-          </select>
-        </div>-->
-        <button type="button" class="btn sbold green" (click)="query()">查询</button>
-        <button type="button" class="btn sbold green" (click)="reset()">重置</button>
       </div>
-    </div>
-    <div class="dataTables_wrapper no-footer">
-      <ngx-datatable
-        #mydatatable
-        class="material"
-        [headerHeight]="50"
-        [footerHeight]="50"
-        [limit]="page?.pageSize"
-        [columnMode]="'force'"
-        [rowHeight]="'auto'"
-        [externalPaging]="true"
-        [count]="page?.totalCount"
-        [offset]="page?.pageNo-1"
-        [rows]="page?.items"
-        (page)='setPage($event)'
-      >
-        <ngx-datatable-column name="订单号" prop="order_no"></ngx-datatable-column>
-        <ngx-datatable-column name="买家" prop="buyer"></ngx-datatable-column>
-        <ngx-datatable-column name="付款时间" prop="pay_time"></ngx-datatable-column>
-        <ngx-datatable-column name="编辑" prop="id">
-          <ng-template ngx-datatable-cell-template let-value="value" let-row="order">
-            <button class="btn btn-default" (click)="edit(value);">修改</button>
-          </ng-template>
-        </ngx-datatable-column>
-      </ngx-datatable>
-    </div>
+      <button type="submit" class="btn btn-primary">查询</button>
+      <button type="submit" class="btn btn-primary">重置</button>
+    </form>
   </div>
 </div>
+<div class="row">
+  <div class="col-xs-12">
+    <ngx-datatable
+      #mydatatable
+      class="material"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [limit]="page?.pageSize"
+      [columnMode]="'force'"
+      [rowHeight]="'auto'"
+      [externalPaging]="true"
+      [count]="page?.totalCount"
+      [offset]="page?.pageNo-1"
+      [rows]="page?.items"
+      (page)='setPage($event)'
+    >
+      <ngx-datatable-column name="订单号" prop="order_no"></ngx-datatable-column>
+      <ngx-datatable-column name="买家" prop="buyer"></ngx-datatable-column>
+      <ngx-datatable-column name="付款时间" prop="pay_time"></ngx-datatable-column>
+      <ngx-datatable-column name="编辑" prop="id">
+        <ng-template ngx-datatable-cell-template let-value="value" let-row="order">
+          <button class="btn btn-default" (click)="edit(value);">修改</button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>
+

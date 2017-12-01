@@ -1,0 +1,27 @@
+.page-header {
+  margin: 0 20px;
+  padding: 0;
+}
+
+.navbar-default {
+  border-color: #ddd;
+  background-color: #293239;
+}
+.navbar-default .navbar-brand,
+.navbar-default .navbar-brand:hover {
+  color: #337ab7;
+}
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  border-color: #293239;
+}
+.navbar-default .navbar-nav>li>a,
+.navbar-default .navbar-nav>li>a:hover {
+  color: #fff;
+}
+.navbar-brand {
+  font-size: 32px;
+  line-height: 32px;
+  float: left;
+  height: 62px;
+  padding: 15px 15px;
+}
