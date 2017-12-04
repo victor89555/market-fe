@@ -37,14 +37,15 @@
             <span>{{item.name}}</span>
           </ng-template>
           <ng-template #noResultItemTemplate let-term="term">
-            <span>No any results match <b>{{term}}</b></span>
+            <span>没有符合条件的记录</span>
           </ng-template>
           <input type="text" class="form-control" name="language" id="languageFromSource" [minLength]="0"
-                 reAutoComplete [onSearch]="onSearchLocal"
-                 [itemTemplate]="customiseItemTemplate" [noResultItemTemplate]="noResultItemTemplate" [formatter]="stallNameFormatter"
+                 reAutoComplete [onSearch]="onSearchLocal" [dataSource]="stalls"
+                 [itemTemplate]="customiseItemTemplate" [noResultItemTemplate]="noResultItemTemplate"
+                 [formatter]="stallNameFormatter"
                  (selectValueChange)="onStallNameChange($event)"
-                 #autoComplete="autoComplete"/>
-          <div class="input-group-addon" (click)="autoComplete.toggle($event)">
+                 #autoComplete1="autoComplete"/>
+          <div class="input-group-addon" (click)="autoComplete1.toggle($event)">
             <i class="glyphicon glyphicon-menu-down"></i>
           </div>
         </div>

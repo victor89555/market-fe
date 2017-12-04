@@ -36,7 +36,7 @@ export class ShopFormComponent implements Modal, OnInit {
   shop: Shop = new Shop()
   markets: Market[]
   stalls: Stall[]
-  stallNames = [] //摊位名称
+  stallNames = ["test1", "test2"] //摊位名称
   operators: Operator[]
   electronicScales: any[]
   contracts: Contract[]
@@ -45,7 +45,14 @@ export class ShopFormComponent implements Modal, OnInit {
   shop_con = []
   shop_id: number //商户
 
-  onSearchLocal = (term) => of(this.stalls.filter((stall: Stall) => stall.name.indexOf(term.toLowerCase()) !== -1));
+  onSearchLocal = (term) => {
+    debugger
+    if (term) {
+      return of(this.stalls.filter((stall: Stall) => stall.name.indexOf(term.toLowerCase()) !== -1))
+    } else {
+      return of(this.stalls)
+    }
+  };
   stallNameFormatter = (stall: Stall) => {
     return stall.name
   }
@@ -77,11 +84,9 @@ export class ShopFormComponent implements Modal, OnInit {
     this.loadElectronicScale();
     this.loadContractor();
     this.loadShop();
-    debugger
   }
 
   onStallNameChange(stall: Stall) {
-    debugger
     console.log(stall)
     this.shop.stallId = stall.id
     this.shop.funcType = stall.funcType
