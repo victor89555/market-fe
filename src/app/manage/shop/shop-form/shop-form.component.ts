@@ -37,14 +37,14 @@ export class ShopFormComponent implements Modal, OnInit {
   stalls: Stall[]
   stallNames = [] //摊位名称
   // stallname:Observable = new Subject()
-  stallname = ''
+  stallName: string = ""
   operators: Operator[]
   electronicScales: any[]
   contracts: Contract[]
   allotElectronicScales = []
   contract = []
   shop_con = []
-  shop_id :number //商户
+  shop_id: number //商户
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private shopService: ShopService,
@@ -73,36 +73,45 @@ export class ShopFormComponent implements Modal, OnInit {
     this.loadElectronicScale();
     this.loadContractor();
     this.loadShop();
+    debugger
   }
-  loadStall(){  //摊位
+
+  onStallNameChange(name) {
+    console.log(name)
+  }
+
+  loadStall() {  //摊位
     this.stallService.getAll().subscribe(
       (stalls) => {
         this.stalls = stalls  //摊位对象
-        for(let i=0;i<stalls.length;i++){
-           this.stallNames.push(stalls[i].name);
+        for (let i = 0; i < stalls.length; i++) {
+          this.stallNames.push(stalls[i].name);
         }
       }
     )
   }
+
   onSearch = (term) => {
     return this.stalls;
   }
 
-  loadMarket(){ //市场
+  loadMarket() { //市场
     this.marketService.getAll().subscribe(
       (markets) => {
         this.markets = markets
       }
     )
   }
-  loadOperator(){ //操作者
+
+  loadOperator() { //操作者
     this.operatorService.getAll().subscribe(
       (operators) => {
         this.operators = operators
       }
     )
   }
-  loadElectronicScale(){ // 电子秤
+
+  loadElectronicScale() { // 电子秤
     this.electronicScaleService.getAll("", true).subscribe(
       (electronicScales) => {
         this.electronicScales = electronicScales
@@ -110,14 +119,16 @@ export class ShopFormComponent implements Modal, OnInit {
       }
     )
   }
-  loadContractor(){ // 获取合同
+
+  loadContractor() { // 获取合同
     this.contractService.getAll().subscribe(
       (contracts) => {
         this.contracts = contracts
       }
     )
   }
-  loadShop(){ // 商户
+
+  loadShop() { // 商户
     this.shopService.get(this.shop_id).subscribe(
       (shop) => {
         this.shop = shop
@@ -125,6 +136,7 @@ export class ShopFormComponent implements Modal, OnInit {
       }
     )
   }
+
   save() {
     this.shopService.save(this.shop).subscribe(
       (shop) => {
@@ -138,7 +150,8 @@ export class ShopFormComponent implements Modal, OnInit {
       this.allotElectronicScales.push(this.electronicScales[i].sequence_no)
     }
   }
-  alert(title,content) {  // 弹框提示
+
+  alert(title, content) {  // 弹框提示
     this.dialogService.alert({
       title: title,
       content: content,
@@ -151,22 +164,24 @@ export class ShopFormComponent implements Modal, OnInit {
         error => console.error('Rebirth alert get no result:', error)
       );
   }
-  isEletronicExist(id){   // 判断电子称是否存在
-       for(let i = 0; i<this.shop_con.length;i++){
-          if(id==this.shop_con[i].id){
-            this.alert('提示框','该电子秤已选择。');
-            return true;
-          }
-       }
-       return false;
+
+  isEletronicExist(id) {   // 判断电子称是否存在
+    for (let i = 0; i < this.shop_con.length; i++) {
+      if (id == this.shop_con[i].id) {
+        this.alert('提示框', '该电子秤已选择。');
+        return true;
+      }
+    }
+    return false;
   }
+
   allotment(val) {   //添加电子秤
     for (let i = 0; i < this.electronicScales.length; i++) {
       if (val == this.electronicScales[i].sequence_no && !this.isEletronicExist(this.electronicScales[i].id)) {
         this.shop_con.push({
           "sequenceNo": this.electronicScales[i].sequence_no,
           "softVersion": this.electronicScales[i].soft_version,
-          "id":this.electronicScales[i].id
+          "id": this.electronicScales[i].id
         })
       }
     }
@@ -177,18 +192,18 @@ export class ShopFormComponent implements Modal, OnInit {
   }
 
   delElectronicScale(sequenceNo) { //删除电子秤
-     console.log('删除'+ sequenceNo)
-     this.shop_con = this.shop_con.filter((sc)=>sc.sequenceNo!=sequenceNo);
+    console.log('删除' + sequenceNo)
+    this.shop_con = this.shop_con.filter((sc) => sc.sequenceNo != sequenceNo);
   }
 
-  addContract(id:number){ //增加合同
+  addContract(id: number) { //增加合同
     this.modalService.open<Contract>({
       component: ContractFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
         id: id,
         isShopForm: true, //判断是否从商户管理进入。
-        marketId:''
+        marketId: ''
 
       }
     }).subscribe(contract => {

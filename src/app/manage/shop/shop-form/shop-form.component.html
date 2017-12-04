@@ -30,8 +30,14 @@
     <div class="form-group">
       <label class="col-sm-3 control-label">摊位:</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" name="language" id="languageFromSource" [minLength]="0"
-                [(ngModel)]="stallName" reAutoComplete [dataSource]="stallNames" />
+        <div class="input-group">
+          <input type="text" class="form-control" name="language" id="languageFromSource" [minLength]="0"
+                 [(ngModel)]="stallName" reAutoComplete [dataSource]="stallNames" (selectValueChange)="onStallNameChange($event)"
+                 #autoComplete="autoComplete"/>
+          <div class="input-group-addon" (click)="autoComplete.toggle($event)">
+            <i class="glyphicon glyphicon-menu-down"></i>
+          </div>
+        </div>
 
         <!--<select type="text" class="form-control" [(ngModel)]="shop.stallId">
           <option *ngFor="let stall of stalls" [value]="stall.id">{{stall.name}}</option>
@@ -56,7 +62,7 @@
           <ng-template reTabContent>
             <div class="same-line">
               <input type="text" class="form-control" [minLength]="0" placeholder="请选择需要的电子秤序列号。"
-                      reAutoComplete [dataSource]="allotElectronicScales"
+                     reAutoComplete [dataSource]="allotElectronicScales"
                      #scaleSelect/>
               <button class="btn sbold green line-btn" (click)="allotment(scaleSelect.value)">分配</button>
             </div>
