@@ -2,9 +2,11 @@
   "id": 1,
   "marketId": 2,
   "stallId": 1,
+  "stallName":"摊位1",
   "name": "经营者",
   "funcType": 2,
   "operatorId": 1,
+  "operatorName": "经营1",
   "status": 0,
   "electronicScaleId": 2,
   "contractId": 3
