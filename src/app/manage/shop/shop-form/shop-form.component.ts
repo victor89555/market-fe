@@ -1,5 +1,12 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, ComponentFactoryResolver} from "@angular/core";
-import {Modal,DialogService,ModalService} from "rebirth-ng";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ComponentFactoryResolver,
+  EventEmitter,
+  OnInit
+} from "@angular/core";
+import {DialogService, Modal, ModalService} from "rebirth-ng";
 import {Shop} from "../shared/shop.model";
 import {ShopService} from "../shared/shop.service";
 import {Market} from "../../market/shared/market.model";
@@ -9,11 +16,11 @@ import {StallService} from "../../stall/shared/stall.service";
 import {MarketService} from "../../market/shared/market.service";
 import {OperatorService} from "../../operator/shared/operator.service";
 import {ElectronicScaleService} from "../../electronicScale/shared/electronicScale.service";
-import {ElectronicScale} from "../../electronicScale/shared/electronicScale.model";
 import {Contract} from "../../contract/shared/contract.model";
 import {ContractService} from "../../contract/shared/contract.service";
 import {HttpClient} from "@angular/common/http";
 import {ContractFormComponent} from "../../contract/contract-form/contract-form.component";
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 @Component({
   selector: 'app-shop-form',
@@ -28,12 +35,16 @@ export class ShopFormComponent implements Modal, OnInit {
   shop: any = {}
   markets: Market[]
   stalls: Stall[]
+  stallNames = [] //摊位名称
+  // stallname:Observable = new Subject()
+  stallname = ''
   operators: Operator[]
   electronicScales: any[]
   contracts: Contract[]
   allotElectronicScales = []
   contract = []
   shop_con = []
+  shop_id :number //商户
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private shopService: ShopService,
@@ -45,11 +56,17 @@ export class ShopFormComponent implements Modal, OnInit {
               private httpClient: HttpClient,
               private modalService: ModalService,
               private dialogService: DialogService,
-              private componentFactoryResolver: ComponentFactoryResolver) {
+              private componentFactoryResolver: ComponentFactoryResolver,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit(): void {
     console.log('ModalTestComponent init....');
+    this.route.params.forEach((params: Params) => {
+      let id = params['id'];
+      this.shop_id = id;
+    });
     this.loadStall();
     this.loadMarket();
     this.loadOperator();
@@ -60,10 +77,17 @@ export class ShopFormComponent implements Modal, OnInit {
   loadStall(){  //摊位
     this.stallService.getAll().subscribe(
       (stalls) => {
-        this.stalls = stalls
+        this.stalls = stalls  //摊位对象
+        for(let i=0;i<stalls.length;i++){
+           this.stallNames.push(stalls[i].name);
+        }
       }
     )
   }
+  onSearch = (term) => {
+    return this.stalls;
+  }
+
   loadMarket(){ //市场
     this.marketService.getAll().subscribe(
       (markets) => {
@@ -94,7 +118,7 @@ export class ShopFormComponent implements Modal, OnInit {
     )
   }
   loadShop(){ // 商户
-    this.shopService.get(this.context.id).subscribe(
+    this.shopService.get(this.shop_id).subscribe(
       (shop) => {
         this.shop = shop
         this.changeDetectorRef.markForCheck()

@@ -28,7 +28,7 @@ export class ShopListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.query()
+    this.query();
   }
 
   query() { //全部商户

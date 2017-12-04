@@ -1,4 +1,4 @@
-import {Body, GET, Path, POST, Query, RebirthHttp} from "rebirth-http";
+import {Body, GET, Path, POST, Query, RebirthHttp,PUT} from "rebirth-http";
 import {Observable} from "rxjs/Observable";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
@@ -33,5 +33,8 @@ export class ShopService extends RebirthHttp {
   save(@Body shop: Shop): Observable<Shop> {
     return null;
   }
-
+  /*@PUT('shops/:id')
+  edit(@Path('id') id: number): Observable<Shop> {
+    return null;
+  }*/
 }

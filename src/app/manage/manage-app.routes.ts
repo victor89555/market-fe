@@ -9,6 +9,7 @@ import {OperatorListComponent} from "./operator/operator-list/operator-list.comp
 import {ShopListComponent} from "./shop/shop-list/shop-list.component";
 import {ElectronicScaleListComponent} from "./electronicScale/electronicScale-list/electronicScale-list.component";
 import {ContractListComponent} from "./contract/contract-list/contract-list.component";
+import {ShopFormComponent} from "./shop/shop-form/shop-form.component";
 
 export const ROUTER_CONFIG: Routes = [
   {
@@ -27,6 +28,7 @@ export const ROUTER_CONFIG: Routes = [
       {path: 'contracts', component: ContractListComponent},
       {path: 'user', component: UserMockComponent},
       {path: 'document', component: UserMockComponent},
+      {path: 'shopForm/:id', component: ShopFormComponent},
     ]
   }
 ];
