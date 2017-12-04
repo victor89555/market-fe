@@ -21,6 +21,7 @@ import {ContractService} from "../../contract/shared/contract.service";
 import {HttpClient} from "@angular/common/http";
 import {ContractFormComponent} from "../../contract/contract-form/contract-form.component";
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {of} from 'rxjs/observable/of';
 
 @Component({
   selector: 'app-shop-form',
@@ -32,12 +33,10 @@ export class ShopFormComponent implements Modal, OnInit {
   context: { id: number };
   dismiss: EventEmitter<Shop>;
 
-  shop: any = {}
+  shop: Shop = new Shop()
   markets: Market[]
   stalls: Stall[]
   stallNames = [] //摊位名称
-  // stallname:Observable = new Subject()
-  stallName: string = ""
   operators: Operator[]
   electronicScales: any[]
   contracts: Contract[]
@@ -45,6 +44,11 @@ export class ShopFormComponent implements Modal, OnInit {
   contract = []
   shop_con = []
   shop_id: number //商户
+
+  onSearchLocal = (term) => of(this.stalls.filter((stall: Stall) => stall.name.indexOf(term.toLowerCase()) !== -1));
+  stallNameFormatter = (stall: Stall) => {
+    return stall.name
+  }
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private shopService: ShopService,
@@ -76,8 +80,11 @@ export class ShopFormComponent implements Modal, OnInit {
     debugger
   }
 
-  onStallNameChange(name) {
-    console.log(name)
+  onStallNameChange(stall: Stall) {
+    debugger
+    console.log(stall)
+    this.shop.stallId = stall.id
+    this.shop.funcType = stall.funcType
   }
 
   loadStall() {  //摊位

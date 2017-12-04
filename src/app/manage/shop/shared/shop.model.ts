@@ -1,4 +1,4 @@
-export interface Shop {
+export class Shop {
   id: number
   marketId: number
   stallId: number
