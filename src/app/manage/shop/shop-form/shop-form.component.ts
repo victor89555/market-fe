@@ -78,15 +78,16 @@ export class ShopFormComponent implements Modal, OnInit {
   ngOnInit(): void {
     console.log('ModalTestComponent init....');
     this.route.params.forEach((params: Params) => {
-      let id = params['id'];
-      this.shop_id = id;
+      this.shop_id  = params['id'];
     });
     this.loadStall();
     this.loadMarket();
     this.loadOperator();
     this.loadElectronicScale();
     this.loadContractor();
-    this.loadShop();
+    if(this.shop_id > 0){
+      this.loadShop();
+    }
   }
 
   loadStall() {  //摊位
@@ -139,15 +140,6 @@ export class ShopFormComponent implements Modal, OnInit {
       (shop) => {
         this.shop = shop
         this.changeDetectorRef.markForCheck()
-        console.log(shop);
-      }
-    )
-  }
-
-  save() {
-    this.shopService.save(this.shop).subscribe(
-      (shop) => {
-        this.dismiss.emit(shop);
       }
     )
   }
@@ -194,8 +186,15 @@ export class ShopFormComponent implements Modal, OnInit {
     }
   }
 
+  save() {
+    this.shopService.save(this.shop).subscribe(
+      (shop) => {
+        this.router.navigate(['/shops']);
+      }
+    )
+  }
   cancel() {
-    this.dismiss.error(this.shop);
+    this.router.navigate(['/shops']);
   }
 
   delElectronicScale(sequenceNo) { //删除电子秤
