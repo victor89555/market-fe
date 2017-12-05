@@ -14,9 +14,21 @@
     <div class="form-group">
       <label class="col-sm-3 control-label">经营者:</label>
       <div class="col-sm-9">
-        <select type="text" class="form-control" [(ngModel)]="shop.operatorId">
-          <option *ngFor="let operator of operators" [value]="operator.id">{{operator.name}}</option>
-        </select>
+        <div class="input-group">
+          <!--<ng-template #operatorItemTemplate let-item="item" let-$index="$index"
+                       let-source="source"
+                       let-term="term">
+            <span>{{item.name}}</span>
+          </ng-template>-->
+          <input type="text" class="form-control"  [minLength]="0"
+                 reAutoComplete  [dataSource]="operators" [value]="shop.operatorName"
+                 [formatter]="operatorNameFormatter"
+                 (selectValueChange)="onOperatorNameChange($event)"
+                 #operatorList="autoComplete"/>
+          <div class="input-group-addon" (click)="operatorList.toggle($event)">
+            <i class="glyphicon glyphicon-menu-down"></i>
+          </div>
+        </div>
       </div>
     </div>
     <div class="form-group">
@@ -31,7 +43,7 @@
       <label class="col-sm-3 control-label">摊位:</label>
       <div class="col-sm-9">
         <div class="input-group">
-          <ng-template #customiseItemTemplate let-item="item" let-$index="$index"
+          <ng-template #stallItemTemplate let-item="item" let-$index="$index"
                        let-source="source"
                        let-term="term">
             <span>{{item.name}}</span>
@@ -40,8 +52,8 @@
             <span>没有符合条件的记录</span>
           </ng-template>
           <input type="text" class="form-control" name="language" id="languageFromSource" [minLength]="0"
-                 reAutoComplete [onSearch]="onSearchLocal" [dataSource]="stalls"
-                 [itemTemplate]="customiseItemTemplate" [noResultItemTemplate]="noResultItemTemplate"
+                 reAutoComplete  [dataSource]="stalls" [value]="shop.stallName"
+                 [itemTemplate]="stallItemTemplate" [noResultItemTemplate]="noResultItemTemplate"
                  [formatter]="stallNameFormatter"
                  (selectValueChange)="onStallNameChange($event)"
                  #autoComplete1="autoComplete"/>

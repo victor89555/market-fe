@@ -45,16 +45,19 @@ export class ShopFormComponent implements Modal, OnInit {
   shop_con = []
   shop_id: number //商户
 
-  onSearchLocal = (term) => {
-    debugger
-    if (term) {
-      return of(this.stalls.filter((stall: Stall) => stall.name.indexOf(term.toLowerCase()) !== -1))
-    } else {
-      return of(this.stalls)
-    }
-  };
-  stallNameFormatter = (stall: Stall) => {
+  stallNameFormatter = (stall: Stall) => { // 摊位输入显示数据
     return stall.name
+  }
+  onStallNameChange(stall: Stall) { // 摊位内容改变时调用
+    console.log(stall)
+    this.shop.stallId = stall.id
+    this.shop.funcType = stall.funcType
+  }
+  operatorNameFormatter = (operator: Operator) => { // 经营者输入显示数据
+    return operator.name +" "+ operator.tel
+  }
+  onOperatorNameChange =(operator: Operator) =>{ // 经营者内容改变时调用
+    console.log(operator)
   }
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
@@ -86,12 +89,6 @@ export class ShopFormComponent implements Modal, OnInit {
     this.loadShop();
   }
 
-  onStallNameChange(stall: Stall) {
-    console.log(stall)
-    this.shop.stallId = stall.id
-    this.shop.funcType = stall.funcType
-  }
-
   loadStall() {  //摊位
     this.stallService.getAll().subscribe(
       (stalls) => {
@@ -101,10 +98,6 @@ export class ShopFormComponent implements Modal, OnInit {
         }
       }
     )
-  }
-
-  onSearch = (term) => {
-    return this.stalls;
   }
 
   loadMarket() { //市场
@@ -119,6 +112,7 @@ export class ShopFormComponent implements Modal, OnInit {
     this.operatorService.getAll().subscribe(
       (operators) => {
         this.operators = operators
+        console.log(operators[0].name);
       }
     )
   }
@@ -145,6 +139,7 @@ export class ShopFormComponent implements Modal, OnInit {
       (shop) => {
         this.shop = shop
         this.changeDetectorRef.markForCheck()
+        console.log(shop);
       }
     )
   }
