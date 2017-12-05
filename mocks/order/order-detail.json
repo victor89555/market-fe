@@ -1,6 +1,18 @@
 {
-  "id": 1,
-  "orderNo": "NO20170123100035",
-  "buyer": "张三",
-  "payTime": "2017-01-23 09:23:55"
+  "id":1,
+  "marketId":3,
+  "marketName": "市场3",
+  "memberId":4,
+  "memberName":"lisi",
+  "origAmount":1,
+  "outTradeNo":"123",
+  "payWay":2,
+  "scaleId":1,
+  "shopId":2,
+  "shopName":"洪",
+  "source":3,
+  "status":0,
+  "totalAmount":1,
+  "tradingTime":"2017-12-03",
+  "transLogNo":"111"
 }

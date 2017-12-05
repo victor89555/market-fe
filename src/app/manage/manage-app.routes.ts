@@ -10,6 +10,7 @@ import {ShopListComponent} from "./shop/shop-list/shop-list.component";
 import {ElectronicScaleListComponent} from "./electronicScale/electronicScale-list/electronicScale-list.component";
 import {ContractListComponent} from "./contract/contract-list/contract-list.component";
 import {ShopFormComponent} from "./shop/shop-form/shop-form.component";
+import {OrderFormComponent} from "./order/order-form/order-form.component";
 
 export const ROUTER_CONFIG: Routes = [
   {
@@ -29,6 +30,7 @@ export const ROUTER_CONFIG: Routes = [
       {path: 'user', component: UserMockComponent},
       {path: 'document', component: UserMockComponent},
       {path: 'shopForm/:id', component: ShopFormComponent},
+      {path: 'orderLines/:id', component: OrderFormComponent},
     ]
   }
 ];
