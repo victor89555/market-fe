@@ -1,65 +1,66 @@
-
-<div class="page-head">
-  <div class="page-title">
-    <h1><span class="glyphicon glyphicon-shopping-cart"></span>
-      合同信息
-      <!--<small>dashboard &amp; statistics</small>-->
-    </h1>
-  </div>
-  <div class="page-toolbar">
-    <div class="pull-right tooltips" >
-      <a href="javascript:;" class="btn btn-danger" (click)="add()">
-        <i class="glyphicon glyphicon-plus"></i> 新增
-      </a>
+<div id="page1" class="page-content">
+  <div class="page-head">
+    <div class="page-title">
+      <h1><span class="glyphicon glyphicon-shopping-cart"></span>
+        合同信息
+        <!--<small>dashboard &amp; statistics</small>-->
+      </h1>
+    </div>
+    <div class="page-toolbar">
+      <div class="pull-right tooltips" >
+        <a href="javascript:;" class="btn btn-danger" (click)="add()">
+          <i class="glyphicon glyphicon-plus"></i> 新增
+        </a>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <form class="form-inline">
-      <div class="form-group">
-        <div class="input-group">
-          <input type="text" class="form-control" id="exampleInputAmount" name="order" placeholder="订单名" [(ngModel)]="qry_name" placeholder="合同">
+  <div class="row">
+    <div class="col-xs-12">
+      <form class="form-inline">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="form-control" id="exampleInputAmount" name="order" placeholder="订单名" [(ngModel)]="qry_name" placeholder="合同">
+          </div>
         </div>
-      </div>
-      <button type="submit" class="btn btn-primary" (click)="query()">查询</button>
-      <button type="submit" class="btn btn-primary" (click)="reset()">重置</button>
-    </form>
+        <button type="submit" class="btn btn-primary" (click)="query()">查询</button>
+        <button type="submit" class="btn btn-primary" (click)="reset()">重置</button>
+      </form>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <ngx-datatable
-      #mydatatable
-      class="material"
-      [headerHeight]="50"
-      [footerHeight]="50"
-      [limit]="page?.pageSize"
-      [columnMode]="'force'"
-      [rowHeight]="'auto'"
-      [externalPaging]="true"
-      [count]="page?.totalCount"
-      [offset]="page?.pageNo-1"
-      [rows]="page?.items"
-      (page)='setPage($event)'
-    >
-      <ngx-datatable-column name="市场" prop="market_id"></ngx-datatable-column>
-      <ngx-datatable-column name="商户" prop="shop_id"></ngx-datatable-column>
-      <ngx-datatable-column name="签约时间" prop="sign_time"></ngx-datatable-column>
-      <ngx-datatable-column name="到期时间" prop="validity_time"></ngx-datatable-column>
-      <ngx-datatable-column name="合同总金额" prop="total_amount"></ngx-datatable-column>
-      <ngx-datatable-column name="已付金额" prop="paid_amount"></ngx-datatable-column>
-      <ngx-datatable-column name="状态" prop="status">
-        <ng-template ngx-datatable-cell-template let-value="value">
-          {{value|dictConvert:"SHOP_STATUS"}}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="操作" prop="id">
-        <ng-template ngx-datatable-cell-template let-value="value" let-row="contract">
-          <button class="btn btn-default" (click)="edit(value);">修改</button>
-        </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
+  <div class="row">
+    <div class="col-xs-12">
+      <ngx-datatable
+        #mydatatable
+        class="material"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [limit]="page?.pageSize"
+        [columnMode]="'force'"
+        [rowHeight]="'auto'"
+        [externalPaging]="true"
+        [count]="page?.totalCount"
+        [offset]="page?.pageNo-1"
+        [rows]="page?.items"
+        (page)='setPage($event)'
+      >
+        <ngx-datatable-column name="市场" prop="market_id"></ngx-datatable-column>
+        <ngx-datatable-column name="商户" prop="shop_id"></ngx-datatable-column>
+        <ngx-datatable-column name="签约时间" prop="sign_time"></ngx-datatable-column>
+        <ngx-datatable-column name="到期时间" prop="validity_time"></ngx-datatable-column>
+        <ngx-datatable-column name="合同总金额" prop="total_amount"></ngx-datatable-column>
+        <ngx-datatable-column name="已付金额" prop="paid_amount"></ngx-datatable-column>
+        <ngx-datatable-column name="状态" prop="status">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{value|dictConvert:"SHOP_STATUS"}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="操作" prop="id">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="contract">
+            <button class="btn btn-default" (click)="edit(value);">修改</button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
   </div>
 </div>
