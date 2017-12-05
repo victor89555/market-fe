@@ -1,0 +1,26 @@
+[
+  {
+    "discount":0.1,
+    "id":1,
+    "orderId":1,
+    "origAmount":100,
+    "price":1,
+    "productId":1,
+    "productName":"苹果",
+    "qty":2,
+    "totalAmount":99,
+    "unitName":"个"
+  },
+  {
+    "discount":0.1,
+    "id":1,
+    "orderId":1,
+    "origAmount":100,
+    "price":1,
+    "productId":1,
+    "productName":"苹果",
+    "qty":2,
+    "totalAmount":99,
+    "unitName":"个"
+  }
+]

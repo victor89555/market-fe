@@ -6,13 +6,13 @@
       <!--<small>dashboard &amp; statistics</small>-->
     </h1>
   </div>
-  <div class="page-toolbar">
-    <div class="pull-right tooltips" >
-      <a href="javascript:;" class="btn btn-danger">
-        <i class="glyphicon glyphicon-plus"></i> 新增
-      </a>
-    </div>
-  </div>
+  <!--<div class="page-toolbar">-->
+    <!--<div class="pull-right tooltips" >-->
+      <!--<a href="javascript:;" class="btn btn-danger">-->
+        <!--<i class="glyphicon glyphicon-plus"></i> 新增-->
+      <!--</a>-->
+    <!--</div>-->
+  <!--</div>-->
 </div>
 
 <div class="row">
@@ -44,12 +44,26 @@
       [rows]="page?.items"
       (page)='setPage($event)'
     >
-      <ngx-datatable-column name="订单号" prop="order_no"></ngx-datatable-column>
-      <ngx-datatable-column name="买家" prop="buyer"></ngx-datatable-column>
-      <ngx-datatable-column name="付款时间" prop="pay_time"></ngx-datatable-column>
-      <ngx-datatable-column name="编辑" prop="id">
+      <ngx-datatable-column name="市场" prop="market_name"></ngx-datatable-column>
+      <ngx-datatable-column name="商户" prop="shop_name"></ngx-datatable-column>
+      <ngx-datatable-column name="会员" prop="member_name"></ngx-datatable-column>
+      <ngx-datatable-column name="流水交易号" prop="out_trade_no"></ngx-datatable-column>
+      <ngx-datatable-column name="支付方式" prop="pay_way">
+        <ng-template ngx-datatable-cell-template let-value="value">
+          {{value|dictConvert:"PAY_WAY"}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="原始金额" prop="orig_amount"></ngx-datatable-column>
+      <ngx-datatable-column name="实收金额" prop="total_amount"></ngx-datatable-column>
+      <ngx-datatable-column name="交易时间" prop="trading_time"></ngx-datatable-column>
+      <ngx-datatable-column name="状态" prop="status">
+        <ng-template ngx-datatable-cell-template let-value="value">
+          {{value|dictConvert:"TRANS_STATUS"}}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="操作" prop="id">
         <ng-template ngx-datatable-cell-template let-value="value" let-row="order">
-          <button class="btn btn-default" (click)="edit(value);">修改</button>
+          <a routerLink="/manage/orderLines/{{value}}">查看</a>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>

@@ -3,7 +3,7 @@ import {Observable} from "rxjs/Observable";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import "rxjs/add/operator/map";
-import {Order} from "./order.model";
+import {Order, OrderLine} from "./order.model";
 import {Page} from "../../../thurder-ng/models/page.model";
 
 @Injectable()
@@ -20,6 +20,11 @@ export class OrderService extends RebirthHttp {
 
   @GET("orders/:id")
   get(@Path("id") id: number): Observable<Order> {
+    return null
+  }
+
+  @GET("orderLines/:id")
+  getLine(@Path("id") id: number): Observable<OrderLine> {
     return null
   }
 
