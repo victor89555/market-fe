@@ -114,3 +114,23 @@
   color: #5b9bd1;
   background: #f2f6f9;
 }
+.barShow-toggle{
+  display: none !important;
+}
+.nav-below{
+  border-bottom: 1px solid #5b9bd1 !important;
+}
+.menu-top-border{
+  margin: 0 !important;
+  border-top: 10px solid #5b9bd1;
+}
+.page-sidebar[_ngcontent-c3] .page-sidebar-menu[_ngcontent-c3] > li.active[_ngcontent-c3] > a[_ngcontent-c3] {
+  /*border-left: 3px solid #5C9ACF !important;*/
+  border-left:0 !important;
+  margin-left:0 !important;
+  padding-left: 15px;
+}
+.chosed-left-border{
+  border-left: 3px solid #5C9ACF;
+  margin-left: -3px;
+}

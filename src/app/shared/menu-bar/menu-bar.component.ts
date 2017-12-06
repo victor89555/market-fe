@@ -23,6 +23,9 @@ export class MenuBarComponent implements OnInit, OnDestroy {
   isIconMenuBarOpen = false;
   windowResize = new EventEmitter<any>();
   listens: any[] = [];
+  hide:boolean =false;
+  menuActive:boolean[]=new Array(9);
+  arrowState ='arrow open';
 
   constructor(private router: Router, private renderer: Renderer2, private windowRef: WindowRef) {
   }
@@ -47,6 +50,7 @@ export class MenuBarComponent implements OnInit, OnDestroy {
 
     this.listens.push(this.renderer.listen('window', 'resize',
       ($event) => this.windowResize.emit($event)));
+    this.menuActive[0]=true;
   }
 
   shouldShowUpArrow(path): boolean {
@@ -69,5 +73,25 @@ export class MenuBarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.listens.forEach(listen => listen());
+  }
+  // 功能列表的显隐
+  isHidden() {
+     this.hide=!this.hide;
+     this.menuActive[8] = !this.menuActive[8];
+     if(this.arrowState=="arrow open"){
+       this.arrowState="arrow closed"
+     }else{
+       this.arrowState="arrow open"
+     }
+  }
+  // 选中功能高亮
+  menuChoose(chosed) {
+    for(let i=0;i<this.menuActive.length;i++){
+      if(i==chosed){
+        this.menuActive[i]=true;
+      }else {
+        this.menuActive[i]=false;
+      }
+    }
   }
 }

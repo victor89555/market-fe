@@ -1,85 +1,68 @@
 
 <div class="page-sidebar-wrapper">
   <div class="page-sidebar">
-    <ul class="page-sidebar-menu">
-      <li class="nav-item start active open">
-        <a href="javascript:;" class="nav-link nav-toggle">
+    <ul class="page-sidebar-menu menu-top-border">
+      <li class="nav-item start open" [ngClass]="{'active':menuActive[8]}">
+        <a href="javascript:;" class="nav-link nav-toggle nav-below" (click)="isHidden()">
           <i class="glyphicon glyphicon-home"></i>
           <span class="title">信息管理</span>
           <span class="selected"></span>
-          <span class="arrow open"></span>
+          <span [class]=arrowState></span>
         </a>
-        <ul class="sub-menu">
-          <li class="nav-item start active open">
-            <a href="/manage/orders" class="nav-link">
+        <ul class="sub-menu" [ngClass]="{'barShow-toggle': hide}">
+          <li class="nav-item start open" [ngClass]="{'active':menuActive[0]}" (click)="menuChoose(0)">
+            <a routerLink="/manage/orders" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[0]}">
               <i class="glyphicon glyphicon-user"></i>
               <span class="title">订单管理</span>
               <span class="selected"></span>
             </a>
           </li>
-          <li class="nav-item start">
-            <a href="/manage/markets" class="nav-link">
+          <li class="nav-item start" [ngClass]="{'active':menuActive[1]}" (click)="menuChoose(1)">
+            <a routerLink="/manage/markets" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[1]}" >
               <i class="glyphicon glyphicon-user"></i>
               <span class="title">市场管理</span>
               <span class="selected"></span>
             </a>
           </li>
-          <li class="nav-item start">
-            <a href="/manage/stalls" class="nav-link">
+          <li class="nav-item start" [ngClass]="{'active':menuActive[2]}" (click)="menuChoose(2)">
+            <a routerLink="/manage/stalls" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[2]}">
               <i class="glyphicon glyphicon-user"></i>
               <span class="title">摊位管理</span>
               <span class="selected"></span>
             </a>
           </li>
-          <li class="nav-item start">
-            <a href="/manage/electronicScales" class="nav-link">
+          <li class="nav-item start" [ngClass]="{'active':menuActive[3]}" (click)="menuChoose(3)">
+            <a routerLink="/manage/electronicScales" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[3]}">
               <i class="glyphicon glyphicon-user"></i>
               <span class="title">电子称管理</span>
               <span class="selected"></span>
             </a>
           </li>
-          <li class="nav-item start">
-            <a href="/manage/operators" class="nav-link">
+          <li class="nav-item start" [ngClass]="{'active':menuActive[4]}" (click)="menuChoose(4)">
+            <a routerLink="/manage/operators" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[4]}">
               <i class="glyphicon glyphicon-user"></i>
               <span class="title">经营者管理</span>
               <span class="selected"></span>
             </a>
           </li>
-          <li class="nav-item start">
-            <a href="/manage/shops" class="nav-link">
+          <li class="nav-item start" [ngClass]="{'active':menuActive[5]}" (click)="menuChoose(5)">
+            <a routerLink="/manage/shops" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[5]}">
               <i class="glyphicon glyphicon-user"></i>
               <span class="title">商户管理</span>
               <span class="selected"></span>
             </a>
           </li>
-          <li class="nav-item start">
-            <a href="/manage/contracts" class="nav-link">
+          <li class="nav-item start" [ngClass]="{'active':menuActive[6]}" (click)="menuChoose(6)">
+            <a routerLink="/manage/contracts" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[6]}">
               <i class="glyphicon glyphicon-user"></i>
               <span class="title">合同管理</span>
               <span class="selected"></span>
             </a>
           </li>
-          <li class="nav-item start">
-            <a href="/manage/members" class="nav-link">
+          <li class="nav-item start" [ngClass]="{'active':menuActive[7]}" (click)="menuChoose(7)">
+            <a routerLink="/manage/members" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[7]}">
               <i class="glyphicon glyphicon-user"></i>
               <span class="title">会员管理</span>
-              <span class="selected"></span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item start">
-        <a href="javascript:;" class="nav-link nav-toggle">
-          <i class="glyphicon glyphicon-home"></i>
-          <span class="title">信息管理</span>
-          <span class="selected"></span>
-          <span class="arrow"></span>
-        </a>
-        <ul class="sub-menu">
-          <li class="nav-item start">
-            <a href="javascript:;" class="nav-link">
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="title">订单管理</span>
               <span class="selected"></span>
             </a>
           </li>
