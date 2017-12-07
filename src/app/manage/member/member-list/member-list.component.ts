@@ -21,7 +21,7 @@ export class MemberListComponent implements OnInit {
     this.query()
   }
   page: Page<any> = new Page()
-  query_tel:string  = '';
+  queryName ={'mobile':'', 'name':'', 'cardno':'', 'idcardno':''};
 
   setPage(pageInfo) {
     this.page.pageNo = pageInfo.offset + 1
@@ -43,7 +43,7 @@ export class MemberListComponent implements OnInit {
   }
 
   query() {
-    this.memberService.query(this.query_tel, this.page.pageNo).subscribe(
+    this.memberService.query(this.queryName.mobile, this.page.pageNo).subscribe(
       (page) => {
         this.page = page
       }

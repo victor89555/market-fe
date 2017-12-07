@@ -21,7 +21,10 @@
         <div class="form-group">
           <div class="input-group">
             <div class="search-line">
-              <input type="text" class="form-control" name="memberName" [(ngModel)]="query_tel" placeholder="手机号">
+              <input type="text" class="form-control" name="mobile" [(ngModel)]="queryName.mobile" placeholder="手机号">
+              <input type="text" class="form-control" name="memberName" [(ngModel)]="queryName.name" placeholder="姓名">
+              <input type="text" class="form-control" name="cardNo" [(ngModel)]="queryName.cardno" placeholder="会员卡号">
+              <input type="text" class="form-control" name="idCardNo" [(ngModel)]="queryName.idcardno" placeholder="身份证号">
             </div>
           </div>
         </div>
