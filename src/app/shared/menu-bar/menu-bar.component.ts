@@ -77,7 +77,13 @@ export class MenuBarComponent implements OnInit, OnDestroy {
   // 功能列表的显隐
   isHidden(index:number) {
      this.hide[index]=!this.hide[index];
-     this.menuActive[8] = !this.menuActive[8];
+     switch(index){
+       case 0:
+         this.menuChoose(8);
+         break;
+       case 1:
+         this.menuChoose(10);
+     }
      if(this.arrowState[index]=="arrow open"){
        this.arrowState[index]="arrow closed"
      }else{

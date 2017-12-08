@@ -38,6 +38,7 @@ import { UserFormComponent } from './user/user-form/user-form.component';
 import {UserService} from "./user/shared/user.service";
 import { RoleListComponent } from './role/role-list/role-list.component';
 import { RoleFormComponent } from './role/role-form/role-form.component';
+import {RoleService} from "./role/shared/role.service";
 
 @NgModule({
   imports: [
@@ -81,7 +82,8 @@ import { RoleFormComponent } from './role/role-form/role-form.component';
     ElectronicScaleFormComponent,
     ContractFormComponent,
     MemberFormComponent,
-    UserFormComponent
+    UserFormComponent,
+    RoleFormComponent
   ],
   providers: [
     MenuService,
@@ -93,7 +95,8 @@ import { RoleFormComponent } from './role/role-form/role-form.component';
     ElectronicScaleService,
     ContractService,
     MemberService,
-    UserService
+    UserService,
+    RoleService
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

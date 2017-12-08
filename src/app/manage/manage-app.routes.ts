@@ -13,6 +13,7 @@ import {ShopFormComponent} from "./shop/shop-form/shop-form.component";
 import {OrderFormComponent} from "./order/order-form/order-form.component";
 import {MemberListComponent} from "./member/member-list/member-list.component";
 import {UserListComponent} from "./user/user-list/user-list.component";
+import {RoleListComponent} from "./role/role-list/role-list.component";
 
 export const ROUTER_CONFIG: Routes = [
   {
@@ -34,7 +35,8 @@ export const ROUTER_CONFIG: Routes = [
       {path: 'shopForm/:id', component: ShopFormComponent},
       {path: 'orderLines/:id', component: OrderFormComponent},
       {path: 'members', component: MemberListComponent},
-      {path: 'users', component:UserListComponent}
+      {path: 'users', component:UserListComponent},
+      {path: 'roles', component:RoleListComponent}
     ]
   }
 ];

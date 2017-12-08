@@ -76,7 +76,7 @@
           <span [class]=arrowState[1]></span>
         </a>
         <ul class="sub-menu" [ngClass]="{'barShow-toggle': hide[1]}">
-          <li class="nav-item start" [ngClass]="{'active':menuActive[12]}" (click)="menuChoose(11)">
+          <li class="nav-item start" [ngClass]="{'active':menuActive[11]}" (click)="menuChoose(11)">
             <a routerLink="/manage/users" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[11]}">
               <i class="glyphicon glyphicon-user"></i>
               <span class="title">用户管理</span>
@@ -84,14 +84,14 @@
             </a>
           </li>
           <li class="nav-item start" [ngClass]="{'active':menuActive[12]}" (click)="menuChoose(12)">
-            <a class="nav-link" [ngClass]="{'chosed-left-border':menuActive[12]}">
+            <a routerLink="/manage/roles" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[12]}">
               <i class="glyphicon glyphicon-user"></i>
               <span class="title">角色管理</span>
               <span class="selected"></span>
             </a>
           </li>
           <li class="nav-item start open" [ngClass]="{'active':menuActive[13]}" (click)="menuChoose(13)">
-            <a class="nav-link" [ngClass]="{'chosed-left-border':menuActive[13]}">
+            <a routerLink="/manage/resources" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[13]}">
               <i class="glyphicon glyphicon-user"></i>
               <span class="title">资源管理</span>
               <span class="selected"></span>

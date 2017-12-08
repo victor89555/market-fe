@@ -1,0 +1,31 @@
+{
+  "beginIndex": 0,
+  "endIndex": 1,
+  "firstPage": true,
+  "hasNextPage": false,
+  "hasPrePage": false,
+  "items": [
+    {
+      "id": 1,
+      "code":"4125487",
+      "name":"角色1"
+    },{
+      "id": 2,
+      "code":"41253387",
+      "name":"角色2"
+    },{
+      "id": 3,
+      "code":"3344125487",
+      "name":"角色3"
+    }
+  ],
+  "lastPage": true,
+  "nextPage": 1,
+  "offset": 0,
+  "pageNo": 1,
+  "pageSize": 10,
+  "prePage": 1,
+  "totalCount": 100,
+  "totalPages": 1
+}
+
