@@ -33,6 +33,11 @@ import {ContractService} from "./contract/shared/contract.service";
 import { MemberListComponent } from './member/member-list/member-list.component';
 import { MemberFormComponent } from './member/member-form/member-form.component';
 import {MemberService} from "./member/shared/member.service";
+import { UserListComponent } from './user/user-list/user-list.component';
+import { UserFormComponent } from './user/user-form/user-form.component';
+import {UserService} from "./user/shared/user.service";
+import { RoleListComponent } from './role/role-list/role-list.component';
+import { RoleFormComponent } from './role/role-form/role-form.component';
 
 @NgModule({
   imports: [
@@ -61,7 +66,11 @@ import {MemberService} from "./member/shared/member.service";
     ContractListComponent,
     ContractFormComponent,
     MemberListComponent,
-    MemberFormComponent
+    MemberFormComponent,
+    UserListComponent,
+    UserFormComponent,
+    RoleListComponent,
+    RoleFormComponent
   ],
   entryComponents: [
     OrderFormComponent,
@@ -71,7 +80,8 @@ import {MemberService} from "./member/shared/member.service";
     ShopFormComponent,
     ElectronicScaleFormComponent,
     ContractFormComponent,
-    MemberFormComponent
+    MemberFormComponent,
+    UserFormComponent
   ],
   providers: [
     MenuService,
@@ -82,7 +92,8 @@ import {MemberService} from "./member/shared/member.service";
     ShopService,
     ElectronicScaleService,
     ContractService,
-    MemberService
+    MemberService,
+    UserService
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

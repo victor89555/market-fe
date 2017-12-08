@@ -23,9 +23,9 @@ export class MenuBarComponent implements OnInit, OnDestroy {
   isIconMenuBarOpen = false;
   windowResize = new EventEmitter<any>();
   listens: any[] = [];
-  hide:boolean =false;
-  menuActive:boolean[]=new Array(9);
-  arrowState ='arrow open';
+  hide:boolean[] =[false,true];
+  menuActive:boolean[]=new Array(15);
+  arrowState:string[] =['arrow open','arrow closed'];
 
   constructor(private router: Router, private renderer: Renderer2, private windowRef: WindowRef) {
   }
@@ -75,13 +75,13 @@ export class MenuBarComponent implements OnInit, OnDestroy {
     this.listens.forEach(listen => listen());
   }
   // 功能列表的显隐
-  isHidden() {
-     this.hide=!this.hide;
+  isHidden(index:number) {
+     this.hide[index]=!this.hide[index];
      this.menuActive[8] = !this.menuActive[8];
-     if(this.arrowState=="arrow open"){
-       this.arrowState="arrow closed"
+     if(this.arrowState[index]=="arrow open"){
+       this.arrowState[index]="arrow closed"
      }else{
-       this.arrowState="arrow open"
+       this.arrowState[index]="arrow open"
      }
   }
   // 选中功能高亮

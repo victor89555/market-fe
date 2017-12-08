@@ -1,0 +1,62 @@
+
+{
+  "beginIndex": 0,
+  "endIndex": 1,
+  "firstPage": true,
+  "hasNextPage": false,
+  "hasPrePage": false,
+  "items": [
+    {
+      "id":1,
+      "login_name":"登入名1",
+      "name":"用户名1",
+      "nick_name":"昵称",
+      "weixin_name":"微信1",
+      "weixin_open_id":"122222",
+      "email":"1234@qq.com",
+      "mobile":"18065381752",
+      "head_img":"图片1",
+      "manager":"是",
+      "sex":"男",
+      "enable":"是",
+      "loginable":"是"
+    }, {
+      "id":2,
+      "login_name":"登入名2",
+      "name":"用户名2",
+      "nick_name":"昵称",
+      "weixin_name":"微信2",
+      "weixin_open_id":"122222",
+      "email":"1234@qq.com",
+      "mobile":"18065381752",
+      "head_img":"图片2",
+      "manager":"是",
+      "sex":"男",
+      "enable":"是",
+      "loginable":"是"
+    }, {
+      "id":3,
+      "login_name":"登入名3",
+      "name":"用户名3",
+      "nick_name":"昵称",
+      "weixin_name":"微信3",
+      "weixin_open_id":"122222",
+      "email":"1234@qq.com",
+      "mobile":"18065381752",
+      "head_img":"图片3",
+      "manager":"是",
+      "sex":"男",
+      "enable":"是",
+      "loginable":"是"
+    }
+  ],
+  "lastPage": true,
+  "nextPage": 1,
+  "offset": 0,
+  "pageNo": 1,
+  "pageSize": 10,
+  "prePage": 1,
+  "totalCount": 100,
+  "totalPages": 1
+}
+
