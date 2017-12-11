@@ -1,3 +1,4 @@
+<!--
 <div class="main">
   <h1 class="title">Rebirth Admin</h1>
   <div class="login-body">
@@ -28,6 +29,58 @@
         </div>
       </div>
       <button id="submit" [disabled]="loginForm.invalid" class="btn btn-primary btn-block btn-lg">登 录</button>
+    </form>
+  </div>
+</div>
+-->
+<div class="login-page page-container">
+  <div class="mask"></div>
+  <div class="login-wrapper">
+    <div class="login-hd">
+      <h2 class="text-center">登录</h2>
+    </div>
+    <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
+      <re-alert-box type="danger" *ngIf="showError">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        输入的用户名或者密码无效!(测试账号：admin/admin、user/user)。
+      </re-alert-box>
+      <div class="login-bd">
+        <div class="form-horizontal">
+          <div class="form-group" [ngClass]="{'has-error': loginForm.controls['username'].touched && loginForm.controls['username'].invalid}">
+            <label for="username" class="col-xs-3 control-label">账 号：</label>
+            <div class="col-xs-9">
+              <input type="text" class="form-control" name="username" id="username" maxlength="20"
+                     formControlName="username" />
+              <div class="help-block"
+                   *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].hasError('required')">
+                请输入用户名!
+              </div>
+            </div>
+          </div>
+          <div class="form-group"  [ngClass]="{'has-error': loginForm.controls['password'].touched && loginForm.controls['password'].invalid}">
+            <label for="password" class="col-xs-3 control-label">密 码：</label>
+            <div class="col-xs-9">
+              <input type="password" class="form-control" id="password" name="password" autocomplete="off"
+                     maxlength="20"
+                     formControlName="password" />
+              <div class="help-block"
+                   *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].hasError('required')">
+                请输入密码!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="login-ft">
+      <div class="form-horizontal">
+        <div class="form-group">
+          <div class="col-xs-12">
+            <button id="submit" [disabled]="loginForm.invalid"  class="btn btn-info form-control">登录</button>
+          </div>
+        </div>
+      </div>
+    </div>
     </form>
   </div>
 </div>
