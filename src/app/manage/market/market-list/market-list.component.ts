@@ -19,8 +19,7 @@ export class MarketListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  qry_name: string = ""
-  qry_code: string = ""
+  queryMarket = {'name':'','address':'','state':''};
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private marketService: MarketService) {
@@ -31,7 +30,7 @@ export class MarketListComponent implements OnInit {
   }
 
   query() {
-    this.marketService.query(this.qry_name, this.page.pageNo).subscribe(
+    this.marketService.query(this.queryMarket.name, this.page.pageNo).subscribe(
       (page) => {
         this.page = page
       }
@@ -44,17 +43,23 @@ export class MarketListComponent implements OnInit {
   }
 
   reset() {
-    this.qry_name = ""
+    this.queryMarket.name = ""
     this.query()
   }
-
+  delete(id:number){
+    
+  }
   add() {
     this.modalService.open<Market>({
       component: MarketFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
-      resolve: {}
+      resolve: {
+        "add":true
+      }
     }).subscribe(market => {
       console.log('Rebirth Modal -> Get ok with result:', market)
+      // 重新获取一次数据
+      this.query()
     }, error => {
       console.error('Rebirth Modal -> Get cancel with result:', error)
     })
@@ -69,6 +74,8 @@ export class MarketListComponent implements OnInit {
       }
     }).subscribe(market => {
       console.log('Rebirth Modal -> Get ok with result:', market)
+      // 重新获取一次数据
+      this.query()
     }, error => {
       console.error('Rebirth Modal -> Get cancel with result:', error)
     })

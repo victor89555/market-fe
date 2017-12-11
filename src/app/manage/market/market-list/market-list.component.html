@@ -21,8 +21,9 @@
         <div class="form-group">
           <div class="input-group">
             <div class="search-line">
-              <input type="text" class="form-control" name="marketName" [(ngModel)]="qry_name" placeholder="市场名称">
-              <input type="text" class="form-control" name="marketCode" [(ngModel)]="qry_code" placeholder="市场代码">
+              <input type="text" class="form-control" name="marketName" [(ngModel)]="queryMarket.name" placeholder="市场名称">
+              <input type="text" class="form-control" name="marketAddress" [(ngModel)]="queryMarket.address" placeholder="市场地址">
+              <input type="text" class="form-control" name="marketState" [(ngModel)]="queryMarket.state" placeholder="市场经营状态">
             </div>
           </div>
         </div>
@@ -55,6 +56,7 @@
         <ngx-datatable-column name="编辑" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="market">
             <button class="btn btn-default" (click)="edit(value);">修改</button>
+            <button class="btn btn-default" (click)="delete(value);">删除</button>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
