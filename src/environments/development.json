@@ -1,6 +1,6 @@
 {
   "env": "dev",
   "api": {
-    "host": "http://localhost:8000/api"
+    "host": "http://market-bus.djws.com.cn/api"
   }
 }
