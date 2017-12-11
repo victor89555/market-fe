@@ -47,7 +47,8 @@ export class AppComponent {
         request: (request) => {
           return request.clone({
             setHeaders: {
-              "X-Requested-With": "XMLHttpRequest"
+              "X-Requested-With": "XMLHttpRequest",
+              "Content-Type": "application/json"
             }
           });
         }

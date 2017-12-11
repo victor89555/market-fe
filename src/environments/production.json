@@ -2,5 +2,8 @@
   "env": "prod",
   "api": {
     "host": "http://localhost:8000/api"
+  },
+  "auth": {
+    "host": "http://vito-uic.djws.com.cn"
   }
 }

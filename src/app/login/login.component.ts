@@ -15,7 +15,7 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) {
     this.loginForm = fb.group({
-      'username': ['', Validators.required],
+      'loginName': ['', Validators.required],
       'password': ['', Validators.required]
     });
   }
@@ -27,7 +27,7 @@ export class LoginComponent {
 
     this.loginService.login(this.loginForm.value)
       .subscribe(
-        (user) => this.router.navigateByUrl('/manage/orders'),
+        (user) => this.router.navigateByUrl('/manage/markets'),
         () => this.showError = true
       );
   }

@@ -1,20 +1,19 @@
-import { Observable } from 'rxjs/Observable';
-import { Injectable } from '@angular/core';
-import { AuthorizationService } from 'rebirth-permission';
-import { Body, POST, RebirthHttp } from 'rebirth-http';
-import { HttpClient } from '@angular/common/http';
-import { CurrentUser } from '../shared/model/current-user.model';
+import {Observable} from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {AuthorizationService} from 'rebirth-permission';
+import {HttpClient} from '@angular/common/http';
+import {CurrentUser} from '../shared/model/current-user.model';
 import 'rxjs/add/operator/map';
+import {environment} from "../../environments/environment"
 
 @Injectable()
-export class LoginService extends RebirthHttp {
+export class LoginService {
 
-  constructor(http: HttpClient,
+  constructor(private http: HttpClient,
               private authorizationService: AuthorizationService) {
-    super(http);
   }
 
-  login(loginInfo: { username: string; password: string }): Observable<CurrentUser> {
+  login(loginInfo: { loginName: string; password: string }): Observable<CurrentUser> {
     const authorizationService = this.authorizationService;
     return this.innerLogin(loginInfo)
       .map(user => {
@@ -23,9 +22,15 @@ export class LoginService extends RebirthHttp {
       });
   }
 
-  @POST('login')
-  private innerLogin(@Body body): Observable<CurrentUser> {
-    return null;
+  innerLogin(loginInfo): Observable<CurrentUser> {
+    return this.http.post<CurrentUser>(`${environment.auth.host}/login`, loginInfo).map((data: any) => {
+      let currentUser = new CurrentUser()
+      currentUser.id = data.userId
+      currentUser.name = data.userName
+      currentUser.token = data.token
+      currentUser.roles = data.resources
+      return currentUser
+    })
   }
 
 

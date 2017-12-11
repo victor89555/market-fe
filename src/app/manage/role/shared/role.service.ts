@@ -1,12 +1,14 @@
-import {Body, GET, Path, POST, Query, RebirthHttp} from "rebirth-http";
+import {BaseUrl, Body, GET, Path, POST, Query, RebirthHttp} from "rebirth-http";
 import {Observable} from "rxjs/Observable";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import "rxjs/add/operator/map";
-import { Role } from "./role.model";
+import {Role} from "./role.model";
 import {Page} from "../../../thurder-ng/models/page.model"
+import {environment} from "../../../../environments/environment"
 
 @Injectable()
+@BaseUrl(environment.auth.host)
 export class RoleService extends RebirthHttp {
   constructor(http: HttpClient) {
     super(http);

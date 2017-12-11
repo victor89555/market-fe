@@ -42,17 +42,17 @@
     <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
       <re-alert-box type="danger" *ngIf="showError">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        输入的用户名或者密码无效!(测试账号：admin/admin、user/user)。
+        输入的用户名或者密码无效!
       </re-alert-box>
       <div class="login-bd">
         <div class="form-horizontal">
-          <div class="form-group" [ngClass]="{'has-error': loginForm.controls['username'].touched && loginForm.controls['username'].invalid}">
-            <label for="username" class="col-xs-3 control-label">账 号：</label>
+          <div class="form-group" [ngClass]="{'has-error': loginForm.controls['loginName'].touched && loginForm.controls['loginName'].invalid}">
+            <label for="loginName" class="col-xs-3 control-label">账 号：</label>
             <div class="col-xs-9">
-              <input type="text" class="form-control" name="username" id="username" maxlength="20"
-                     formControlName="username" />
+              <input type="text" class="form-control" name="loginName" id="loginName" maxlength="20"
+                     formControlName="loginName" />
               <div class="help-block"
-                   *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].hasError('required')">
+                   *ngIf="loginForm.controls['loginName'].touched && loginForm.controls['loginName'].hasError('required')">
                 请输入用户名!
               </div>
             </div>
