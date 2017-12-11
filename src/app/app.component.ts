@@ -47,7 +47,12 @@ export class AppComponent {
         request: (request) => {
           const currentUser = this.authorizationService.getCurrentUser();
           if (currentUser) {
-            return request.clone({setHeaders: {Authorization: `Bearer ${currentUser.token }`}});
+            return request.clone({
+              setHeaders: {
+                Authorization: `Bearer ${currentUser.token }`,
+                "X-Requested-With": "XMLHttpRequest"
+              }
+            });
           }
         }
       })
@@ -57,4 +62,5 @@ export class AppComponent {
         }
       });
   }
+
 }
