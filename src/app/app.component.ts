@@ -45,12 +45,20 @@ export class AppComponent {
       })
       .addInterceptor({
         request: (request) => {
+          return request.clone({
+            setHeaders: {
+              "X-Requested-With": "XMLHttpRequest"
+            }
+          });
+        }
+      })
+      .addInterceptor({
+        request: (request) => {
           const currentUser = this.authorizationService.getCurrentUser();
           if (currentUser) {
             return request.clone({
               setHeaders: {
-                Authorization: `Bearer ${currentUser.token }`,
-                "X-Requested-With": "XMLHttpRequest"
+                Authorization: `Bearer ${currentUser.token }`
               }
             });
           }
