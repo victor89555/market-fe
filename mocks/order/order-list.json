@@ -7,75 +7,75 @@
   "items": [
     {
       "id": 1,
-      "order_no": "NO20170123100035",
-      "buyer": "张三",
-      "pay_time": "2017-01-23 09:23:55"
-    },
-    {
-      "id": 2,
-      "order_no": "NO20170123100035",
-      "buyer": "张三",
-      "pay_time": "2017-01-23 09:23:55"
-    },
-    {
-      "id": 1,
-      "order_no": "NO20170123100035",
-      "buyer": "小五",
-      "pay_time": "2017-01-23 09:23:55"
-    },
-    {
-      "id": 1,
-      "order_no": "NO20170123100035",
-      "buyer": "李四",
-      "pay_time": "2017-01-23 09:23:55"
+      "market_id": 3,
+      "market_name": "市场3",
+      "member_id": 4,
+      "member_name": "lisi",
+      "orig_amount": 1,
+      "out_trade_no": "123",
+      "pay_way": 2,
+      "scale_id":1,
+      "shop_id":2,
+      "shop_name": "洪",
+      "source":3,
+      "status":1,
+      "total_amount":1,
+      "trading_time":"2017-12-03",
+      "trans_log_no":"111"
     },
     {
       "id": 1,
-      "order_no": "NO20170123100035",
-      "buyer": "旺旺",
-      "pay_time": "2017-01-23 09:23:55"
+      "market_id": 3,
+      "market_name": "市场3",
+      "member_id": 4,
+      "member_name": "lisi",
+      "orig_amount": 1,
+      "out_trade_no": "123",
+      "pay_way": 2,
+      "scale_id":1,
+      "shop_id":2,
+      "shop_name": "洪",
+      "source":3,
+      "status":2,
+      "total_amount":1,
+      "trading_time":"2017-12-03",
+      "trans_log_no":"111"
     },
     {
       "id": 1,
-      "order_no": "NO20170123100035",
-      "buyer": "陈丽",
-      "pay_time": "2017-01-23 09:23:55"
+      "market_id": 3,
+      "market_name": "市场3",
+      "member_id": 4,
+      "member_name": "lisi",
+      "orig_amount": 1,
+      "out_trade_no": "123",
+      "pay_way": 2,
+      "scale_id":1,
+      "shop_id":2,
+      "shop_name": "洪",
+      "source":3,
+      "status":3,
+      "total_amount":1,
+      "trading_time":"2017-12-03",
+      "trans_log_no":"111"
     },
     {
       "id": 1,
-      "order_no": "NO20170123100035",
-      "buyer": "白强",
-      "pay_time": "2017-01-23 09:23:55"
-    },
-    {
-      "id": 1,
-      "order_no": "NO20170123100035",
-      "buyer": "周四",
-      "pay_time": "2017-01-23 09:23:55"
-    },
-    {
-      "id": 1,
-      "order_no": "NO20170123100035",
-      "buyer": "周四",
-      "pay_time": "2017-01-23 09:23:55"
-    },
-    {
-      "id": 1,
-      "order_no": "NO20170123100035",
-      "buyer": "周四",
-      "pay_time": "2017-01-23 09:23:55"
-    },
-    {
-      "id": 1,
-      "order_no": "NO20170123100035",
-      "buyer": "周四",
-      "pay_time": "2017-01-23 09:23:55"
-    },
-    {
-      "id": 1,
-      "order_no": "NO20170123100035",
-      "buyer": "周四",
-      "pay_time": "2017-01-23 09:23:55"
+      "market_id": 3,
+      "market_name": "市场3",
+      "member_id": 4,
+      "member_name": "lisi",
+      "orig_amount": 1,
+      "out_trade_no": "123",
+      "pay_way": 2,
+      "scale_id":1,
+      "shop_id":2,
+      "shop_name": "洪",
+      "source":3,
+      "status":2,
+      "total_amount":1,
+      "trading_time":"2017-12-03",
+      "trans_log_no":"111"
     }
   ],
   "lastPage": true,

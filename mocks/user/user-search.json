@@ -1,0 +1,15 @@
+{
+  "id":1,
+  "login_name":"登入名1",
+  "name":"用户名1",
+  "nick_name":"昵称",
+  "weixin_name":"微信1",
+  "weixin_open_id":"122222",
+  "email":"1234@qq.com",
+  "mobile":"18065381752",
+  "head_img":"图片1",
+  "manager":"是",
+  "sex":"男",
+  "enable":"是",
+  "loginable":"是"
+}

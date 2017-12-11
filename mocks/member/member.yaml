@@ -1,0 +1,75 @@
+- request:
+    url: /api/members$
+    method: GET
+    query:
+       pageNo: 1
+  response:
+    status: 200
+    latency: 500
+    headers:
+       Content-Type: application/json
+       Access-Control-Allow-Origin: '*'
+       Access-Control-Allow-Credentials: true
+       Access-Control-Allow-Methods: 'GET, POST, PUT, DELETE, OPTIONS'
+       api-version: "1.0"
+    file: member-list.json
+
+- request:
+    url: /api/members$
+    method: GET
+  response:
+    status: 200
+    latency: 500
+    headers:
+       Content-Type: application/json
+       Access-Control-Allow-Origin: '*'
+       Access-Control-Allow-Credentials: true
+       Access-Control-Allow-Methods: 'GET, POST, PUT, DELETE, OPTIONS'
+       api-version: "1.0"
+    file: member-search.json
+
+- request:
+    url: /api/members/1$
+    method: GET
+  response:
+    status: 200
+    latency: 500
+    headers:
+       Content-Type: application/json
+       Access-Control-Allow-Origin: '*'
+       Access-Control-Allow-Credentials: true
+       Access-Control-Allow-Methods: 'GET, POST, PUT, DELETE, OPTIONS'
+       api-version: "1.0"
+    file: member-detail.json
+
+- request:
+    url: /api/members$
+    method: POST
+  response:
+    status: 200
+    latency: 500
+    headers:
+       Content-Type: application/json
+       Access-Control-Allow-Origin: '*'
+       Access-Control-Allow-Credentials: true
+       Access-Control-Allow-Methods: 'GET, POST, PUT, DELETE, OPTIONS'
+       api-version: "1.0"
+    file: member-detail.json
+
+- request:
+    url: /api/members$
+    method: GET
+  response:
+    status: 400
+    latency: 500
+    headers:
+       Content-Type: application/json
+       Access-Control-Allow-Origin: '*'
+       Access-Control-Allow-Credentials: true
+       Access-Control-Allow-Methods: 'GET, POST, PUT, DELETE, OPTIONS'
+       api-version: "1.0"
+    body:  >
+      {
+        "error": "文件不存在."
+      }
+

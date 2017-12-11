@@ -43,6 +43,20 @@
     file: order-detail.json
 
 - request:
+    url: /api/orderLines/1$
+    method: GET
+  response:
+    status: 200
+    latency: 500
+    headers:
+       Content-Type: application/json
+       Access-Control-Allow-Origin: '*'
+       Access-Control-Allow-Credentials: true
+       Access-Control-Allow-Methods: 'GET, POST, PUT, DELETE, OPTIONS'
+       api-version: "1.0"
+    file: orderLine-detail.json
+
+- request:
     url: /api/orders$
     method: GET
   response:

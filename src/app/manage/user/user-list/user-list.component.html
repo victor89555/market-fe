@@ -1,0 +1,68 @@
+<div id="page1" class="page-content">
+  <div class="page-head">
+    <div class="page-title">
+      <h1><span class="glyphicon glyphicon-shopping-cart"></span>
+        用户信息
+        <!--<small>dashboard &amp; statistics</small>-->
+      </h1>
+    </div>
+    <div class="page-toolbar">
+      <div class="pull-right tooltips" >
+        <a href="javascript:;" class="btn btn-danger" (click)="add()" has-permission="FUC_ORDER_ADD">
+          <i class="glyphicon glyphicon-plus"></i> 新增
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <form class="form-inline">
+        <div class="form-group">
+          <div class="input-group">
+            <div class="search-line">
+              <input type="text" class="form-control" name="marketName" [(ngModel)]="qry_name" placeholder="手机号">
+              <input type="text" class="form-control" name="marketCode" [(ngModel)]="qry_code" placeholder="用户名">
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="query()">查询</button>
+        <button type="submit" class="btn btn-primary" (click)="reset()">重置</button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <ngx-datatable
+        #mydatatable
+        class="material"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [limit]="page?.pageSize"
+        [columnMode]="'force'"
+        [rowHeight]="'auto'"
+        [externalPaging]="true"
+        [count]="page?.totalCount"
+        [offset]="page?.pageNo-1"
+        [rows]="page?.items"
+        (page)='setPage($event)'
+      >
+        <ngx-datatable-column name="头像" prop="head_img"></ngx-datatable-column>
+        <ngx-datatable-column name="用户名" prop="name"></ngx-datatable-column>
+        <ngx-datatable-column name="昵称" prop="nick_name"></ngx-datatable-column>
+        <ngx-datatable-column name="微信号" prop="weixin_open_id"></ngx-datatable-column>
+        <ngx-datatable-column name="邮箱" prop="email"></ngx-datatable-column>
+        <ngx-datatable-column name="手机号" prop="mobile"></ngx-datatable-column>
+        <ngx-datatable-column name="是否管理员" prop="manager"></ngx-datatable-column>
+        <ngx-datatable-column name="性别" prop="sex"></ngx-datatable-column>
+        <ngx-datatable-column name="是否可用" prop="enable"></ngx-datatable-column>
+        <ngx-datatable-column name="是否可登入" prop="loginable"></ngx-datatable-column>
+        <ngx-datatable-column name="编辑" prop="id">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="market">
+            <button class="btn btn-default" (click)="edit(value);">修改</button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

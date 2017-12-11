@@ -1,39 +1,39 @@
-
-<div class="page-head">
-  <div class="page-title">
-    <h1><span class="glyphicon glyphicon-shopping-cart"></span>
-      商户信息
-      <!--<small>dashboard &amp; statistics</small>-->
-    </h1>
-  </div>
-  <div class="page-toolbar">
-    <div class="pull-right tooltips" >
-      <a href="javascript:;" class="btn btn-danger">
-        <i class="glyphicon glyphicon-plus"></i> 新增
-      </a>
+<div id="page1" class="page-content">
+  <div class="page-head">
+    <div class="page-title">
+      <h1><span class="glyphicon glyphicon-shopping-cart"></span>
+        商户信息
+        <!--<small>dashboard &amp; statistics</small>-->
+      </h1>
+    </div>
+    <div class="page-toolbar">
+      <div class="pull-right tooltips" >
+        <a routerLink="/manage/shopForm/0" class="btn btn-danger">
+          <i class="glyphicon glyphicon-plus"></i> 新增
+        </a>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <form class="form-inline">
-      <div class="form-group">
-        <div class="input-group">
-          <div class="search-line">
-            <input type="text" class="form-control" name="markt" [(ngModel)]="qry.market" placeholder="市场名称">
-            <input type="text" class="form-control" name="shop"  [(ngModel)]="qry.shop" placeholder="商户名称">
-            <input type="text" class="form-control" name="stall"  [(ngModel)]="qry.stall" placeholder="摊位编号">
-            <input type="text" class="form-control" name="state"  [(ngModel)]="qry.state" placeholder="状态">
+  <div class="row">
+    <div class="col-xs-12">
+      <form class="form-inline">
+        <div class="form-group">
+          <div class="input-group">
+            <div class="search-line">
+              <input type="text" class="form-control" name="markt" [(ngModel)]="qry.market" placeholder="市场名称">
+              <input type="text" class="form-control" name="shop"  [(ngModel)]="qry.shop" placeholder="商户名称">
+              <input type="text" class="form-control" name="stall"  [(ngModel)]="qry.stall" placeholder="摊位编号">
+              <input type="text" class="form-control" name="state"  [(ngModel)]="qry.state" placeholder="状态">
+            </div>
           </div>
         </div>
-      </div>
-      <button type="submit" class="btn btn-primary" (click)="query()">查询</button>
-      <button type="submit" class="btn btn-primary" (click)="reset()">重置</button>
-    </form>
+        <button type="submit" class="btn btn-primary" (click)="query()">查询</button>
+        <button type="submit" class="btn btn-primary" (click)="reset()">重置</button>
+      </form>
+    </div>
   </div>
-</div>
-<div class="row">
+  <div class="row">
   <div class="col-xs-12">
     <ngx-datatable
       #mydatatable
@@ -73,4 +73,4 @@
     </ngx-datatable>
   </div>
 </div>
-
+</div>
