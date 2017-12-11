@@ -19,7 +19,7 @@ export const ROUTER_CONFIG: Routes = [
   {
     path: 'manage',
     component: ManageAppComponent,
-    canActivate: [AuthLoginPermission],
+    // canActivate: [AuthLoginPermission],
     children: [
       // can use role AuthRolePermission
       {path: '', pathMatch: 'full', redirectTo: 'orders'},

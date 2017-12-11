@@ -64,6 +64,7 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="操作" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="order">
+            <!--<button class="btn btn-default" (click)="edit(value);">查看</button>-->
             <a routerLink="/manage/orderLines/{{value}}">查看</a>
           </ng-template>
         </ngx-datatable-column>

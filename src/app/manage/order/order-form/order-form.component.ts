@@ -43,6 +43,7 @@ export class OrderFormComponent implements Modal, OnInit {
   loadOrderLine() {
     this.orderService.getLine(this.order_id).subscribe(
       (orderLines) => {
+        console.log(orderLines);
         this.orderLines = orderLines
         this.changeDetectorRef.markForCheck()
       }
