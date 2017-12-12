@@ -62,7 +62,7 @@ export class ElectronicScaleListComponent implements OnInit {
       console.log('Rebirth Modal -> Get ok with result:', electronicScale)
       this.query()
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 
@@ -77,7 +77,7 @@ export class ElectronicScaleListComponent implements OnInit {
       console.log('Rebirth Modal -> Get ok with result:', electronicScale)
       this.query()
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 

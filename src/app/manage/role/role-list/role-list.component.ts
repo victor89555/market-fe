@@ -1,8 +1,8 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
 import {ModalService} from "rebirth-ng";
 import {RoleFormComponent} from "../role-form/role-form.component";
-import { Role} from "../shared/role.model";
-import { RoleService} from "../shared/role.service";
+import {Role} from "../shared/role.model";
+import {RoleService} from "../shared/role.service";
 import {Page} from "../../../thurder-ng/models/page.model";
 
 @Component({
@@ -21,6 +21,7 @@ export class RoleListComponent implements OnInit {
   page: Page<any> = new Page()
   qry_name: string = ""
   qry_code: string = ""
+
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private roleService: RoleService) {
@@ -57,7 +58,7 @@ export class RoleListComponent implements OnInit {
     }).subscribe(user => {
       console.log('Rebirth Modal -> Get ok with result:', user)
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 
@@ -71,7 +72,7 @@ export class RoleListComponent implements OnInit {
     }).subscribe(user => {
       console.log('Rebirth Modal -> Get ok with result:', user)
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 

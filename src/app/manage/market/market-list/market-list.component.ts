@@ -66,7 +66,7 @@ export class MarketListComponent implements OnInit {
       // 重新获取一次数据
       this.query()
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 
@@ -82,7 +82,7 @@ export class MarketListComponent implements OnInit {
       // 重新获取一次数据
       this.query()
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 

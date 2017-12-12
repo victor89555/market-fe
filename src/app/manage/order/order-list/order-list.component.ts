@@ -52,7 +52,7 @@ export class OrderListComponent implements OnInit {
     }).subscribe(order => {
       console.log('Rebirth Modal -> Get ok with result:', order)
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 
@@ -66,7 +66,7 @@ export class OrderListComponent implements OnInit {
     }).subscribe(order => {
       console.log('Rebirth Modal -> Get ok with result:', order)
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 
