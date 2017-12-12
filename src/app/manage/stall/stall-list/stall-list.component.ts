@@ -58,6 +58,7 @@ export class StallListComponent implements OnInit {
       }
     }).subscribe(stall => {
       console.log('Rebirth Modal -> Get ok with result:', stall)
+      this.query()
     }, error => {
       console.error('Rebirth Modal -> Get cancel with result:', error)
     })
@@ -72,6 +73,7 @@ export class StallListComponent implements OnInit {
       }
     }).subscribe(stall => {
       console.log('Rebirth Modal -> Get ok with result:', stall)
+      this.query()
     }, error => {
       console.error('Rebirth Modal -> Get cancel with result:', error)
     })

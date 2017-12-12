@@ -39,6 +39,10 @@ export class StallFormComponent implements Modal, OnInit {
     )
   }
   save() {
+    if(this.stall.marketId == null){ //无法选则市场ID时使用
+      this.stall.marketId = 5
+
+    }
     this.stallService.save(this.stall).subscribe(
       (stall) => {
         this.dismiss.emit(stall);
