@@ -30,7 +30,7 @@ export class MarketListComponent implements OnInit {
   }
 
   query() {
-    this.marketService.query(this.queryMarket.name, this.page.pageNo).subscribe(
+    this.marketService.query(this.queryMarket.name, this.queryMarket.address, this.queryMarket.state, this.page.pageNo).subscribe(
       (page) => {
         this.page = page
       }
@@ -44,10 +44,14 @@ export class MarketListComponent implements OnInit {
 
   reset() {
     this.queryMarket.name = ""
+    this.queryMarket.address = ""
+    this.queryMarket.state = ""
     this.query()
   }
   delete(id:number){
-    
+     this.marketService.delete(id).subscribe((market) => {
+        this.query();
+     })
   }
   add() {
     this.modalService.open<Market>({
