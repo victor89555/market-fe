@@ -20,7 +20,7 @@ export class StallListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  qry_name: string = ""
+  queryStall = {"market":"", "shop":"", "func":"", "status":"", "name":""}
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
@@ -32,7 +32,8 @@ export class StallListComponent implements OnInit {
     this.query()
   }
   query() {
-    this.stallService.query(this.qry_name, this.page.pageNo).subscribe(
+    this.stallService.query(this.queryStall.market, this.queryStall.shop,
+      this.queryStall.func,this.queryStall.status,this.queryStall.name,this.page.pageNo).subscribe(
       (page) => {
         this.page = page
       }
@@ -40,7 +41,11 @@ export class StallListComponent implements OnInit {
   }
 
   reset() {
-    this.qry_name = ""
+    this.queryStall.status = ""
+    this.queryStall.market = ""
+    this.queryStall.shop = ""
+    this.queryStall.func = ""
+    this.queryStall.name = ""
     this.query()
   }
 
@@ -49,6 +54,7 @@ export class StallListComponent implements OnInit {
       component: StallFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
+        "add": true
       }
     }).subscribe(stall => {
       console.log('Rebirth Modal -> Get ok with result:', stall)
@@ -70,5 +76,10 @@ export class StallListComponent implements OnInit {
       console.error('Rebirth Modal -> Get cancel with result:', error)
     })
   }
-
+  delete(id:number){
+    this.stallService.delete(id).subscribe(() => {
+      debugger
+      this.query()
+    })
+  }
 }
