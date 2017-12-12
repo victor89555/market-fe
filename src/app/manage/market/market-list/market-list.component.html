@@ -53,6 +53,7 @@
         <ngx-datatable-column name="市场代码" prop="code"></ngx-datatable-column>
         <ngx-datatable-column name="市场摊位总数" prop="stall_limit"></ngx-datatable-column>
         <ngx-datatable-column name="已入驻摊位数" prop="stall_num"></ngx-datatable-column>
+        <ngx-datatable-column name="经营状态" prop="status"></ngx-datatable-column>
         <ngx-datatable-column name="编辑" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="market">
             <button class="btn btn-default" (click)="edit(value);">修改</button>

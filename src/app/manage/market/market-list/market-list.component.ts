@@ -49,8 +49,9 @@ export class MarketListComponent implements OnInit {
     this.query()
   }
   delete(id:number){
-     this.marketService.delete(id).subscribe((market) => {
-        this.query();
+     this.marketService.delete(id).subscribe(() => {
+       debugger
+       this.query()
      })
   }
   add() {

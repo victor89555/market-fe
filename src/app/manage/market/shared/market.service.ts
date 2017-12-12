@@ -39,7 +39,7 @@ export class MarketService extends RebirthHttp {
   }
 
   @DELETE("markets/:id")
-  delete( @Path("id") id: number): Observable<Market> {
+  delete( @Path("id") id: number): Observable<any> {
     return null;
   }
 }
