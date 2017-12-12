@@ -12,7 +12,7 @@ import {ShopService} from "../../shop/shared/shop.service";
   templateUrl: "./electronicScale-form.component.html"
 })
 export class ElectronicScaleFormComponent implements Modal, OnInit {
-  context: { id: number };
+  context: { id: number, add:boolean };
   dismiss: EventEmitter<ElectronicScale>;
 
   electronicScale: any = {}
@@ -24,8 +24,8 @@ export class ElectronicScaleFormComponent implements Modal, OnInit {
   }
 
   ngOnInit(): void {
-    console.log('ModalTestComponent init....');
-    this.marketService.getAll().subscribe(
+    console.log('ModalTestComponent init....')
+    /*this.marketService.getAll().subscribe(
       (markets) => {
         this.markets = markets
       }
@@ -34,22 +34,36 @@ export class ElectronicScaleFormComponent implements Modal, OnInit {
       (shops) => {
         this.shops = shops
       }
-    )
+    )*/
+    if(!this.context.add){
+      this.getElectronicScale()
+    }
+  }
+
+  getElectronicScale(){
     this.electronicScaleService.get(this.context.id).subscribe(
       (electronicScale) => {
         this.electronicScale = electronicScale
       }
     )
   }
-
   save() {
-    this.electronicScale.save(this.electronicScale).subscribe(
+    this.electronicScaleService.save(this.electronicScale).subscribe(
       (electronicScale) => {
         this.dismiss.emit(electronicScale);
       }
     )
   }
 
+  update() {
+    this.electronicScale.id = this.context.id;
+    console.log(this.electronicScale);
+    this.electronicScaleService.update(this.context.id,this.electronicScale).subscribe(
+      (electronicScale) => {
+        this.dismiss.emit(electronicScale);
+      }
+    )
+  }
   cancel() {
     this.dismiss.error(this.electronicScale);
   }
