@@ -11,7 +11,7 @@
         </a>
         <ul *ngIf="menuItem.children" class="sub-menu" [ngClass]="{'hide': !menuItem.isOpen}">
           <li *ngFor="let subItem of menuItem.children" class="nav-item" [ngClass]="{'active': subItem.active}" (click)="onSelect(subItem)">
-            <a href="{{subItem.link}}" class="nav-lick">
+            <a routerLink="{{subItem.link}}" class="nav-lick">
               <i class="glyphicon glyphicon-{{subItem.icon}}"></i>
               <span class="title"> {{subItem.title}}</span>
               <span class="selected"></span>
