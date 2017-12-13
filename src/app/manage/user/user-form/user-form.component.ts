@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {Modal} from "rebirth-ng";
 import {UserService} from "../shared/user.service";
 import {User} from "../shared/user.model";
@@ -11,22 +11,27 @@ import {User} from "../shared/user.model";
 export class UserFormComponent implements OnInit, Modal {
   context: { id: number, add: boolean };
   dismiss: EventEmitter<User>;
-  constructor(private userService:UserService) { }
+
+  constructor(private userService: UserService) {
+  }
+
   user: any = {}
 
   ngOnInit() {
     console.log('ModalTestComponent init....');
-    if(!this.context.add){
+    if (!this.context.add) {
       this.getUser();
     }
   }
-  getUser(){
+
+  getUser() {
     this.userService.get(this.context.id).subscribe(
       (user) => {
         this.user = user;
       }
     )
   }
+
   save() {
     this.userService.save(this.user).subscribe(
       (user) => {
@@ -35,6 +40,17 @@ export class UserFormComponent implements OnInit, Modal {
     )
     /*this.dismiss.emit(this.member);*/
   }
+
+  update() {
+    this.user.id = this.context.id;
+    console.log(this.user);
+    this.userService.update(this.context.id, this.user).subscribe(
+      (user) => {
+        this.dismiss.emit(user);
+      }
+    )
+  }
+
   cancel() {
     this.dismiss.error(this.user);
   }

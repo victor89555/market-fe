@@ -1,7 +1,8 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {Modal} from "rebirth-ng";
-import { Role } from "../shared/role.model";
+import {Role} from "../shared/role.model";
 import {RoleService} from "../shared/role.service";
+import {ResourceService} from "../../resource/shared/resource.service"
 
 @Component({
   selector: 'app-role-form',
@@ -11,32 +12,37 @@ import {RoleService} from "../shared/role.service";
 export class RoleFormComponent implements OnInit, Modal {
   context: { id: number, add: boolean };
   dismiss: EventEmitter<Role>;
-  constructor(private roleService:RoleService) { }
-  role: any = {};
-  resourceIds:object[] = [];          // 所有资源
-  checkedResources:number[]=[];      //  选中的资源
+  role: Role = new Role();
+  resourceTreeData: any[] = [];          // 所有资源
+  checkedResources: number[] = [];      //  选中的资源
+
+  constructor(private roleService: RoleService, private resourceService: ResourceService) {
+  }
 
   ngOnInit() {
     console.log('ModalTestComponent init....');
-    if(!this.context.add){
+    if (!this.context.add) {
       this.getRole();
     }
     this.getResource();
   }
-  getRole(){
+
+  getRole() {
     this.roleService.get(this.context.id).subscribe(
       (role) => {
         this.role = role;
       }
     )
   }
-  getResource(){
-    this.roleService.getResource().subscribe(
+
+  getResource() {
+    this.resourceService.getTree().subscribe(
       (resourceIds) => {
-        this.resourceIds = resourceIds;
+        this.resourceTreeData = resourceIds;
       }
     )
   }
+
   save() {
     this.roleService.save(this.role).subscribe(
       (role) => {
@@ -45,21 +51,22 @@ export class RoleFormComponent implements OnInit, Modal {
       }
     )
   }
+
   cancel() {
     this.dismiss.error(this.role);
   }
 
 // 资源分配的结果
-  showTreeBack(node){
-     console.log(node);
-     if(node.$check){
-       this.checkedResources.push(node.id);
-     }else {
-       for(let i=0;i<this.checkedResources.length;i++){
-         if(node.id==this.checkedResources[i]){
-           this.checkedResources.splice(i,1);
-         }
-       }
-     }
+  showTreeBack(node) {
+    console.log(node);
+    if (node.$check) {
+      this.checkedResources.push(node.id);
+    } else {
+      for (let i = 0; i < this.checkedResources.length; i++) {
+        if (node.id == this.checkedResources[i]) {
+          this.checkedResources.splice(i, 1);
+        }
+      }
+    }
   }
 }

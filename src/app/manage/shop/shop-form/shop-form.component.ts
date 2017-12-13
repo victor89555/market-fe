@@ -21,7 +21,6 @@ import {ContractService} from "../../contract/shared/contract.service";
 import {HttpClient} from "@angular/common/http";
 import {ContractFormComponent} from "../../contract/contract-form/contract-form.component";
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {of} from 'rxjs/observable/of';
 
 @Component({
   selector: 'app-shop-form',
@@ -215,7 +214,7 @@ export class ShopFormComponent implements Modal, OnInit {
     }).subscribe(contract => {
       this.loadContractor();
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 }

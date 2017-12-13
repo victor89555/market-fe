@@ -48,6 +48,6 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-primary" (click)="save()">保存</button>
+  <button type="button" class="btn btn-primary" (click)="context.add ? save() : update()">保存</button>
   <button type="button" class="btn btn-warning" (click)="cancel()">取消</button>
 </div>

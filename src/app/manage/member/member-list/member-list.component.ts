@@ -1,9 +1,9 @@
-import { Component, OnInit, ComponentFactoryResolver, ViewEncapsulation } from '@angular/core';
-import { Page} from "../../../thurder-ng/models/page.model";
-import { MemberService} from "../shared/member.service";
+import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from '@angular/core';
+import {Page} from "../../../thurder-ng/models/page.model";
+import {MemberService} from "../shared/member.service";
 import {ModalService} from "rebirth-ng";
 import {Member} from "../shared/member.model";
-import { MemberFormComponent } from "../member-form/member-form.component";
+import {MemberFormComponent} from "../member-form/member-form.component";
 
 @Component({
   selector: 'app-member-list',
@@ -38,7 +38,7 @@ export class MemberListComponent implements OnInit {
     }).subscribe(member => {
       console.log('Rebirth Modal -> Get ok with result:', member)
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 
@@ -62,7 +62,7 @@ export class MemberListComponent implements OnInit {
     }).subscribe(member => {
       console.log('Rebirth Modal -> Get ok with result:', member)
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 }

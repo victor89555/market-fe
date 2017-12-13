@@ -52,7 +52,7 @@ export class ContractListComponent implements OnInit {
     }).subscribe(contract => {
       console.log('Rebirth Modal -> Get ok with result:', contract)
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 
@@ -66,7 +66,7 @@ export class ContractListComponent implements OnInit {
     }).subscribe(contract => {
       console.log('Rebirth Modal -> Get ok with result:', contract)
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 

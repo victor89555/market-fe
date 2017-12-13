@@ -7,8 +7,8 @@
     </div>
     <div class="page-toolbar">
       <div class="pull-right tooltips" >
-        <a href="javascript:;" class="btn btn-danger">
-          <i class="glyphicon glyphicon-plus" (click)="add()"></i> 新增
+        <a href="javascript:;" class="btn btn-danger" (click)="add()">
+          <i class="glyphicon glyphicon-plus"></i> 新增
         </a>
       </div>
     </div>
@@ -19,7 +19,11 @@
       <form class="form-inline">
         <div class="form-group">
           <div class="input-group">
-            <input type="text" class="form-control" name="electronicScale" id="exampleInputAmount" [(ngModel)]="qry_name" placeholder="电子秤序列号">
+            <div class="search-line">
+              <input type="text" class="form-control" name="sequence" [(ngModel)]="queryElecScale.no" placeholder="电子秤序列号">
+              <input type="text" class="form-control" name="market" [(ngModel)]="queryElecScale.market" placeholder="市场查询">
+              <input type="text" class="form-control" name="status" [(ngModel)]="queryElecScale.status" placeholder="状态查询">
+            </div>
           </div>
         </div>
         <button type="submit" class="btn btn-primary" (click)="query()">查询</button>
@@ -48,9 +52,16 @@
         <ngx-datatable-column name="最后更新者" prop="last_update_user"></ngx-datatable-column>
         <ngx-datatable-column name="市场" prop="market_id"></ngx-datatable-column>
         <ngx-datatable-column name="商户" prop="shop_id"></ngx-datatable-column>
+        <ngx-datatable-column name="状态" prop="status">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{value|dictConvert:"SHOP_STATUS"}}
+          </ng-template>
+        </ngx-datatable-column>
+
         <ngx-datatable-column name="编辑" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="market">
             <button class="btn btn-default" (click)="edit(value);">修改</button>
+            <button class="btn btn-default" (click)="delete(value);">删除</button>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>

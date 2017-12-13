@@ -56,7 +56,7 @@ export class ShopListComponent implements OnInit {
     }).subscribe(shop => {
       console.log('Rebirth Modal -> Get ok with result:', shop)
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 
@@ -70,7 +70,7 @@ export class ShopListComponent implements OnInit {
     }).subscribe(shop => {
       console.log('Rebirth Modal -> Get ok with result:', shop)
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 

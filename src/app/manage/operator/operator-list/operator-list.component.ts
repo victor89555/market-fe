@@ -56,7 +56,7 @@ export class OperatorListComponent implements OnInit {
     }).subscribe(operator => {
       console.log('Rebirth Modal -> Get ok with result:', operator)
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 
@@ -70,7 +70,7 @@ export class OperatorListComponent implements OnInit {
     }).subscribe(operator => {
       console.log('Rebirth Modal -> Get ok with result:', operator)
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 

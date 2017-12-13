@@ -19,7 +19,7 @@ export class ElectronicScaleListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  qry_name: string = ""
+  queryElecScale = {"market":"", "no":"","status":""}
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
@@ -31,7 +31,8 @@ export class ElectronicScaleListComponent implements OnInit {
   }
 
   query() {
-    this.electronicScaleService.query(this.qry_name, this.page.pageNo).subscribe(
+    this.electronicScaleService.query(this.queryElecScale.no, this.queryElecScale.market,
+      this.queryElecScale.status, this.page.pageNo).subscribe(
       (page) => {
         this.page = page
       }
@@ -44,7 +45,9 @@ export class ElectronicScaleListComponent implements OnInit {
   }
 
   reset() {
-    this.qry_name = ""
+    this.queryElecScale.no = ""
+    this.queryElecScale.market = ""
+    this.queryElecScale.status = ""
     this.query()
   }
 
@@ -52,11 +55,14 @@ export class ElectronicScaleListComponent implements OnInit {
     this.modalService.open<ElectronicScale>({
       component: ElectronicScaleFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
-      resolve: {}
+      resolve: {
+        "add":true
+      }
     }).subscribe(electronicScale => {
       console.log('Rebirth Modal -> Get ok with result:', electronicScale)
+      this.query()
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 
@@ -69,9 +75,16 @@ export class ElectronicScaleListComponent implements OnInit {
       }
     }).subscribe(electronicScale => {
       console.log('Rebirth Modal -> Get ok with result:', electronicScale)
+      this.query()
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 
+  delete(id:number){
+    this.electronicScaleService.delete(id).subscribe(() => {
+
+    })
+    this.query()
+  }
 }

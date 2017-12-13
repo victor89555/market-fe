@@ -4,7 +4,6 @@ import {RouterModule} from "@angular/router";
 import {ManageAppComponent} from "./manage-app.component";
 import {SharedModule} from "../shared/shared.module";
 import {ROUTER_CONFIG} from "./manage-app.routes";
-import {UserMockComponent} from "./user-mock/user-mock.component";
 import {MenuService} from "./menu.service";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {FormsModule} from "@angular/forms";
@@ -30,15 +29,16 @@ import {ElectronicScaleService} from "./electronicScale/shared/electronicScale.s
 import {ContractListComponent} from "./contract/contract-list/contract-list.component";
 import {ContractFormComponent} from "./contract/contract-form/contract-form.component";
 import {ContractService} from "./contract/shared/contract.service";
-import { MemberListComponent } from './member/member-list/member-list.component';
-import { MemberFormComponent } from './member/member-form/member-form.component';
+import {MemberListComponent} from './member/member-list/member-list.component';
+import {MemberFormComponent} from './member/member-form/member-form.component';
 import {MemberService} from "./member/shared/member.service";
-import { UserListComponent } from './user/user-list/user-list.component';
-import { UserFormComponent } from './user/user-form/user-form.component';
+import {UserListComponent} from './user/user-list/user-list.component';
+import {UserFormComponent} from './user/user-form/user-form.component';
 import {UserService} from "./user/shared/user.service";
-import { RoleListComponent } from './role/role-list/role-list.component';
-import { RoleFormComponent } from './role/role-form/role-form.component';
+import {RoleListComponent} from './role/role-list/role-list.component';
+import {RoleFormComponent} from './role/role-form/role-form.component';
 import {RoleService} from "./role/shared/role.service";
+import {ResourceService} from "./resource/shared/resource.service"
 
 @NgModule({
   imports: [
@@ -51,7 +51,6 @@ import {RoleService} from "./role/shared/role.service";
   exports: [],
   declarations: [
     ManageAppComponent,
-    UserMockComponent,
     OrderListComponent,
     OrderFormComponent,
     MarketFormComponent,
@@ -96,7 +95,8 @@ import {RoleService} from "./role/shared/role.service";
     ContractService,
     MemberService,
     UserService,
-    RoleService
+    RoleService,
+    ResourceService,
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

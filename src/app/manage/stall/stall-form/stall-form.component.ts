@@ -10,7 +10,7 @@ import {MarketService} from "../../market/shared/market.service"
   templateUrl: "./stall-form.component.html"
 })
 export class StallFormComponent implements Modal, OnInit {
-  context: { id: number };
+  context: { id: number, add: boolean };
   dismiss: EventEmitter<Stall>;
 
   stall: any = {}
@@ -22,27 +22,42 @@ export class StallFormComponent implements Modal, OnInit {
 
   ngOnInit(): void {
     console.log('ModalTestComponent init....');
-    this.marketService.getAll().subscribe(
+   /*this.marketService.getAll().subscribe(
       (markets) => {
         this.markets = markets
       }
-    )
+    )*/
+   if(!this.context.add){
+     this.getStall();
+   }
+  }
+  getStall(){
     this.stallService.get(this.context.id).subscribe(
       (stall) => {
         this.stall = stall
       }
     )
   }
-
   save() {
-    debugger
+    if(this.stall.marketId == null){ //无法选则市场ID时使用
+      this.stall.marketId = 5
+
+    }
     this.stallService.save(this.stall).subscribe(
       (stall) => {
         this.dismiss.emit(stall);
       }
     )
   }
-
+  update() {
+    this.stall.id = this.context.id;
+    console.log(this.stall);
+    this.stallService.update(this.context.id,this.stall).subscribe(
+      (stall) => {
+        this.dismiss.emit(this.stall);
+      }
+    )
+  }
   cancel() {
     this.dismiss.error(this.stall);
   }

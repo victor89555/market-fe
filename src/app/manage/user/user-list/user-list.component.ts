@@ -21,6 +21,7 @@ export class UserListComponent implements OnInit {
   page: Page<any> = new Page()
   qry_name: string = ""
   qry_code: string = ""
+
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private userService: UserService) {
@@ -54,9 +55,8 @@ export class UserListComponent implements OnInit {
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {}
     }).subscribe(user => {
-      console.log('Rebirth Modal -> Get ok with result:', user)
+      this.query()
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
     })
   }
 
@@ -67,10 +67,9 @@ export class UserListComponent implements OnInit {
       resolve: {
         id: id
       }
-    }).subscribe(user => {
-      console.log('Rebirth Modal -> Get ok with result:', user)
+    }).subscribe(() => {
+      this.query()
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
     })
   }
 

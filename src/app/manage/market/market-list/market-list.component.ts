@@ -30,7 +30,7 @@ export class MarketListComponent implements OnInit {
   }
 
   query() {
-    this.marketService.query(this.queryMarket.name, this.page.pageNo).subscribe(
+    this.marketService.query(this.queryMarket.name, this.queryMarket.address, this.queryMarket.state, this.page.pageNo).subscribe(
       (page) => {
         this.page = page
       }
@@ -44,10 +44,15 @@ export class MarketListComponent implements OnInit {
 
   reset() {
     this.queryMarket.name = ""
+    this.queryMarket.address = ""
+    this.queryMarket.state = ""
     this.query()
   }
   delete(id:number){
-    
+     this.marketService.delete(id).subscribe(() => {
+       debugger
+       this.query()
+     })
   }
   add() {
     this.modalService.open<Market>({
@@ -61,7 +66,7 @@ export class MarketListComponent implements OnInit {
       // 重新获取一次数据
       this.query()
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 
@@ -77,7 +82,7 @@ export class MarketListComponent implements OnInit {
       // 重新获取一次数据
       this.query()
     }, error => {
-      console.error('Rebirth Modal -> Get cancel with result:', error)
+
     })
   }
 

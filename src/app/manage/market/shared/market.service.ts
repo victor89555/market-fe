@@ -1,4 +1,4 @@
-import {Body, GET, Path, POST, Query, RebirthHttp, PUT} from "rebirth-http";
+import {Body, GET, Path, POST, Query, RebirthHttp, PUT, DELETE} from "rebirth-http";
 import {Observable} from "rxjs/Observable";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
@@ -13,8 +13,8 @@ export class MarketService extends RebirthHttp {
   }
 
   @GET("markets")
-  query(@Query("_filter_like_name") name = "", @Query("pageNo") pageNo = 1,
-        @Query("pageSize") pageSize = 10): Observable<Page<any>> {
+  query(@Query("_filter_like_name") name = "",@Query("_filter_like_addr") addr = "",@Query("_filter_eq_status-int") status = "",
+        @Query("pageNo") pageNo = 1, @Query("pageSize") pageSize = 10): Observable<Page<any>> {
     return null;
   }
 
@@ -35,6 +35,11 @@ export class MarketService extends RebirthHttp {
 
   @PUT("markets/:id")
   update( @Path("id") id: number, @Body market: Market): Observable<Market> {
+    return null;
+  }
+
+  @DELETE("markets/:id")
+  delete( @Path("id") id: number): Observable<any> {
     return null;
   }
 }

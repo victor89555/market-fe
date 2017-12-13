@@ -19,7 +19,16 @@
       <form class="form-inline">
         <div class="form-group">
           <div class="input-group">
-            <input type="text" class="form-control" id="exampleInputAmount" name="stall" [(ngModel)]="qry_name" placeholder="摊位名">
+            <!--<input type="text" class="form-control" id="exampleInputAmount" name="stall" [(ngModel)]="qry_name" placeholder="摊位名">-->
+            <div class="search-line">
+              <input type="text" class="form-control" name="stall" [(ngModel)]="queryStall.market" placeholder="市场查询">
+              <!--<input type="text" class="form-control" name="stall" [(ngModel)]="queryStall.shop" placeholder="商户查询">-->
+              <tg-dict-select dictName="FUNC_TYPE" [(ngModel)]="queryStall.func" name="func"></tg-dict-select>
+              <tg-dict-select dictName="ENABLE_STATUS" [(ngModel)]="queryStall.status" name="status"></tg-dict-select>
+              <!--<input type="text" class="form-control" name="stall" [(ngModel)]="queryStall.func" placeholder="功能分区查询">-->
+              <!--<input type="text" class="form-control" name="stall" [(ngModel)]="queryStall.status" placeholder="摊位状态查询">-->
+              <input type="text" class="form-control" name="stall" [(ngModel)]="queryStall.name" placeholder="摊位名称查询">
+            </div>
           </div>
         </div>
         <button type="submit" class="btn btn-primary" (click)="query()">查询</button>
@@ -60,6 +69,7 @@
         <ngx-datatable-column name="操作" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="stall">
             <button class="btn btn-default" (click)="edit(value);">修改</button>
+            <button class="btn btn-default" (click)="delete(value);">删除</button>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>

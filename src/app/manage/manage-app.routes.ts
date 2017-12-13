@@ -1,7 +1,5 @@
 import {Routes} from "@angular/router";
 import {ManageAppComponent} from "./manage-app.component";
-import {AuthLoginPermission} from "rebirth-permission";
-import {UserMockComponent} from "./user-mock/user-mock.component";
 import {OrderListComponent} from "./order/order-list/order-list.component";
 import {MarketListComponent} from "./market/market-list/market-list.component";
 import {StallListComponent} from "./stall/stall-list/stall-list.component";
@@ -14,12 +12,13 @@ import {OrderFormComponent} from "./order/order-form/order-form.component";
 import {MemberListComponent} from "./member/member-list/member-list.component";
 import {UserListComponent} from "./user/user-list/user-list.component";
 import {RoleListComponent} from "./role/role-list/role-list.component";
+import {AuthLoginPermission} from "rebirth-permission"
 
 export const ROUTER_CONFIG: Routes = [
   {
     path: 'manage',
     component: ManageAppComponent,
-    // canActivate: [AuthLoginPermission],
+    canActivate: [AuthLoginPermission],
     children: [
       // can use role AuthRolePermission
       {path: '', pathMatch: 'full', redirectTo: 'orders'},
@@ -30,8 +29,6 @@ export const ROUTER_CONFIG: Routes = [
       {path: 'shops', component: ShopListComponent},
       {path: 'electronicScales', component: ElectronicScaleListComponent},
       {path: 'contracts', component: ContractListComponent},
-      {path: 'user', component: UserMockComponent},
-      {path: 'document', component: UserMockComponent},
       {path: 'shopForm/:id', component: ShopFormComponent},
       {path: 'orderLines/:id', component: OrderFormComponent},
       {path: 'members', component: MemberListComponent},
