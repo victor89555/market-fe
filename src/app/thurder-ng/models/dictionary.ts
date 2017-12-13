@@ -44,5 +44,10 @@ export const dicts = {
   "MARKET_STATUS": {
      0: "未开业",
      1: "经营中"
+  },
+
+  "STALL_STATUS":{
+    0:"未被使用",
+    1:"已被使用"
   }
 }

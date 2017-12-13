@@ -5,6 +5,8 @@ import {StallService} from "../shared/stall.service";
 import {Stall} from "../shared/stall.model";
 import {MarketService} from "../../market/shared/market.service";
 import {Page} from "../../../thurder-ng/models/page.model";
+import {Operator} from "../../operator/shared/operator.model";
+import {Market} from "../../market/shared/market.model";
 
 @Component({
   selector: 'app-stall-list',
@@ -20,8 +22,9 @@ export class StallListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  queryStall = {"market":"", "shop":"", "func":"", "status":"", "name":""}
-
+  queryStall = {"market":null, "shop":"", "func":"", "status":"", "name":""}
+  markets:Market[] = []
+  marketName = ""
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private stallService: StallService,
@@ -30,6 +33,8 @@ export class StallListComponent implements OnInit {
 
   ngOnInit(): void {
     this.query()
+    this.getAllMarkets()
+
   }
   query() {
     this.stallService.query(this.queryStall.market, this.queryStall.shop,
@@ -39,10 +44,24 @@ export class StallListComponent implements OnInit {
       }
     )
   }
+  getAllMarkets(){
+    this.marketService.getAll().subscribe(
+      (markets)=>{
+        this.markets = markets;
+      }
+    )
+  }
+  onMarketNameChange =(market: Market) =>{ // 选中市场改变时调用
+    this.queryStall.market = market.id
+  }
+  marketNameFormatter = (market: Market) => { // 市场名称输入显示数据
+    return market.name
+  }
 
   reset() {
     this.queryStall.status = ""
-    this.queryStall.market = ""
+    this.queryStall.market = null
+    this.marketName = ""
     this.queryStall.shop = ""
     this.queryStall.func = ""
     this.queryStall.name = ""

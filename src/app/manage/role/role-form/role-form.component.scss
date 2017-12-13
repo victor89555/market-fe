@@ -1,3 +1,8 @@
-:host/deep/.node-item-content[_ngcontent-c10] .node-icon {
+:host /deep/ .node-item-content .node-icon {
   color: cadetblue;
+}
+:host /deep/ input[type="checkbox"], input[type="radio"] {
+  height: 18px;
+  width: 18px;
+  margin-top: 2px !important;
 }

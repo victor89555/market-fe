@@ -19,14 +19,16 @@
       <form class="form-inline">
         <div class="form-group">
           <div class="input-group">
-            <!--<input type="text" class="form-control" id="exampleInputAmount" name="stall" [(ngModel)]="qry_name" placeholder="摊位名">-->
             <div class="search-line">
-              <input type="text" class="form-control" name="stall" [(ngModel)]="queryStall.market" placeholder="市场查询">
-              <!--<input type="text" class="form-control" name="stall" [(ngModel)]="queryStall.shop" placeholder="商户查询">-->
+
+              <input type="text" class="form-control"  [minLength]="0"
+                     reAutoComplete  [dataSource]="markets" placeholder="市场查询"
+                     [formatter]="marketNameFormatter" [(ngModel)]="marketName" name="market"
+                     (selectValueChange)="onMarketNameChange($event)"
+                     />
+
               <tg-dict-select dictName="FUNC_TYPE" [(ngModel)]="queryStall.func" name="func"></tg-dict-select>
               <tg-dict-select dictName="ENABLE_STATUS" [(ngModel)]="queryStall.status" name="status"></tg-dict-select>
-              <!--<input type="text" class="form-control" name="stall" [(ngModel)]="queryStall.func" placeholder="功能分区查询">-->
-              <!--<input type="text" class="form-control" name="stall" [(ngModel)]="queryStall.status" placeholder="摊位状态查询">-->
               <input type="text" class="form-control" name="stall" [(ngModel)]="queryStall.name" placeholder="摊位名称查询">
             </div>
           </div>
@@ -54,7 +56,7 @@
       >
         <ngx-datatable-column name="摊位名" prop="name"></ngx-datatable-column>
         <ngx-datatable-column name="摊位面积" prop="area"></ngx-datatable-column>
-        <ngx-datatable-column name="所属市场" prop="market_id"></ngx-datatable-column>
+        <ngx-datatable-column name="所属市场" prop="market_name"></ngx-datatable-column>
         <ngx-datatable-column name="功能区域" prop="func_type">
           <ng-template ngx-datatable-cell-template let-value="value">
             {{value|dictConvert:"FUNC_TYPE"}}
@@ -62,7 +64,7 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="状态" prop="status">
           <ng-template ngx-datatable-cell-template let-value="value">
-            {{value|dictConvert:"ENABLE_STATUS"}}
+            {{value|dictConvert:"STALL_STATUS"}}
           </ng-template>
         </ngx-datatable-column>
 

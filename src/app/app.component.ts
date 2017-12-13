@@ -69,6 +69,9 @@ export class AppComponent {
         if ([401, 403].indexOf(res.status) !== -1) {
           this.router.navigateByUrl('/login');
         }
+        if([400].indexOf(res.status)!==-1){
+          console.log(res.error.msg)
+        }
       });
   }
 

@@ -1,5 +1,5 @@
 import {BrowserModule} from "@angular/platform-browser";
-import {NgModule} from "@angular/core";
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
 import {RouterModule} from "@angular/router";
 
 import {AppComponent} from "./app.component";
@@ -22,6 +22,7 @@ import {ManageAppModule} from "./manage/manage-app.module"
     RouterModule.forRoot(ROUTER_CONFIG)
   ],
   providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -14,7 +14,7 @@ export class StallService extends RebirthHttp {
   }
 
   @GET("stalls")
-  query(@Query("_filter_eq_market_id-int") market = "",@Query("_filter_eq_shop_id-int") shop = "",@Query("_filter_eq_func_type-int") func = "",
+  query(@Query("_filter_eq_market_id-int") market:number,@Query("_filter_eq_shop_id-int") shop = "",@Query("_filter_eq_func_type-int") func = "",
         @Query("_filter_eq_status-int") status = "", @Query("_filter_like_name") name = "", @Query("pageNo") pageNo = 1,
         @Query("pageSize") pageSize = 10): Observable<Page<any>> {
     return null;

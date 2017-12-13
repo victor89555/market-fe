@@ -18,8 +18,8 @@ export class MarketService extends RebirthHttp {
     return null;
   }
 
-  @GET("markets")
-  getAll(@Query("name") name = ""): Observable<Market[]> {
+  @GET("markets/all")
+  getAll(@Query("status") name = ""): Observable<Market[]> {
     return null;
   }
 

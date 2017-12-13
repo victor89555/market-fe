@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
+import {NgModule} from "@angular/core";
 import {RouterModule} from "@angular/router";
 
 import {ManageAppComponent} from "./manage-app.component";
@@ -98,8 +98,7 @@ import {ResourceService} from "./resource/shared/resource.service"
     RoleService,
     ResourceService,
 
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  ]
 })
 export class ManageAppModule {
 

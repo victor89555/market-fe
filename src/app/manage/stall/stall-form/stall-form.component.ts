@@ -16,33 +16,61 @@ export class StallFormComponent implements Modal, OnInit {
   stall: any = {}
   markets: Market[]
   test: any
+  marketId:number=null
+  marketName:string
+  closed = false
+  close() {
+    console.log('close');
+    this.closed = true;
+  }
 
   constructor(private stallService: StallService, private marketService: MarketService) {
   }
 
   ngOnInit(): void {
     console.log('ModalTestComponent init....');
-   /*this.marketService.getAll().subscribe(
-      (markets) => {
-        this.markets = markets
-      }
-    )*/
    if(!this.context.add){
-     this.getStall();
+     this.getStall()
    }
+   this.getAllMarkets()
   }
+  getAllMarkets(){
+    this.marketService.getAll().subscribe(
+      (markets)=>{
+        this.markets = markets;
+      },
+      (err)=>{
+        debugger
+      }
+    )
+  }
+  // 第一次打开页面时显示的市场名称
+  getMarket(marketId){
+    this.marketService.get(marketId).subscribe(
+      (market)=>{
+        this.marketName = market.name;
+      }
+    )
+  }
+  onMarketNameChange =(market: Market) =>{ // 选中市场改变时调用
+    console.log(market);
+    this.marketId = market.id
+    console.log(this.marketId)
+  }
+  marketNameFormatter = (market: Market) => { // 市场名称输入显示数据
+    return market.name
+  }
+
   getStall(){
     this.stallService.get(this.context.id).subscribe(
       (stall) => {
         this.stall = stall
+        this.marketId = stall.marketId;
+        this.getMarket(this.marketId)
       }
     )
   }
   save() {
-    if(this.stall.marketId == null){ //无法选则市场ID时使用
-      this.stall.marketId = 5
-
-    }
     this.stallService.save(this.stall).subscribe(
       (stall) => {
         this.dismiss.emit(stall);
@@ -51,6 +79,7 @@ export class StallFormComponent implements Modal, OnInit {
   }
   update() {
     this.stall.id = this.context.id;
+    this.stall.marketId = this.marketId
     console.log(this.stall);
     this.stallService.update(this.context.id,this.stall).subscribe(
       (stall) => {

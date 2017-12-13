@@ -19,7 +19,7 @@ export class OrderListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  qry_name: string = ""
+  queryOrder ={"shopId":"","marketId":"","trancsitionNo":""}
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
@@ -31,7 +31,8 @@ export class OrderListComponent implements OnInit {
   }
 
   query() {
-    this.orderService.query(this.qry_name, this.page.pageNo).subscribe(
+    this.orderService.query(this.queryOrder.marketId, this.queryOrder.shopId,
+      this.queryOrder.trancsitionNo,this.page.pageNo).subscribe(
       (page) => {
         this.page = page
       }
@@ -39,7 +40,9 @@ export class OrderListComponent implements OnInit {
   }
 
   reset() {
-    this.qry_name="";
+    this.queryOrder.marketId="";
+    this.queryOrder.shopId="";
+    this.queryOrder.trancsitionNo="";
     this.query()
   }
 
