@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {WindowRef} from 'rebirth-ng';
-import {MenuConfig} from './menu-config.model';
+import {MenuConfig, menuItem} from './menu-config.model';
 import {Router} from '@angular/router';
 
 @Component({
@@ -15,7 +15,6 @@ import {Router} from '@angular/router';
 })
 export class MenuBarComponent implements OnInit, OnDestroy {
 
-
   static MAX_MIDDLE_SCREEN = 768;
   static MIN_MIDDLE_SCREEN = 576;
   @Input() menuConfig: MenuConfig;
@@ -27,9 +26,86 @@ export class MenuBarComponent implements OnInit, OnDestroy {
   menuActive:boolean[]=new Array(15);
   arrowState:string[] =['arrow open','arrow closed'];
 
+  menuList : menuItem[] = [
+    {
+      title: "市场管理",
+      icon: "home",
+      link:"",
+      active: true,
+      isOpen: true,
+      children: [
+        {title: "基础信息",link:"/manage/markets",active: true,icon: "user"}
+      ]
+    },
+    {
+      title: "商户管理",
+      icon: "home",
+      link:"",
+      active: false,
+      isOpen: true,
+      children: [
+        {title: "商户信息",link:"/manage/shops",active: false,icon: "user"},
+        {title: "合同管理",link:"/manage/contracts",active: false,icon: "user"},
+        {title: "电子秤管理",link:"/manage/electronicScales",active: false,icon: "user"},
+        {title: "商户台账查询",link:"/manage/shops",active: false,icon: "user"},
+        {title: "检测结果查询",link:"JavaScript:;",active: false,icon: "user"}
+      ]
+    },
+    {
+      title: "运营管理",
+      icon: "home",
+      link:"",
+      active: false,
+      isOpen: true,
+      children: [
+        {title: "交易信息查询",link:"/manage/orders",active: false,icon: "user"},
+        {title: "检测信息溯源",link:"JavaScript:;",active: false,icon: "user"},
+        {title: "交易情况统计",link:"JavaScript:;",active: false,icon: "user"}
+      ]
+    },
+    {
+      title: "系统管理",
+      icon: "home",
+      link:"",
+      active: false,
+      isOpen: true,
+      children: [
+        {title: "用户管理",link:"/manage/users",active: false,icon: "user"},
+        {title: "角色管理",link:"/manage/roles",active: false,icon: "user"},
+        {title: "资源管理",link:"/manage/resources",active: false,icon: "user"}
+      ]
+    }
+  ]
+
   constructor(private router: Router, private renderer: Renderer2, private windowRef: WindowRef) {
   }
 
+  onSelect(i) {
+    var n = null
+    for(let x in this.menuList){
+      for(let y in this.menuList[x].children){
+        if(this.menuList[x].children[y]===i){
+          n = x
+          if(!i.active){
+            i.active = true
+            this.menuList[x].active = true
+          }
+        }else{
+          if(x != n){
+            this.menuList[x].active = false
+          }
+          this.menuList[x].children[y].active = false
+        }
+      }
+    }
+  }
+  onToggleClick(i){
+    for(var key in this.menuList){
+      if(this.menuList[key] === i){
+        i.isOpen = i.isOpen ? false : true
+      }
+    }
+  }
   getClassNames() {
     const textMenuClass = this.isTextMenuBarOpen ? 'open-text-menu' : 'hide-text-menu';
     const iconMenuClass = this.isIconMenuBarOpen ? 'open-icon-menu' : 'hide-icon-menu';
@@ -90,7 +166,7 @@ export class MenuBarComponent implements OnInit, OnDestroy {
        this.arrowState[index]="arrow open"
      }
   }
-  // 选中功能高亮
+  选中功能高亮
   menuChoose(chosed) {
     for(let i=0;i<this.menuActive.length;i++){
       if(i==chosed){
