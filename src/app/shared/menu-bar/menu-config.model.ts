@@ -6,6 +6,15 @@ export interface MenuItem {
   children?: MenuItem[];
 }
 
+export interface menuItem {
+  title: string;
+  link?: string;
+  icon: string;
+  active: boolean;
+  children?: menuItem[];
+  isOpen?: boolean;
+}
+
 export interface MenuConfig {
   menus: MenuItem[];
 }

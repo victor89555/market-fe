@@ -2,98 +2,18 @@
 <div class="page-sidebar-wrapper">
   <div class="page-sidebar">
     <ul class="page-sidebar-menu menu-top-border">
-      <li class="nav-item start open" [ngClass]="{'active':menuActive[8]}">
-        <a href="javascript:;" class="nav-link nav-toggle nav-below" (click)="isHidden(0)">
-          <i class="glyphicon glyphicon-home"></i>
-          <span class="title">信息管理</span>
+      <li *ngFor="let menuItem of menuList" class="nav-item" [ngClass]="{'active': menuItem.active}">
+        <a href="javascript:;" class="nav-link" (click)="onToggleClick(menuItem)">
+          <i class="svg-icon icon-{{menuItem.icon}}"></i>
+          <span class="title"> {{menuItem.title}}</span>
           <span class="selected"></span>
-          <span [class]=arrowState[0]></span>
+          <span *ngIf="menuItem.children" class="arrow"  [ngClass]="{'open': menuItem.isOpen}"></span>
         </a>
-        <ul class="sub-menu" [ngClass]="{'barShow-toggle': hide[0]}">
-          <li class="nav-item start open" [ngClass]="{'active':menuActive[0]}" (click)="menuChoose(0)">
-            <a routerLink="/manage/orders" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[0]}">
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="title">订单管理</span>
-              <span class="selected"></span>
-            </a>
-          </li>
-          <li class="nav-item start" [ngClass]="{'active':menuActive[1]}" (click)="menuChoose(1)">
-            <a routerLink="/manage/markets" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[1]}" >
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="title">市场管理</span>
-              <span class="selected"></span>
-            </a>
-          </li>
-          <li class="nav-item start" [ngClass]="{'active':menuActive[2]}" (click)="menuChoose(2)">
-            <a routerLink="/manage/stalls" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[2]}">
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="title">摊位管理</span>
-              <span class="selected"></span>
-            </a>
-          </li>
-          <li class="nav-item start" [ngClass]="{'active':menuActive[3]}" (click)="menuChoose(3)">
-            <a routerLink="/manage/electronicScales" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[3]}">
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="title">电子称管理</span>
-              <span class="selected"></span>
-            </a>
-          </li>
-          <li class="nav-item start" [ngClass]="{'active':menuActive[4]}" (click)="menuChoose(4)">
-            <a routerLink="/manage/operators" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[4]}">
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="title">经营者管理</span>
-              <span class="selected"></span>
-            </a>
-          </li>
-          <li class="nav-item start" [ngClass]="{'active':menuActive[5]}" (click)="menuChoose(5)">
-            <a routerLink="/manage/shops" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[5]}">
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="title">商户管理</span>
-              <span class="selected"></span>
-            </a>
-          </li>
-          <li class="nav-item start" [ngClass]="{'active':menuActive[6]}" (click)="menuChoose(6)">
-            <a routerLink="/manage/contracts" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[6]}">
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="title">合同管理</span>
-              <span class="selected"></span>
-            </a>
-          </li>
-          <li class="nav-item start" [ngClass]="{'active':menuActive[7]}" (click)="menuChoose(7)">
-            <a routerLink="/manage/members" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[7]}">
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="title">会员管理</span>
-              <span class="selected"></span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item start open" [ngClass]="{'active':menuActive[10]}">
-        <a href="javascript:;" class="nav-link nav-toggle nav-below" (click)="isHidden(1)">
-          <i class="glyphicon glyphicon-home"></i>
-          <span class="title">系统管理</span>
-          <span class="selected"></span>
-          <span [class]=arrowState[1]></span>
-        </a>
-        <ul class="sub-menu" [ngClass]="{'barShow-toggle': hide[1]}">
-          <li class="nav-item start" [ngClass]="{'active':menuActive[11]}" (click)="menuChoose(11)">
-            <a routerLink="/manage/users" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[11]}">
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="title">用户管理</span>
-              <span class="selected"></span>
-            </a>
-          </li>
-          <li class="nav-item start" [ngClass]="{'active':menuActive[12]}" (click)="menuChoose(12)">
-            <a routerLink="/manage/roles" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[12]}">
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="title">角色管理</span>
-              <span class="selected"></span>
-            </a>
-          </li>
-          <li class="nav-item start open" [ngClass]="{'active':menuActive[13]}" (click)="menuChoose(13)">
-            <a routerLink="/manage/resources" class="nav-link" [ngClass]="{'chosed-left-border':menuActive[13]}">
-              <i class="glyphicon glyphicon-user"></i>
-              <span class="title">资源管理</span>
+        <ul *ngIf="menuItem.children" class="sub-menu" [ngClass]="{'hide': !menuItem.isOpen}">
+          <li *ngFor="let subItem of menuItem.children" class="nav-item" [ngClass]="{'active': subItem.active}" (click)="onSelect(subItem)">
+            <a routerLink="{{subItem.link}}" class="nav-link">
+              <i class="svg-icon icon-{{subItem.icon}}"></i>
+              <span class="title"> {{subItem.title}}</span>
               <span class="selected"></span>
             </a>
           </li>
