@@ -149,12 +149,167 @@
   font-style: normal;
   font-weight: bolder;
   position: relative;
-  top: 3px;
+  top: 4px;
 }
 
 .icon-home {
-  background-image: url("../../../assets/svg/icon-svg/home-b.svg");
+  background-image: url("../../../assets/svg/icon-svg/home1-h.svg");
 }
 .icon-set {
-  background-image: url("../../../assets/svg/icon-svg/home-b.svg");
+  background-image: url("../../../assets/svg/icon-svg/set-h.svg");
+}
+.icon-activity {
+  background-image: url("../../../assets/svg/icon-svg/activity-h.svg");
+}
+.icon-add-file {
+  background-image: url("../../../assets/svg/icon-svg/add-file-h.svg");
+}
+.icon-all {
+  background-image: url("../../../assets/svg/icon-svg/all-h.svg");
+}
+.icon-box {
+  background-image: url("../../../assets/svg/icon-svg/box-h.svg");
+}
+.icon-book {
+  background-image: url("../../../assets/svg/icon-svg/book-h.svg");
+}
+.icon-more {
+  background-image: url("../../../assets/svg/icon-svg/more-h.svg");
+}
+.icon-open {
+  background-image: url("../../../assets/svg/icon-svg/open-h.svg");
+}
+.icon-plot {
+  background-image: url("../../../assets/svg/icon-svg/plot-h.svg");
+}
+.icon-list {
+  background-image: url("../../../assets/svg/icon-svg/list-h.svg");
+}
+.icon-user {
+  background-image: url("../../../assets/svg/icon-svg/user-h.svg");
+}
+.icon-chart {
+  background-image: url("../../../assets/svg/icon-svg/chart-h.svg");
+}
+.icon-order {
+  background-image: url("../../../assets/svg/icon-svg/order-h.svg");
+}
+.icon-chem {
+  background-image: url("../../../assets/svg/icon-svg/chem-h.svg");
+}
+.icon-balance {
+  background-image: url("../../../assets/svg/icon-svg/balance-h.svg");
+}
+.icon-text {
+  background-image: url("../../../assets/svg/icon-svg/text-h.svg");
+}
+.icon-pages {
+  background-image: url("../../../assets/svg/icon-svg/pages-h.svg");
+}
+.icon-profile {
+  background-image: url("../../../assets/svg/icon-svg/profile-h.svg");
+}
+.icon-user1 {
+  background-image: url("../../../assets/svg/icon-svg/user1-h.svg");
+}
+
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-home,
+.sub-menu>li>a:hover>.icon-home,
+.active>.nav-link>.icon-home {
+  background-image: url("../../../assets/svg/icon-svg/home1-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-set,
+.sub-menu>li>a:hover>.icon-set,
+.active>.nav-link>.icon-set {
+  background-image: url("../../../assets/svg/icon-svg/set-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-activity,
+.sub-menu>li>a:hover>.icon-activity,
+.active>.nav-link>.icon-activity {
+  background-image: url("../../../assets/svg/icon-svg/activity-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-add-file,
+.sub-menu>li>a:hover>.icon-add-file,
+.active>.nav-link>.icon-add-file {
+  background-image: url("../../../assets/svg/icon-svg/add-file-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-all,
+.page-sidebar>.page-sidebar-menu>.sub-menu>li>a:hover>.icon-all,
+.active>.nav-link>.icon-all {
+  background-image: url("../../../assets/svg/icon-svg/all-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-box,
+.sub-menu>li>a:hover>.icon-box,
+.active>.nav-link>.icon-box {
+  background-image: url("../../../assets/svg/icon-svg/box-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-book,
+.sub-menu>li>a:hover>.icon-book,
+.active>.nav-link>.icon-book {
+  background-image: url("../../../assets/svg/icon-svg/book-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-more,
+.sub-menu>li>a:hover>.icon-more,
+.active>.nav-link>.icon-more {
+  background-image: url("../../../assets/svg/icon-svg/more-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-open,
+.sub-menu>li>a:hover>.icon-open,
+.active>.nav-link>.icon-open {
+  background-image: url("../../../assets/svg/icon-svg/open-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-plot,
+.sub-menu>li>a:hover>.icon-plot,
+.active>.nav-link>.icon-plot {
+  background-image: url("../../../assets/svg/icon-svg/plot-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-list,
+.sub-menu>li>a:hover>.icon-list,
+.active>.nav-link>.icon-list {
+  background-image: url("../../../assets/svg/icon-svg/list-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-user,
+.sub-menu>li>a:hover>.icon-user,
+.active>.nav-link>.icon-user {
+  background-image: url("../../../assets/svg/icon-svg/user-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-chart,
+.sub-menu>li>a:hover>.icon-chart,
+.active>.nav-link>.icon-chart {
+  background-image: url("../../../assets/svg/icon-svg/chart-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-order,
+.sub-menu>li>a:hover>.icon-order,
+.active>.nav-link>.icon-order {
+  background-image: url("../../../assets/svg/icon-svg/order-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-chem,
+.sub-menu>li>a:hover>.icon-chem,
+.active>.nav-link>.icon-chem {
+  background-image: url("../../../assets/svg/icon-svg/chem-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-balance,
+.sub-menu>li>a:hover>.icon-balance,
+.active>.nav-link>.icon-balance {
+  background-image: url("../../../assets/svg/icon-svg/balance-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-text,
+.sub-menu>li>a:hover>.icon-text,
+.active>.nav-link>.icon-text {
+  background-image: url("../../../assets/svg/icon-svg/text-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-pages,
+.sub-menu>li>a:hover>.icon-pages,
+.active>.nav-link>.icon-pages {
+  background-image: url("../../../assets/svg/icon-svg/pages-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-profile,
+.sub-menu>li>a:hover>.icon-profile,
+.active>.nav-link>.icon-profile {
+  background-image: url("../../../assets/svg/icon-svg/profile-b.svg");
+}
+.page-sidebar>.page-sidebar-menu>li>a:hover>.icon-user1,
+.sub-menu>li>a:hover>.icon-user1,
+.active>.nav-link>.icon-user1 {
+  background-image: url("../../../assets/svg/icon-svg/user1-b.svg");
 }

@@ -13,7 +13,7 @@ import {Router} from '@angular/router';
   },
   exportAs: 'menuBar'
 })
-export class MenuBarComponent implements OnInit, OnDestroy {
+export class MenuBarComponent implements OnInit {
 
   static MAX_MIDDLE_SCREEN = 768;
   static MIN_MIDDLE_SCREEN = 576;
@@ -34,45 +34,45 @@ export class MenuBarComponent implements OnInit, OnDestroy {
       active: true,
       isOpen: true,
       children: [
-        {title: "基础信息",link:"/manage/markets",active: true,icon: "user"}
+        {title: "基础信息",link:"/manage/markets",active: true,icon: "more"}
       ]
     },
     {
       title: "商户管理",
-      icon: "home",
+      icon: "all",
       link:"",
       active: false,
       isOpen: true,
       children: [
-        {title: "商户信息",link:"/manage/shops",active: false,icon: "user"},
-        {title: "合同管理",link:"/manage/contracts",active: false,icon: "user"},
-        {title: "电子秤管理",link:"/manage/electronicScales",active: false,icon: "user"},
-        {title: "商户台账查询",link:"/manage/shops",active: false,icon: "user"},
-        {title: "检测结果查询",link:"JavaScript:;",active: false,icon: "user"}
+        {title: "商户信息",link:"/manage/shops",active: false,icon: "user1"},
+        {title: "合同管理",link:"/manage/contracts",active: false,icon: "order"},
+        {title: "电子秤管理",link:"/manage/electronicScales",active: false,icon: "balance"},
+        // {title: "商户台账查询",link:"/manage/orders",active: false,icon: "book"},
+        {title: "检测结果查询",link:"JavaScript:;",active: false,icon: "chem"}
       ]
     },
     {
       title: "运营管理",
-      icon: "home",
+      icon: "open",
       link:"",
       active: false,
       isOpen: true,
       children: [
-        {title: "交易信息查询",link:"/manage/orders",active: false,icon: "user"},
-        {title: "检测信息溯源",link:"JavaScript:;",active: false,icon: "user"},
-        {title: "交易情况统计",link:"JavaScript:;",active: false,icon: "user"}
+        {title: "交易信息查询",link:"/manage/orders",active: false,icon: "pages"},
+        {title: "检测信息溯源",link:"JavaScript:;",active: false,icon: "text"},
+        {title: "交易情况统计",link:"JavaScript:;",active: false,icon: "plot"}
       ]
     },
     {
       title: "系统管理",
-      icon: "home",
+      icon: "set",
       link:"",
       active: false,
       isOpen: true,
       children: [
-        {title: "用户管理",link:"/manage/users",active: false,icon: "user"},
-        {title: "角色管理",link:"/manage/roles",active: false,icon: "user"},
-        {title: "资源管理",link:"/manage/resources",active: false,icon: "user"}
+        {title: "用户管理",link:"/manage/users",active: false,icon: "user1"},
+        {title: "角色管理",link:"/manage/roles",active: false,icon: "profile"},
+        {title: "资源管理",link:"/manage/resources",active: false,icon: "box"}
       ]
     }
   ]
@@ -80,6 +80,7 @@ export class MenuBarComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private renderer: Renderer2, private windowRef: WindowRef) {
   }
 
+  //选中menubar
   onSelect(i) {
     var n = null
     for(let x in this.menuList){
@@ -99,6 +100,8 @@ export class MenuBarComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  //开关menubar一级菜单
   onToggleClick(i){
     for(var key in this.menuList){
       if(this.menuList[key] === i){
@@ -112,68 +115,68 @@ export class MenuBarComponent implements OnInit, OnDestroy {
     return `${textMenuClass} ${iconMenuClass}`;
   }
 
-  updateMenuBarStatus() {
-    this.isTextMenuBarOpen = this.windowRef.innerWidth >= MenuBarComponent.MAX_MIDDLE_SCREEN;
-    this.isIconMenuBarOpen = this.windowRef.innerWidth >= MenuBarComponent.MIN_MIDDLE_SCREEN;
-  }
+  // updateMenuBarStatus() {
+  //   this.isTextMenuBarOpen = this.windowRef.innerWidth >= MenuBarComponent.MAX_MIDDLE_SCREEN;
+  //   this.isIconMenuBarOpen = this.windowRef.innerWidth >= MenuBarComponent.MIN_MIDDLE_SCREEN;
+  // }
 
   ngOnInit(): void {
-    this.updateMenuBarStatus();
-    this.windowResize
-      .debounceTime(200)
-      .distinctUntilChanged()
-      .subscribe(() => this.updateMenuBarStatus());
-
-    this.listens.push(this.renderer.listen('window', 'resize',
-      ($event) => this.windowResize.emit($event)));
-    this.menuActive[0]=true;
+    // this.updateMenuBarStatus();
+    // this.windowResize
+    //   .debounceTime(200)
+    //   .distinctUntilChanged()
+    //   .subscribe(() => this.updateMenuBarStatus());
+    //
+    // this.listens.push(this.renderer.listen('window', 'resize',
+    //   ($event) => this.windowResize.emit($event)));
+    // this.menuActive[0]=true;
   }
 
-  shouldShowUpArrow(path): boolean {
-    return this.router.url.indexOf(path) !== -1;
-  }
+  // shouldShowUpArrow(path): boolean {
+  //   return this.router.url.indexOf(path) !== -1;
+  // }
 
-  toggle() {
-    this.isTextMenuBarOpen = !this.isTextMenuBarOpen;
-    if (this.windowRef.innerWidth >= MenuBarComponent.MIN_MIDDLE_SCREEN) {
-      this.isIconMenuBarOpen = true;
-    } else {
-      this.isIconMenuBarOpen = this.isTextMenuBarOpen;
-    }
-  }
+  // toggle() {
+  //   this.isTextMenuBarOpen = !this.isTextMenuBarOpen;
+  //   if (this.windowRef.innerWidth >= MenuBarComponent.MIN_MIDDLE_SCREEN) {
+  //     this.isIconMenuBarOpen = true;
+  //   } else {
+  //     this.isIconMenuBarOpen = this.isTextMenuBarOpen;
+  //   }
+  // }
 
-  showTextMenuBar(event) {
-    event.preventDefault();
-    this.isTextMenuBarOpen = true;
-  }
+  // showTextMenuBar(event) {
+  //   event.preventDefault();
+  //   this.isTextMenuBarOpen = true;
+  // }
 
-  ngOnDestroy(): void {
-    this.listens.forEach(listen => listen());
-  }
-  // 功能列表的显隐
-  isHidden(index:number) {
-     this.hide[index]=!this.hide[index];
-     switch(index){
-       case 0:
-         this.menuChoose(8);
-         break;
-       case 1:
-         this.menuChoose(10);
-     }
-     if(this.arrowState[index]=="arrow open"){
-       this.arrowState[index]="arrow closed"
-     }else{
-       this.arrowState[index]="arrow open"
-     }
-  }
-  选中功能高亮
-  menuChoose(chosed) {
-    for(let i=0;i<this.menuActive.length;i++){
-      if(i==chosed){
-        this.menuActive[i]=true;
-      }else {
-        this.menuActive[i]=false;
-      }
-    }
-  }
+  // ngOnDestroy(): void {
+  //   this.listens.forEach(listen => listen());
+  // }
+  // // 功能列表的显隐
+  // isHidden(index:number) {
+  //    this.hide[index]=!this.hide[index];
+  //    switch(index){
+  //      case 0:
+  //        this.menuChoose(8);
+  //        break;
+  //      case 1:
+  //        this.menuChoose(10);
+  //    }
+  //    if(this.arrowState[index]=="arrow open"){
+  //      this.arrowState[index]="arrow closed"
+  //    }else{
+  //      this.arrowState[index]="arrow open"
+  //    }
+  // }
+  // // 选中功能高亮
+  // menuChoose(chosed) {
+  //   for(let i=0;i<this.menuActive.length;i++){
+  //     if(i==chosed){
+  //       this.menuActive[i]=true;
+  //     }else {
+  //       this.menuActive[i]=false;
+  //     }
+  //   }
+  // }
 }

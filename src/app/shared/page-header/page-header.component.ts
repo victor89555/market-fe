@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthorizationService} from "rebirth-permission"
 import {CurrentUser} from "../model/current-user.model";
+import {Router} from "@angular/router";
 import {rootRoute} from "@angular/router/src/router_module";
 
 @Component({
@@ -15,7 +16,10 @@ export class PageHeaderComponent implements OnInit{
   userSet = {
     open: false
   }
-  constructor(private authorizationService: AuthorizationService) { }
+  constructor(
+    private authorizationService: AuthorizationService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.getUser()
@@ -27,6 +31,8 @@ export class PageHeaderComponent implements OnInit{
 
   logOut(){
     this.authorizationService.setCurrentUser(null)
+    this.userSet.open = false;
+    this.router.navigate(['/']);
   }
 
   onUserClick(){
