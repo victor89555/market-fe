@@ -1,7 +1,7 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
-import {Modal} from "rebirth-ng";
-import {Role} from "../shared/role.model";
-import {RoleService} from "../shared/role.service";
+import {Component, EventEmitter, OnInit, ViewChild} from '@angular/core'
+import {Modal, TreeViewComponent} from "rebirth-ng"
+import {Role} from "../shared/role.model"
+import {RoleService} from "../shared/role.service"
 import {ResourceService} from "../../resource/shared/resource.service"
 
 @Component({
@@ -10,63 +10,77 @@ import {ResourceService} from "../../resource/shared/resource.service"
   styleUrls: ['./role-form.component.scss']
 })
 export class RoleFormComponent implements OnInit, Modal {
-  context: { id: number, add: boolean };
-  dismiss: EventEmitter<Role>;
-  role: Role = new Role();
-  resourceTreeData: any[] = [];          // 所有资源
-  checkedResources: number[] = [];      //  选中的资源
+
+  @ViewChild("checkedTreeView")
+  treeViewComponent: TreeViewComponent
+
+  context: { id: number, add: boolean }
+  dismiss: EventEmitter<Role>
+  role: Role = new Role()
+  resourceTreeData: any[] = []          // 所有资源
 
   constructor(private roleService: RoleService, private resourceService: ResourceService) {
   }
 
   ngOnInit() {
-    console.log('ModalTestComponent init....');
-    if (!this.context.add) {
-      this.getRole();
-    }
-    this.getResource();
+    console.log('ModalTestComponent init....')
+    this.getResourceTree()
   }
 
   getRole() {
-    this.roleService.get(this.context.id).subscribe(
+    let roleOb = this.roleService.get(this.context.id)
+    roleOb.subscribe(
       (role) => {
-        this.role = role;
+        this.role = role
       }
     )
+    return roleOb
   }
 
-  getResource() {
-    this.resourceService.getTree().subscribe(
-      (resourceIds) => {
-        this.resourceTreeData = resourceIds;
+  getResourceTree() {
+    let treeDataOb = this.resourceService.getTreeData()
+    treeDataOb.subscribe(
+      (treeData) => {
+        if (!this.context.add) {
+          this.getRole().subscribe(() => {
+            this.setChecked(treeData, this.role.resourceIds)
+            debugger
+            this.resourceTreeData = treeData
+          })
+        } else {
+          this.resourceTreeData = treeData
+        }
       }
     )
+    return treeDataOb
+  }
+
+  private setChecked(treeData, resourceIds) {
+    treeData.forEach(node => {
+      node["checked"] = resourceIds.includes(node.id)
+      let nodeChildren = node["children"]
+      if (nodeChildren) {
+        this.setChecked(nodeChildren, resourceIds)
+      }
+    })
   }
 
   save() {
+    let checkedNodes = this.treeViewComponent.getCheckedNodes()
+    const checkedResourceIds = checkedNodes.map(checkedNode => {
+      let node = checkedNode["node"]
+      return node.id
+    })
+    this.role.resourceIds = checkedResourceIds
     this.roleService.save(this.role).subscribe(
       (role) => {
-        this.dismiss.emit(role);
-        console.log(this.checkedResources);
+        this.dismiss.emit(role)
       }
     )
   }
 
   cancel() {
-    this.dismiss.error(this.role);
+    this.dismiss.error(this.role)
   }
 
-// 资源分配的结果
-  showTreeBack(node) {
-    console.log(node);
-    if (node.$check) {
-      this.checkedResources.push(node.id);
-    } else {
-      for (let i = 0; i < this.checkedResources.length; i++) {
-        if (node.id == this.checkedResources[i]) {
-          this.checkedResources.splice(i, 1);
-        }
-      }
-    }
-  }
 }

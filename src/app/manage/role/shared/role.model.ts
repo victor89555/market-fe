@@ -1,5 +1,6 @@
-export class Role{
-  id:number
-  code:string
-  name:string
+export class Role {
+  id: number
+  code: string
+  name: string
+  resourceIds: number[]
 }
