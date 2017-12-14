@@ -57,7 +57,7 @@ export class RoleFormComponent implements OnInit, Modal {
 
   private setChecked(treeData, resourceIds) {
     treeData.forEach(node => {
-      node["checked"] = resourceIds.includes(node.id)
+      node["$check"] = resourceIds.includes(node.id)
       let nodeChildren = node["children"]
       if (nodeChildren) {
         this.setChecked(nodeChildren, resourceIds)
