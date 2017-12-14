@@ -26,7 +26,7 @@ export class ResourceService extends RebirthHttp {
   }
 
   @GET("resources/tree")
-  getTree(): Observable<any> {
+  getTreeData(): Observable<any> {
     return null
   }
 

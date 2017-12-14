@@ -56,9 +56,7 @@ export class RoleListComponent implements OnInit {
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: { "add": true}
     }).subscribe(user => {
-      console.log('Rebirth Modal -> Get ok with result:', user)
-    }, error => {
-
+      this.query()
     })
   }
 
@@ -70,9 +68,7 @@ export class RoleListComponent implements OnInit {
         id: id
       }
     }).subscribe(user => {
-      console.log('Rebirth Modal -> Get ok with result:', user)
-    }, error => {
-
+      this.query()
     })
   }
 
