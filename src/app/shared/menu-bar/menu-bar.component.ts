@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Renderer2} from '@angular/core';
+import {Component, OnInit, Renderer2} from '@angular/core';
 import {WindowRef} from 'rebirth-ng';
-import {MenuConfig, menuItem} from './menu-config.model';
+import {menuItem} from './menu-config.model';
 import {Router} from '@angular/router';
 
 @Component({
@@ -26,54 +26,56 @@ export class MenuBarComponent implements OnInit {
   // menuActive:boolean[]=new Array(15);
   // arrowState:string[] =['arrow open','arrow closed'];
 
-  menuList : menuItem[] = [
+  menuList: menuItem[] = [
     {
       title: "市场管理",
       icon: "home",
-      link:"",
+      link: "",
       active: true,
       isOpen: true,
       children: [
-        {title: "市场信息",link:"/manage/markets",active: true,icon: "more"},
-        {title: "摊位管理",link:"/manage/stalls",active: false,icon: "more"}
+        {title: "市场信息", link: "/manage/markets", active: true, icon: "more"},
+        {title: "摊位管理", link: "/manage/stalls", active: false, icon: "more"}
       ]
     },
     {
       title: "商户管理",
       icon: "all",
-      link:"",
+      link: "",
       active: false,
       isOpen: true,
       children: [
-        {title: "商户信息",link:"/manage/shops",active: false,icon: "user1"},
-        {title: "合同管理",link:"/manage/contracts",active: false,icon: "order"},
-        {title: "电子秤管理",link:"/manage/electronicScales",active: false,icon: "balance"},
+        {title: "商户信息", link: "/manage/shops", active: false, icon: "user1"},
+        {title: "经营者管理", link: "/manage/operators", active: false, icon: "user1"},
+        {title: "合同管理", link: "/manage/contracts", active: false, icon: "order"},
+        {title: "电子秤管理", link: "/manage/electronicScales", active: false, icon: "balance"},
         // {title: "商户台账查询",link:"/manage/orders",active: false,icon: "book"},
-        {title: "检测结果查询",link:"JavaScript:;",active: false,icon: "chem"}
+        {title: "检测结果查询", link: "JavaScript:;", active: false, icon: "chem"}
       ]
     },
     {
       title: "运营管理",
       icon: "open",
-      link:"",
+      link: "",
       active: false,
       isOpen: true,
       children: [
-        {title: "交易信息查询",link:"/manage/orders",active: false,icon: "pages"},
-        {title: "检测信息溯源",link:"JavaScript:;",active: false,icon: "text"},
-        {title: "交易情况统计",link:"JavaScript:;",active: false,icon: "plot"}
+        {title: "会员管理", link: "/manage/members", active: false, icon: "pages"},
+        {title: "交易信息查询", link: "/manage/orders", active: false, icon: "pages"},
+        {title: "检测信息溯源", link: "JavaScript:;", active: false, icon: "text"},
+        {title: "交易情况统计", link: "JavaScript:;", active: false, icon: "plot"}
       ]
     },
     {
       title: "系统管理",
       icon: "set",
-      link:"",
+      link: "",
       active: false,
       isOpen: true,
       children: [
-        {title: "用户管理",link:"/manage/users",active: false,icon: "user1"},
-        {title: "角色管理",link:"/manage/roles",active: false,icon: "profile"},
-        {title: "资源管理",link:"/manage/resources",active: false,icon: "box"}
+        {title: "用户管理", link: "/manage/users", active: false, icon: "user1"},
+        {title: "角色管理", link: "/manage/roles", active: false, icon: "profile"},
+        {title: "资源管理", link: "/manage/resources", active: false, icon: "box"}
       ]
     }
   ]
@@ -84,16 +86,16 @@ export class MenuBarComponent implements OnInit {
   //选中menubar
   onSelect(i) {
     var n = null
-    for(let x in this.menuList){
-      for(let y in this.menuList[x].children){
-        if(this.menuList[x].children[y]===i){
+    for (let x in this.menuList) {
+      for (let y in this.menuList[x].children) {
+        if (this.menuList[x].children[y] === i) {
           n = x
-          if(!i.active){
+          if (!i.active) {
             i.active = true
             this.menuList[x].active = true
           }
-        }else{
-          if(x != n){
+        } else {
+          if (x != n) {
             this.menuList[x].active = false
           }
           this.menuList[x].children[y].active = false
@@ -103,9 +105,9 @@ export class MenuBarComponent implements OnInit {
   }
 
   //开关menubar一级菜单
-  onToggleClick(i){
-    for(var key in this.menuList){
-      if(this.menuList[key] === i){
+  onToggleClick(i) {
+    for (var key in this.menuList) {
+      if (this.menuList[key] === i) {
         i.isOpen = i.isOpen ? false : true
       }
     }
