@@ -33,7 +33,7 @@ export class ContractFormComponent implements Modal, OnInit {
         this.markets = markets
       }
     )
-    this.shopService.getAll().subscribe(
+    this.shopService.getAll(null).subscribe(
       (shops) => {
         this.shops = shops
       }

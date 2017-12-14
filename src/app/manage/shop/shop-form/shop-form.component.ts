@@ -6,6 +6,7 @@ import {
   EventEmitter,
   OnInit
 } from "@angular/core";
+
 import {DialogService, Modal, ModalService} from "rebirth-ng";
 import {Shop} from "../shared/shop.model";
 import {ShopService} from "../shared/shop.service";
@@ -21,6 +22,7 @@ import {ContractService} from "../../contract/shared/contract.service";
 import {HttpClient} from "@angular/common/http";
 import {ContractFormComponent} from "../../contract/contract-form/contract-form.component";
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ElectronicScale} from "../../electronicScale/shared/electronicScale.model";
 
 @Component({
   selector: 'app-shop-form',
@@ -28,36 +30,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
   styleUrls: ['./shop-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShopFormComponent implements Modal, OnInit {
-  context: { id: number };
-  dismiss: EventEmitter<Shop>;
-
-  shop: Shop = new Shop()
-  markets: Market[]
-  stalls: Stall[]
-  stallNames = ["test1", "test2"] //摊位名称
-  operators: Operator[]
-  electronicScales: any[]
-  contracts: Contract[]
-  allotElectronicScales = []
-  contract = []
-  shop_con = []
-  shop_id: number //商户
-
-  stallNameFormatter = (stall: Stall) => { // 摊位输入显示数据
-    return stall.name
-  }
-  onStallNameChange(stall: Stall) { // 摊位内容改变时调用
-    console.log(stall)
-    this.shop.stallId = stall.id
-    this.shop.funcType = stall.funcType
-  }
-  operatorNameFormatter = (operator: Operator) => { // 经营者输入显示数据
-    return operator.name +" "+ operator.tel
-  }
-  onOperatorNameChange =(operator: Operator) =>{ // 经营者内容改变时调用
-    console.log(operator)
-  }
+export class ShopFormComponent implements OnInit {
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private shopService: ShopService,
@@ -74,79 +47,177 @@ export class ShopFormComponent implements Modal, OnInit {
               private router: Router) {
   }
 
+  dismiss: EventEmitter<Shop>;
+
+  shopId: number //商户ID
+  // 页面组件
+  pageComponent = {
+    tabs: false
+  }
+  shop: Shop = new Shop() //商户信息
+  operatorName : string = "请选择经营者"
+  operators: Operator[] //操作者列表
+  markets: Market[] //市场列表
+  market: Market //市场
+  stalls: Stall[] //摊位列表
+  stallName: string = "请选择摊位"
+  contracts: Contract[] //合同列表
+  allotableElectronicScales: any[] //可分配的电子秤列表
+  allotedElectronicScales = [] //已分配的电子秤列表
+  selectedScale: ElectronicScale
+
   ngOnInit(): void {
     console.log('ModalTestComponent init....');
+    // 获取商户Id
     this.route.params.forEach((params: Params) => {
-      this.shop_id  = params['id'];
+      this.shopId = params['id'];
     });
-    this.loadStall();
-    this.loadMarket();
-    this.loadOperator();
-    this.loadElectronicScale();
-    this.loadContractor();
-    if(this.shop_id > 0){
-      this.loadShop();
+    // 判断是添加商户还是修改商户
+    if (this.shopId > 0) {
+      this.initEditShop();
+    }else{
+      this.initAddShop();
     }
   }
 
+  // 初始化添加商户
+  initAddShop() {
+    console.log('初始化添加商户界面...');
+    this.pageComponent.tabs = false;
+  }
+
+  // 初始化修改商户
+  initEditShop() {
+    console.log('初始化修改商户界面...');
+    this.pageComponent.tabs = true;
+    this.loadShop().subscribe(() => {
+      this.loadOperator();
+      this.loadMarket();
+    });
+  }
+
+  loadShop() { // 商户
+    let shopOb = this.shopService.get(this.shopId);
+    shopOb.subscribe(
+      (shop) => {
+        console.log(shop)
+        this.shop = shop
+        this.changeDetectorRef.markForCheck()
+      }
+    )
+    return shopOb
+  }
+
+  loadOperator() { // 加载经营者
+    this.operatorService.getAll().subscribe(
+      (operators) => {
+        console.log(operators)
+        this.operators = operators
+      }
+    )
+  }
+
+  loadOperators() { // 经营者
+    this.operatorService.getAll().subscribe(
+      (operators) => {
+        console.log(operators)
+        this.operators = operators
+      }
+    )
+  }
+
+  addOperator() { //添加经营者
+    console.log("打开添加页面")
+    this.operatorService;
+  }
+
+  stallNameFormatter = (stall: Stall) => { // 摊位输入显示数据
+    return stall.name
+  }
+
+  scaleNameFormatter = (scale: any) => { // 摊位输入显示数据
+    return scale.sequence_no
+  }
+
+  onStallNameChange(stall: Stall) { // 摊位内容改变时调用
+    console.log(stall)
+    this.shop.stallId = stall.id
+    this.shop.funcType = stall.funcType
+  }
+
+  onScaleSelected(scale:any) {
+    this.selectedScale = new ElectronicScale()
+    this.selectedScale.shopId = scale.shop_id
+    this.selectedScale.lastUpdateUser = scale.last_update_user
+    this.selectedScale.sequenceNo = scale.sequence_no
+    this.selectedScale.softVersion = scale.soft_version
+    this.selectedScale.marketId = scale.market_id
+    this.selectedScale.shopId = scale.shop_id
+    this.selectedScale.status = scale.status
+  }
+
+  operatorNameFormatter = (operator: Operator) => { // 经营者输入显示数据
+    return operator.name + " " + operator.tel
+  }
+  onOperatorNameChange = (operator: Operator) => { // 经营者内容改变时调用
+    console.log(operator)
+
+  }
+
   loadStall() {  //摊位
-    this.stallService.getAll().subscribe(
+    console.log(this.shop.marketId,this.shop.id)
+    this.stallService.getStalls(
+      this.shop.marketId,
+      this.shop.id
+      // this.shop.funcType,
+      // this.selectedScale.status
+    ).subscribe(
       (stalls) => {
+        console.log(stalls)
         this.stalls = stalls  //摊位对象
-        for (let i = 0; i < stalls.length; i++) {
-          this.stallNames.push(stalls[i].name);
-        }
       }
     )
   }
 
   loadMarket() { //市场
-    this.marketService.getAll().subscribe(
+    let marketOb = this.marketService.getAll();
+    marketOb.subscribe(
       (markets) => {
+        // console.log(markets)
         this.markets = markets
       }
     )
+    return marketOb
   }
 
-  loadOperator() { //操作者
-    this.operatorService.getAll().subscribe(
-      (operators) => {
-        this.operators = operators
-        console.log(operators[0].name);
-      }
-    )
+  changeMarket(marketId) {
+    // console.log(marketId, this.shop.marketId);
+    // this.sele.marketId = marketId;
+    this.loadStall();
   }
-
   loadElectronicScale() { // 电子秤
-    this.electronicScaleService.getAll("", true).subscribe(
+    this.electronicScaleService.getAllotableElectronic(this.shop.marketId).subscribe(
       (electronicScales) => {
-        this.electronicScales = electronicScales
-        this.getDetail()
+        // console.log(electronicScales)
+        this.allotableElectronicScales = electronicScales
+      }
+    )
+    this.electronicScaleService.getAllotedElectronic(this.shop.marketId, this.shopId).subscribe(
+      (electronicScales) => {
+        // console.log(electronicScales)
+        this.allotedElectronicScales = electronicScales
       }
     )
   }
+
 
   loadContractor() { // 获取合同
-    this.contractService.getAll().subscribe(
-      (contracts) => {
-        this.contracts = contracts
+    this.contractService.query(this.shopId, 1, 100).subscribe(
+      (page) => {
+        // console.log(page)
+        this.contracts = page.items
       }
     )
-  }
-
-  loadShop() { // 商户
-    this.shopService.get(this.shop_id).subscribe(
-      (shop) => {
-        this.shop = shop
-        this.changeDetectorRef.markForCheck()
-      }
-    )
-  }
-
-  getDetail() {
-    for (var i = 0; i < this.electronicScales.length; i++) {
-      this.allotElectronicScales.push(this.electronicScales[i].sequence_no)
-    }
   }
 
   alert(title, content) {  // 弹框提示
@@ -163,42 +234,25 @@ export class ShopFormComponent implements Modal, OnInit {
       );
   }
 
-  isEletronicExist(id) {   // 判断电子称是否存在
-    for (let i = 0; i < this.shop_con.length; i++) {
-      if (id == this.shop_con[i].id) {
-        this.alert('提示框', '该电子秤已选择。');
-        return true;
-      }
-    }
-    return false;
-  }
-
-  allotment(val) {   //添加电子秤
-    for (let i = 0; i < this.electronicScales.length; i++) {
-      if (val == this.electronicScales[i].sequence_no && !this.isEletronicExist(this.electronicScales[i].id)) {
-        this.shop_con.push({
-          "sequenceNo": this.electronicScales[i].sequence_no,
-          "softVersion": this.electronicScales[i].soft_version,
-          "id": this.electronicScales[i].id
-        })
-      }
-    }
+  allot() {   //添加电子秤
+    this.electronicScaleService.update(this.selectedScale.id, this.selectedScale)
   }
 
   save() {
     this.shopService.save(this.shop).subscribe(
       (shop) => {
-        this.router.navigate(['/shops']);
+        this.router.navigate(['/manage/shops']);
       }
     )
   }
+
   cancel() {
-    this.router.navigate(['/shops']);
+    this.router.navigate(['/manage/shops']);
   }
 
   delElectronicScale(sequenceNo) { //删除电子秤
     console.log('删除' + sequenceNo)
-    this.shop_con = this.shop_con.filter((sc) => sc.sequenceNo != sequenceNo);
+    // this.electronicScaleService.unbind()
   }
 
   addContract(id: number) { //增加合同
@@ -209,7 +263,6 @@ export class ShopFormComponent implements Modal, OnInit {
         id: id,
         isShopForm: true, //判断是否从商户管理进入。
         marketId: ''
-
       }
     }).subscribe(contract => {
       this.loadContractor();

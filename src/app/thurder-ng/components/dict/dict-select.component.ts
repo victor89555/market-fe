@@ -24,7 +24,6 @@ export class DictSelectComponent implements OnInit, ControlValueAccessor {
 
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2) {
-
   }
 
   ngOnInit(): void {

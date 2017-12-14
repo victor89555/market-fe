@@ -12,52 +12,59 @@
       </div>
     </div>
   </div>
-
+  
   <div class="row">
     <div class="col-xs-6">
       <form class="form-horizontal">
+        <!-- 商户名 -->
         <div class="form-group">
-          <label for="inputEmail3" class="col-sm-2 control-label">商户名</label>
+          <label for="shopname" class="col-sm-2 control-label">商户名</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" name="shop" id="inputEmail3" [(ngModel)]="shop.name"/>
-            <!--<input type="email" class="form-control" id="inputEmail3" placeholder="Email">-->
+            <input type="text" class="form-control" name="shop" id="shopname" [(ngModel)]="shop.name"/>
           </div>
         </div>
+        <!-- 经营者 -->
         <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">经营者</label>
+          <label class="col-sm-2 control-label">经营者</label>
           <div class="col-sm-10">
             <div class="input-group">
-              <ng-template #operatorItemTemplate let-item="item" let-$index="$index"
-                                       let-source="source"
-                                       let-term="term">
-              <span>{{item.name}}</span>
-            </ng-template>
               <input type="text" class="form-control"  [minLength]="0"
-                     reAutoComplete  [dataSource]="operators" [value]="shop.operatorName"
+                     reAutoComplete  [dataSource]="operators" [value]="operatorName"
                      [formatter]="operatorNameFormatter"
                      (selectValueChange)="onOperatorNameChange($event)"
                      #operatorList="autoComplete"/>
               <div class="input-group-addon" (click)="operatorList.toggle($event)">
                 <i class="glyphicon glyphicon-menu-down"></i>
               </div>
+              <div class="input-group-addon" (click)="addOperator($event)">
+                <i class="glyphicon glyphicon-plus"></i>
+              </div>
             </div>
-            <!--<input type="text" class="form-control" id="inputPassword3" placeholder="Password">-->
           </div>
         </div>
+        <!-- 功能区域 -->
         <div class="form-group">
-          <label class="col-sm-2 control-label">市场:</label>
+          <label class="col-sm-2 control-label">功能区域</label>
           <div class="col-sm-10">
-            <select type="text" class="form-control" name="market" [(ngModel)]="shop.marketId">
-              <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
-            </select>
+            <tg-dict-select dictName="FUNC_TYPE" name="func" [(ngModel)]="shop.funcType"></tg-dict-select>
           </div>
         </div>
       </form>
     </div>
     <div class="col-xs-6">
       <form class="form-horizontal">
+        <!-- 市场 -->
         <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">摊位</label>
+          <label class="col-sm-2 control-label">市场:</label>
+          <div class="col-sm-10">
+            <select type="text" class="form-control" name="market" [(ngModel)]="shop.marketId" (ngModelChange)="changeMarket($event)">
+              <option *ngFor="let item of markets" [value]="item.id">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+        <!-- 摊位 -->
+        <div class="form-group">
+          <label class="col-sm-2 control-label">摊位</label>
           <div class="col-sm-10">
             <div class="input-group">
               <ng-template #stallItemTemplate let-item="item" let-$index="$index"
@@ -69,7 +76,7 @@
                 <span>没有符合条件的记录</span>
               </ng-template>
               <input type="text" class="form-control" name="language" id="languageFromSource" [minLength]="0"
-                     reAutoComplete  [dataSource]="stalls" [value]="shop.stallName"
+                     reAutoComplete  [dataSource]="stalls" [value]="stallName"
                      [itemTemplate]="stallItemTemplate" [noResultItemTemplate]="noResultItemTemplate"
                      [formatter]="stallNameFormatter"
                      (selectValueChange)="onStallNameChange($event)"
@@ -80,14 +87,9 @@
             </div>
           </div>
         </div>
+        <!-- 状态 -->
         <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">功能区域</label>
-          <div class="col-sm-10">
-            <tg-dict-select dictName="FUNC_TYPE" name="func" [(ngModel)]="shop.funcType"></tg-dict-select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputPassword3" class="col-sm-2 control-label">状态</label>
+          <label class="col-sm-2 control-label">状态</label>
           <div class="col-sm-10">
             <tg-dict-select dictName="SHOP_STATUS" name="state" [(ngModel)]="shop.status"></tg-dict-select>
           </div>
@@ -95,14 +97,16 @@
       </form>
     </div>
   </div>
-  <re-tabs>
+  <re-tabs *ngIf="pageComponent.tabs">
     <re-tab id="tab1" title="电子秤">
       <ng-template reTabContent>
         <div class="same-line">
           <input type="text" class="form-control" [minLength]="0" placeholder="请选择需要的电子秤序列号。"
-                 reAutoComplete [dataSource]="allotElectronicScales"
+                 reAutoComplete [dataSource]="allotableElectronicScales"
+                 [formatter]="scaleNameFormatter"
+                 (selectValueChange)="onScaleSelected($event)"
                  #scaleSelect/>
-          <button class="btn btn-primary electronic-assign" (click)="allotment(scaleSelect.value)">分配</button>
+          <button class="btn btn-primary electronic-assign" (click)="allot()">分配</button>
         </div>
         <table id="table2">
           <tr>
@@ -110,7 +114,7 @@
             <th>版本</th>
             <th>操作</th>
           </tr>
-          <tr *ngFor="let sc of shop_con">
+          <tr *ngFor="let sc of allotedElectronicScales">
             <td>{{sc.sequenceNo}}</td>
             <td>{{sc.softVersion}}</td>
             <td (click)="delElectronicScale(sc.sequenceNo)">删除</td>

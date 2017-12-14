@@ -20,9 +20,10 @@ export class StallService extends RebirthHttp {
     return null;
   }
 
-  @GET("stalls")
-  getAll(@Query("name") name = ""): Observable<Stall[]> {
-    return null;
+  getStalls(marketId, shopId): Observable<Stall[]> {
+    return this.query(marketId, shopId, null, null, null, 1, 1000).map((page)=>{
+      return page.items || []
+    });
   }
 
   @GET("stalls/:id")

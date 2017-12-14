@@ -8,23 +8,23 @@ import {Router} from '@angular/router';
   templateUrl: './menu-bar.component.html',
   // templateUrl: './menu-bar.component_bak.html',
   styleUrls: ['./menu-bar.component.scss'],
-  host: {
-    '[class]': `getClassNames()`,
-  },
+  // host: {
+  //   '[class]': `getClassNames()`,
+  // },
   exportAs: 'menuBar'
 })
 export class MenuBarComponent implements OnInit {
 
   static MAX_MIDDLE_SCREEN = 768;
   static MIN_MIDDLE_SCREEN = 576;
-  @Input() menuConfig: MenuConfig;
-  @Input() isTextMenuBarOpen: boolean;
-  isIconMenuBarOpen = false;
-  windowResize = new EventEmitter<any>();
-  listens: any[] = [];
-  hide:boolean[] =[false,true];
-  menuActive:boolean[]=new Array(15);
-  arrowState:string[] =['arrow open','arrow closed'];
+  // @Input() menuConfig: MenuConfig;
+  // @Input() isTextMenuBarOpen: boolean;
+  // isIconMenuBarOpen = false;
+  // windowResize = new EventEmitter<any>();
+  // listens: any[] = [];
+  // hide:boolean[] =[false,true];
+  // menuActive:boolean[]=new Array(15);
+  // arrowState:string[] =['arrow open','arrow closed'];
 
   menuList : menuItem[] = [
     {
@@ -34,7 +34,8 @@ export class MenuBarComponent implements OnInit {
       active: true,
       isOpen: true,
       children: [
-        {title: "基础信息",link:"/manage/markets",active: true,icon: "more"}
+        {title: "市场信息",link:"/manage/markets",active: true,icon: "more"},
+        {title: "摊位管理",link:"/manage/stalls",active: false,icon: "more"}
       ]
     },
     {
@@ -109,11 +110,13 @@ export class MenuBarComponent implements OnInit {
       }
     }
   }
-  getClassNames() {
-    const textMenuClass = this.isTextMenuBarOpen ? 'open-text-menu' : 'hide-text-menu';
-    const iconMenuClass = this.isIconMenuBarOpen ? 'open-icon-menu' : 'hide-icon-menu';
-    return `${textMenuClass} ${iconMenuClass}`;
-  }
+
+  //？不知道什么功能
+  // getClassNames() {
+  //   const textMenuClass = this.isTextMenuBarOpen ? 'open-text-menu' : 'hide-text-menu';
+  //   const iconMenuClass = this.isIconMenuBarOpen ? 'open-icon-menu' : 'hide-icon-menu';
+  //   return `${textMenuClass} ${iconMenuClass}`;
+  // }
 
   // updateMenuBarStatus() {
   //   this.isTextMenuBarOpen = this.windowRef.innerWidth >= MenuBarComponent.MAX_MIDDLE_SCREEN;

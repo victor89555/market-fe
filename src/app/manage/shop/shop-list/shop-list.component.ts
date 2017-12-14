@@ -35,10 +35,11 @@ export class ShopListComponent implements OnInit {
     this.shopService.query(this.qry.market, this.qry.shop, this.qry.stall, this.qry.state, this.page.pageNo).subscribe(
       (page) => {
         this.page = page
-        console.log(page);
+        // console.log(page);
       }
     )
   }
+
   reset() {
     this.qry.market = ''
     this.qry.shop = ''

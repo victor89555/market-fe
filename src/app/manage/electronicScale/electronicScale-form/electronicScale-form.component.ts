@@ -36,13 +36,13 @@ export class ElectronicScaleFormComponent implements Modal, OnInit {
       this.getElectronicScale()
     }
     this.getAllMarkets()
-    this.queryShops(null, null, null, null, 1, 500)
+    this.queryShops()
   }
 
-  queryShops(market, shop, stall, state, pageNo, pageSize) {
-    this.shopService.query(market, shop, stall, state, pageNo, pageSize).subscribe(
-      (shop) => {
-        this.shops = shop.items
+  queryShops() {
+    this.shopService.getAll(null).subscribe(
+      (shops) => {
+        this.shops = shops
       }
     )
   }

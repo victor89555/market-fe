@@ -6,6 +6,6 @@ export class Shop {
   funcType: number
   operatorId: number
   status: number
-  electronicScaleId: number
-  contractId: number
+  creatTime: string
+  updateKey: string
 }

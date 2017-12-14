@@ -13,7 +13,7 @@ export class ContractService extends RebirthHttp {
   }
 
   @GET("contracts")
-  query(@Query("name") name = "", @Query("pageNo") pageNo = 1,
+  query(@Query("_filter_eq_shop_id-long") shopId = null, @Query("pageNo") pageNo = 1,
         @Query("pageSize") pageSize = 10): Observable<Page<any>> {
     return null;
   }
