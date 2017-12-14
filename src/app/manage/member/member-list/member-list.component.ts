@@ -21,7 +21,7 @@ export class MemberListComponent implements OnInit {
     this.query()
   }
   page: Page<any> = new Page()
-  queryName ={'mobile':'', 'name':'', 'cardno':'', 'idcardno':''};
+  queryMember ={'mobile':'', 'name':'', 'cardNo':'', 'idCardNo':''};
 
   setPage(pageInfo) {
     this.page.pageNo = pageInfo.offset + 1
@@ -43,7 +43,8 @@ export class MemberListComponent implements OnInit {
   }
 
   query() {
-    this.memberService.query(this.queryName.mobile, this.page.pageNo).subscribe(
+    this.memberService.query(this.queryMember.name,this.queryMember.mobile,this.queryMember.cardNo,
+      this.queryMember.idCardNo,1,10 ).subscribe(
       (page) => {
         this.page = page
       }
@@ -61,8 +62,14 @@ export class MemberListComponent implements OnInit {
       }
     }).subscribe(member => {
       console.log('Rebirth Modal -> Get ok with result:', member)
+      this.query()
     }, error => {
 
+    })
+  }
+  delete(id:number){
+    this.memberService.delete(id).subscribe(()=>{
+      this.query()
     })
   }
 }

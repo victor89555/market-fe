@@ -33,7 +33,14 @@ export class MemberFormComponent implements OnInit, Modal {
         this.dismiss.emit(member);
       }
     )
-    /*this.dismiss.emit(this.member);*/
+  }
+  update() {
+    console.log(this.member);
+    this.memberService.update(this.context.id, this.member).subscribe(
+      (member) => {
+        this.dismiss.emit(member);
+      }
+    )
   }
   cancel() {
     this.dismiss.error(this.member);

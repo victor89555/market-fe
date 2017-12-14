@@ -6,13 +6,13 @@
         <!--<small>dashboard &amp; statistics</small>-->
       </h1>
     </div>
-    <div class="page-toolbar">
+   <!-- <div class="page-toolbar">
       <div class="pull-right tooltips" >
         <a href="javascript:;" class="btn btn-danger" (click)="add()" has-permission="FUC_ORDER_ADD">
           <i class="glyphicon glyphicon-plus"></i> 新增
         </a>
       </div>
-    </div>
+    </div>-->
   </div>
 
   <div class="row">
@@ -21,10 +21,10 @@
         <div class="form-group">
           <div class="input-group">
             <div class="search-line">
-              <input type="text" class="form-control" name="mobile" [(ngModel)]="queryName.mobile" placeholder="手机号">
-              <input type="text" class="form-control" name="memberName" [(ngModel)]="queryName.name" placeholder="姓名">
-              <input type="text" class="form-control" name="cardNo" [(ngModel)]="queryName.cardno" placeholder="会员卡号">
-              <input type="text" class="form-control" name="idCardNo" [(ngModel)]="queryName.idcardno" placeholder="身份证号">
+              <input type="text" class="form-control" name="memberName" [(ngModel)]="queryMember.name" placeholder="姓名">
+              <input type="text" class="form-control" name="mobile" [(ngModel)]="queryMember.mobile" placeholder="手机号">
+              <input type="text" class="form-control" name="cardNo" [(ngModel)]="queryMember.cardNo" placeholder="会员卡号">
+              <input type="text" class="form-control" name="idCardNo" [(ngModel)]="queryMember.idCardNo" placeholder="身份证号">
             </div>
           </div>
         </div>
@@ -58,6 +58,7 @@
         <ngx-datatable-column name="编辑" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="member">
             <button class="btn btn-default" (click)="edit(value);">修改</button>
+            <button class="btn btn-default" (click)="delete(value);">删除</button>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
