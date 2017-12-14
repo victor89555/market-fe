@@ -6,18 +6,24 @@ import {Market} from "../../market/shared/market.model";
 import {Shop} from "../../shop/shared/shop.model";
 import {MarketService} from "../../market/shared/market.service";
 import {ShopService} from "../../shop/shared/shop.service";
+import {Page} from "../../../thurder-ng/models/page.model";
 
 @Component({
   selector: 'app-electronicScale-form',
   templateUrl: "./electronicScale-form.component.html"
 })
 export class ElectronicScaleFormComponent implements Modal, OnInit {
-  context: { id: number, add:boolean };
+  context: { id: number, add: boolean };
   dismiss: EventEmitter<ElectronicScale>;
 
   electronicScale: any = {}
   markets: Market[]
+  marketId: number = null
+  marketName: string
   shops: Shop[]
+  shopName = ""
+  shopId: number
+
   constructor(private electronicScaleService: ElectronicScaleService,
               private marketService: MarketService,
               private shopService: ShopService) {
@@ -25,28 +31,68 @@ export class ElectronicScaleFormComponent implements Modal, OnInit {
 
   ngOnInit(): void {
     console.log('ModalTestComponent init....')
-    /*this.marketService.getAll().subscribe(
-      (markets) => {
-        this.markets = markets
-      }
-    )
-    this.shopService.getAll().subscribe(
-      (shops) => {
-        this.shops = shops
-      }
-    )*/
-    if(!this.context.add){
+
+    if (!this.context.add) {
       this.getElectronicScale()
     }
+    this.getAllMarkets()
+    this.queryShops(null, null, null, null, 1, 500)
   }
 
-  getElectronicScale(){
+  queryShops(market, shop, stall, state, pageNo, pageSize) {
+    this.shopService.query(market, shop, stall, state, pageNo, pageSize).subscribe(
+      (shop) => {
+        this.shops = shop.items
+      }
+    )
+  }
+
+  // 第一次打开页面时显示的商户名称
+  getShop(shopId) {
+    this.shopService.get(shopId).subscribe(
+      (shop) => {
+        this.shopName = shop.name;
+      }
+    )
+  }
+
+  onShopNameChange = (shop: Shop) => { // 选中商户改变时调用
+    this.shopId = shop.id
+  }
+  shopNameFormatter = (shop: Shop) => { // 商户名称输入显示数据
+    return shop.name || ""
+  }
+
+  getAllMarkets() {
+    this.marketService.getAll().subscribe(
+      (markets) => {
+        this.markets = markets;
+        console.log(markets)
+      }
+    )
+  }
+
+  // 第一次打开页面时显示的市场名称
+  getMarket(marketId) {
+    this.marketService.get(marketId).subscribe(
+      (market) => {
+        this.marketName = market.name;
+      }
+    )
+  }
+
+  getElectronicScale() {
     this.electronicScaleService.get(this.context.id).subscribe(
       (electronicScale) => {
         this.electronicScale = electronicScale
+        this.marketId = electronicScale.marketId
+        this.shopId = electronicScale.shopId
+        this.getMarket(this.marketId)
+        this.getShop(this.shopId)
       }
     )
   }
+
   save() {
     this.electronicScaleService.save(this.electronicScale).subscribe(
       (electronicScale) => {
@@ -56,14 +102,16 @@ export class ElectronicScaleFormComponent implements Modal, OnInit {
   }
 
   update() {
+    this.electronicScale.marketId = this.marketId
     this.electronicScale.id = this.context.id;
     console.log(this.electronicScale);
-    this.electronicScaleService.update(this.context.id,this.electronicScale).subscribe(
+    this.electronicScaleService.update(this.context.id, this.electronicScale).subscribe(
       (electronicScale) => {
         this.dismiss.emit(electronicScale);
       }
     )
   }
+
   cancel() {
     this.dismiss.error(this.electronicScale);
   }

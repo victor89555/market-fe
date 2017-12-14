@@ -4,6 +4,10 @@ import {ElectronicScaleService} from "../shared/electronicScale.service";
 import {ElectronicScale} from "../shared/electronicScale.model";
 import {Page} from "../../../thurder-ng/models/page.model";
 import {ElectronicScaleFormComponent} from "../electronicScale-form/electronicScale-form.component";
+import {Market} from "../../market/shared/market.model";
+import {Shop} from "../../shop/shared/shop.model";
+import {MarketService} from "../../market/shared/market.service";
+
 
 @Component({
   selector: 'app-electronicScale-list',
@@ -19,22 +23,40 @@ export class ElectronicScaleListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  queryElecScale = {"market":"", "no":"","status":""}
+  queryElecScale = {"market":null, "no":"","status":""}
+  markets:Market[] = []
+  marketName = ""
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
-              private electronicScaleService: ElectronicScaleService) {
+              private electronicScaleService: ElectronicScaleService,
+              private marketService: MarketService) {
   }
 
   ngOnInit(): void {
     this.query()
+    this.getAllMarkets()
   }
 
+  getAllMarkets(){
+    this.marketService.getAll().subscribe(
+      (markets)=>{
+        this.markets = markets;
+      }
+    )
+  }
+  onMarketNameChange =(market: Market) =>{ // 选中市场改变时调用
+    this.queryElecScale.market = market.id
+  }
+  marketNameFormatter = (market: Market) => { // 市场名称输入显示数据
+    return market.name
+  }
   query() {
     this.electronicScaleService.query(this.queryElecScale.no, this.queryElecScale.market,
       this.queryElecScale.status, this.page.pageNo).subscribe(
       (page) => {
         this.page = page
+        console.log(this.page);
       }
     )
   }
@@ -46,7 +68,8 @@ export class ElectronicScaleListComponent implements OnInit {
 
   reset() {
     this.queryElecScale.no = ""
-    this.queryElecScale.market = ""
+    this.marketName = ""
+    this.queryElecScale.market = null
     this.queryElecScale.status = ""
     this.query()
   }

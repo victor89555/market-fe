@@ -49,5 +49,10 @@ export const dicts = {
   "STALL_STATUS":{
     0:"未被使用",
     1:"已被使用"
+  },
+
+  "ELECTRONICSCALE_STATUS":{
+    0:"正常",
+    1:"损坏"
   }
 }

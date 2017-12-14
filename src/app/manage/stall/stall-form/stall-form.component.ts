@@ -38,9 +38,6 @@ export class StallFormComponent implements Modal, OnInit {
     this.marketService.getAll().subscribe(
       (markets)=>{
         this.markets = markets;
-      },
-      (err)=>{
-        debugger
       }
     )
   }
