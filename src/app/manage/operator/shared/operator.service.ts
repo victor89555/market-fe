@@ -1,10 +1,11 @@
-import {Body, GET, Path, POST, Query, RebirthHttp} from "rebirth-http";
+import {Body, GET, Path, POST, Query, RebirthHttp,DELETE,PUT} from "rebirth-http";
 import {Observable} from "rxjs/Observable";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import "rxjs/add/operator/map";
 import {Operator} from "./operator.model";
 import {Page} from "../../../thurder-ng/models/page.model";
+import {ElectronicScale} from "../../electronicScale/shared/electronicScale.model";
 
 @Injectable()
 export class OperatorService extends RebirthHttp {
@@ -13,8 +14,8 @@ export class OperatorService extends RebirthHttp {
   }
 
   @GET("operators")
-  query(@Query("name") name = "", @Query("pageNo") pageNo = 1,
-        @Query("pageSize") pageSize = 10): Observable<Page<any>> {
+  query(@Query("_filter_like_name") name = "",@Query("_filter_like_mobile") mobile = "", @Query("pageNo") pageNo = null,
+        @Query("pageSize") pageSize = null): Observable<Page<any>> {
     return null;
   }
 
@@ -33,4 +34,13 @@ export class OperatorService extends RebirthHttp {
     return null;
   }
 
+  @PUT("operators/:id")
+  update( @Path("id") id: number, @Body operator: Operator): Observable<Operator> {
+    return null;
+  }
+
+  @DELETE("operators/:id")
+  delete( @Path("id") id: number): Observable<any> {
+    return null;
+  }
 }

@@ -19,7 +19,7 @@ export class OperatorListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  qry_name: string = ""
+  queryOperator={"name":"","mobile":""}
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
@@ -30,7 +30,8 @@ export class OperatorListComponent implements OnInit {
     this.query()
   }
   query() {
-    this.operatorService.query(this.qry_name, this.page.pageNo).subscribe(
+    this.operatorService.query(this.queryOperator.name,
+      this.queryOperator.mobile,1,10).subscribe(
       (page) => {
         this.page = page
       }
@@ -43,7 +44,8 @@ export class OperatorListComponent implements OnInit {
   }
 
   reset() {
-    this.qry_name = ""
+    this.queryOperator.name = ""
+    this.queryOperator.mobile=""
     this.query()
   }
 
@@ -52,9 +54,11 @@ export class OperatorListComponent implements OnInit {
       component: OperatorFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
+        "add":true
       }
     }).subscribe(operator => {
       console.log('Rebirth Modal -> Get ok with result:', operator)
+      this.query()
     }, error => {
 
     })
@@ -69,9 +73,15 @@ export class OperatorListComponent implements OnInit {
       }
     }).subscribe(operator => {
       console.log('Rebirth Modal -> Get ok with result:', operator)
+      this.query()
     }, error => {
 
     })
   }
+  delete(id:number){
+    this.operatorService.delete(id).subscribe(() => {
 
+    })
+    this.query()
+  }
 }

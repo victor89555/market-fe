@@ -20,7 +20,10 @@
       <form class="form-inline">
         <div class="form-group">
           <div class="input-group">
-            <input type="text" class="form-control" name="operator" id="exampleInputAmount" [(ngModel)]="qry_name" placeholder="姓名">
+            <div class="search-line">
+              <input type="text" class="form-control" name="name"  [(ngModel)]="queryOperator.name" placeholder="姓名">
+              <input type="text" class="form-control" name="mobile"  [(ngModel)]="queryOperator.mobile" placeholder="手机号">
+            </div>
           </div>
         </div>
         <button type="submit" class="btn btn-primary" (click)="query()">查询</button>
@@ -46,7 +49,7 @@
       >
         <ngx-datatable-column name="姓名" prop="name"></ngx-datatable-column>
         <ngx-datatable-column name="昵称" prop="nick_name"></ngx-datatable-column>
-        <ngx-datatable-column name="身份证" prop="idCard_no"></ngx-datatable-column>
+        <ngx-datatable-column name="身份证" prop="id_card_no"></ngx-datatable-column>
         <ngx-datatable-column name="手机号" prop="mobile"></ngx-datatable-column>
         <ngx-datatable-column name="座机" prop="tel"></ngx-datatable-column>
         <ngx-datatable-column name="性别" prop="sex">
@@ -58,6 +61,7 @@
         <ngx-datatable-column name="操作" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="operator">
             <button class="btn btn-default" (click)="edit(value);">修改</button>
+            <button class="btn btn-default" (click)="delete(value);">删除</button>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
