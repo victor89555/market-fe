@@ -94,6 +94,7 @@ export class ElectronicScaleFormComponent implements Modal, OnInit {
   }
 
   save() {
+    this.electronicScale.marketId = this.marketId
     this.electronicScaleService.save(this.electronicScale).subscribe(
       (electronicScale) => {
         this.dismiss.emit(electronicScale);
