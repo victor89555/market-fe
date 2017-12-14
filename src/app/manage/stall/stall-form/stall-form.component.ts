@@ -18,7 +18,7 @@ export class StallFormComponent implements Modal, OnInit {
   test: any
   marketId:number=null
   marketName:string
-  closed = false
+  closed = true
   close() {
     console.log('close');
     this.closed = true;
@@ -68,6 +68,7 @@ export class StallFormComponent implements Modal, OnInit {
     )
   }
   save() {
+    this.stall.marketId = this.marketId
     this.stallService.save(this.stall).subscribe(
       (stall) => {
         this.dismiss.emit(stall);
