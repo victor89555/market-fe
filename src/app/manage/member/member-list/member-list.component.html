@@ -53,8 +53,10 @@
         <ngx-datatable-column name="姓名" prop="name"></ngx-datatable-column>
         <ngx-datatable-column name="昵称" prop="nick_name"></ngx-datatable-column>
         <ngx-datatable-column name="手机号" prop="mobile"></ngx-datatable-column>
-        <ngx-datatable-column name="身份证号" prop="id_card_no"></ngx-datatable-column>
         <ngx-datatable-column name="会员卡号" prop="card_no"></ngx-datatable-column>
+        <ngx-datatable-column name="微信" prop="wechat_open_id"></ngx-datatable-column>
+        <ngx-datatable-column name="积分" prop="integral_amount"></ngx-datatable-column>
+        <ngx-datatable-column name="身份证号" prop="id_card_no"></ngx-datatable-column>
         <ngx-datatable-column name="编辑" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="member">
             <button class="btn btn-default" (click)="edit(value);">修改</button>

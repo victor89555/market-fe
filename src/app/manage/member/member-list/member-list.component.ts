@@ -51,7 +51,11 @@ export class MemberListComponent implements OnInit {
     )
   }
   reset() {
-
+    this.queryMember.idCardNo=""
+    this.queryMember.cardNo=""
+    this.queryMember.name=""
+    this.queryMember.mobile=""
+    this.query()
   }
   edit(id: number) {
     this.modalService.open<Member>({

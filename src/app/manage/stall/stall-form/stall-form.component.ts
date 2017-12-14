@@ -17,7 +17,7 @@ export class StallFormComponent implements Modal, OnInit {
   markets: Market[]
   test: any
   marketId:number=null
-  marketName:string
+  marketName:string =""
   closed = true
   close() {
     console.log('close');
