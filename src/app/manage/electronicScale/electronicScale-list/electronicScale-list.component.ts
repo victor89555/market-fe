@@ -52,8 +52,8 @@ export class ElectronicScaleListComponent implements OnInit {
     return market.name
   }
   query() {
-    this.electronicScaleService.query(this.queryElecScale.no, this.queryElecScale.market,
-      this.queryElecScale.status, this.page.pageNo).subscribe(
+    this.electronicScaleService.query(this.page.pageNo, null, this.queryElecScale.no, this.queryElecScale.market,
+      this.queryElecScale.status).subscribe(
       (page) => {
         this.page = page
         console.log(this.page);

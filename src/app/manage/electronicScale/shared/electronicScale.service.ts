@@ -14,15 +14,23 @@ export class ElectronicScaleService extends RebirthHttp {
   }
 
   @GET("electronicScales")
-  query(@Query("_filter_like_sequence_no") sequence = "", @Query("_filter_eq_market_id-long") market = "",
-        @Query("_filter_eq_status-int") status = "", @Query("pageNo") pageNo = 1,
-        @Query("pageSize") pageSize = 10): Observable<Page<any>> {
+  query(@Query("pageNo") pageNo = 1,@Query("pageSize") pageSize = 10,
+        @Query("_filter_like_sequence_no") sequence = "", @Query("_filter_eq_market_id-long") marketId = "",
+        @Query("_filter_eq_status-int") status = null,
+        @Query("_filter_eq_used-int") used = null, @Query("_filter_eq_shop_id-long") shopId = "") : Observable<Page<any>> {
     return null;
   }
 
-  @GET("electronicScales")
-  getAll(@Query("name") name = "", @Query("usable") usable = true): Observable<ElectronicScale[]> {
-    return null;
+  getAllotableElectronic(marketId): Observable<ElectronicScale[]> {
+    return this.query(1, 100000, null, marketId, 1, 1, null).map((page)=> {
+      return page.items || []
+    })
+  }
+
+  getAllotedElectronic(marketId, shopId):  Observable<ElectronicScale[]> {
+    return this.query(1, 100000, null, marketId, 1, 1, shopId).map((page) => {
+      return page.items || []
+    })
   }
 
   @GET("electronicScales/:id")

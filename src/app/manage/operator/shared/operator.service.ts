@@ -19,9 +19,15 @@ export class OperatorService extends RebirthHttp {
     return null;
   }
 
-  @GET("operators")
-  getAll(@Query("name") name = ""): Observable<Operator[]> {
-    return null;
+  getAll(): Observable<any[]> {
+    return this.query(null, null, 1, 100000).map((page)=> {
+      return page.items
+    })
+  }
+
+  @POST('operators')
+  add(idCardNo, mobile, name, nickname, sex, tel): Observable<Operator> {
+    return null
   }
 
   @GET("operators/:id")

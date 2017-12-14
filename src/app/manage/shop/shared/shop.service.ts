@@ -19,9 +19,10 @@ export class ShopService extends RebirthHttp {
     return null;
   }
 
-  @GET("shops")
-  getAll(@Query("name") name = ""): Observable<Shop[]> {
-    return null;
+  getAll(marketId): Observable<Shop[]> {
+    return this.query(marketId, null, null, null, 1, 10000).map((page)=> {
+      return page.items || []
+    })
   }
 
   @GET("shops/:id")
@@ -33,6 +34,7 @@ export class ShopService extends RebirthHttp {
   save(@Body shop: Shop): Observable<Shop> {
     return null;
   }
+
   /*@PUT('shops/:id')
   edit(@Path('id') id: number): Observable<Shop> {
     return null;
