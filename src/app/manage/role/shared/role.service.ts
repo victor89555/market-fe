@@ -15,7 +15,7 @@ export class RoleService extends RebirthHttp {
   }
 
   @GET("roles")
-  query(@Query("name") name = "", @Query("pageNo") pageNo = 1,
+  query(@Query("_filter_like_name") name = "", @Query("pageNo") pageNo = 1,
         @Query("pageSize") pageSize = 10): Observable<Page<any>> {
     return null;
   }
