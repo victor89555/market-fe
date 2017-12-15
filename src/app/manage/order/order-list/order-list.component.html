@@ -14,18 +14,44 @@
       <form class="form-inline">
         <div class="form-group">
           <div class="input-group">
-            <div class="search-line">
-              <select type="text" class="form-control" name="market" [(ngModel)]="queryOrder.marketId" title="市场">
+              <select type="text" class="form-control" name="market" [(ngModel)]="queryOrder.marketId" title="按市场搜索">
                 <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
               </select>
-              <input type="text" class="form-control"  [minLength]="0"
-                     reAutoComplete  [dataSource]="shops"
-                     [formatter]="shopNameFormatter" [value]="shopName" name="shop"
-                     (selectValueChange)="onShopNameChange($event)"
-                     #shopList="autoComplete"
-              />
-             <!-- <input type="text" class="form-control" name="shop" [(ngModel)]="queryOrder.shopId" placeholder="商户">-->
-              <input type="text" class="form-control" name="trancsitionNo" [(ngModel)]="queryOrder.trancsitionNo" placeholder="交易流水号">
+          </div>
+          <div class="input-group">
+            <ng-template #shopItemTemplate let-item="item" let-$index="$index"
+                         let-source="source"
+                         let-term="term">
+              <span>{{item.name}}</span>
+            </ng-template>
+            <ng-template #noResultItemTemplate let-term="term">
+              <span>没有符合条件的记录</span>
+            </ng-template>
+            <input type="text" class="form-control" name="language"  [minLength]="0"
+                   reAutoComplete  [dataSource]="shops" [(ngModel)]="shopName"
+                   [itemTemplate]="shopItemTemplate" [noResultItemTemplate]="noResultItemTemplate"
+                   [formatter]="shopNameFormatter"  placeholder="商户"
+                   (selectValueChange)="onShopNameChange($event)"
+                   #autoComplete1="autoComplete"/>
+            <div class="input-group-addon" (click)="autoComplete1.toggle($event)">
+              <i class="glyphicon glyphicon-menu-down"></i>
+            </div>
+            </div>
+          <div class="input-group">
+            <tg-dict-select dictName="PAY_WAY" [(ngModel)]="queryOrder.payWay" name="payWay" title="支付方式"></tg-dict-select>
+          </div>
+          <div class="input-group">
+            <input class="form-control" placeholder="开始时间" [dateFormat]="dateFormat"
+                   name="dp" [(ngModel)]="queryOrder.beginDate" reDatePicker #datePicker1="datePicker">
+            <div class="input-group-addon" (click)="datePicker1.toggle($event)">
+              <i class="glyphicon glyphicon-calendar"></i>
+            </div>
+          </div>
+          <div class="input-group">
+            <input class="form-control" placeholder="结束时间" [dateFormat]="dateFormat"
+                   name="dp" [(ngModel)]="queryOrder.endDate" reDatePicker #datePicker2="datePicker">
+            <div class="input-group-addon" (click)="datePicker2.toggle($event)">
+              <i class="glyphicon glyphicon-calendar"></i>
             </div>
           </div>
         </div>
@@ -50,8 +76,8 @@
         [rows]="page?.items"
         (page)='setPage($event)'
       >
-        <ngx-datatable-column name="市场" prop="market_id"></ngx-datatable-column>
-        <ngx-datatable-column name="商户" prop="shop_id"></ngx-datatable-column>
+        <ngx-datatable-column name="市场" prop="market_name"></ngx-datatable-column>
+        <ngx-datatable-column name="商户" prop="shop_name"></ngx-datatable-column>
         <ngx-datatable-column name="会员" prop="member_name"></ngx-datatable-column>
         <ngx-datatable-column name="流水交易号" prop="trans_log_no"></ngx-datatable-column>
         <ngx-datatable-column name="支付方式" prop="pay_way">

@@ -23,11 +23,11 @@ export class OrderListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  queryOrder ={"shopId":"","marketId":"","trancsitionNo":""}
+  queryOrder ={"shopId":null,"marketId":null,payWay:null,beginDate : "",endDate: ""}
   markets:Market[]
   shops:Shop[]
-  shopId:number //改变时，商户的ID
   shopName:string=""
+  dateFormat: string
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private orderService: OrderService,
@@ -38,6 +38,7 @@ export class OrderListComponent implements OnInit {
   ngOnInit(): void {
     this.query()
     this.getAllMarkets()
+    this.queryShops()
   }
   queryShops() {
     this.shopService.getAll(null).subscribe(
@@ -48,14 +49,14 @@ export class OrderListComponent implements OnInit {
   }
 
   onShopNameChange = (shop: Shop) => { // 选中商户改变时调用
-    this.shopId = shop.id
+    this.queryOrder.shopId = shop.id
   }
   shopNameFormatter = (shop: Shop) => { // 商户名称输入显示数据
     return shop.name || ""
   }
   query() {
     this.orderService.query(this.queryOrder.marketId, this.queryOrder.shopId,
-      this.queryOrder.trancsitionNo,1,10).subscribe(
+      this.queryOrder.payWay,this.queryOrder.beginDate,this.queryOrder.endDate,1,10).subscribe(
       (page) => {
         this.page = page
       }
@@ -69,9 +70,11 @@ export class OrderListComponent implements OnInit {
     )
   }
   reset() {
-    this.queryOrder.marketId="";
-    this.queryOrder.shopId="";
-    this.queryOrder.trancsitionNo="";
+    this.queryOrder.marketId=null;
+    this.queryOrder.shopId=null;
+    this.queryOrder.payWay="";
+    this.queryOrder.beginDate=null
+    this.queryOrder.endDate=null
     this.shopName=""
     this.query()
   }

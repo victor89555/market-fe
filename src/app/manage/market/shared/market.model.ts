@@ -1,4 +1,4 @@
-export  interface Market {
+export class Market {
   id: number
   name: string
   addr: string

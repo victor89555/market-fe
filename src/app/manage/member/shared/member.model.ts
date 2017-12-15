@@ -1,4 +1,4 @@
-export  class Member {
+export class Member {
   id: number
   name: string
   mobile: string

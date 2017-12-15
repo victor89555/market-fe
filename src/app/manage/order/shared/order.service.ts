@@ -14,8 +14,9 @@ export class OrderService extends RebirthHttp {
 
   @GET("orders")
   query(@Query("_filter_eq_market_id-long") marketId = "", @Query("_filter_eq_shop_id-long") shopId = "",
-        @Query("_filter_like_trans_log_no") trancsitionNo = "",@Query("pageNo") pageNo = 1,
-        @Query("pageSize") pageSize = 10): Observable<Page<any>> {
+        @Query("_filter_eq_pay_way-int") payWay = null,
+        @Query("_filter_ge_begin_time-date") beginTime = "",@Query("_filter_le_end_time-date") endTime = "",
+        @Query("pageNo") pageNo = 1, @Query("pageSize") pageSize = 10): Observable<Page<any>> {
     return null;
   }
 
