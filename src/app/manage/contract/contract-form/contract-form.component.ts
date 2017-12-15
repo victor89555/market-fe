@@ -13,7 +13,7 @@ import {ShopService} from "../../shop/shared/shop.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContractFormComponent implements Modal, OnInit {
-  context: { id: number,isShopForm: boolean,marketId: number };
+  context: { id: number,isShopForm: boolean,marketId: number ,add:boolean};
   dismiss: EventEmitter<Contract>;
   uploadFiles: any[];
   contract: any = {}
@@ -57,7 +57,14 @@ export class ContractFormComponent implements Modal, OnInit {
       }
     )
   }
-
+  update() {
+    console.log(this.contract);
+    this.contractService.update(this.context.id, this.contract).subscribe(
+      (contract) => {
+        this.dismiss.emit(contract);
+      }
+    )
+  }
   cancel() {
     this.dismiss.error(this.contract);
   }

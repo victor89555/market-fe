@@ -1,10 +1,11 @@
-import {Body, GET, Path, POST, Query, RebirthHttp} from "rebirth-http";
+import {Body, GET, Path, POST, Query, RebirthHttp,PUT} from "rebirth-http";
 import {Observable} from "rxjs/Observable";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import "rxjs/add/operator/map";
 import {Contract} from "./contract.model";
 import {Page} from "../../../thurder-ng/models/page.model";
+import {ElectronicScale} from "../../electronicScale/shared/electronicScale.model";
 
 @Injectable()
 export class ContractService extends RebirthHttp {
@@ -27,7 +28,10 @@ export class ContractService extends RebirthHttp {
   get(@Path("id") id: number): Observable<Contract> {
     return null
   }
-
+  @PUT("contracts/:id")
+  update( @Path("id") id: number, @Body contract: Contract): Observable<Contract> {
+    return null;
+  }
   @POST('contracts')
   save(@Body contract: Contract): Observable<Contract> {
     return null;

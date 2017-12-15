@@ -49,15 +49,6 @@ export class StallFormComponent implements Modal, OnInit {
       }
     )
   }
-  onMarketNameChange =(market: Market) =>{ // 选中市场改变时调用
-    console.log(market);
-    this.marketId = market.id
-    console.log(this.marketId)
-  }
-  marketNameFormatter = (market: Market) => { // 市场名称输入显示数据
-    return market.name
-  }
-
   getStall(){
     this.stallService.get(this.context.id).subscribe(
       (stall) => {

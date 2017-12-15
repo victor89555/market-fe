@@ -21,12 +21,14 @@
           <div class="input-group">
             <div class="search-line">
 
-              <input type="text" class="form-control"  [minLength]="0"
+            <!--  <input type="text" class="form-control"  [minLength]="0"
                      reAutoComplete  [dataSource]="markets" placeholder="市场查询"
                      [formatter]="marketNameFormatter" [(ngModel)]="marketName" name="market"
                      (selectValueChange)="onMarketNameChange($event)"
-                     />
-
+                     />-->
+              <select type="text" class="form-control" name="market" [(ngModel)]="queryStall.marketId">
+                <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
+              </select>
               <tg-dict-select dictName="FUNC_TYPE" [(ngModel)]="queryStall.func" name="func"></tg-dict-select>
               <tg-dict-select dictName="ENABLE_STATUS" [(ngModel)]="queryStall.status" name="status"></tg-dict-select>
               <input type="text" class="form-control" name="stall" [(ngModel)]="queryStall.name" placeholder="摊位名称查询">

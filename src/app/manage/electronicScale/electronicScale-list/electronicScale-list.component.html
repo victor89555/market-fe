@@ -20,11 +20,9 @@
         <div class="form-group">
           <div class="input-group">
             <div class="search-line">
-              <input type="text" class="form-control"  [minLength]="0"
-                     reAutoComplete  [dataSource]="markets" placeholder="市场查询"
-                     [formatter]="marketNameFormatter" [(ngModel)]="marketName" name="market"
-                     (selectValueChange)="onMarketNameChange($event)"
-              />
+              <select type="text" class="form-control" name="market" [(ngModel)]="queryElecScale.marketId">
+                <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
+              </select>
               <input type="text" class="form-control" name="sequence" [(ngModel)]="queryElecScale.no" placeholder="电子秤序列号">
               <tg-dict-select dictName="ELECTRONICSCALE_STATUS" [(ngModel)]="queryElecScale.status" name="status"></tg-dict-select>
             </div>

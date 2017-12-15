@@ -23,7 +23,7 @@ export class ElectronicScaleListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  queryElecScale = {"market":null, "no":"","status":""}
+  queryElecScale = {"marketId":null, "no":"","status":""}
   markets:Market[] = []
   marketName = ""
 
@@ -45,14 +45,8 @@ export class ElectronicScaleListComponent implements OnInit {
       }
     )
   }
-  onMarketNameChange =(market: Market) =>{ // 选中市场改变时调用
-    this.queryElecScale.market = market.id
-  }
-  marketNameFormatter = (market: Market) => { // 市场名称输入显示数据
-    return market.name
-  }
   query() {
-    this.electronicScaleService.query(this.page.pageNo, null, this.queryElecScale.no, this.queryElecScale.market,
+    this.electronicScaleService.query(this.page.pageNo, null, this.queryElecScale.no, this.queryElecScale.marketId,
       this.queryElecScale.status).subscribe(
       (page) => {
         this.page = page
@@ -69,7 +63,7 @@ export class ElectronicScaleListComponent implements OnInit {
   reset() {
     this.queryElecScale.no = ""
     this.marketName = ""
-    this.queryElecScale.market = null
+    this.queryElecScale.marketId = null
     this.queryElecScale.status = ""
     this.query()
   }

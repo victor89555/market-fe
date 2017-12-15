@@ -22,7 +22,7 @@ export class StallListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  queryStall = {"market":null, "shop":"", "func":"", "status":"", "name":""}
+  queryStall = {"marketId":null, "shop":"", "func":"", "status":"", "name":""}
   markets:Market[] = []
   marketName = ""
   constructor(private modalService: ModalService,
@@ -37,7 +37,7 @@ export class StallListComponent implements OnInit {
 
   }
   query() {
-    this.stallService.query(this.queryStall.market, this.queryStall.shop,
+    this.stallService.query(this.queryStall.marketId, this.queryStall.shop,
       this.queryStall.func,this.queryStall.status,this.queryStall.name,this.page.pageNo).subscribe(
       (page) => {
         this.page = page
@@ -51,16 +51,10 @@ export class StallListComponent implements OnInit {
       }
     )
   }
-  onMarketNameChange =(market: Market) =>{ // 选中市场改变时调用
-    this.queryStall.market = market.id
-  }
-  marketNameFormatter = (market: Market) => { // 市场名称输入显示数据
-    return market.name
-  }
 
   reset() {
     this.queryStall.status = ""
-    this.queryStall.market = null
+    this.queryStall.marketId = null
     this.marketName = ""
     this.queryStall.shop = ""
     this.queryStall.func = ""

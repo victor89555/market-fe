@@ -22,7 +22,7 @@
           <div class="input-group">
             <input type="text" class="form-control"  [minLength]="0"
                    reAutoComplete  [dataSource]="shops" placeholder="商户"
-                   [formatter]="shopNameFormatter" name="shop"
+                   [formatter]="shopNameFormatter" name="shop" [value]="shopName"
                    (selectValueChange)="onShopNameChange($event)"
             />
             <!--<input type="text" class="form-control" id="exampleInputAmount" name="order" [(ngModel)]="qry_name" placeholder="商户">-->

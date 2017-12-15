@@ -21,9 +21,9 @@ export class ContractListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  qry_name: number = null
   shops:Shop[]
   shopId:number
+  shopName:string = ""
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private contractService: ContractService,
@@ -50,7 +50,7 @@ export class ContractListComponent implements OnInit {
     return shop.name || ""
   }
   query() {
-    this.contractService.query(this.qry_name, 1,10).subscribe(
+    this.contractService.query(this.shopId, 1,10).subscribe(
       (page) => {
         this.page = page
       }
@@ -58,7 +58,8 @@ export class ContractListComponent implements OnInit {
   }
 
   reset() {
-    this.qry_name = null
+    this.shopId = null
+    this.shopName=""
     this.query()
   }
 
@@ -67,9 +68,11 @@ export class ContractListComponent implements OnInit {
       component: ContractFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
+        "add":true
       }
     }).subscribe(contract => {
       console.log('Rebirth Modal -> Get ok with result:', contract)
+      this.query()
     }, error => {
 
     })
@@ -84,6 +87,7 @@ export class ContractListComponent implements OnInit {
       }
     }).subscribe(contract => {
       console.log('Rebirth Modal -> Get ok with result:', contract)
+      this.query()
     }, error => {
 
     })
