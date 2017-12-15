@@ -31,7 +31,12 @@ export class ShopService extends RebirthHttp {
   }
 
   @POST('shops')
-  save(@Body shop: Shop): Observable<Shop> {
+  add(@Body shop: Shop): Observable<Shop> {
+    return null;
+  }
+
+  @PUT('shops/:id')
+  save(@Path("id") id:number, @Body shop: Shop): Observable<Shop> {
     return null;
   }
 

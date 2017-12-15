@@ -23,6 +23,7 @@ import {HttpClient} from "@angular/common/http";
 import {ContractFormComponent} from "../../contract/contract-form/contract-form.component";
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ElectronicScale} from "../../electronicScale/shared/electronicScale.model";
+import {OperatorFormComponent} from "../../operator/operator-form/operator-form.component";
 
 @Component({
   selector: 'app-shop-form',
@@ -39,12 +40,12 @@ export class ShopFormComponent implements OnInit {
               private operatorService: OperatorService,
               private electronicScaleService: ElectronicScaleService,
               private contractService: ContractService,
-              private httpClient: HttpClient,
               private modalService: ModalService,
               private dialogService: DialogService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router
+  ) {
   }
 
   dismiss: EventEmitter<Shop>;
@@ -52,7 +53,7 @@ export class ShopFormComponent implements OnInit {
   shopId: number //商户ID
   // 页面组件
   pageComponent = {
-    tabs: false
+    newShop: true
   }
   shop: Shop = new Shop() //商户信息
   operatorName : string = "请选择经营者"
@@ -62,7 +63,7 @@ export class ShopFormComponent implements OnInit {
   stalls: Stall[] //摊位列表
   stallName: string = "请选择摊位"
   contracts: Contract[] //合同列表
-  allotableElectronicScales: any[] //可分配的电子秤列表
+  allotableElectronicScales = [] //可分配的电子秤列表
   allotedElectronicScales = [] //已分配的电子秤列表
   selectedScale: ElectronicScale
 
@@ -83,15 +84,17 @@ export class ShopFormComponent implements OnInit {
   // 初始化添加商户
   initAddShop() {
     console.log('初始化添加商户界面...');
-    this.pageComponent.tabs = false;
+    this.pageComponent.newShop = true;
+    this.loadOperators();
+    this.loadMarket();
   }
 
   // 初始化修改商户
   initEditShop() {
     console.log('初始化修改商户界面...');
-    this.pageComponent.tabs = true;
+    this.pageComponent.newShop = false;
     this.loadShop().subscribe(() => {
-      this.loadOperator();
+      this.loadOperators();
       this.loadMarket();
     });
   }
@@ -102,52 +105,90 @@ export class ShopFormComponent implements OnInit {
       (shop) => {
         console.log(shop)
         this.shop = shop
+        this.shop.operatorId && this.loadOperator(this.shop.operatorId)
+        this.stallName = this.shop.stallName
+        // this.shop.stallId && this.loadStall(this.shop.stallId);
         this.changeDetectorRef.markForCheck()
       }
     )
     return shopOb
   }
 
-  loadOperator() { // 加载经营者
+  loadOperator(operatorId) { // 加载经营者
+    // console.log(this.shop.operatorId)
+    this.operatorService.get(operatorId).subscribe(
+      (operator) => {
+        // console.log(operator)
+        this.operatorName = operator.name + " " + operator.tel
+      }
+    )
+  }
+
+  loadOperators() { // 经营者列表
     this.operatorService.getAll().subscribe(
       (operators) => {
-        console.log(operators)
+        // console.log(operators)
         this.operators = operators
       }
     )
   }
 
-  loadOperators() { // 经营者
-    this.operatorService.getAll().subscribe(
-      (operators) => {
-        console.log(operators)
-        this.operators = operators
+  loadStalls() {  //摊位列表
+    this.stallService.getStalls(this.shop.marketId).subscribe(
+      (stalls) => {
+        // console.log(stalls)
+        this.stalls = stalls  //摊位对象
       }
     )
   }
 
-  addOperator() { //添加经营者
-    console.log("打开添加页面")
-    this.operatorService;
+  loadStall(stallId) { //摊位名
+    this.stallService.get(stallId).subscribe(
+      (stall) => {
+        // console.log(stall)
+        this.stallName = stall.name;
+      }
+    )
   }
 
-  stallNameFormatter = (stall: Stall) => { // 摊位输入显示数据
-    return stall.name
+  loadMarket() { //市场
+    let marketOb = this.marketService.getAll();
+    marketOb.subscribe(
+      (markets) => {
+        // console.log(markets)
+        this.markets = markets
+        this.loadStalls();
+        if(this.shopId>0){
+          this.loadElectronicScale()
+        }
+        this.changeDetectorRef.markForCheck()
+      }
+    )
+    return marketOb
   }
 
-  scaleNameFormatter = (scale: any) => { // 摊位输入显示数据
-    return scale.sequence_no
+  onMarketChange(marketId) {
+    this.shop.marketId = marketId
+    this.loadStalls();
+  }
+
+  onFuncTypeChange(funcType) {
+    this.shop.funcType = funcType
+    // console.log(this.shop)
+  }
+
+  onStatusChange(status) {
+    this.shop.status = status
   }
 
   onStallNameChange(stall: Stall) { // 摊位内容改变时调用
-    console.log(stall)
     this.shop.stallId = stall.id
-    this.shop.funcType = stall.funcType
+    this.shop.funcType = this.shop.funcType ? this.shop.funcType : stall.funcType
   }
 
   onScaleSelected(scale:any) {
     this.selectedScale = new ElectronicScale()
-    this.selectedScale.shopId = scale.shop_id
+    this.selectedScale.id = scale.id
     this.selectedScale.lastUpdateUser = scale.last_update_user
     this.selectedScale.sequenceNo = scale.sequence_no
     this.selectedScale.softVersion = scale.soft_version
@@ -159,53 +200,47 @@ export class ShopFormComponent implements OnInit {
   operatorNameFormatter = (operator: Operator) => { // 经营者输入显示数据
     return operator.name + " " + operator.tel
   }
+
   onOperatorNameChange = (operator: Operator) => { // 经营者内容改变时调用
-    console.log(operator)
-
+    this.shop.operatorId = operator.id
   }
 
-  loadStall() {  //摊位
-    console.log(this.shop.marketId,this.shop.id)
-    this.stallService.getStalls(
-      this.shop.marketId,
-      this.shop.id
-      // this.shop.funcType,
-      // this.selectedScale.status
-    ).subscribe(
-      (stalls) => {
-        console.log(stalls)
-        this.stalls = stalls  //摊位对象
+  addOperator() { //添加经营者
+    this.modalService.open<Operator>({
+      component: OperatorFormComponent,
+      componentFactoryResolver: this.componentFactoryResolver,
+      resolve: {
+        "add":true
       }
-    )
+    }).subscribe(operator => {
+      console.log('Rebirth Modal -> Get ok with result:', operator)
+      this.loadOperators()
+    }, error => {
+
+    })
   }
 
-  loadMarket() { //市场
-    let marketOb = this.marketService.getAll();
-    marketOb.subscribe(
-      (markets) => {
-        // console.log(markets)
-        this.markets = markets
-      }
-    )
-    return marketOb
+  stallNameFormatter = (stall: Stall) => { // 摊位输入显示数据
+    return stall.name
   }
 
-  changeMarket(marketId) {
-    // console.log(marketId, this.shop.marketId);
-    // this.sele.marketId = marketId;
-    this.loadStall();
+  scaleNameFormatter = (scale: any) => { // 电子秤输入显示数据
+    return scale.sequence_no
   }
+
   loadElectronicScale() { // 电子秤
     this.electronicScaleService.getAllotableElectronic(this.shop.marketId).subscribe(
       (electronicScales) => {
         // console.log(electronicScales)
         this.allotableElectronicScales = electronicScales
+        this.changeDetectorRef.detectChanges()
       }
     )
     this.electronicScaleService.getAllotedElectronic(this.shop.marketId, this.shopId).subscribe(
       (electronicScales) => {
         // console.log(electronicScales)
         this.allotedElectronicScales = electronicScales
+        this.changeDetectorRef.detectChanges()
       }
     )
   }
@@ -216,6 +251,7 @@ export class ShopFormComponent implements OnInit {
       (page) => {
         // console.log(page)
         this.contracts = page.items
+        this.changeDetectorRef.markForCheck()
       }
     )
   }
@@ -234,12 +270,36 @@ export class ShopFormComponent implements OnInit {
       );
   }
 
-  allot() {   //添加电子秤
-    this.electronicScaleService.update(this.selectedScale.id, this.selectedScale)
+  //分配电子秤
+  allotElectronicScale() {
+    // console.log(this.selectedScale)
+    this.selectedScale.shopId = this.shopId;
+    this.electronicScaleService.bind(this.selectedScale.id, this.selectedScale).subscribe(()=>{
+      this.loadElectronicScale()
+    })
   }
 
-  save() {
-    this.shopService.save(this.shop).subscribe(
+  //解绑电子秤
+  unbindElectronicScale(id) {
+    this.electronicScaleService.unbind(id).subscribe(() => {
+      this.loadElectronicScale()
+    })
+  }
+
+  //添加商户
+  addShop() {
+    console.log(this.shop);
+    this.shopService.add(this.shop).subscribe(
+      (shop) => {
+        this.router.navigate(['/manage/shops']);
+      }
+    )
+  }
+
+  //编辑保存商户
+  editShop() {
+    console.log(this.shop);
+    this.shopService.save(this.shopId, this.shop).subscribe(
       (shop) => {
         this.router.navigate(['/manage/shops']);
       }
@@ -248,11 +308,6 @@ export class ShopFormComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['/manage/shops']);
-  }
-
-  delElectronicScale(sequenceNo) { //删除电子秤
-    console.log('删除' + sequenceNo)
-    // this.electronicScaleService.unbind()
   }
 
   addContract(id: number) { //增加合同

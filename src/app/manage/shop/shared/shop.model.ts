@@ -6,6 +6,7 @@ export class Shop {
   funcType: number
   operatorId: number
   status: number
+  stallName: string
   creatTime: string
   updateKey: string
 }

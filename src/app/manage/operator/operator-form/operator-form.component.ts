@@ -30,6 +30,7 @@ export class OperatorFormComponent implements Modal, OnInit {
     )
   }
   save() {
+    console.log("save")
     this.operatorService.save(this.operator).subscribe(
       (operator) => {
         this.dismiss.emit(operator);

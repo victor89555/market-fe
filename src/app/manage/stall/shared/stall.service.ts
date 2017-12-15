@@ -20,8 +20,8 @@ export class StallService extends RebirthHttp {
     return null;
   }
 
-  getStalls(marketId, shopId): Observable<Stall[]> {
-    return this.query(marketId, shopId, null, null, null, 1, 1000).map((page)=>{
+  getStalls(marketId): Observable<Stall[]> {
+    return this.query(marketId, null, null, null, null, 1, 1000).map((page)=>{
       return page.items || []
     });
   }
