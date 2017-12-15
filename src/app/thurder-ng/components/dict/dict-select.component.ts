@@ -16,7 +16,9 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms"
 export class DictSelectComponent implements OnInit, ControlValueAccessor {
 
   @Input() dictName: string
-  private _selectedVal: any
+  @Input() emptyText: string
+
+  private _selectedVal: any = ""
   dictCodes: any[]
 
   private onChange = (_: any) => null;

@@ -23,7 +23,7 @@
             <div class="search-line">
               <input type="text" class="form-control" name="marketName" [(ngModel)]="queryMarket.name" placeholder="市场名称">
               <input type="text" class="form-control" name="marketAddress" [(ngModel)]="queryMarket.address" placeholder="市场地址">
-              <tg-dict-select dictName="MARKET_STATUS" [(ngModel)]="queryMarket.state" name="status"></tg-dict-select>
+              <tg-dict-select dictName="MARKET_STATUS" [emptyText]="'-请选择状态-'" [(ngModel)]="queryMarket.state" name="status"></tg-dict-select>
             </div>
           </div>
         </div>
