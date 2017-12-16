@@ -41,21 +41,21 @@
             <tg-dict-select dictName="PAY_WAY" [(ngModel)]="queryOrder.payWay" name="payWay" title="支付方式"></tg-dict-select>
           </div>
           <div class="input-group">
-            <input class="form-control" placeholder="开始时间" [dateFormat]="dateFormat"
+            <input class="form-control" placeholder="开始时间"
                    name="dp" [(ngModel)]="queryOrder.beginDate" reDatePicker #datePicker1="datePicker">
             <div class="input-group-addon" (click)="datePicker1.toggle($event)">
               <i class="glyphicon glyphicon-calendar"></i>
             </div>
           </div>
           <div class="input-group">
-            <input class="form-control" placeholder="结束时间" [dateFormat]="dateFormat"
+            <input class="form-control" placeholder="结束时间"
                    name="dp" [(ngModel)]="queryOrder.endDate" reDatePicker #datePicker2="datePicker">
             <div class="input-group-addon" (click)="datePicker2.toggle($event)">
               <i class="glyphicon glyphicon-calendar"></i>
             </div>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary" (click)="query()">查询</button>
+        <button type="submit" class="btn btn-primary" (click)="query(true)">查询</button>
         <button type="submit" class="btn btn-primary" (click)="reset()">重置</button>
       </form>
     </div>

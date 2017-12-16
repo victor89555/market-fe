@@ -27,7 +27,8 @@ export class OrderListComponent implements OnInit {
   markets:Market[]
   shops:Shop[]
   shopName:string=""
-  dateFormat: string
+  dateFormat: any={"beginDate":"","endDate":""}
+
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private orderService: OrderService,
@@ -36,7 +37,7 @@ export class OrderListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.query()
+    this.query(false)
     this.getAllMarkets()
     this.queryShops()
   }
@@ -54,14 +55,31 @@ export class OrderListComponent implements OnInit {
   shopNameFormatter = (shop: Shop) => { // 商户名称输入显示数据
     return shop.name || ""
   }
-  query() {
+  query(second:boolean) {
+    if(second){
+      this.dateFormat.beginDate = this.formatDateTime(this.queryOrder.beginDate)
+      this.dateFormat.endDate = this.formatDateTime(this.queryOrder.endDate)
+    }
+    debugger
     this.orderService.query(this.queryOrder.marketId, this.queryOrder.shopId,
-      this.queryOrder.payWay,this.queryOrder.beginDate,this.queryOrder.endDate,1,10).subscribe(
+      this.queryOrder.payWay,this.dateFormat.beginDate,this.dateFormat.endDate,1,10).subscribe(
       (page) => {
         this.page = page
       }
     )
   }
+
+
+  formatDateTime(timeStamp) { // 时间格式化
+    let date = new Date();
+    date.setTime(timeStamp);
+    let y = date.getFullYear();
+    let m:number|string = date.getMonth() + 1;
+    m =  m < 10 ? ('0' + m) : m;
+    let d :number|string = date.getDate();
+    d = d < 10 ? ('0' + d) : d
+    return y + '-' + m + '-' + d
+  };
   getAllMarkets(){
     this.marketService.getAll().subscribe(
       (markets)=>{
@@ -76,7 +94,7 @@ export class OrderListComponent implements OnInit {
     this.queryOrder.beginDate=null
     this.queryOrder.endDate=null
     this.shopName=""
-    this.query()
+    this.query(false)
   }
 
   add() {
