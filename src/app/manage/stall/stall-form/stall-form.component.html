@@ -23,11 +23,6 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">所属市场:</label>
       <div class="col-sm-10">
-       <!-- <input type="text" class="form-control"  [minLength]="0"
-               reAutoComplete  [dataSource]="markets"
-               [formatter]="marketNameFormatter" [value]="marketName" name="market"
-               (selectValueChange)="onMarketNameChange($event)"
-        />-->
         <select type="text" class="form-control" name="market" [(ngModel)]="marketId">
           <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
         </select>
@@ -42,7 +37,7 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">状态:</label>
       <div class="col-sm-10">
-        <tg-dict-select dictName="ENABLE_STATUS" [(ngModel)]="stall.status"></tg-dict-select>
+        <tg-dict-select dictName="STALL_STATUS" [(ngModel)]="stall.status"></tg-dict-select>
       </div>
     </div>
   </div>

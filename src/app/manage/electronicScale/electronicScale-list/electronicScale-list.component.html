@@ -18,15 +18,36 @@
     <div class="col-xs-12">
       <form class="form-inline">
         <div class="form-group">
+            <select type="text" class="form-control" name="market" [(ngModel)]="queryElecScale.marketId" title="请选择市场">
+              <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
           <div class="input-group">
-            <div class="search-line">
-              <select type="text" class="form-control" name="market" [(ngModel)]="queryElecScale.marketId">
-                <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
-              </select>
-              <input type="text" class="form-control" name="sequence" [(ngModel)]="queryElecScale.no" placeholder="电子秤序列号">
-              <tg-dict-select dictName="ELECTRONICSCALE_STATUS" [(ngModel)]="queryElecScale.status" name="status"></tg-dict-select>
+            <ng-template #shopItemTemplate let-item="item" let-$index="$index"
+                         let-source="source"
+                         let-term="term">
+              <span>{{item.name}}</span>
+            </ng-template>
+            <ng-template #noResultItemTemplate let-term="term">
+              <span>没有符合条件的记录</span>
+            </ng-template>
+            <input type="text" class="form-control" name="language"  [minLength]="0"
+                   reAutoComplete  [dataSource]="shops" [(ngModel)]="shopName"
+                   [itemTemplate]="shopItemTemplate" [noResultItemTemplate]="noResultItemTemplate"
+                   [formatter]="shopNameFormatter"  placeholder="商户"
+                   (selectValueChange)="onShopNameChange($event)"
+                   #autoComplete1="autoComplete"/>
+            <div class="input-group-addon" (click)="autoComplete1.toggle($event)">
+              <i class="glyphicon glyphicon-menu-down"></i>
             </div>
           </div>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="sequence" [(ngModel)]="queryElecScale.no" placeholder="电子秤序列号">
+        </div>
+        <div class="form-group">
+            <tg-dict-select dictName="ELECTRONICSCALE_STATUS" [emptyText]="'-请选择状态-'" [(ngModel)]="queryElecScale.status" name="status"></tg-dict-select>
         </div>
         <button type="submit" class="btn btn-primary" (click)="query()">查询</button>
         <button type="submit" class="btn btn-primary" (click)="reset()">重置</button>

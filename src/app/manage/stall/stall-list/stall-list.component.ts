@@ -7,6 +7,8 @@ import {MarketService} from "../../market/shared/market.service";
 import {Page} from "../../../thurder-ng/models/page.model";
 import {Operator} from "../../operator/shared/operator.model";
 import {Market} from "../../market/shared/market.model";
+import {Shop} from "../../shop/shared/shop.model";
+import { ShopService} from "../../shop/shared/shop.service";
 
 @Component({
   selector: 'app-stall-list',
@@ -22,22 +24,38 @@ export class StallListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  queryStall = {"marketId":null, "shop":"", "func":"", "status":"", "name":""}
+  queryStall = {"marketId":null, "shopId":null, "func":"", "status":"", "name":""}
   markets:Market[] = []
   marketName = ""
+  shops:Shop[]
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private stallService: StallService,
-              private marketService: MarketService) {
+              private marketService: MarketService,
+              private shopService:ShopService) {
   }
 
   ngOnInit(): void {
     this.query()
     this.getAllMarkets()
+    this.queryShops()
+  }
+  queryShops() {
+    this.shopService.getAll(null).subscribe(
+      (shops) => {
+        this.shops = shops
+      }
+    )
+  }
 
+  onShopNameChange = (shop: Shop) => { // 选中商户改变时调用
+    this.queryStall.shopId = shop.id
+  }
+  shopNameFormatter = (shop: Shop) => { // 商户名称输入显示数据
+    return shop.name || ""
   }
   query() {
-    this.stallService.query(this.queryStall.marketId, this.queryStall.shop,
+    this.stallService.query(this.queryStall.marketId, this.queryStall.shopId,
       this.queryStall.func,this.queryStall.status,this.queryStall.name,this.page.pageNo).subscribe(
       (page) => {
         this.page = page
@@ -56,7 +74,7 @@ export class StallListComponent implements OnInit {
     this.queryStall.status = ""
     this.queryStall.marketId = null
     this.marketName = ""
-    this.queryStall.shop = ""
+    this.queryStall.shopId = null
     this.queryStall.func = ""
     this.queryStall.name = ""
     this.query()

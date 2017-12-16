@@ -59,8 +59,11 @@ export class OrderListComponent implements OnInit {
     if(second){
       this.dateFormat.beginDate = this.formatDateTime(this.queryOrder.beginDate)
       this.dateFormat.endDate = this.formatDateTime(this.queryOrder.endDate)
+      if(this.dateFormat.beginDate=="1970-01-01"){
+        this.dateFormat.beginDate=null
+        this.dateFormat.endDate=null
+      }
     }
-    debugger
     this.orderService.query(this.queryOrder.marketId, this.queryOrder.shopId,
       this.queryOrder.payWay,this.dateFormat.beginDate,this.dateFormat.endDate,1,10).subscribe(
       (page) => {
@@ -93,6 +96,8 @@ export class OrderListComponent implements OnInit {
     this.queryOrder.payWay="";
     this.queryOrder.beginDate=null
     this.queryOrder.endDate=null
+    this.dateFormat.beginDate=null
+    this.dateFormat.endDate=null
     this.shopName=""
     this.query(false)
   }

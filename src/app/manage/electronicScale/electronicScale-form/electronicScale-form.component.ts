@@ -94,6 +94,7 @@ export class ElectronicScaleFormComponent implements Modal, OnInit {
   }
 
   save() {
+    this.electronicScale.shopId = this.shopId
     this.electronicScale.marketId = this.marketId
     this.electronicScaleService.save(this.electronicScale).subscribe(
       (electronicScale) => {
@@ -103,6 +104,7 @@ export class ElectronicScaleFormComponent implements Modal, OnInit {
   }
 
   update() {
+    this.electronicScale.shopId = this.shopId
     this.electronicScale.marketId = this.marketId
     this.electronicScale.id = this.context.id;
     console.log(this.electronicScale);
