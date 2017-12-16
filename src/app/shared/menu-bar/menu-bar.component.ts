@@ -74,6 +74,7 @@ export class MenuBarComponent implements OnInit {
       children: [
         {title: "用户管理",link:"/manage/users",active: false,icon: "user1"},
         {title: "角色管理",link:"/manage/roles",active: false,icon: "profile"},
+        {title: "会员管理",link:"/manage/members",active: false,icon: "profile"},
         {title: "资源管理",link:"/manage/resources",active: false,icon: "box"}
       ]
     }

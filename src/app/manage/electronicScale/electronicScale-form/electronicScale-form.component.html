@@ -50,7 +50,7 @@
             <span>没有符合条件的记录</span>
           </ng-template>
           <input type="text" class="form-control" name="language"  [minLength]="0"
-                 reAutoComplete  [dataSource]="shops" [(ngModel)]="shopName"
+                 reAutoComplete  [dataSource]="shops" [value]="shopName"
                  [itemTemplate]="shopItemTemplate" [noResultItemTemplate]="noResultItemTemplate"
                  [formatter]="shopNameFormatter"
                  (selectValueChange)="onShopNameChange($event)"
