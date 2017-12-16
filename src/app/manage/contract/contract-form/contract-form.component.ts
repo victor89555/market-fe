@@ -42,6 +42,7 @@ export class ContractFormComponent implements Modal, OnInit {
       this.loadContract();
     }
   }
+
   loadContract(){
     this.contractService.get(this.context.id).subscribe(
       (contract) => {
@@ -50,6 +51,7 @@ export class ContractFormComponent implements Modal, OnInit {
       }
     )
   }
+
   save() {
     this.contractService.save(this.contract).subscribe(
       (contract) => {
@@ -57,6 +59,7 @@ export class ContractFormComponent implements Modal, OnInit {
       }
     )
   }
+
   update() {
     console.log(this.contract);
     this.contractService.update(this.context.id, this.contract).subscribe(
@@ -65,6 +68,7 @@ export class ContractFormComponent implements Modal, OnInit {
       }
     )
   }
+
   cancel() {
     this.dismiss.error(this.contract);
   }

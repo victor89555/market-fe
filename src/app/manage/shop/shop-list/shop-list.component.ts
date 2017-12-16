@@ -20,7 +20,7 @@ export class ShopListComponent implements OnInit {
   editing = {}
   page: Page<any> = new Page()
   qry = {market:'',shop:'',stall:'',state:''}
-  shop_state:boolean
+  shop_state: boolean
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
@@ -31,11 +31,12 @@ export class ShopListComponent implements OnInit {
     this.query();
   }
 
-  query() { //全部商户
+  query() { //条件搜索商户
+    // console.log(this.qry)
     this.shopService.query(this.qry.market, this.qry.shop, this.qry.stall, this.qry.state, this.page.pageNo).subscribe(
       (page) => {
         this.page = page
-        // console.log(page);
+        console.log(page);
       }
     )
   }
@@ -48,31 +49,31 @@ export class ShopListComponent implements OnInit {
     this.query()
   }
 
-  add() {
-    this.modalService.open<Shop>({
-      component: ShopFormComponent,
-      componentFactoryResolver: this.componentFactoryResolver,
-      resolve: {
-      }
-    }).subscribe(shop => {
-      console.log('Rebirth Modal -> Get ok with result:', shop)
-    }, error => {
-
-    })
-  }
-
-  edit(id: number) {
-    this.modalService.open<Shop>({
-      component: ShopFormComponent,
-      componentFactoryResolver: this.componentFactoryResolver,
-      resolve: {
-        id: id
-      }
-    }).subscribe(shop => {
-      console.log('Rebirth Modal -> Get ok with result:', shop)
-    }, error => {
-
-    })
-  }
+  // add() {
+  //   this.modalService.open<Shop>({
+  //     component: ShopFormComponent,
+  //     componentFactoryResolver: this.componentFactoryResolver,
+  //     resolve: {
+  //     }
+  //   }).subscribe(shop => {
+  //     console.log('Rebirth Modal -> Get ok with result:', shop)
+  //   }, error => {
+  //
+  //   })
+  // }
+  //
+  // edit(id: number) {
+  //   this.modalService.open<Shop>({
+  //     component: ShopFormComponent,
+  //     componentFactoryResolver: this.componentFactoryResolver,
+  //     resolve: {
+  //       id: id
+  //     }
+  //   }).subscribe(shop => {
+  //     console.log('Rebirth Modal -> Get ok with result:', shop)
+  //   }, error => {
+  //
+  //   })
+  // }
 
 }

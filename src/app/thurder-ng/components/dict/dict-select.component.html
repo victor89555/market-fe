@@ -1,3 +1,4 @@
 <select class="form-control" [(ngModel)]="selectedVal">
+  <option *ngIf="emptyText" value="">{{emptyText}}</option>
   <option *ngFor="let iter of dictCodes|entrys" [value]="iter.key">{{iter.value}}</option>
 </select>

@@ -22,24 +22,34 @@ export class ElectronicScaleService extends RebirthHttp {
   }
 
   getAllotableElectronic(marketId): Observable<ElectronicScale[]> {
-    return this.query(1, 100000, null, marketId, 1, 1, null).map((page)=> {
+    return this.query(1, 100000, null, marketId, 0, 0, null).map((page)=> {
       return page.items || []
     })
   }
 
   getAllotedElectronic(marketId, shopId):  Observable<ElectronicScale[]> {
-    return this.query(1, 100000, null, marketId, 1, 1, shopId).map((page) => {
+    return this.query(1, 100000, null, marketId, 0, 1, shopId).map((page) => {
       return page.items || []
     })
   }
 
   @GET("electronicScales/:id")
   get(@Path("id") id: number): Observable<ElectronicScale> {
-    return null
+    return null;
   }
 
   @POST('electronicScales')
   save(@Body electronicScale: ElectronicScale): Observable<ElectronicScale> {
+    return null;
+  }
+
+  @PUT("electronicScales/:id/bind")
+  bind(@Path("id") id: number,@Body electronicScale: ElectronicScale): Observable<any> {
+    return null;
+  }
+
+  @PUT("electronicScales/:id/unbind")
+  unbind(@Path("id") id: number): Observable<any> {
     return null;
   }
 
@@ -52,4 +62,5 @@ export class ElectronicScaleService extends RebirthHttp {
   delete( @Path("id") id: number): Observable<any> {
     return null;
   }
+
 }
