@@ -66,9 +66,9 @@
     <div class="form-group">
       <label class="col-sm-3 control-label">附件:</label>
       <div class="col-sm-9">
-        <re-file-upload [multiple]="true" (removeFiles)="onRemoveDone($event)" uploadParamName="files"
+        <re-file-upload [multiple]="true" (removeFiles)="onRemoveDone($event)" uploadParamName="file"
                         (uploadFilesChange)="uploadFilesChange($event)"
-                        uploadUrl="http://localhost:8000/upload"></re-file-upload>
+                        uploadUrl="http://market-bus.djws.com.cn/api/contracts/attachments" (fileUploadSuccess)="onUploadSuccess($event)"></re-file-upload>
       </div>
     </div>
   </div>

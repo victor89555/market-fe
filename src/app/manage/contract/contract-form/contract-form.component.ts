@@ -19,6 +19,7 @@ export class ContractFormComponent implements Modal, OnInit {
   contract: any = {}
   markets: Market[]
   shops: Shop[]
+  uploadUrl: string = "http://market-bus.djws.com.cn/api/contracts/attachments"
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private contractService: ContractService,
@@ -74,11 +75,14 @@ export class ContractFormComponent implements Modal, OnInit {
   }
 
   onRemoveDone(files) {
-    console.log('files', files);
+    console.log("files", files);
   }
 
   uploadFilesChange($event) {
     this.uploadFiles = $event.map(item => item.uploadResponse.path);
+  }
+  onUploadSuccess($event) {
+    console.log($event)
   }
 }
 
