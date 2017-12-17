@@ -48,7 +48,7 @@ export class AppComponent {
           return request.clone({
             setHeaders: {
               "X-Requested-With": "XMLHttpRequest",
-              "Content-Type": "application/json"
+              // "Content-Type": "application/json"
             }
           });
         }
@@ -66,10 +66,10 @@ export class AppComponent {
         }
       })
       .addResponseErrorInterceptor((res: HttpErrorResponse) => {
-        if ([401, 403].includes(res.status)) {
+        if ([401, 403, 0].includes(res.status)) {
           this.router.navigateByUrl('/login');
         }
-        if([400].indexOf(res.status)!==-1){
+        if ([400].indexOf(res.status) !== -1) {
           console.log(res.error.msg)
         }
       });
