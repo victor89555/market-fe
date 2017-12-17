@@ -19,7 +19,8 @@ export class MarketListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  queryMarket = {'name':'','address':'','state':''};
+  queryMarket = {'name': '', 'address': '', 'state': ''};
+
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private marketService: MarketService) {
@@ -48,18 +49,20 @@ export class MarketListComponent implements OnInit {
     this.queryMarket.state = ""
     this.query()
   }
-  delete(id:number){
-     this.marketService.delete(id).subscribe(() => {
-       debugger
-       this.query()
-     })
+
+  delete(id: number) {
+    this.marketService.delete(id).subscribe(() => {
+      debugger
+      this.query()
+    })
   }
+
   add() {
     this.modalService.open<Market>({
       component: MarketFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
-        "add":true
+        "add": true
       }
     }).subscribe(market => {
       console.log('Rebirth Modal -> Get ok with result:', market)

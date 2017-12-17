@@ -45,7 +45,7 @@ export class DictSelectComponent implements OnInit, ControlValueAccessor {
   }
 
   writeValue(value: any): void {
-    if (value !== undefined) {
+    if (value !== undefined && value != null) {
       this.selectedVal = value
     }
   }

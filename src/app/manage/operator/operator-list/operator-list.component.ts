@@ -82,8 +82,7 @@ export class OperatorListComponent implements OnInit {
 
   delete(id: number) {
     this.operatorService.delete(id).subscribe(() => {
-
+      this.query()
     })
-    this.query()
   }
 }

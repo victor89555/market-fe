@@ -121,8 +121,7 @@ export class ElectronicScaleListComponent implements OnInit {
 
   delete(id: number) {
     this.electronicScaleService.delete(id).subscribe(() => {
-
+      this.query()
     })
-    this.query()
   }
 }

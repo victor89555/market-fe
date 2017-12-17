@@ -1,4 +1,4 @@
-import {BaseUrl, Body, GET, Path, POST, PUT, Query, RebirthHttp} from "rebirth-http";
+import {BaseUrl, Body, DELETE, GET, Path, POST, PUT, Query, RebirthHttp} from "rebirth-http";
 import {Observable} from "rxjs/Observable";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
@@ -37,6 +37,11 @@ export class UserService extends RebirthHttp {
 
   @PUT("users/:id")
   update( @Path("id") id: number, @Body user: User): Observable<User> {
+    return null;
+  }
+
+  @DELETE("users/:id")
+  delete(@Path("id") id: number): Observable<any> {
     return null;
   }
 

@@ -72,4 +72,10 @@ export class RoleListComponent implements OnInit {
     })
   }
 
+  delete(id: number) {
+    this.roleService.delete(id).subscribe(() => {
+      this.query()
+    })
+  }
+
 }
