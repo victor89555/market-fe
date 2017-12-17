@@ -7,7 +7,7 @@ import {ElectronicScaleFormComponent} from "../electronicScale-form/electronicSc
 import {Market} from "../../market/shared/market.model";
 import {Shop} from "../../shop/shared/shop.model";
 import {MarketService} from "../../market/shared/market.service";
-import { ShopService } from "../../shop/shared/shop.service";
+import {ShopService} from "../../shop/shared/shop.service";
 
 @Component({
   selector: 'app-electronicScale-list',
@@ -23,10 +23,11 @@ export class ElectronicScaleListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  queryElecScale = {"marketId":null, "shopId":null,"no":"","status":"","user":null}
-  markets:Market[] = []
+  queryElecScale = {"marketId": null, "shopId": null, "no": "", "status": "", "user": null}
+  markets: Market[] = []
   marketName = ""
-  shops:Shop[]
+  shops: Shop[]
+
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private electronicScaleService: ElectronicScaleService,
@@ -39,6 +40,7 @@ export class ElectronicScaleListComponent implements OnInit {
     this.getAllMarkets()
     this.queryShops()
   }
+
   queryShops() {
     this.shopService.getAll(null).subscribe(
       (shops) => {
@@ -53,16 +55,18 @@ export class ElectronicScaleListComponent implements OnInit {
   shopNameFormatter = (shop: Shop) => { // 商户名称输入显示数据
     return shop.name || ""
   }
-  getAllMarkets(){
+
+  getAllMarkets() {
     this.marketService.getAll().subscribe(
-      (markets)=>{
+      (markets) => {
         this.markets = markets;
       }
     )
   }
+
   query() {
     this.electronicScaleService.query(this.page.pageNo, null, this.queryElecScale.no, this.queryElecScale.marketId,
-      this.queryElecScale.status,this.queryElecScale.user,this.queryElecScale.shopId).subscribe(
+      this.queryElecScale.status, this.queryElecScale.user, this.queryElecScale.shopId).subscribe(
       (page) => {
         this.page = page
         console.log(this.page);
@@ -80,8 +84,8 @@ export class ElectronicScaleListComponent implements OnInit {
     this.marketName = ""
     this.queryElecScale.marketId = null
     this.queryElecScale.status = ""
-    this.queryElecScale.shopId=null
-    this.queryElecScale.user=null
+    this.queryElecScale.shopId = null
+    this.queryElecScale.user = null
     this.query()
   }
 
@@ -90,7 +94,7 @@ export class ElectronicScaleListComponent implements OnInit {
       component: ElectronicScaleFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
-        "add":true
+        "add": true
       }
     }).subscribe(electronicScale => {
       console.log('Rebirth Modal -> Get ok with result:', electronicScale)
@@ -115,7 +119,7 @@ export class ElectronicScaleListComponent implements OnInit {
     })
   }
 
-  delete(id:number){
+  delete(id: number) {
     this.electronicScaleService.delete(id).subscribe(() => {
 
     })

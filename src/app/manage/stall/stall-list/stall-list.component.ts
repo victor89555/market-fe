@@ -5,10 +5,9 @@ import {StallService} from "../shared/stall.service";
 import {Stall} from "../shared/stall.model";
 import {MarketService} from "../../market/shared/market.service";
 import {Page} from "../../../thurder-ng/models/page.model";
-import {Operator} from "../../operator/shared/operator.model";
 import {Market} from "../../market/shared/market.model";
 import {Shop} from "../../shop/shared/shop.model";
-import { ShopService} from "../../shop/shared/shop.service";
+import {ShopService} from "../../shop/shared/shop.service";
 
 @Component({
   selector: 'app-stall-list',
@@ -24,15 +23,16 @@ export class StallListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  queryStall = {"marketId":null, "shopId":null, "func":"", "status":"", "name":""}
-  markets:Market[] = []
+  queryStall = {"marketId": null, "shopId": null, "func": "", "status": "", "name": ""}
+  markets: Market[] = []
   marketName = ""
-  shops:Shop[]
+  shops: Shop[]
+
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private stallService: StallService,
               private marketService: MarketService,
-              private shopService:ShopService) {
+              private shopService: ShopService) {
   }
 
   ngOnInit(): void {
@@ -40,6 +40,7 @@ export class StallListComponent implements OnInit {
     this.getAllMarkets()
     this.queryShops()
   }
+
   queryShops() {
     this.shopService.getAll(null).subscribe(
       (shops) => {
@@ -48,23 +49,30 @@ export class StallListComponent implements OnInit {
     )
   }
 
+  setPage(pageInfo) {
+    this.page.pageNo = pageInfo.offset + 1
+    this.query()
+  }
+
   onShopNameChange = (shop: Shop) => { // 选中商户改变时调用
     this.queryStall.shopId = shop.id
   }
   shopNameFormatter = (shop: Shop) => { // 商户名称输入显示数据
     return shop.name || ""
   }
+
   query() {
     this.stallService.query(this.queryStall.marketId, this.queryStall.shopId,
-      this.queryStall.func,this.queryStall.status,this.queryStall.name,this.page.pageNo).subscribe(
+      this.queryStall.func, this.queryStall.status, this.queryStall.name, this.page.pageNo).subscribe(
       (page) => {
         this.page = page
       }
     )
   }
-  getAllMarkets(){
+
+  getAllMarkets() {
     this.marketService.getAll().subscribe(
-      (markets)=>{
+      (markets) => {
         this.markets = markets;
       }
     )
@@ -109,7 +117,8 @@ export class StallListComponent implements OnInit {
 
     })
   }
-  delete(id:number){
+
+  delete(id: number) {
     this.stallService.delete(id).subscribe(() => {
       debugger
       this.query()

@@ -1,8 +1,6 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
 import {ModalService} from "rebirth-ng";
-import {ShopFormComponent} from "../shop-form/shop-form.component";
 import {ShopService} from "../shared/shop.service";
-import {Shop} from "../shared/shop.model";
 import {Page} from "../../../thurder-ng/models/page.model";
 
 @Component({
@@ -46,6 +44,11 @@ export class ShopListComponent implements OnInit {
     this.qry.shop = ''
     this.qry.stall = ''
     this.qry.state = ''
+    this.query()
+  }
+
+  setPage(pageInfo) {
+    this.page.pageNo = pageInfo.offset + 1
     this.query()
   }
 

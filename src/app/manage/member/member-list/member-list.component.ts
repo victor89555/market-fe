@@ -15,13 +15,15 @@ export class MemberListComponent implements OnInit {
 
   constructor(private memberService: MemberService,
               private modalService: ModalService,
-              private componentFactoryResolver: ComponentFactoryResolver) { }
+              private componentFactoryResolver: ComponentFactoryResolver) {
+  }
 
   ngOnInit() {
     this.query()
   }
+
   page: Page<any> = new Page()
-  queryMember ={'mobile':'', 'name':'', 'cardNo':'', 'idCardNo':''};
+  queryMember = {'mobile': '', 'name': '', 'cardNo': '', 'idCardNo': ''};
 
   setPage(pageInfo) {
     this.page.pageNo = pageInfo.offset + 1
@@ -33,7 +35,7 @@ export class MemberListComponent implements OnInit {
       component: MemberFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
-        add :true
+        add: true
       }
     }).subscribe(member => {
       console.log('Rebirth Modal -> Get ok with result:', member)
@@ -43,20 +45,22 @@ export class MemberListComponent implements OnInit {
   }
 
   query() {
-    this.memberService.query(this.queryMember.name,this.queryMember.mobile,this.queryMember.cardNo,
-      this.queryMember.idCardNo,1,10 ).subscribe(
+    this.memberService.query(this.queryMember.name, this.queryMember.mobile, this.queryMember.cardNo,
+      this.queryMember.idCardNo, 1, 10).subscribe(
       (page) => {
         this.page = page
       }
     )
   }
+
   reset() {
-    this.queryMember.idCardNo=""
-    this.queryMember.cardNo=""
-    this.queryMember.name=""
-    this.queryMember.mobile=""
+    this.queryMember.idCardNo = ""
+    this.queryMember.cardNo = ""
+    this.queryMember.name = ""
+    this.queryMember.mobile = ""
     this.query()
   }
+
   edit(id: number) {
     this.modalService.open<Member>({
       component: MemberFormComponent,
@@ -71,8 +75,9 @@ export class MemberListComponent implements OnInit {
 
     })
   }
-  delete(id:number){
-    this.memberService.delete(id).subscribe(()=>{
+
+  delete(id: number) {
+    this.memberService.delete(id).subscribe(() => {
       this.query()
     })
   }

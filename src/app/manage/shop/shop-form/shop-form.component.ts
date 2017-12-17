@@ -7,7 +7,7 @@ import {
   OnInit
 } from "@angular/core";
 
-import {DialogService, Modal, ModalService} from "rebirth-ng";
+import {DialogService, ModalService} from "rebirth-ng";
 import {Shop} from "../shared/shop.model";
 import {ShopService} from "../shared/shop.service";
 import {Market} from "../../market/shared/market.model";
@@ -19,7 +19,6 @@ import {OperatorService} from "../../operator/shared/operator.service";
 import {ElectronicScaleService} from "../../electronicScale/shared/electronicScale.service";
 import {Contract} from "../../contract/shared/contract.model";
 import {ContractService} from "../../contract/shared/contract.service";
-import {HttpClient} from "@angular/common/http";
 import {ContractFormComponent} from "../../contract/contract-form/contract-form.component";
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ElectronicScale} from "../../electronicScale/shared/electronicScale.model";
@@ -119,7 +118,7 @@ export class ShopFormComponent implements OnInit {
     this.operatorService.get(operatorId).subscribe(
       (operator) => {
         // console.log(operator)
-        this.operatorName = operator.name + " " + operator.tel
+        this.operatorName = operator.name + "（" + operator.mobile + "）"
       }
     )
   }
@@ -198,7 +197,7 @@ export class ShopFormComponent implements OnInit {
   }
 
   operatorNameFormatter = (operator: Operator) => { // 经营者输入显示数据
-    return operator.name + " " + operator.tel
+    return operator.name + "（" + operator.mobile + "）"
   }
 
   onOperatorNameChange = (operator: Operator) => { // 经营者内容改变时调用

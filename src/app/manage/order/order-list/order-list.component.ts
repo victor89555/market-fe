@@ -4,10 +4,10 @@ import {OrderFormComponent} from "../order-form/order-form.component";
 import {OrderService} from "../shared/order.service";
 import {Order} from "../shared/order.model";
 import {Page} from "../../../thurder-ng/models/page.model";
-import { MarketService } from "../../market/shared/market.service";
+import {MarketService} from "../../market/shared/market.service";
 import {Market} from "../../market/shared/market.model";
 import {Shop} from "../../shop/shared/shop.model";
-import { ShopService} from "../../shop/shared/shop.service";
+import {ShopService} from "../../shop/shared/shop.service";
 
 @Component({
   selector: 'app-order-list',
@@ -23,11 +23,11 @@ export class OrderListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  queryOrder ={"shopId":null,"marketId":null,payWay:null,beginDate : "",endDate: ""}
-  markets:Market[]
-  shops:Shop[]
-  shopName:string=""
-  dateFormat: any={"beginDate":"","endDate":""}
+  queryOrder = {"shopId": null, "marketId": null, payWay: null, beginDate: "", endDate: ""}
+  markets: Market[]
+  shops: Shop[]
+  shopName: string = ""
+  dateFormat: any = {"beginDate": "", "endDate": ""}
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
@@ -41,6 +41,7 @@ export class OrderListComponent implements OnInit {
     this.getAllMarkets()
     this.queryShops()
   }
+
   queryShops() {
     this.shopService.getAll(null).subscribe(
       (shops) => {
@@ -55,50 +56,57 @@ export class OrderListComponent implements OnInit {
   shopNameFormatter = (shop: Shop) => { // 商户名称输入显示数据
     return shop.name || ""
   }
-  query(second:boolean) {
-    if(second){
+
+  query(second: boolean) {
+    if (second) {
       this.dateFormat.beginDate = this.formatDateTime(this.queryOrder.beginDate)
       this.dateFormat.endDate = this.formatDateTime(this.queryOrder.endDate)
-      if(this.dateFormat.beginDate=="1970-01-01"){
-        this.dateFormat.beginDate=null
-        this.dateFormat.endDate=null
+      if (this.dateFormat.beginDate == "1970-01-01") {
+        this.dateFormat.beginDate = null
+        this.dateFormat.endDate = null
       }
     }
     this.orderService.query(this.queryOrder.marketId, this.queryOrder.shopId,
-      this.queryOrder.payWay,this.dateFormat.beginDate,this.dateFormat.endDate,1,10).subscribe(
+      this.queryOrder.payWay, this.dateFormat.beginDate, this.dateFormat.endDate, 1, 10).subscribe(
       (page) => {
         this.page = page
       }
     )
   }
 
+  setPage(pageInfo) {
+    this.page.pageNo = pageInfo.offset + 1
+    this.query(true)
+  }
 
   formatDateTime(timeStamp) { // 时间格式化
     let date = new Date();
     date.setTime(timeStamp);
     let y = date.getFullYear();
-    let m:number|string = date.getMonth() + 1;
-    m =  m < 10 ? ('0' + m) : m;
-    let d :number|string = date.getDate();
+    let m: number | string = date.getMonth() + 1;
+    m = m < 10 ? ('0' + m) : m;
+    let d: number | string = date.getDate();
     d = d < 10 ? ('0' + d) : d
     return y + '-' + m + '-' + d
   };
-  getAllMarkets(){
+
+  getAllMarkets() {
     this.marketService.getAll().subscribe(
-      (markets)=>{
+      (markets) => {
         this.markets = markets;
       }
     )
   }
+
   reset() {
-    this.queryOrder.marketId=null;
-    this.queryOrder.shopId=null;
-    this.queryOrder.payWay="";
-    this.queryOrder.beginDate=null
-    this.queryOrder.endDate=null
-    this.dateFormat.beginDate=null
-    this.dateFormat.endDate=null
-    this.shopName=""
+    this.queryOrder.marketId = null;
+    this.queryOrder.shopId = null;
+    this.queryOrder.payWay = "";
+    this.queryOrder.beginDate = null
+    this.queryOrder.endDate = null
+    this.dateFormat.beginDate = null
+    this.dateFormat.endDate = null
+    this.shopName = ""
     this.query(false)
   }
 
@@ -106,8 +114,7 @@ export class OrderListComponent implements OnInit {
     this.modalService.open<Order>({
       component: OrderFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
-      resolve: {
-      }
+      resolve: {}
     }).subscribe(order => {
       console.log('Rebirth Modal -> Get ok with result:', order)
     }, error => {

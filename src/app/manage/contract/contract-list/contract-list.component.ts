@@ -21,19 +21,21 @@ export class ContractListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  shops:Shop[]
-  shopId:number
-  shopName:string = ""
+  shops: Shop[]
+  shopId: number
+  shopName: string = ""
+
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private contractService: ContractService,
-              private shopService:ShopService) {
+              private shopService: ShopService) {
   }
 
   ngOnInit(): void {
     this.query()
     this.queryShops()
   }
+
   queryShops() {
     this.shopService.getAll(null).subscribe(
       (shops) => {
@@ -49,17 +51,23 @@ export class ContractListComponent implements OnInit {
   shopNameFormatter = (shop: Shop) => { // 商户名称输入显示数据
     return shop.name || ""
   }
+
   query() {
-    this.contractService.query(this.shopId, 1,10).subscribe(
+    this.contractService.query(this.shopId, 1, 10).subscribe(
       (page) => {
         this.page = page
       }
     )
   }
 
+  setPage(pageInfo) {
+    this.page.pageNo = pageInfo.offset + 1
+    this.query()
+  }
+
   reset() {
     this.shopId = null
-    this.shopName=""
+    this.shopName = ""
     this.query()
   }
 
@@ -68,7 +76,7 @@ export class ContractListComponent implements OnInit {
       component: ContractFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
-        "add":true
+        "add": true
       }
     }).subscribe(contract => {
       console.log('Rebirth Modal -> Get ok with result:', contract)
