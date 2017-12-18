@@ -2,6 +2,10 @@ import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@a
 import {ModalService} from "rebirth-ng";
 import {ShopService} from "../shared/shop.service";
 import {Page} from "../../../thurder-ng/models/page.model";
+import {Market} from "../../market/shared/market.model";
+import {MarketService} from "../../market/shared/market.service";
+import {Stall} from "../../stall/shared/stall.model";
+import {Shop} from "../shared/shop.model";
 
 @Component({
   selector: 'app-shop-list',
@@ -17,33 +21,62 @@ export class ShopListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  qry = {market:'',shop:'',stall:'',state:''}
+  qry = {market:'',shop:'',stall:'',status:''}
   shop_state: boolean
+  markets: Market[]
+  stalls: Stall[] //摊位列表
+  shops: Shop[]
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
-              private shopService: ShopService) {
+              private shopService: ShopService,
+              private marketService: MarketService) {
   }
 
   ngOnInit(): void {
     this.query();
+    this.getAllMarkets()
+    this.queryShops()
   }
 
   query() { //条件搜索商户
     // console.log(this.qry)
-    this.shopService.query(this.qry.market, this.qry.shop, this.qry.stall, this.qry.state, this.page.pageNo).subscribe(
+    this.shopService.query(this.qry.market, this.qry.shop, this.qry.stall, this.qry.status, this.page.pageNo).subscribe(
       (page) => {
         this.page = page
-        console.log(page);
+        // console.log(page);
       }
     )
+  }
+
+  getAllMarkets(){
+    this.marketService.getAll().subscribe(
+      (markets)=>{
+        this.markets = markets;
+      }
+    )
+  }
+
+  queryShops() {
+    this.shopService.getAll(null).subscribe(
+      (shops) => {
+        this.shops = shops
+      }
+    )
+  }
+
+  onShopNameChange = (shop: Shop) => { // 选中商户改变时调用
+    this.qry.shop = shop.name
+  }
+  shopNameFormatter = (shop: Shop) => { // 商户名称输入显示数据
+    return shop.name || ""
   }
 
   reset() {
     this.qry.market = ''
     this.qry.shop = ''
     this.qry.stall = ''
-    this.qry.state = ''
+    this.qry.status = ''
     this.query()
   }
 

@@ -24,6 +24,11 @@ export class ContractService extends RebirthHttp {
     return null;
   }
 
+  @GET("contracts/:id/attachments")
+  getAttachments(@Path("id") id: number): Observable<any[]> {
+    return null;
+  }
+
   @GET("contracts/:id")
   get(@Path("id") id: number): Observable<Contract> {
     return null

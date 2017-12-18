@@ -95,6 +95,7 @@ export class ShopFormComponent implements OnInit {
     this.loadShop().subscribe(() => {
       this.loadOperators();
       this.loadMarket();
+      this.loadContractor();
     });
   }
 
@@ -119,6 +120,7 @@ export class ShopFormComponent implements OnInit {
       (operator) => {
         // console.log(operator)
         this.operatorName = operator.name + "（" + operator.mobile + "）"
+        this.changeDetectorRef.markForCheck()
       }
     )
   }
@@ -128,6 +130,7 @@ export class ShopFormComponent implements OnInit {
       (operators) => {
         // console.log(operators)
         this.operators = operators
+        this.changeDetectorRef.markForCheck()
       }
     )
   }
@@ -137,6 +140,7 @@ export class ShopFormComponent implements OnInit {
       (stalls) => {
         // console.log(stalls)
         this.stalls = stalls  //摊位对象
+        this.changeDetectorRef.markForCheck()
       }
     )
   }
@@ -146,6 +150,7 @@ export class ShopFormComponent implements OnInit {
       (stall) => {
         // console.log(stall)
         this.stallName = stall.name;
+        this.changeDetectorRef.markForCheck()
       }
     )
   }
@@ -209,7 +214,7 @@ export class ShopFormComponent implements OnInit {
       component: OperatorFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
-        "add":true
+        add: true
       }
     }).subscribe(operator => {
       console.log('Rebirth Modal -> Get ok with result:', operator)
@@ -244,11 +249,10 @@ export class ShopFormComponent implements OnInit {
     )
   }
 
-
   loadContractor() { // 获取合同
     this.contractService.query(this.shopId, 1, 100).subscribe(
       (page) => {
-        // console.log(page)
+        console.log(page)
         this.contracts = page.items
         this.changeDetectorRef.markForCheck()
       }
@@ -314,9 +318,10 @@ export class ShopFormComponent implements OnInit {
       component: ContractFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
-        id: id,
         isShopForm: true, //判断是否从商户管理进入。
-        marketId: ''
+        marketId: this.shop.marketId,
+        shopId: this.shopId,
+        add: true
       }
     }).subscribe(contract => {
       this.loadContractor();

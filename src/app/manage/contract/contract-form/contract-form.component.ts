@@ -13,10 +13,11 @@ import {ShopService} from "../../shop/shared/shop.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContractFormComponent implements Modal, OnInit {
-  context: { id: number,isShopForm: boolean,marketId: number ,add:boolean};
+  context: { id: number,isShopForm: boolean,marketId: number, shopId: number, add:boolean};
   dismiss: EventEmitter<Contract>;
   uploadFiles: any[];
-  contract: any = {}
+  contract: Contract = new Contract()
+  attachments: any[] = []
   markets: Market[]
   shops: Shop[]
   uploadUrl: string = "http://market-bus.djws.com.cn/api/contracts/attachments"
@@ -29,31 +30,64 @@ export class ContractFormComponent implements Modal, OnInit {
 
   ngOnInit(): void {
     console.log('ModalTestComponent init....');
+    //判断添加合同（合同管理里添加，商户管理里添加），修改合同
+    if(this.context.add) {
+      if(this.context.isShopForm){
+        this.contract.marketId = this.context.marketId
+        this.contract.shopId = this.context.shopId
+      }
+    }else {
+      if(this.context.id){
+        this.loadContract();
+      }
+    }
+
+    this.loadMarkets()
+    this.loadShops()
+
+  }
+
+  //加载市场信息列表
+  loadMarkets(){
     this.marketService.getAll().subscribe(
       (markets) => {
         this.markets = markets
+        this.changeDetectorRef.markForCheck()
       }
     )
+  }
+
+  //加载商户信息列表
+  loadShops(){
     this.shopService.getAll(null).subscribe(
       (shops) => {
         this.shops = shops
+        this.changeDetectorRef.markForCheck()
       }
     )
-    if(!this.context.isShopForm){
-      this.loadContract();
-    }
   }
 
+  //加载合同信息
   loadContract(){
     this.contractService.get(this.context.id).subscribe(
       (contract) => {
-        this.contract = contract
+        Object.assign(this.contract, contract)
+        this.changeDetectorRef.markForCheck()
+      }
+    )
+    this.contractService.getAttachments(this.context.id).subscribe(
+      (attachments) => {
+        console.log(attachments)
+        this.attachments = attachments
         this.changeDetectorRef.markForCheck()
       }
     )
   }
 
   save() {
+    this.attachments.map((e)=> {
+      this.contract.attachmentIds.push(e.uploadResponse.id)
+    })
     this.contractService.save(this.contract).subscribe(
       (contract) => {
         this.dismiss.emit(contract);
@@ -62,27 +96,31 @@ export class ContractFormComponent implements Modal, OnInit {
   }
 
   update() {
-    console.log(this.contract);
+    this.attachments.map((e)=> {
+      this.contract.attachmentIds.push(e.uploadResponse.id)
+    })
     this.contractService.update(this.context.id, this.contract).subscribe(
       (contract) => {
-        this.dismiss.emit(contract);
+        this.dismiss.emit(contract)
       }
     )
   }
 
   cancel() {
-    this.dismiss.error(this.contract);
+    this.dismiss.error(this.contract)
   }
 
   onRemoveDone(files) {
-    console.log("files", files);
+    console.log("files", files)
   }
 
   uploadFilesChange($event) {
-    this.uploadFiles = $event.map(item => item.uploadResponse.path);
+    this.uploadFiles = $event.map(item => item.uploadResponse.path)
   }
+
   onUploadSuccess($event) {
-    console.log($event)
+    this.attachments.push($event)
+    console.log(this.attachments)
   }
 }
 

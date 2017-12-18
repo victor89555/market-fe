@@ -12,7 +12,7 @@
             <button type="button" class="btn btn-primary" (click)="addShop()">保存</button>
           </div>
           <div class="form-group" *ngIf="!pageComponent.newShop">
-            <button type="button" class="btn btn-info" (click)="editShop()">保存</button>
+            <button type="button" class="btn btn-info" (click)="editShop()">修改</button>
           </div>
           <div class="form-group">
             <button type="button" class="btn btn-warning" (click)="cancel()">取消</button>
@@ -156,11 +156,11 @@
             <th>合同状态</th>
           </tr>
           <tr *ngFor="let con of contracts">
-            <td *ngIf="con.shop_id == shop.contractId">{{con.sign_time}}</td>
-            <td *ngIf="con.shop_id == shop.contractId">{{con.validity_time}}</td>
-            <td *ngIf="con.shop_id == shop.contractId">{{con.total_amount}}</td>
-            <td *ngIf="con.shop_id == shop.contractId">{{con.paid_amount}}</td>
-            <td *ngIf="con.shop_id == shop.contractId">{{con.status}}</td>
+            <td>{{con.sign_time}}</td>
+            <td>{{con.validity_time}}</td>
+            <td>{{con.total_amount}}</td>
+            <td>{{con.paid_amount}}</td>
+            <td>{{con.status}}</td>
           </tr>
         </table>
       </ng-template>

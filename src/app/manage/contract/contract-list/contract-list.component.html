@@ -19,17 +19,18 @@
     <div class="col-xs-12">
       <form class="form-inline">
         <div class="form-group">
-          <div class="input-group">
-            <input type="text" class="form-control"  [minLength]="0"
-                   reAutoComplete  [dataSource]="shops" placeholder="商户"
-                   [formatter]="shopNameFormatter" name="shop" [value]="shopName"
-                   (selectValueChange)="onShopNameChange($event)"
-            />
-            <!--<input type="text" class="form-control" id="exampleInputAmount" name="order" [(ngModel)]="qry_name" placeholder="商户">-->
-          </div>
+          <input type="text" class="form-control"  [minLength]="0"
+                 reAutoComplete  [dataSource]="shops" placeholder="商户"
+                 [formatter]="shopNameFormatter" name="shop" [value]="shopName"
+                 (selectValueChange)="onShopNameChange($event)"
+          />
         </div>
-        <button type="submit" class="btn btn-primary" (click)="query()">查询</button>
-        <button type="submit" class="btn btn-primary" (click)="reset()">重置</button>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" (click)="query()">查询</button>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" (click)="reset()">重置</button>
+        </div>
       </form>
     </div>
   </div>
