@@ -126,13 +126,15 @@ export class ShopFormComponent implements OnInit {
   }
 
   loadOperators() { // 经营者列表
-    this.operatorService.getAll().subscribe(
+    let opratorOb = this.operatorService.getAll();
+    opratorOb.subscribe(
       (operators) => {
         // console.log(operators)
         this.operators = operators
         this.changeDetectorRef.markForCheck()
       }
     )
+    return opratorOb;
   }
 
   loadStalls() {  //摊位列表
@@ -218,7 +220,13 @@ export class ShopFormComponent implements OnInit {
       }
     }).subscribe(operator => {
       console.log('Rebirth Modal -> Get ok with result:', operator)
-      this.loadOperators()
+      this.loadOperators().subscribe(
+        (oprators) => {
+          this.operatorName = operator.name + "（" + operator.mobile + "）"
+          this.shop.operatorId = operator.id
+          this.changeDetectorRef.markForCheck()
+        }
+      )
     }, error => {
 
     })
