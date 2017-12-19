@@ -38,7 +38,9 @@ import {UserService} from "./user/shared/user.service";
 import {RoleListComponent} from './role/role-list/role-list.component';
 import {RoleFormComponent} from './role/role-form/role-form.component';
 import {RoleService} from "./role/shared/role.service";
-import {ResourceService} from "./resource/shared/resource.service"
+import {ResourceService} from "./resource/shared/resource.service";
+import {OrderStatisticsComponent} from './order/order-statistics/order-statistics.component'
+import {NgxEchartsModule} from "ngx-echarts"
 
 @NgModule({
   imports: [
@@ -47,6 +49,7 @@ import {ResourceService} from "./resource/shared/resource.service"
     ThurderNGModule,
     RouterModule.forChild(ROUTER_CONFIG),
     NgxDatatableModule,
+    NgxEchartsModule
   ],
   exports: [],
   declarations: [
@@ -70,7 +73,8 @@ import {ResourceService} from "./resource/shared/resource.service"
     UserListComponent,
     UserFormComponent,
     RoleListComponent,
-    RoleFormComponent
+    RoleFormComponent,
+    OrderStatisticsComponent
   ],
   entryComponents: [
     OrderFormComponent,

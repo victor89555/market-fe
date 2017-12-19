@@ -13,6 +13,7 @@ import {MemberListComponent} from "./member/member-list/member-list.component";
 import {UserListComponent} from "./user/user-list/user-list.component";
 import {RoleListComponent} from "./role/role-list/role-list.component";
 import {AuthLoginPermission} from "rebirth-permission"
+import {OrderStatisticsComponent} from "./order/order-statistics/order-statistics.component"
 
 export const ROUTER_CONFIG: Routes = [
   {
@@ -23,6 +24,7 @@ export const ROUTER_CONFIG: Routes = [
       // can use role AuthRolePermission
       {path: '', pathMatch: 'full', redirectTo: 'orders'},
       {path: 'orders', component: OrderListComponent},
+      {path: 'orderStatistics', component: OrderStatisticsComponent},
       {path: 'markets', component: MarketListComponent},
       {path: 'stalls', component: StallListComponent},
       {path: 'operators', component: OperatorListComponent},

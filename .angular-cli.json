@@ -22,7 +22,8 @@
         "styles/bootstrap.scss"
       ],
       "scripts": [
-        "service-worker-registration.js"
+        "service-worker-registration.js",
+        "../node_modules/echarts/dist/echarts.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
