@@ -33,7 +33,7 @@
               <span>没有符合条件的记录</span>
             </ng-template>
             <input type="text" class="form-control" name="language"  [minLength]="0"
-                   reAutoComplete  [dataSource]="shops" [(ngModel)]="shopName"
+                   reAutoComplete  [dataSource]="shops"
                    [itemTemplate]="shopItemTemplate" [noResultItemTemplate]="noResultItemTemplate"
                    [formatter]="shopNameFormatter"  placeholder="商户"
                    (selectValueChange)="onShopNameChange($event)"

@@ -238,14 +238,14 @@ export class OrderStatisticsComponent implements OnInit {
           center : ['75%', '50%'],
           roseType : 'area',
           data:[
-            {value:10, name:'蔬菜'},
-            {value:5, name:'主食'},
-            {value:15, name:'奶制品'},
-            {value:40, name:'肉类'},
-            {value:30, name:'冷冻类'},
-            {value:15, name:'火锅食品'},
-            {value:20, name:'干货'},
-            {value:25, name:'水果'}
+            {value:800, name:'蔬菜'},
+            {value:500, name:'主食'},
+            {value:150, name:'奶制品'},
+            {value:400, name:'肉类'},
+            {value:300, name:'冷冻类'},
+            {value:150, name:'火锅食品'},
+            {value:200, name:'干货'},
+            {value:250, name:'水果'}
           ]
         }
       ]
