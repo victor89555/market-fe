@@ -55,9 +55,11 @@ export class StallListComponent implements OnInit {
   }
 
   onShopNameChange = (shop: Shop) => { // 选中商户改变时调用
+    console.log("onShopNameChange")
     this.queryStall.shopId = shop.id
   }
   shopNameFormatter = (shop: Shop) => { // 商户名称输入显示数据
+    console.log("shopNameFormatter")
     return shop.name || ""
   }
 

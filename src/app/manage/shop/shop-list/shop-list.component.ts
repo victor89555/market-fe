@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
+import {ChangeDetectorRef, Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
 import {ModalService} from "rebirth-ng";
 import {ShopService} from "../shared/shop.service";
 import {Page} from "../../../thurder-ng/models/page.model";
@@ -19,7 +19,6 @@ import {Shop} from "../shared/shop.model";
 
 export class ShopListComponent implements OnInit {
 
-  editing = {}
   page: Page<any> = new Page()
   qry = {market:'',shop:'',stall:'',status:''}
   shop_state: boolean
@@ -27,7 +26,8 @@ export class ShopListComponent implements OnInit {
   stalls: Stall[] //摊位列表
   shops: Shop[]
 
-  constructor(private modalService: ModalService,
+  constructor(private changeDetectorRef: ChangeDetectorRef,
+              private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private shopService: ShopService,
               private marketService: MarketService) {
@@ -66,9 +66,11 @@ export class ShopListComponent implements OnInit {
   }
 
   onShopNameChange = (shop: Shop) => { // 选中商户改变时调用
-    this.qry.shop = shop.name
+    // console.log("onShopNameChange")
+    // this.qry.shop = shop.name
   }
   shopNameFormatter = (shop: Shop) => { // 商户名称输入显示数据
+    // console.log("shopNameFormatter")
     return shop.name || ""
   }
 
@@ -84,32 +86,5 @@ export class ShopListComponent implements OnInit {
     this.page.pageNo = pageInfo.offset + 1
     this.query()
   }
-
-  // add() {
-  //   this.modalService.open<Shop>({
-  //     component: ShopFormComponent,
-  //     componentFactoryResolver: this.componentFactoryResolver,
-  //     resolve: {
-  //     }
-  //   }).subscribe(shop => {
-  //     console.log('Rebirth Modal -> Get ok with result:', shop)
-  //   }, error => {
-  //
-  //   })
-  // }
-  //
-  // edit(id: number) {
-  //   this.modalService.open<Shop>({
-  //     component: ShopFormComponent,
-  //     componentFactoryResolver: this.componentFactoryResolver,
-  //     resolve: {
-  //       id: id
-  //     }
-  //   }).subscribe(shop => {
-  //     console.log('Rebirth Modal -> Get ok with result:', shop)
-  //   }, error => {
-  //
-  //   })
-  // }
 
 }

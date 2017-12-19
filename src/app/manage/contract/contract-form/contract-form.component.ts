@@ -118,6 +118,10 @@ export class ContractFormComponent implements Modal, OnInit {
     this.uploadFiles = $event.map(item => item.uploadResponse.path)
   }
 
+  onDeleteAttachments(idx) {
+    this.attachments.splice(idx,1);
+  }
+
   onUploadSuccess($event) {
     this.attachments.push($event)
     console.log(this.attachments)
