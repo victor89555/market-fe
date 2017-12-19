@@ -147,21 +147,18 @@ export class OrderStatisticsComponent implements OnInit {
         {
           name:'干货营业额',
           type:'line',
-          stack: '总量',
           showSymbol: false,
           data:[22, 18, 19, 23, 29, 33, 31]
         },
         {
           name:'蔬菜营业额',
           type:'line',
-          stack: '总量',
           showSymbol: false,
           data:[15, 23, 20, 15, 19, 33, 41]
         },
         {
           name:'肉类营业额',
           type:'line',
-          stack: '总量',
           showSymbol: false,
           data:[32, 33, 30, 33, 39, 33, 32]
         },
@@ -180,8 +177,7 @@ export class OrderStatisticsComponent implements OnInit {
             ]
           },
           showSymbol: false,
-          stack: '总量',
-          data:[60, 74, 69, 71, 87, 99, 104]
+          data:[69, 74, 69, 71, 87, 99, 104]
         }
       ]
     };
