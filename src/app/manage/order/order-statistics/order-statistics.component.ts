@@ -21,7 +21,7 @@ export class OrderStatisticsComponent implements OnInit {
   }
 
 // 获取营业额统计
-  getBusinessStatistics(){
+ /* getBusinessStatistics(){
     let data = [["2017-06-05",116],["2017-06-06",129],["2017-06-07",135],["2017-06-08",86],["2017-06-09",73],["2017-06-10",85],
       ["2017-06-11",73],["2017-06-12",68],["2017-06-13",92],["2017-06-14",130],["2017-06-15",245],["2017-06-16",139],
       ["2017-06-17",115],["2017-06-18",111],["2017-06-19",309],["2017-06-20",206],["2017-06-21",137],["2017-06-22",128],
@@ -55,8 +55,7 @@ export class OrderStatisticsComponent implements OnInit {
         text: '营业额走势图'
       }],
       tooltip: {
-        trigger: 'axis',
-        // formatter:'{Array | json}'
+        trigger: 'axis'
       },
       toolbox: {
         show: true,
@@ -81,8 +80,8 @@ export class OrderStatisticsComponent implements OnInit {
         name:'(万元)'
       }],
       series: [{
-        type: 'line',
         name:'营业额',
+        type: 'line',
         markPoint: {
           data: [
             {type: 'max', name: '最大值'},
@@ -98,8 +97,95 @@ export class OrderStatisticsComponent implements OnInit {
         data: valueList
       }]
     };
+  }*/
+  getBusinessStatistics(){
+    this.businessOption = {
+      title: {
+        left: 'center',
+        top:'5%',
+        text: '市场营业额'
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        top:'13%',
+        data:['营业总额','肉类营业额','蔬菜营业额','干货营业额']
+      },
+      toolbox: {
+        show: true,
+        top:'17%',
+        right:'6%',
+        feature: {
+          dataZoom: {
+            yAxisIndex: 'none'
+          },
+          dataView: {readOnly: false},
+          magicType: {type: ['line', 'bar']},
+          restore: {},
+          saveAsImage: {}
+        }
+      },
+      grid: {
+        top:'25%',
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['周一','周二','周三','周四','周五','周六','周日']
+      },
+      yAxis: {
+        type: 'value',
+        splitLine: {show: false},
+        name:'(万元/日)'
+      },
+      series: [
+        {
+          name:'干货营业额',
+          type:'line',
+          stack: '总量',
+          showSymbol: false,
+          data:[22, 18, 19, 23, 29, 33, 31]
+        },
+        {
+          name:'蔬菜营业额',
+          type:'line',
+          stack: '总量',
+          showSymbol: false,
+          data:[15, 23, 20, 15, 19, 33, 41]
+        },
+        {
+          name:'肉类营业额',
+          type:'line',
+          stack: '总量',
+          showSymbol: false,
+          data:[32, 33, 30, 33, 39, 33, 32]
+        },
+        {
+          name:'营业总额',
+          type:'line',
+          markPoint: {
+            data: [
+              {type: 'max', name: '最大值'},
+              {type: 'min', name: '最小值'}
+            ]
+          },
+          markLine: {
+            data: [
+              {type: 'average', name: '平均值'}
+            ]
+          },
+          showSymbol: false,
+          stack: '总量',
+          data:[60, 74, 69, 71, 87, 99, 104]
+        }
+      ]
+    };
   }
-
 //获取菜品销量统计
   getGreensSellStatistic(){
     this.greensOption = {
@@ -134,53 +220,36 @@ export class OrderStatisticsComponent implements OnInit {
       },
       calculable : true,
       series : [
-        {
-          name:'半径模式',
+        { name:'销售数量',
           type:'pie',
-          radius : [20, 110],
+          radius : [40, 210],
           center : ['25%', '50%'],
-          roseType : 'radius',
-          label: {
-            normal: {
-              show: false
-            },
-            emphasis: {
-              show: true
-            }
-          },
-          lableLine: {
-            normal: {
-              show: false
-            },
-            emphasis: {
-              show: true
-            }
-          },
+          roseType : 'area',
           data:[
-            {value:10, name:'蔬菜'},
-            {value:5, name:'主食'},
+            {value:40, name:'蔬菜'},
+            {value:30, name:'主食'},
             {value:15, name:'奶制品'},
             {value:25, name:'肉类'},
             {value:20, name:'冷冻类'},
-            {value:35, name:'火锅食品'},
-            {value:30, name:'干货'},
-            {value:40, name:'水果'}
+            {value:15, name:'火锅食品'},
+            {value:5, name:'干货'},
+            {value:25, name:'水果'}
           ]
         },
-        { name:'面积模式',
+        { name:'销售金额',
           type:'pie',
-          radius : [30, 110],
+          radius : [40, 210],
           center : ['75%', '50%'],
           roseType : 'area',
           data:[
             {value:10, name:'蔬菜'},
             {value:5, name:'主食'},
             {value:15, name:'奶制品'},
-            {value:25, name:'肉类'},
-            {value:20, name:'冷冻类'},
-            {value:35, name:'火锅食品'},
-            {value:30, name:'干货'},
-            {value:40, name:'水果'}
+            {value:40, name:'肉类'},
+            {value:30, name:'冷冻类'},
+            {value:15, name:'火锅食品'},
+            {value:20, name:'干货'},
+            {value:25, name:'水果'}
           ]
         }
       ]
@@ -192,6 +261,7 @@ export class OrderStatisticsComponent implements OnInit {
 
     // app.title = '堆叠柱状图';
     this.shopOption = {
+      color: ['#21dbd8'],
       title : {
         text: '商户销量排名',
         subtext: '',
@@ -202,11 +272,6 @@ export class OrderStatisticsComponent implements OnInit {
         axisPointer : {            // 坐标轴指示器，坐标轴触发有效
           type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
         }
-      },
-      legend: {
-        x : 'center',
-        y : 'bottom',
-        data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎','百度','谷歌','必应','其他']
       },
       toolbox: {
         show: true,
@@ -232,81 +297,23 @@ export class OrderStatisticsComponent implements OnInit {
       xAxis : [
         {
           type : 'category',
-          data : ['周一','周二','周三','周四','周五','周六','周日']
+          data : ['金商户','李商户','王商户','陈商户','黄商户','蓝陈商户','赵成商户','徐商户','许商户','钟商户']
         }
       ],
       yAxis : [
         {
-          type : 'value'
+          type : 'value',
+          name : '(万元/年)'
         }
       ],
       series : [
         {
-          name:'直接访问',
+          name:'销售金额',
           type:'bar',
-          data:[320, 332, 301, 334, 390, 330, 320]
-        },
-        {
-          name:'邮件营销',
-          type:'bar',
-          stack: '广告',
-          data:[120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-          name:'联盟广告',
-          type:'bar',
-          stack: '广告',
-          data:[220, 182, 191, 234, 290, 330, 310]
-        },
-        {
-          name:'视频广告',
-          type:'bar',
-          stack: '广告',
-          data:[150, 232, 201, 154, 190, 330, 410]
-        },
-        {
-          name:'搜索引擎',
-          type:'bar',
-          data:[862, 1018, 964, 1026, 1679, 1600, 1570],
-          markLine : {
-            lineStyle: {
-              normal: {
-                type: 'dashed'
-              }
-            },
-            data : [
-              [{type : 'min'}, {type : 'max'}]
-            ]
-          }
-        },
-        {
-          name:'百度',
-          type:'bar',
-          barWidth : 5,
-          stack: '搜索引擎',
-          data:[620, 732, 701, 734, 1090, 1130, 1120]
-        },
-        {
-          name:'谷歌',
-          type:'bar',
-          stack: '搜索引擎',
-          data:[120, 132, 101, 134, 290, 230, 220]
-        },
-        {
-          name:'必应',
-          type:'bar',
-          stack: '搜索引擎',
-          data:[60, 72, 71, 74, 190, 130, 110]
-        },
-        {
-          name:'其他',
-          type:'bar',
-          stack: '搜索引擎',
-          data:[62, 82, 91, 84, 109, 110, 120]
+          barWidth: '50%',
+          data:[320, 310, 295, 267, 234, 221, 220, 215,198,193]
         }
       ]
     };
-
   }
-
 }
