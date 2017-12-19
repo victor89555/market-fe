@@ -18,7 +18,6 @@ export class ContractFormComponent implements Modal, OnInit {
   uploadFiles: any[];
   contract: Contract = new Contract()
   attachments: any[] = []
-  attachmentIds: number[] = []
   markets: Market[]
   shops: Shop[]
   uploadUrl: string = "http://market-bus.djws.com.cn/api/contracts/attachments"
@@ -70,7 +69,6 @@ export class ContractFormComponent implements Modal, OnInit {
 
   //加载合同信息
   loadContract(){
-    console.log("loadContact()")
     this.contractService.get(this.context.id).subscribe(
       (contract) => {
         Object.assign(this.contract, contract)
@@ -79,22 +77,17 @@ export class ContractFormComponent implements Modal, OnInit {
     )
     this.contractService.getAttachments(this.context.id).subscribe(
       (attachments) => {
-        // console.log(attachments)
+        console.log(attachments)
         this.attachments = attachments
-        this.attachments.map((item)=>{
-          console.log(item.id)
-          this.attachmentIds.push(item.id)
-        })
-        // console.log(this.attachmentIds)
         this.changeDetectorRef.markForCheck()
       }
     )
   }
 
   save() {
-    // console.log("save()")
-    // console.log(this.attachmentIds)
-    this.contract.attachmentIds = this.attachmentIds
+    this.attachments.map((e)=> {
+      this.contract.attachmentIds.push(e.uploadResponse.id)
+    })
     this.contractService.save(this.contract).subscribe(
       (contract) => {
         this.dismiss.emit(contract);
@@ -103,9 +96,9 @@ export class ContractFormComponent implements Modal, OnInit {
   }
 
   update() {
-    // console.log("update()")
-    // console.log(this.attachmentIds)
-    this.contract.attachmentIds = this.attachmentIds
+    this.attachments.map((e)=> {
+      this.contract.attachmentIds.push(e.uploadResponse.id)
+    })
     this.contractService.update(this.context.id, this.contract).subscribe(
       (contract) => {
         this.dismiss.emit(contract)
@@ -126,16 +119,12 @@ export class ContractFormComponent implements Modal, OnInit {
   }
 
   onDeleteAttachments(idx) {
-    // console.log("onDeleteAttachments()")
     this.attachments.splice(idx,1);
-    this.attachmentIds.splice(idx,1);
-    // console.log(this.attachmentIds)
   }
 
   onUploadSuccess($event) {
-    // console.log("onUploadSuccess()")
-    // console.log(this.attachmentIds)
-    this.attachmentIds.push($event.uploadResponse.id)
+    this.attachments.push($event)
+    console.log(this.attachments)
   }
 }
 
