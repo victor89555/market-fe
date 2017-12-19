@@ -1,5 +1,5 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
-import {ModalService} from "rebirth-ng";
+import {ModalService, NotifyService} from "rebirth-ng";
 import {OperatorFormComponent} from "../operator-form/operator-form.component";
 import {OperatorService} from "../shared/operator.service";
 import {Operator} from "../shared/operator.model";
@@ -20,10 +20,12 @@ export class OperatorListComponent implements OnInit {
   editing = {}
   page: Page<any> = new Page()
   queryOperator = {"name": "", "mobile": ""}
+  index: number = 0
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
-              private operatorService: OperatorService) {
+              private operatorService: OperatorService,
+              private alertBoxService: NotifyService) {
   }
 
   ngOnInit(): void {
@@ -84,5 +86,14 @@ export class OperatorListComponent implements OnInit {
     this.operatorService.delete(id).subscribe(() => {
       this.query()
     })
+  }
+
+  //测试用Alert
+  openAlert() {
+    this.alertBoxService.placement("top")
+    this.alertBoxService.open({
+      type: 'danger',
+      html: '<strong>err!</strong>it\'s a test error message!(' + this.index++ +')'
+    }, 2000 );
   }
 }

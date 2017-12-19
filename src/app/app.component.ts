@@ -1,7 +1,7 @@
 import {Component, ViewContainerRef} from '@angular/core';
 import {environment} from '../environments/environment';
 import {RebirthHttpProvider} from 'rebirth-http';
-import {RebirthNGConfig} from 'rebirth-ng';
+import {NotifyService, RebirthNGConfig} from 'rebirth-ng';
 import 'rxjs/add/operator/do';
 import {AuthorizationService} from 'rebirth-permission';
 import {LoadingService} from './core/loading/loading.service';
@@ -22,8 +22,8 @@ export class AppComponent {
               private viewContainerRef: ViewContainerRef,
               private loadingService: LoadingService,
               private router: Router,
-              private rebirthHttpProvider: RebirthHttpProvider) {
-
+              private rebirthHttpProvider: RebirthHttpProvider,
+              private alertBoxService: NotifyService) {
     this.applicationSetup();
   }
 
@@ -71,6 +71,12 @@ export class AppComponent {
         }
         if ([400].indexOf(res.status) !== -1) {
           console.log(res.error.msg)
+
+          this.alertBoxService.placement("top")
+          this.alertBoxService.open({
+            type: 'danger',
+            html: res.error.msg
+          }, 2000 );
         }
       });
   }
