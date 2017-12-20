@@ -85,7 +85,7 @@ export class MenuBarComponent implements OnInit {
 
   //选中menubar
   onSelect(i) {
-    var n = null
+    let n = null
     for (let x in this.menuList) {
       for (let y in this.menuList[x].children) {
         if (this.menuList[x].children[y] === i) {
@@ -113,6 +113,26 @@ export class MenuBarComponent implements OnInit {
     }
   }
 
+  checkMenu(url) {
+    let n = null
+    for (let x in this.menuList) {
+      for (let y in this.menuList[x].children) {
+        if(this.menuList[x].children[y].link == url) {
+          n = x
+          if (!this.menuList[x].children[y].active) {
+            this.menuList[x].children[y].active = true
+            this.menuList[x].active = true
+          }
+        } else {
+          if(x != n) {
+            this.menuList[x].active = false
+          }
+          this.menuList[x].children[y].active = false
+        }
+      }
+    }
+  }
+
   //？不知道什么功能
   // getClassNames() {
   //   const textMenuClass = this.isTextMenuBarOpen ? 'open-text-menu' : 'hide-text-menu';
@@ -135,6 +155,7 @@ export class MenuBarComponent implements OnInit {
     // this.listens.push(this.renderer.listen('window', 'resize',
     //   ($event) => this.windowResize.emit($event)));
     // this.menuActive[0]=true;
+    this.checkMenu(this.router.url)
   }
 
   // shouldShowUpArrow(path): boolean {
