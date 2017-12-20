@@ -71,10 +71,10 @@
         (page)='setPage($event)'
       >
         <ngx-datatable-column name="序列号" prop="sequence_no"></ngx-datatable-column>
+        <ngx-datatable-column name="商户" prop="shop_name"></ngx-datatable-column>
+        <ngx-datatable-column name="市场" prop="market_name"></ngx-datatable-column>
         <ngx-datatable-column name="软件版本" prop="soft_version"></ngx-datatable-column>
         <ngx-datatable-column name="最后更新者" prop="last_update_user"></ngx-datatable-column>
-        <ngx-datatable-column name="市场" prop="market_name"></ngx-datatable-column>
-        <ngx-datatable-column name="商户" prop="shop_name"></ngx-datatable-column>
         <ngx-datatable-column name="状态" prop="status">
           <ng-template ngx-datatable-cell-template let-value="value">
             {{value|dictConvert:"ELECTRONICSCALE_STATUS"}}

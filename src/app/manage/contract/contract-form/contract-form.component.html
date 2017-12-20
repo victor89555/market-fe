@@ -6,27 +6,18 @@
 <div class="modal-body">
   <div class="form-horizontal">
     <div class="form-group" *ngIf="!context.isShopForm">
-      <label class="col-sm-3 control-label">市场:</label>
-      <div class="col-sm-9">
-        <select type="text" class="form-control" [(ngModel)]="contract.marketId">
-          <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
-        </select>
-      </div>
-    </div>
-    <!--<div class="form-group" *ngIf="context.isShopForm">-->
-      <!--<label class="col-sm-3 control-label">市场:</label>-->
-      <!--<div class="col-sm-9">-->
-        <!--<input type="text" class="from-control" [value]="market.name">-->
-        <!--<select type="text" class="form-control" [(ngModel)]="contract.marketId">-->
-          <!--<option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>-->
-        <!--</select>-->
-      <!--</div>-->
-    <!--</div>-->
-    <div class="form-group" *ngIf="!context.isShopForm">
       <label class="col-sm-3 control-label">商户:</label>
       <div class="col-sm-9">
         <select type="text" class="form-control" [(ngModel)]="contract.shopId">
           <option *ngFor="let shop of shops" [value]="shop.id">{{shop.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group" *ngIf="!context.isShopForm">
+      <label class="col-sm-3 control-label">市场:</label>
+      <div class="col-sm-9">
+        <select type="text" class="form-control" [(ngModel)]="contract.marketId">
+          <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
         </select>
       </div>
     </div>
