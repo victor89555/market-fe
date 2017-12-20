@@ -16,7 +16,7 @@ export class ManageAppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.menuService.getMenuConfig()
-      .subscribe(menuConfig => this.menuConfig = menuConfig);
+    // this.menuService.getMenuConfig()
+    //   .subscribe(menuConfig => this.menuConfig = menuConfig);
   }
 }

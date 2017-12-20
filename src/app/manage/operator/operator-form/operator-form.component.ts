@@ -49,5 +49,6 @@ export class OperatorFormComponent implements Modal, OnInit {
   cancel() {
     this.dismiss.error(this.operator);
   }
+
 }
 
