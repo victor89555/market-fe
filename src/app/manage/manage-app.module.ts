@@ -5,7 +5,8 @@ import {ManageAppComponent} from "./manage-app.component";
 import {SharedModule} from "../shared/shared.module";
 import {ROUTER_CONFIG} from "./manage-app.routes";
 import {MenuService} from "./menu.service";
-import {NgxDatatableModule} from "@swimlane/ngx-datatable/src";
+import {NgxDatatableModule} from "@swimlane/ngx-datatable";
+// import {NgxDatatableModule} from "@swimlane/ngx-datatable/src";  // ng build打包时需要使用这个路径
 import {FormsModule} from "@angular/forms";
 import {OrderFormComponent} from "./order/order-form/order-form.component";
 import {OrderListComponent} from "./order/order-list/order-list.component";
