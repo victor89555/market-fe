@@ -11,6 +11,8 @@ export class OrderStatisticsComponent implements OnInit {
   businessOption: any
   greensOption:any
   shopOption:any
+  isLoading:boolean = false
+  updateOptions:any
   constructor() {
   }
 
@@ -312,4 +314,19 @@ export class OrderStatisticsComponent implements OnInit {
       ]
     };
   }
+
+// 异步获取数据
+   getAsyncData(){
+       //异步获取的数据
+      let aquaticProduct = {
+          name:'水产类',
+          type:'line',
+          showSymbol: false,
+          data:[45, 34, 43, 23, 29, 53, 56]
+        }
+      this.businessOption.series.push(aquaticProduct)
+       this.updateOptions = {
+         series:this.businessOption.series
+       }
+   }
 }

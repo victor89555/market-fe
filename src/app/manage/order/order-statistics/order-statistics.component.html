@@ -1,5 +1,6 @@
 <div id="page1" class="page-content">
-  <div echarts [options]="businessOption" class="demo-chart"></div>
+  <div echarts [options]="businessOption" [loading]="isLoading" [merge]="updateOptions"  class="demo-chart"></div>
+  <button (click)="getAsyncData()">获取水产类</button>
   <p class="cutOff-rule"></p>
   <div echarts [options]="greensOption" class="demo-chart"></div>
   <p class="cutOff-rule"></p>
