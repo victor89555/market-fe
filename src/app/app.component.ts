@@ -76,7 +76,7 @@ export class AppComponent {
           this.alertBoxService.open({
             type: 'danger',
             html: res.error.msg
-          }, 2000 );
+          }, 5000 );
         }
       });
   }
