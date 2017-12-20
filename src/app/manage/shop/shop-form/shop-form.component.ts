@@ -23,6 +23,7 @@ import {ContractFormComponent} from "../../contract/contract-form/contract-form.
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ElectronicScale} from "../../electronicScale/shared/electronicScale.model";
 import {OperatorFormComponent} from "../../operator/operator-form/operator-form.component";
+import {dicts} from "../../../thurder-ng/models/dictionary"
 
 @Component({
   selector: 'app-shop-form',
@@ -65,6 +66,7 @@ export class ShopFormComponent implements OnInit {
   allotableElectronicScales = [] //可分配的电子秤列表
   allotedElectronicScales = [] //已分配的电子秤列表
   selectedScale: ElectronicScale
+  shopStatus = dicts["SHOP_STATUS"]
 
   ngOnInit(): void {
     console.log('ModalTestComponent init....');
@@ -218,6 +220,8 @@ export class ShopFormComponent implements OnInit {
       }
     }).subscribe(operator => {
       console.log('Rebirth Modal -> Get ok with result:', operator)
+      this.operatorName = operator.name + "（" + operator.mobile + "）"
+      this.shop.operatorId = operator.id
       this.loadOperators()
     }, error => {
 
@@ -313,7 +317,7 @@ export class ShopFormComponent implements OnInit {
     this.router.navigate(['/manage/shops']);
   }
 
-  addContract(id: number) { //增加合同
+  addContract() { //增加合同
     this.modalService.open<Contract>({
       component: ContractFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
@@ -329,5 +333,33 @@ export class ShopFormComponent implements OnInit {
 
     })
   }
+
+  editContract(id: number) { //编辑合同
+    this.modalService.open<Contract>({
+      component: ContractFormComponent,
+      componentFactoryResolver: this.componentFactoryResolver,
+      resolve: {
+        isShopForm: true, //判断是否从商户管理进入。
+        marketId: this.shop.marketId,
+        shopId: this.shopId,
+        add: false,
+        id: id
+      }
+    }).subscribe(contract => {
+      this.loadContractor();
+    }, error => {
+
+    })
+  }
+
+  deleteContract(id: number) { //删除合同
+    this.contractService.deleteContract(id).subscribe(
+      (res) => {
+        console.log(res)
+        this.loadContractor()
+      }
+    )
+  }
+
 }
 

@@ -20,7 +20,7 @@ import {Shop} from "../shared/shop.model";
 export class ShopListComponent implements OnInit {
 
   page: Page<any> = new Page()
-  qry = {market:'',shop:'',stall:'',status:''}
+  qry = {market:null,shop:'',stall:'',status:''}
   shop_state: boolean
   markets: Market[]
   stalls: Stall[] //摊位列表
@@ -75,7 +75,7 @@ export class ShopListComponent implements OnInit {
   }
 
   reset() {
-    this.qry.market = ''
+    this.qry.market = null
     this.qry.shop = ''
     this.qry.stall = ''
     this.qry.status = ''

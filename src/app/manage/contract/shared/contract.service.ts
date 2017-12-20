@@ -1,4 +1,4 @@
-import {Body, GET, Path, POST, Query, RebirthHttp,PUT} from "rebirth-http";
+import {Body, GET, Path, POST, Query, RebirthHttp, PUT, DELETE} from "rebirth-http";
 import {Observable} from "rxjs/Observable";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
@@ -16,23 +16,29 @@ export class ContractService extends RebirthHttp {
   @GET("contracts")
   query(@Query("_filter_eq_shop_id-long") shopId = null, @Query("pageNo") pageNo = null,
         @Query("pageSize") pageSize = null): Observable<Page<any>> {
-    return null;
+    return null
   }
 
   @GET("contracts")
   getAll(@Query("name") name = ""): Observable<Contract[]> {
-    return null;
+    return null
   }
 
   @GET("contracts/:id/attachments")
   getAttachments(@Path("id") id: number): Observable<any[]> {
-    return null;
+    return null
   }
 
   @GET("contracts/:id")
   get(@Path("id") id: number): Observable<Contract> {
     return null
   }
+
+  @DELETE("contracts/:id")
+  deleteContract(@Path("id") id: number): Observable<any[]> {
+    return null
+  }
+
   @PUT("contracts/:id")
   update( @Path("id") id: number, @Body contract: Contract): Observable<Contract> {
     return null;

@@ -135,7 +135,7 @@
           <tr *ngFor="let sc of allotedElectronicScales">
             <td>{{sc.sequence_no}}</td>
             <td>{{sc.soft_version}}</td>
-            <td (click)="unbindElectronicScale(sc.id)">删除</td>
+            <td><a href="JavaScript:;" (click)="unbindElectronicScale(sc.id)">解绑</a></td>
           </tr>
         </table>
       </ng-template>
@@ -154,13 +154,17 @@
             <th>合同总金额</th>
             <th>已付金额</th>
             <th>合同状态</th>
+            <th>操作</th>
+            <th>操作</th>
           </tr>
           <tr *ngFor="let con of contracts">
             <td>{{con.sign_time}}</td>
             <td>{{con.validity_time}}</td>
             <td>{{con.total_amount}}</td>
             <td>{{con.paid_amount}}</td>
-            <td>{{con.status}}</td>
+            <td>{{shopStatus[con.status]}}</td>
+            <td><a href="javascript:;" (click)="editContract(con.id)">修改</a></td>
+            <td><a href="javascript:;" (click)="deleteContract(con.id)">删除</a></td>
           </tr>
         </table>
       </ng-template>
