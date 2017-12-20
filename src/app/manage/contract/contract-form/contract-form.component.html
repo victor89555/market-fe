@@ -34,7 +34,7 @@
       <label class="col-sm-3 control-label">签约时间:</label>
       <div class="col-sm-9">
         <div class="input-group">
-          <input class="form-control" [showTimePicker]="true" [dateFormat]="dateFormat" [(ngModel)]="contract.signTime"
+          <input class="form-control" [showTimePicker]="true" [(ngModel)]="contract.signTime"
                  reDatePicker #datePicker1="datePicker">
           <div class="input-group-addon" (click)="datePicker1.toggle($event)">
             <i class="glyphicon glyphicon-calendar"></i>
@@ -46,7 +46,7 @@
       <label class="col-sm-3 control-label">到期时间:</label>
       <div class="col-sm-9">
         <div class="input-group">
-          <input class="form-control" [showTimePicker]="true" [dateFormat]="dateFormat" [(ngModel)]="contract.validityTime"
+          <input class="form-control" [showTimePicker]="true" [(ngModel)]="contract.validityTime"
                  reDatePicker #datePicker2="datePicker">
           <div class="input-group-addon" (click)="datePicker2.toggle($event)">
             <i class="glyphicon glyphicon-calendar"></i>
