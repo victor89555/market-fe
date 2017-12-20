@@ -71,6 +71,7 @@ export class ContractFormComponent implements Modal, OnInit {
   loadContract(){
     this.contractService.get(this.context.id).subscribe(
       (contract) => {
+        // console.log(contract)
         Object.assign(this.contract, contract)
         this.changeDetectorRef.markForCheck()
       }
@@ -85,8 +86,9 @@ export class ContractFormComponent implements Modal, OnInit {
   }
 
   save() {
+    console.log(this.attachments)
     this.attachments.map((e)=> {
-      this.contract.attachmentIds.push(e.uploadResponse.id)
+      this.contract.attachmentIds.push(e.id)
     })
     this.contractService.save(this.contract).subscribe(
       (contract) => {
@@ -96,8 +98,9 @@ export class ContractFormComponent implements Modal, OnInit {
   }
 
   update() {
+    console.log(this.attachments)
     this.attachments.map((e)=> {
-      this.contract.attachmentIds.push(e.uploadResponse.id)
+      this.contract.attachmentIds.push(e.id)
     })
     this.contractService.update(this.context.id, this.contract).subscribe(
       (contract) => {
@@ -123,7 +126,7 @@ export class ContractFormComponent implements Modal, OnInit {
   }
 
   onUploadSuccess($event) {
-    this.attachments.push($event)
+    this.attachments.push($event.uploadResponse)
     console.log(this.attachments)
   }
 }
