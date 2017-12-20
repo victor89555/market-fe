@@ -40,7 +40,7 @@ export class ContractListComponent implements OnInit {
     this.shopService.getAll(null).subscribe(
       (shops) => {
         this.shops = shops
-        console.log(shops);
+        // console.log(shops);
       }
     )
   }

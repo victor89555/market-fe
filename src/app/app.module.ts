@@ -8,12 +8,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CoreModule} from "./core/core.module";
 import {FormsModule} from "@angular/forms";
 import {ManageAppModule} from "./manage/manage-app.module";
-import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AlertComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
