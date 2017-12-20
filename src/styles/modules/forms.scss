@@ -78,3 +78,7 @@ body {
 .search-line{
   display: flex;
 }
+
+.nav-tabs > li > a {
+  cursor: pointer;
+}

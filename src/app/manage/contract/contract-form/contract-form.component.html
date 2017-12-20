@@ -100,7 +100,7 @@
       <label class="col-sm-3 control-label">附件:</label>
       <div class="col-sm-9">
         <re-file-upload [multiple]="true" (removeFiles)="onRemoveDone($event)" uploadParamName="file"
-                        (uploadFilesChange)="uploadFilesChange($event)"
+                        (uploadFilesChange)="uploadFilesChange($event)" chooseButton="选择附件" uploadButton="上传附件" cancelButton="清空"
                         [uploadUrl]="uploadUrl" (fileUploadSuccess)="onUploadSuccess($event)"></re-file-upload>
       </div>
     </div>

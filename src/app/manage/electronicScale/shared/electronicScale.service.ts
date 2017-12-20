@@ -21,13 +21,13 @@ export class ElectronicScaleService extends RebirthHttp {
   }
 
   getAllotableElectronic(marketId): Observable<ElectronicScale[]> {
-    return this.query(1, 100000, null, marketId, 0, 0, null).map((page) => {
+    return this.query(1, 100000, null, marketId, null, 0, null).map((page) => {
       return page.items || []
     })
   }
 
   getAllotedElectronic(marketId, shopId): Observable<ElectronicScale[]> {
-    return this.query(1, 100000, null, marketId, 0, 1, shopId).map((page) => {
+    return this.query(1, 100000, null, marketId, null, null, shopId).map((page) => {
       return page.items || []
     })
   }
