@@ -8,24 +8,15 @@
     <div class="form-group" *ngIf="!context.isShopForm">
       <label class="col-sm-3 control-label">市场:</label>
       <div class="col-sm-9">
-        <select type="text" class="form-control" [(ngModel)]="contract.marketId" [disabled]="onlyRead">
+        <select type="text" class="form-control" [(ngModel)]="contract.marketId">
           <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
         </select>
       </div>
     </div>
-    <!--<div class="form-group" *ngIf="context.isShopForm">-->
-      <!--<label class="col-sm-3 control-label">市场:</label>-->
-      <!--<div class="col-sm-9">-->
-        <!--<input type="text" class="from-control" [value]="market.name">-->
-        <!--<select type="text" class="form-control" [(ngModel)]="contract.marketId">-->
-          <!--<option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>-->
-        <!--</select>-->
-      <!--</div>-->
-    <!--</div>-->
     <div class="form-group" *ngIf="!context.isShopForm">
       <label class="col-sm-3 control-label">商户:</label>
       <div class="col-sm-9">
-        <select type="text" class="form-control" [(ngModel)]="contract.shopId" [disabled]="onlyRead">
+        <select type="text" class="form-control" [(ngModel)]="contract.shopId">
           <option *ngFor="let shop of shops" [value]="shop.id">{{shop.name}}</option>
         </select>
       </div>
@@ -35,8 +26,8 @@
       <div class="col-sm-9">
         <div class="input-group">
           <input class="form-control" [showTimePicker]="true" [(ngModel)]="contract.signTime"
-                 reDatePicker #datePicker1="datePicker" [readonly]="onlyRead" />
-          <div class="input-group-addon" (click)="datePicker1.toggle($event)" *ngIf="!onlyRead">
+                 reDatePicker #datePicker1="datePicker"/>
+          <div class="input-group-addon" (click)="datePicker1.toggle($event)">
             <i class="glyphicon glyphicon-calendar"></i>
           </div>
         </div>
@@ -47,29 +38,57 @@
       <div class="col-sm-9">
         <div class="input-group">
           <input class="form-control" [showTimePicker]="true" [(ngModel)]="contract.validityTime"
-                 reDatePicker #datePicker2="datePicker" [readonly]="onlyRead" />
-          <div class="input-group-addon" (click)="datePicker2.toggle($event)" *ngIf="!onlyRead">
+                 reDatePicker #datePicker2="datePicker" />
+          <div class="input-group-addon" (click)="datePicker2.toggle($event)">
             <i class="glyphicon glyphicon-calendar"></i>
           </div>
         </div>
       </div>
     </div>
-    <div class="form-group">
-      <label class="col-sm-3 control-label">合同总金额:</label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" [(ngModel)]="contract.totalAmount" [readonly]="onlyRead"/>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-3 control-label">已付金额:</label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" [(ngModel)]="contract.paidAmount" [readonly]="onlyRead"/>
-      </div>
-    </div>
+    
     <div class="form-group">
       <label class="col-sm-3 control-label">状态:</label>
       <div class="col-sm-9">
-        <tg-dict-select dictName="SHOP_STATUS" [(ngModel)]="contract.status" [disabled]="onlyRead"></tg-dict-select>
+        <tg-dict-select dictName="SHOP_STATUS" [(ngModel)]="contract.status"></tg-dict-select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">店铺租金:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" [(ngModel)]="contract.totalAmount"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">电子秤押金:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" [(ngModel)]="contract.scaleDeposit"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">市场管理费:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" [(ngModel)]="contract.manageFee"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">设备押金:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" [(ngModel)]="contract.equipmentDeposit"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">备注:</label>
+      <div class="col-sm-9">
+        <textarea cols="30" rows="10" class="form-control" [(ngModel)]="contract.remark"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">租用设备:</label>
+      <div class="col-sm-9">
+        <re-checkbox-group [options]="equipmentsOptions" [(ngModel)]="equipmentsLabel" [inline]="true"
+                           (change)="onCheckBoxChange($event)">
+          <re-checkbox>{{value|dictConvert:"ELECTRONICSCALE_STATUS"}}</re-checkbox>
+        </re-checkbox-group>
       </div>
     </div>
     <div class="form-group" *ngIf="attachments.length > 0">
@@ -81,7 +100,7 @@
             <td>文件名</td>
             <td>类型</td>
             <td>大小</td>
-            <td colspan="2" *ngIf="!onlyRead">操作</td>
+            <td colspan="2">操作</td>
           </tr>
           </thead>
           <tbody>
@@ -89,14 +108,14 @@
             <td>{{att.fileName}}</td>
             <td>{{att.fileType}}</td>
             <td>{{att.fileSize}}</td>
-            <td *ngIf="!onlyRead"><a href="{{att.filePath}}" download="filename" style="cursor: pointer">下载</a></td>
-            <td *ngIf="!onlyRead"><a (click)="onDeleteAttachments(i)" style="cursor: pointer">删除</a></td>
+            <td><a href="{{att.filePath}}" download="filename" style="cursor: pointer">下载</a></td>
+            <td><a (click)="onDeleteAttachments(i)" style="cursor: pointer">删除</a></td>
           </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="form-group" *ngIf="!onlyRead">
+    <div class="form-group">
       <label class="col-sm-3 control-label">附件:</label>
       <div class="col-sm-9">
         <re-file-upload [multiple]="true" (removeFiles)="onRemoveDone($event)" uploadParamName="file"
@@ -107,9 +126,9 @@
   </div>
 </div>
 <div class="modal-footer">
-  <div class="form-inline" *ngIf="!onlyRead">
+  <div class="form-inline">
     <div class="form-group" *ngIf="context.add">
-      <button type="button" class="btn btn-primary" (click)="save()">保存</button>
+      <button type="button" class="btn btn-primary" (click)="add()">保存</button>
     </div>
     <div class="form-group" *ngIf="!context.add">
       <button type="button" class="btn btn-info" (click)="update()">修改</button>

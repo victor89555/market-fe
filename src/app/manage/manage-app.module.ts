@@ -41,7 +41,8 @@ import {RoleFormComponent} from './role/role-form/role-form.component';
 import {RoleService} from "./role/shared/role.service";
 import {ResourceService} from "./resource/shared/resource.service";
 import {OrderStatisticsComponent} from './order/order-statistics/order-statistics.component'
-import {NgxEchartsModule} from "ngx-echarts"
+import {NgxEchartsModule} from "ngx-echarts";
+import { ContractViewComponent } from './contract/contract-view/contract-view.component'
 
 @NgModule({
   imports: [
@@ -75,7 +76,8 @@ import {NgxEchartsModule} from "ngx-echarts"
     UserFormComponent,
     RoleListComponent,
     RoleFormComponent,
-    OrderStatisticsComponent
+    OrderStatisticsComponent,
+    ContractViewComponent
   ],
   entryComponents: [
     OrderFormComponent,
@@ -87,7 +89,8 @@ import {NgxEchartsModule} from "ngx-echarts"
     ContractFormComponent,
     MemberFormComponent,
     UserFormComponent,
-    RoleFormComponent
+    RoleFormComponent,
+    ContractViewComponent
   ],
   providers: [
     MenuService,
@@ -101,8 +104,7 @@ import {NgxEchartsModule} from "ngx-echarts"
     MemberService,
     UserService,
     RoleService,
-    ResourceService,
-
+    ResourceService
   ]
 })
 export class ManageAppModule {
