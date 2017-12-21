@@ -14,6 +14,7 @@ import {UserListComponent} from "./user/user-list/user-list.component";
 import {RoleListComponent} from "./role/role-list/role-list.component";
 import {AuthLoginPermission} from "rebirth-permission"
 import {OrderStatisticsComponent} from "./order/order-statistics/order-statistics.component"
+import {StallHistoryComponent} from "./stall/stall-history/stall-history.component";
 
 export const ROUTER_CONFIG: Routes = [
   {
@@ -27,6 +28,8 @@ export const ROUTER_CONFIG: Routes = [
       {path: 'orderStatistics', component: OrderStatisticsComponent},
       {path: 'markets', component: MarketListComponent},
       {path: 'stalls', component: StallListComponent},
+      {path: 'stalls/:marketId', component: StallListComponent},
+      {path: 'stalls/history/:stallId', component: StallHistoryComponent},
       {path: 'operators', component: OperatorListComponent},
       {path: 'shops', component: ShopListComponent},
       {path: 'electronicScales', component: ElectronicScaleListComponent},

@@ -6,12 +6,6 @@
 <div class="modal-body">
   <div class="form-horizontal">
     <div class="form-group">
-      <label class="col-sm-3 control-label">地址:</label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" [(ngModel)]="market.addr" />
-    </div>
-  </div>
-  <div class="form-group">
       <label class="col-sm-3 control-label">市场名:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="market.name" />
@@ -33,6 +27,12 @@
       <label class="col-sm-3 control-label">已入驻摊位数:</label>
       <div class="col-sm-9">
         <input type="text" disabled class="form-control" [(ngModel)]="market.stallNum" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">地址:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" [(ngModel)]="market.addr" />
       </div>
     </div>
   </div>

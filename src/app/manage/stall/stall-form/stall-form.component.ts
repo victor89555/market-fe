@@ -10,7 +10,7 @@ import {MarketService} from "../../market/shared/market.service"
   templateUrl: "./stall-form.component.html"
 })
 export class StallFormComponent implements Modal, OnInit {
-  context: { id: number, add: boolean };
+  context: { id: number, add: boolean, marketId: number };
   dismiss: EventEmitter<Stall>;
 
   stall: any = {}
@@ -19,8 +19,8 @@ export class StallFormComponent implements Modal, OnInit {
   marketId:number=null
   marketName:string =""
   closed = true
+  disable:boolean = false// 用于判断市场下拉框是否可用
   close() {
-    console.log('close');
     this.closed = true;
   }
 
@@ -31,6 +31,10 @@ export class StallFormComponent implements Modal, OnInit {
     console.log('ModalTestComponent init....');
    if(!this.context.add){
      this.getStall()
+   }else{
+     this.marketId = this.context.marketId;
+     this.getMarket(this.marketId)
+     this.disable = true
    }
    this.getAllMarkets()
   }
@@ -49,7 +53,7 @@ export class StallFormComponent implements Modal, OnInit {
       }
     )
   }
-  getStall(){
+  getStall(){  // 修改时执行
     this.stallService.get(this.context.id).subscribe(
       (stall) => {
         this.stall = stall

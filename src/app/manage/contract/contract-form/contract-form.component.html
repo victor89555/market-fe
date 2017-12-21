@@ -6,14 +6,6 @@
 <div class="modal-body">
   <div class="form-horizontal">
     <div class="form-group" *ngIf="!context.isShopForm">
-      <label class="col-sm-3 control-label">市场:</label>
-      <div class="col-sm-9">
-        <select type="text" class="form-control" [(ngModel)]="contract.marketId">
-          <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group" *ngIf="!context.isShopForm">
       <label class="col-sm-3 control-label">商户:</label>
       <div class="col-sm-9">
         <select type="text" class="form-control" [(ngModel)]="contract.shopId">
@@ -21,12 +13,25 @@
         </select>
       </div>
     </div>
+    <div class="form-group" *ngIf="!context.isShopForm">
+      <label class="col-sm-3 control-label">市场:</label>
+      <div class="col-sm-9">
+        <select type="text" class="form-control" [(ngModel)]="contract.marketId">
+          <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
+        </select>
+      </div>
+    </div>
     <div class="form-group">
       <label class="col-sm-3 control-label">签约时间:</label>
       <div class="col-sm-9">
         <div class="input-group">
+<<<<<<< HEAD
           <input class="form-control" [showTimePicker]="true" [(ngModel)]="contract.signTime"
                  reDatePicker #datePicker1="datePicker"/>
+=======
+          <input class="form-control" [showTimePicker]="false" [(ngModel)]="contract.signTime"
+                 reDatePicker #datePicker1="datePicker">
+>>>>>>> 094e866ad806024d4db7036bc7fb46314d9424f2
           <div class="input-group-addon" (click)="datePicker1.toggle($event)">
             <i class="glyphicon glyphicon-calendar"></i>
           </div>
@@ -37,8 +42,13 @@
       <label class="col-sm-3 control-label">到期时间:</label>
       <div class="col-sm-9">
         <div class="input-group">
+<<<<<<< HEAD
           <input class="form-control" [showTimePicker]="true" [(ngModel)]="contract.validityTime"
                  reDatePicker #datePicker2="datePicker" />
+=======
+          <input class="form-control" [showTimePicker]="false" [(ngModel)]="contract.validityTime"
+                 reDatePicker #datePicker2="datePicker">
+>>>>>>> 094e866ad806024d4db7036bc7fb46314d9424f2
           <div class="input-group-addon" (click)="datePicker2.toggle($event)">
             <i class="glyphicon glyphicon-calendar"></i>
           </div>

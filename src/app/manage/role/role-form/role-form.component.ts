@@ -44,7 +44,6 @@ export class RoleFormComponent implements OnInit, Modal {
         if (!this.context.add) {
           this.getRole().subscribe(() => {
             this.setChecked(treeData, this.role.resourceIds)
-            debugger
             this.resourceTreeData = treeData
           })
         } else {

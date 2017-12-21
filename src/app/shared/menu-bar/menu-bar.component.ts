@@ -35,7 +35,7 @@ export class MenuBarComponent implements OnInit {
       isOpen: true,
       children: [
         {title: "市场信息", link: "/manage/markets", active: true, icon: "more"},
-        {title: "摊位管理", link: "/manage/stalls", active: false, icon: "more"}
+        // {title: "摊位管理", link: "/manage/stalls", active: false, icon: "more"}
       ]
     },
     {

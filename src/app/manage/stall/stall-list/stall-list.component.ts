@@ -1,5 +1,6 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
 import {ModalService} from "rebirth-ng";
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {StallFormComponent} from "../stall-form/stall-form.component";
 import {StallService} from "../shared/stall.service";
 import {Stall} from "../shared/stall.model";
@@ -27,15 +28,19 @@ export class StallListComponent implements OnInit {
   markets: Market[] = []
   marketName = ""
   shops: Shop[]
-
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private stallService: StallService,
               private marketService: MarketService,
-              private shopService: ShopService) {
+              private shopService: ShopService,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit(): void {
+    this.route.params.forEach((params: Params) => {
+      this.queryStall.marketId = params['marketId'];
+    });
     this.query()
     this.getAllMarkets()
     this.queryShops()
@@ -82,7 +87,6 @@ export class StallListComponent implements OnInit {
 
   reset() {
     this.queryStall.status = ""
-    this.queryStall.marketId = null
     this.marketName = ""
     this.queryStall.shopId = null
     this.queryStall.func = ""
@@ -95,7 +99,8 @@ export class StallListComponent implements OnInit {
       component: StallFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
-        "add": true
+        "add": true,
+        "marketId":this.queryStall.marketId
       }
     }).subscribe(stall => {
       console.log('Rebirth Modal -> Get ok with result:', stall)
@@ -126,4 +131,5 @@ export class StallListComponent implements OnInit {
       this.query()
     })
   }
+
 }
