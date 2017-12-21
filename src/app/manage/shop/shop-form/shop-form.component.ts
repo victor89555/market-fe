@@ -50,7 +50,7 @@ export class ShopFormComponent implements OnInit {
 
   dismiss: EventEmitter<Shop>;
 
-  shopId: number //商户ID
+  shopId: number//商户ID
   // 页面组件
   pageComponent = {
     newShop: true
