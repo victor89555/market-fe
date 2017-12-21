@@ -41,13 +41,9 @@ import {RoleFormComponent} from './role/role-form/role-form.component';
 import {RoleService} from "./role/shared/role.service";
 import {ResourceService} from "./resource/shared/resource.service";
 import {OrderStatisticsComponent} from './order/order-statistics/order-statistics.component'
-<<<<<<< HEAD
 import {NgxEchartsModule} from "ngx-echarts";
 import { ContractViewComponent } from './contract/contract-view/contract-view.component'
-=======
-import {NgxEchartsModule} from "ngx-echarts"
 import { StallHistoryComponent } from './stall/stall-history/stall-history.component'
->>>>>>> 094e866ad806024d4db7036bc7fb46314d9424f2
 
 @NgModule({
   imports: [
@@ -82,11 +78,8 @@ import { StallHistoryComponent } from './stall/stall-history/stall-history.compo
     RoleListComponent,
     RoleFormComponent,
     OrderStatisticsComponent,
-<<<<<<< HEAD
-    ContractViewComponent
-=======
+    ContractViewComponent,
     StallHistoryComponent
->>>>>>> 094e866ad806024d4db7036bc7fb46314d9424f2
   ],
   entryComponents: [
     OrderFormComponent,
