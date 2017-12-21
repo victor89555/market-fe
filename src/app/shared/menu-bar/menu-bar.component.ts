@@ -47,7 +47,7 @@ export class MenuBarComponent implements OnInit {
       children: [
         {title: "商户信息", link: "/manage/shops", active: false, icon: "user1"},
         {title: "经营者信息", link: "/manage/operators", active: false, icon: "user1"},
-        {title: "合同管理", link: "/manage/contracts", active: false, icon: "order"},
+        {title: "合同查询", link: "/manage/contracts", active: false, icon: "order"},
         {title: "电子秤管理", link: "/manage/electronicScales", active: false, icon: "balance"},
         // {title: "商户台账查询",link:"/manage/orders",active: false,icon: "book"},
         {title: "检测结果查询", link: "JavaScript:;", active: false, icon: "chem"}

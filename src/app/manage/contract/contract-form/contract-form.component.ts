@@ -13,9 +13,9 @@ import {ShopService} from "../../shop/shared/shop.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContractFormComponent implements Modal, OnInit {
-  context: { id: number,isShopForm: boolean,marketId: number, shopId: number, add:boolean};
-  dismiss: EventEmitter<Contract>;
-  uploadFiles: any[];
+  context: { id: number,isShopForm: boolean,marketId: number, shopId: number, add:boolean, onlyRead: true}
+  dismiss: EventEmitter<Contract>
+  uploadFiles: any[]
   contract: Contract = new Contract()
   attachments: any[] = []
   markets: Market[]

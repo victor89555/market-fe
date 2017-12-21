@@ -76,7 +76,8 @@ export class ContractListComponent implements OnInit {
       component: ContractFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
-        "add": true
+        add: true,
+        isShopForm: false
       }
     }).subscribe(contract => {
       console.log('Rebirth Modal -> Get ok with result:', contract)
@@ -92,6 +93,23 @@ export class ContractListComponent implements OnInit {
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
         id: id
+      }
+    }).subscribe(contract => {
+      console.log('Rebirth Modal -> Get ok with result:', contract)
+      this.query()
+    }, error => {
+
+    })
+  }
+
+  check(id: number) {
+    console.log("查看" + id)
+    this.modalService.open<Contract>({
+      component: ContractFormComponent,
+      componentFactoryResolver: this.componentFactoryResolver,
+      resolve: {
+        id: id,
+        onlyRead: true
       }
     }).subscribe(contract => {
       console.log('Rebirth Modal -> Get ok with result:', contract)

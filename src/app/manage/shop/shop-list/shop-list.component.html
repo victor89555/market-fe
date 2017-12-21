@@ -90,7 +90,7 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="操作" prop="id">
         <ng-template ngx-datatable-cell-template let-value="value" let-row="shop">
-          <a routerLink="/manage/shopForm/{{value}}">修改</a>
+          <button class="btn btn-default" routerLink="/manage/shopForm/{{value}}">修改</button>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>
