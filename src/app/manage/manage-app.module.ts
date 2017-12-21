@@ -42,6 +42,7 @@ import {RoleService} from "./role/shared/role.service";
 import {ResourceService} from "./resource/shared/resource.service";
 import {OrderStatisticsComponent} from './order/order-statistics/order-statistics.component'
 import {NgxEchartsModule} from "ngx-echarts"
+import { StallHistoryComponent } from './stall/stall-history/stall-history.component'
 
 @NgModule({
   imports: [
@@ -75,7 +76,8 @@ import {NgxEchartsModule} from "ngx-echarts"
     UserFormComponent,
     RoleListComponent,
     RoleFormComponent,
-    OrderStatisticsComponent
+    OrderStatisticsComponent,
+    StallHistoryComponent
   ],
   entryComponents: [
     OrderFormComponent,

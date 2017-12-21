@@ -56,7 +56,9 @@ export class MarketListComponent implements OnInit {
       this.query()
     })
   }
-
+  delete1(name) {
+    console.log(name);
+  }
   add() {
     this.modalService.open<Market>({
       component: MarketFormComponent,

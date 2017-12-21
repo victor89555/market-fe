@@ -11,7 +11,8 @@
     <div class="form-group">
       <label class="col-sm-2 control-label">所属市场:</label>
       <div class="col-sm-10">
-        <select type="text" class="form-control" name="market" [(ngModel)]="marketId">
+        <input *ngIf="disable" [value]="marketName" class="form-control" disabled>
+        <select *ngIf="!disable" type="text" class="form-control" name="market" [(ngModel)]="marketId">
           <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
         </select>
       </div>
