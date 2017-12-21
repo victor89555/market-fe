@@ -1,6 +1,7 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
 import {ModalService} from "rebirth-ng";
 import {ContractFormComponent} from "../contract-form/contract-form.component";
+import {ContractViewComponent} from "../contract-view/contract-view.component";
 import {ContractService} from "../shared/contract.service";
 import {Contract} from "../shared/contract.model";
 import {Page} from "../../../thurder-ng/models/page.model";
@@ -76,7 +77,8 @@ export class ContractListComponent implements OnInit {
       component: ContractFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
-        "add": true
+        add: true,
+        isShopForm: false
       }
     }).subscribe(contract => {
       console.log('Rebirth Modal -> Get ok with result:', contract)
@@ -89,6 +91,22 @@ export class ContractListComponent implements OnInit {
   edit(id: number) {
     this.modalService.open<Contract>({
       component: ContractFormComponent,
+      componentFactoryResolver: this.componentFactoryResolver,
+      resolve: {
+        id: id
+      }
+    }).subscribe(contract => {
+      console.log('Rebirth Modal -> Get ok with result:', contract)
+      this.query()
+    }, error => {
+
+    })
+  }
+
+  check(id: number) {
+    console.log("查看" + id)
+    this.modalService.open<Contract>({
+      component: ContractViewComponent,
       componentFactoryResolver: this.componentFactoryResolver,
       resolve: {
         id: id

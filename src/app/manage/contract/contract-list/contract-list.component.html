@@ -6,13 +6,13 @@
         <!--<small>dashboard &amp; statistics</small>-->
       </h1>
     </div>
-    <div class="page-toolbar">
-      <div class="pull-right tooltips" >
-        <a href="javascript:;" class="btn btn-danger" (click)="add()">
-          <i class="glyphicon glyphicon-plus"></i> 新增
-        </a>
-      </div>
-    </div>
+    <!--<div class="page-toolbar">-->
+      <!--<div class="pull-right tooltips" >-->
+        <!--<a href="javascript:;" class="btn btn-danger" (click)="add()">-->
+          <!--<i class="glyphicon glyphicon-plus"></i> 新增-->
+        <!--</a>-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
 
   <div class="row">
@@ -55,7 +55,6 @@
         <ngx-datatable-column name="签约时间" prop="sign_time"></ngx-datatable-column>
         <ngx-datatable-column name="到期时间" prop="validity_time"></ngx-datatable-column>
         <ngx-datatable-column name="合同总金额" prop="total_amount"></ngx-datatable-column>
-        <ngx-datatable-column name="已付金额" prop="paid_amount"></ngx-datatable-column>
         <ngx-datatable-column name="状态" prop="status">
           <ng-template ngx-datatable-cell-template let-value="value">
             {{value|dictConvert:"SHOP_STATUS"}}
@@ -63,7 +62,7 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="操作" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="contract">
-            <button class="btn btn-default" (click)="edit(value);">修改</button>
+            <button class="btn btn-info" (click)="check(value);">查看</button>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>

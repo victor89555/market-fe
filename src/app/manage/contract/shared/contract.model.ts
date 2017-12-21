@@ -5,7 +5,11 @@ export class Contract {
   signTime: string
   validityTime: string
   totalAmount: number
-  paidAmount: number
+  scaleDeposit: number
+  equipmentDeposit: number
+  manageFee: number
+  hireEquipments: string[]
+  remark: string
   status: number
   attachmentIds: number[] = []
 }

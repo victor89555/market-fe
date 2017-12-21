@@ -25,8 +25,13 @@
       <label class="col-sm-3 control-label">签约时间:</label>
       <div class="col-sm-9">
         <div class="input-group">
+<<<<<<< HEAD
+          <input class="form-control" [showTimePicker]="true" [(ngModel)]="contract.signTime"
+                 reDatePicker #datePicker1="datePicker"/>
+=======
           <input class="form-control" [showTimePicker]="false" [(ngModel)]="contract.signTime"
                  reDatePicker #datePicker1="datePicker">
+>>>>>>> 094e866ad806024d4db7036bc7fb46314d9424f2
           <div class="input-group-addon" (click)="datePicker1.toggle($event)">
             <i class="glyphicon glyphicon-calendar"></i>
           </div>
@@ -37,30 +42,63 @@
       <label class="col-sm-3 control-label">到期时间:</label>
       <div class="col-sm-9">
         <div class="input-group">
+<<<<<<< HEAD
+          <input class="form-control" [showTimePicker]="true" [(ngModel)]="contract.validityTime"
+                 reDatePicker #datePicker2="datePicker" />
+=======
           <input class="form-control" [showTimePicker]="false" [(ngModel)]="contract.validityTime"
                  reDatePicker #datePicker2="datePicker">
+>>>>>>> 094e866ad806024d4db7036bc7fb46314d9424f2
           <div class="input-group-addon" (click)="datePicker2.toggle($event)">
             <i class="glyphicon glyphicon-calendar"></i>
           </div>
         </div>
       </div>
     </div>
+    
     <div class="form-group">
-      <label class="col-sm-3 control-label">合同总金额:</label>
+      <label class="col-sm-3 control-label">状态:</label>
+      <div class="col-sm-9">
+        <tg-dict-select dictName="SHOP_STATUS" [(ngModel)]="contract.status"></tg-dict-select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">店铺租金:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="contract.totalAmount"/>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-3 control-label">已付金额:</label>
+      <label class="col-sm-3 control-label">电子秤押金:</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" [(ngModel)]="contract.paidAmount"/>
+        <input type="text" class="form-control" [(ngModel)]="contract.scaleDeposit"/>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-3 control-label">状态:</label>
+      <label class="col-sm-3 control-label">市场管理费:</label>
       <div class="col-sm-9">
-        <tg-dict-select dictName="SHOP_STATUS" [(ngModel)]="contract.status"></tg-dict-select>
+        <input type="text" class="form-control" [(ngModel)]="contract.manageFee"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">设备押金:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" [(ngModel)]="contract.equipmentDeposit"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">备注:</label>
+      <div class="col-sm-9">
+        <textarea cols="30" rows="10" class="form-control" [(ngModel)]="contract.remark"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">租用设备:</label>
+      <div class="col-sm-9">
+        <re-checkbox-group [options]="equipmentsOptions" [(ngModel)]="equipmentsLabel" [inline]="true"
+                           (change)="onCheckBoxChange($event)">
+          <re-checkbox>{{value|dictConvert:"ELECTRONICSCALE_STATUS"}}</re-checkbox>
+        </re-checkbox-group>
       </div>
     </div>
     <div class="form-group" *ngIf="attachments.length > 0">
@@ -100,7 +138,7 @@
 <div class="modal-footer">
   <div class="form-inline">
     <div class="form-group" *ngIf="context.add">
-      <button type="button" class="btn btn-primary" (click)="save()">保存</button>
+      <button type="button" class="btn btn-primary" (click)="add()">保存</button>
     </div>
     <div class="form-group" *ngIf="!context.add">
       <button type="button" class="btn btn-info" (click)="update()">修改</button>

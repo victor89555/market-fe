@@ -44,7 +44,7 @@ export class ContractService extends RebirthHttp {
     return null;
   }
   @POST('contracts')
-  save(@Body contract: Contract): Observable<Contract> {
+  add(@Body contract: Contract): Observable<Contract> {
     return null;
   }
 }

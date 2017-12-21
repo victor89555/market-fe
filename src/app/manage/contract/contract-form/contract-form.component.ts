@@ -6,6 +6,7 @@ import {Market} from "../../market/shared/market.model";
 import {MarketService} from "../../market/shared/market.service";
 import {Shop} from "../../shop/shared/shop.model";
 import {ShopService} from "../../shop/shared/shop.service";
+import {dicts} from "../../../thurder-ng/models/dictionary";
 
 @Component({
   selector: 'app-contract-form',
@@ -13,13 +14,16 @@ import {ShopService} from "../../shop/shared/shop.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContractFormComponent implements Modal, OnInit {
-  context: { id: number,isShopForm: boolean,marketId: number, shopId: number, add:boolean};
-  dismiss: EventEmitter<Contract>;
-  uploadFiles: any[];
+  context: { id: number,isShopForm: boolean,marketId: number, shopId: number, add:boolean, onlyRead: true}
+  dismiss: EventEmitter<Contract>
+  uploadFiles: any[]
   contract: Contract = new Contract()
   attachments: any[] = []
   markets: Market[]
   shops: Shop[]
+  equipmentsOptions = ["电子秤","不锈钢架", "PC垫板","PPP占板","三防罩","操作交易台","上墙货架","展示架","交易台","宰杀操作台","蓄养池","宰杀操作台"];
+  equipmentsLabel: string[]
+  equipmentName = dicts["EQUIPMENT_NAME"]
   uploadUrl: string = "http://market-bus.djws.com.cn/api/contracts/attachments"
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
@@ -71,7 +75,8 @@ export class ContractFormComponent implements Modal, OnInit {
   loadContract(){
     this.contractService.get(this.context.id).subscribe(
       (contract) => {
-        // console.log(contract)
+        console.log("加载合同信息")
+        console.log(contract)
         Object.assign(this.contract, contract)
         this.changeDetectorRef.markForCheck()
       }
@@ -85,12 +90,12 @@ export class ContractFormComponent implements Modal, OnInit {
     )
   }
 
-  save() {
-    console.log(this.attachments)
+  add() {
+    // console.log(this.attachments)
     this.attachments.map((e)=> {
       this.contract.attachmentIds.push(e.id)
     })
-    this.contractService.save(this.contract).subscribe(
+    this.contractService.add(this.contract).subscribe(
       (contract) => {
         this.dismiss.emit(contract);
       }
@@ -102,6 +107,8 @@ export class ContractFormComponent implements Modal, OnInit {
     this.attachments.map((e)=> {
       this.contract.attachmentIds.push(e.id)
     })
+    this.formatLabel(this.equipmentsLabel)
+    console.log(this.contract)
     this.contractService.update(this.context.id, this.contract).subscribe(
       (contract) => {
         this.dismiss.emit(contract)
@@ -128,6 +135,26 @@ export class ContractFormComponent implements Modal, OnInit {
   onUploadSuccess($event) {
     this.attachments.push($event.uploadResponse)
     console.log(this.attachments)
+  }
+
+  onCheckBoxChange(item) {
+    // console.log(item)
+    // console.log(this.equipmentsLabel)
+    // this.formatLabel(this.equipmentsLabel)
+  }
+  formatLabel(e) {
+    console.log(e.length)
+    let arr = []
+    for(let i=0; i < e.length; i++) {
+      for(let key in this.equipmentName) {
+        if(e[i] == this.equipmentName[key]) {
+          arr.push(key)
+          continue
+        }
+      }
+    }
+    // console.log(arr)
+    this.contract.hireEquipments = arr
   }
 }
 
