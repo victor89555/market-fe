@@ -25,13 +25,8 @@
       <label class="col-sm-3 control-label">签约时间:</label>
       <div class="col-sm-9">
         <div class="input-group">
-<<<<<<< HEAD
-          <input class="form-control" [showTimePicker]="true" [(ngModel)]="contract.signTime"
-                 reDatePicker #datePicker1="datePicker"/>
-=======
           <input class="form-control" [showTimePicker]="false" [(ngModel)]="contract.signTime"
-                 reDatePicker #datePicker1="datePicker">
->>>>>>> 094e866ad806024d4db7036bc7fb46314d9424f2
+                 reDatePicker #datePicker1="datePicker"/>
           <div class="input-group-addon" (click)="datePicker1.toggle($event)">
             <i class="glyphicon glyphicon-calendar"></i>
           </div>
@@ -42,13 +37,8 @@
       <label class="col-sm-3 control-label">到期时间:</label>
       <div class="col-sm-9">
         <div class="input-group">
-<<<<<<< HEAD
-          <input class="form-control" [showTimePicker]="true" [(ngModel)]="contract.validityTime"
-                 reDatePicker #datePicker2="datePicker" />
-=======
           <input class="form-control" [showTimePicker]="false" [(ngModel)]="contract.validityTime"
-                 reDatePicker #datePicker2="datePicker">
->>>>>>> 094e866ad806024d4db7036bc7fb46314d9424f2
+                 reDatePicker #datePicker2="datePicker" />
           <div class="input-group-addon" (click)="datePicker2.toggle($event)">
             <i class="glyphicon glyphicon-calendar"></i>
           </div>
@@ -95,8 +85,7 @@
     <div class="form-group">
       <label class="col-sm-3 control-label">租用设备:</label>
       <div class="col-sm-9">
-        <re-checkbox-group [options]="equipmentsOptions" [(ngModel)]="equipmentsLabel" [inline]="true"
-                           (change)="onCheckBoxChange($event)">
+        <re-checkbox-group [options]="equipmentsOptions" [(ngModel)]="equipmentsLabel" [inline]="true">
           <re-checkbox>{{value|dictConvert:"ELECTRONICSCALE_STATUS"}}</re-checkbox>
         </re-checkbox-group>
       </div>

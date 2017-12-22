@@ -18,27 +18,15 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-3 control-label">签约时间:</label>
+      <label class="col-sm-3 control-label">开始时间:</label>
       <div class="col-sm-9">
         <p class="text">{{contract.signTime}}</p>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-3 control-label">到期时间:</label>
+      <label class="col-sm-3 control-label">结束时间:</label>
       <div class="col-sm-9">
         <p class="text">{{contract.validityTime}}</p>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-3 control-label">合同总金额:</label>
-      <div class="col-sm-9">
-        <p class="text">{{contract.totalAmount || 0}} 元</p>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-sm-3 control-label">已付金额:</label>
-      <div class="col-sm-9">
-        <p class="text">{{contract.paidAmount || 0}} 元</p>
       </div>
     </div>
     <div class="form-group">
@@ -48,11 +36,39 @@
       </div>
     </div>
     <div class="form-group">
+      <label class="col-sm-3 control-label">店铺租金:</label>
+      <div class="col-sm-9">
+        <p class="text">{{contract.totalAmount || 0}} 元</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">电子秤押金:</label>
+      <div class="col-sm-9">
+        <p class="text">{{contract.scaleDeposit || 0}} 元</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">市场管理费:</label>
+      <div class="col-sm-9">
+        <p class="text">{{contract.manageFee || 0}} 元</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">设备押金:</label>
+      <div class="col-sm-9">
+        <p class="text">{{contract.equipmentDeposit || 0}} 元</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">备注:</label>
+      <div class="col-sm-9">
+        <p class="text">{{contract.remark}}</p>
+      </div>
+    </div>
+    <div class="form-group">
       <label class="col-sm-3 control-label">租用设备:</label>
       <div class="col-sm-9">
-        <p class="text">
-          <span *ngFor="let e of hireEquipments;let i of index"><span *ngIf="i > 1">, </span>{{equipmentName[e]}}</span>
-        </p>
+        <p class="text">{{hireEquipments}}</p>
       </div>
     </div>
     <div class="form-group" *ngIf="attachments.length > 0">

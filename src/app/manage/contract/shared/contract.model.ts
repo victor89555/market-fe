@@ -8,7 +8,7 @@ export class Contract {
   scaleDeposit: number
   equipmentDeposit: number
   manageFee: number
-  hireEquipments: string[]
+  hireEquipments: string
   remark: string
   status: number
   attachmentIds: number[] = []
