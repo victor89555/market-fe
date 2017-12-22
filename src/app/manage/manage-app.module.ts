@@ -43,7 +43,8 @@ import {ResourceService} from "./resource/shared/resource.service";
 import {OrderStatisticsComponent} from './order/order-statistics/order-statistics.component'
 import {NgxEchartsModule} from "ngx-echarts";
 import { ContractViewComponent } from './contract/contract-view/contract-view.component'
-import { StallHistoryComponent } from './stall/stall-history/stall-history.component'
+import { StallHistoryComponent } from './stall/stall-history/stall-history.component';
+import { ShopStatisticsComponent } from './shop/shop-statistics/shop-statistics.component'
 
 @NgModule({
   imports: [
@@ -79,7 +80,8 @@ import { StallHistoryComponent } from './stall/stall-history/stall-history.compo
     RoleFormComponent,
     OrderStatisticsComponent,
     ContractViewComponent,
-    StallHistoryComponent
+    StallHistoryComponent,
+    ShopStatisticsComponent
   ],
   entryComponents: [
     OrderFormComponent,

@@ -15,6 +15,7 @@ import {RoleListComponent} from "./role/role-list/role-list.component";
 import {AuthLoginPermission} from "rebirth-permission"
 import {OrderStatisticsComponent} from "./order/order-statistics/order-statistics.component"
 import {StallHistoryComponent} from "./stall/stall-history/stall-history.component";
+import {ShopStatisticsComponent} from "./shop/shop-statistics/shop-statistics.component";
 
 export const ROUTER_CONFIG: Routes = [
   {
@@ -32,6 +33,7 @@ export const ROUTER_CONFIG: Routes = [
       {path: 'stalls/history/:stallId', component: StallHistoryComponent},
       {path: 'operators', component: OperatorListComponent},
       {path: 'shops', component: ShopListComponent},
+      {path: 'shops/statistics/:shopId', component: ShopStatisticsComponent},
       {path: 'electronicScales', component: ElectronicScaleListComponent},
       {path: 'contracts', component: ContractListComponent},
       {path: 'shopForm/:id', component: ShopFormComponent},
