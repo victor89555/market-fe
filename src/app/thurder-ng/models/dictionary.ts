@@ -48,14 +48,9 @@ export const dicts = {
   },
 
   "STALL_STATUS":{
-<<<<<<< HEAD
-    0: "未被使用",
-    1: "已被使用"
-=======
     0:"未使用",
     1:"在使用",
     2:"注销"
->>>>>>> 094e866ad806024d4db7036bc7fb46314d9424f2
   },
 
   "ELECTRONICSCALE_STATUS":{
