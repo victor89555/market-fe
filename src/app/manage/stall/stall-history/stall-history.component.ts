@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Params } from '@angular/router'
+import { ActivatedRoute, Router, Params } from '@angular/router'
 
 @Component({
   selector: 'app-stall-history',
@@ -9,7 +9,7 @@ import { ActivatedRoute, Route, Params } from '@angular/router'
 export class StallHistoryComponent implements OnInit {
   stallId:number
   constructor(private route: ActivatedRoute,
-               private router: Route) { }
+              private router: Router) { }
 
   ngOnInit() {
     this.route.params.forEach((params:Params)=>{
