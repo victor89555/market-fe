@@ -20,7 +20,7 @@ export class ContractViewComponent implements OnInit {
   market: Market = new Market()
   shop: Shop = new Shop()
   shopStatus = dicts["SHOP_STATUS"]
-  hireEquipments = [1,3,6,8,10]
+  hireEquipments: string = ""
   equipmentName = dicts["EQUIPMENT_NAME"]
   constructor(private contractService: ContractService,
               private changeDetectorRef: ChangeDetectorRef,
@@ -36,8 +36,10 @@ export class ContractViewComponent implements OnInit {
       (info) => {
         console.log(info)
         Object.assign(this.contract, info)
+        this.contract.hireEquipments && this.formatOptions(this.contract.hireEquipments)
         this.getMarket(info.marketId)
         this.getShop(info.shopId)
+        this.changeDetectorRef.markForCheck()
       }
     )
 
@@ -65,6 +67,14 @@ export class ContractViewComponent implements OnInit {
         this.shop = shop
       }
     )
+  }
+
+  formatOptions(str) {
+    let arr = []
+    str.split(",").map((item) => {
+      arr.push(this.equipmentName[item])
+    })
+    this.hireEquipments = arr.join(", ")
   }
 
 }

@@ -7,3 +7,12 @@ export class ElectronicScale {
   shopId: number
   status: number
 }
+
+export class ElectronicScaleHistory {
+  id: number
+  shopId: number
+  shopName: string
+  scaleStatus: number
+  allocateTime: string
+  unbindTime: string
+}

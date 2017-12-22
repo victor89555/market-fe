@@ -21,7 +21,7 @@ export class ContractFormComponent implements Modal, OnInit {
   attachments: any[] = []
   markets: Market[]
   shops: Shop[]
-  equipmentsOptions = ["电子秤","不锈钢架", "PC垫板","PPP占板","三防罩","操作交易台","上墙货架","展示架","交易台","宰杀操作台","蓄养池","宰杀操作台"];
+  equipmentsOptions = ["电子秤","不锈钢架", "PC垫板","PPP占板","三防罩","操作交易台","上墙货架","展示架","交易台","宰杀操作台","蓄养池"];
   equipmentsLabel: string[]
   equipmentName = dicts["EQUIPMENT_NAME"]
   uploadUrl: string = "http://market-bus.djws.com.cn/api/contracts/attachments"
@@ -78,6 +78,7 @@ export class ContractFormComponent implements Modal, OnInit {
         console.log("加载合同信息")
         console.log(contract)
         Object.assign(this.contract, contract)
+        this.contract.hireEquipments && this.formatOptions(this.contract.hireEquipments)
         this.changeDetectorRef.markForCheck()
       }
     )
@@ -137,13 +138,15 @@ export class ContractFormComponent implements Modal, OnInit {
     console.log(this.attachments)
   }
 
-  onCheckBoxChange(item) {
-    // console.log(item)
-    // console.log(this.equipmentsLabel)
-    // this.formatLabel(this.equipmentsLabel)
+  formatOptions(str) {
+    let arr = []
+    str.split(",").map((item) => {
+      arr.push(this.equipmentName[item])
+    })
+    this.equipmentsLabel = arr
   }
+
   formatLabel(e) {
-    console.log(e.length)
     let arr = []
     for(let i=0; i < e.length; i++) {
       for(let key in this.equipmentName) {
@@ -153,8 +156,7 @@ export class ContractFormComponent implements Modal, OnInit {
         }
       }
     }
-    // console.log(arr)
-    this.contract.hireEquipments = arr
+    this.contract.hireEquipments = arr.join(',')
   }
 }
 

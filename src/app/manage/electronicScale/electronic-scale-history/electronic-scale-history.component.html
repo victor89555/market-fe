@@ -1,0 +1,36 @@
+<div id="page1" class="page-content">
+  <div class="page-head">
+    <div class="page-title">
+      <h1><span class="glyphicon glyphicon-shopping-cart"></span>
+        电子秤历史纪录
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <ngx-datatable
+        #mydatatable
+        class="material"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [limit]="page?.pageSize"
+        [columnMode]="'force'"
+        [rowHeight]="'auto'"
+        [externalPaging]="true"
+        [count]="page?.totalCount"
+        [offset]="page?.pageNo-1"
+        [rows]="page?.items"
+        (page)='setPage($event)'
+      >
+        <ngx-datatable-column name="商户" prop="shop_name"></ngx-datatable-column>
+        <ngx-datatable-column name="分配时间" prop="allocate_time"></ngx-datatable-column>
+        <ngx-datatable-column name="解绑时间" prop="unbind_time"></ngx-datatable-column>
+        <ngx-datatable-column name="解绑时状态" prop="scale_status">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{value|dictConvert:"ELECTRONICSCALE_STATUS"}}
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

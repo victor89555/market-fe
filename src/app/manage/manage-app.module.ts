@@ -44,8 +44,10 @@ import {OrderStatisticsComponent} from './order/order-statistics/order-statistic
 import {NgxEchartsModule} from "ngx-echarts";
 import { ContractViewComponent } from './contract/contract-view/contract-view.component'
 import { StallHistoryComponent } from './stall/stall-history/stall-history.component';
-import { ShopStatisticsComponent } from './shop/shop-statistics/shop-statistics.component'
 import { MarketStatisticsComponent } from './market/market-statistics/market-statistics.component'
+import { ShopStatisticsComponent } from './shop/shop-statistics/shop-statistics.component';
+import { ElectronicScaleHistoryComponent } from './electronicScale/electronic-scale-history/electronic-scale-history.component'
+
 
 @NgModule({
   imports: [
@@ -83,7 +85,8 @@ import { MarketStatisticsComponent } from './market/market-statistics/market-sta
     ContractViewComponent,
     StallHistoryComponent,
     ShopStatisticsComponent,
-    MarketStatisticsComponent
+    MarketStatisticsComponent,
+    ElectronicScaleHistoryComponent
   ],
   entryComponents: [
     OrderFormComponent,
@@ -96,7 +99,8 @@ import { MarketStatisticsComponent } from './market/market-statistics/market-sta
     MemberFormComponent,
     UserFormComponent,
     RoleFormComponent,
-    ContractViewComponent
+    ContractViewComponent,
+    ElectronicScaleHistoryComponent
   ],
   providers: [
     MenuService,
