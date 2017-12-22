@@ -62,4 +62,9 @@ export class ElectronicScaleService extends RebirthHttp {
     return null;
   }
 
+  @GET("electronicScaleHis")
+  getElectronicScaleHis(@Query("pageNo") pageNo = 1, @Query("pageSize") pageSize = 10,
+                        @Query("_filter_eq_scale_id-long") id = ""): Observable<Page<any>> {
+    return null
+  }
 }
