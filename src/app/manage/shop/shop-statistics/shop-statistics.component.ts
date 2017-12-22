@@ -10,9 +10,11 @@ export class ShopStatisticsComponent implements OnInit {
   constructor() { }
   kindsOption:any
   categoryOption:any
+  distributionOption:any
   ngOnInit() {
     this.getKindsStatistics()
     this.getCategoryStatixtics()
+    this.getDistributionStatistics()
   }
   // 商户种类统计
   getKindsStatistics(){
@@ -27,7 +29,7 @@ export class ShopStatisticsComponent implements OnInit {
       },
       legend: {
         top:'13%',
-        data:['海鲜','肉类营业额','蔬菜营业额','干货营业额']
+        data:['干货营业额','蔬菜营业额','肉类营业额','海鲜']
       },
       toolbox: {
         show: true,
@@ -37,7 +39,30 @@ export class ShopStatisticsComponent implements OnInit {
           dataZoom: {
             yAxisIndex: 'none'
           },
-          dataView: {readOnly: false},
+          dataView: {
+            readOnly: false,
+            buttonColor:'#a4d2ae',
+            optionToContent: function(opt) {
+              let axisData = opt.xAxis[0].data;
+              let series = opt.series;
+              let table = '<table style="width:70%;text-align:center;"><tbody><tr>'
+                + '<td>时间</td>';
+                for(let i=0;i<series.length;i++){
+                  table +='<td>' + series[i].name + '</td>'
+                }
+              table += '</tr>';
+              for (let i = 0, l = axisData.length; i < l; i++) {
+                table += '<tr>'
+                  + '<td>' + axisData[i] + '</td>';
+                  for(let j=0;j<series.length;j++){
+                    table += '<td>' + series[j].data[i] + '</td>'
+                  }
+                table += '</tr>';
+              }
+              table += '</tbody></table>';
+              return table;
+            }
+          },
           magicType: {type: ['line', 'bar']},
           restore: {},
           saveAsImage: {}
@@ -58,7 +83,7 @@ export class ShopStatisticsComponent implements OnInit {
       yAxis: {
         type: 'value',
         splitLine: {show: false},
-        name:'(万元/日)'
+        name:'(元/日)'
       },
       series: [
         {
@@ -67,7 +92,7 @@ export class ShopStatisticsComponent implements OnInit {
           showSymbol: false,
           stack: '总量',
           areaStyle: {normal: {}},
-          data:[22, 18, 19, 23, 29, 33, 31]
+          data:[220, 180, 190, 230, 290, 330, 310]
         },
         {
           name:'蔬菜营业额',
@@ -75,7 +100,7 @@ export class ShopStatisticsComponent implements OnInit {
           showSymbol: false,
           stack: '总量',
           areaStyle: {normal: {}},
-          data:[15, 23, 20, 15, 19, 33, 41]
+          data:[150, 230, 200, 150, 190, 330, 410]
         },
         {
           name:'肉类营业额',
@@ -83,7 +108,7 @@ export class ShopStatisticsComponent implements OnInit {
           showSymbol: false,
           stack: '总量',
           areaStyle: {normal: {}},
-          data:[32, 33, 30, 33, 39, 33, 32]
+          data:[320, 330, 300, 330, 390, 330, 320]
         },
         {
           name:'海鲜',
@@ -102,7 +127,7 @@ export class ShopStatisticsComponent implements OnInit {
           stack: '总量',
           areaStyle: {normal: {}},
           showSymbol: false,
-          data:[69, 74, 69, 71, 87, 99, 104]
+          data:[690, 740, 690, 710, 870, 990, 1040]
         }
       ]
     };
@@ -123,7 +148,7 @@ export class ShopStatisticsComponent implements OnInit {
         }
       },
       legend: {
-        top:'50px',
+        top:'13%',
         data:['猪肉','鸭肉','鱼','虾','蔬菜','青菜','生菜','花菜','其他']
       },
       toolbox: {
@@ -134,7 +159,10 @@ export class ShopStatisticsComponent implements OnInit {
           dataZoom: {
             yAxisIndex: 'none'
           },
-          dataView: {readOnly: false},
+          dataView: {
+            readOnly: false,
+            buttonColor:'#a4d2ae'
+          },
           restore: {},
           saveAsImage: {}
         }
@@ -223,5 +251,82 @@ export class ShopStatisticsComponent implements OnInit {
         }
       ]
     };
+  }
+
+  // 交易菜品分布图
+  getDistributionStatistics() {
+    this.distributionOption = {
+      title: {
+        text: '菜品销量分布图',
+        top:'5%',
+        subtext: '',
+        x: 'center'
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+      },
+      legend: {
+        left: 'center',
+        top:'13%',
+        data: ['蔬菜', '主食', '奶制品', '肉类', '冷冻类', '火锅食品', '干货', '水果']
+      },
+      toolbox: {
+        show: true,
+        top:'17%',
+        right:'6%',
+        feature: {
+          mark: {show: true},
+          dataView: {
+            show: true,
+            readOnly: false,
+            buttonColor:'#a4d2ae'
+          },
+          magicType: {
+            show: true,
+            type: ['pie', 'funnel']
+          },
+          restore: {show: true},
+          saveAsImage: {show: true}
+        }
+      },
+      calculable: true,
+      series: [
+        {
+          name: '销售数量',
+          type: 'pie',
+          radius: [35, 200],
+          center: ['25%', '65%'],
+          roseType: 'area',
+          data: [
+            {value: 40, name: '蔬菜'},
+            {value: 30, name: '主食'},
+            {value: 15, name: '奶制品'},
+            {value: 25, name: '肉类'},
+            {value: 20, name: '冷冻类'},
+            {value: 15, name: '火锅食品'},
+            {value: 5, name: '干货'},
+            {value: 25, name: '水果'}
+          ]
+        },
+        {
+          name: '销售金额',
+          type: 'pie',
+          radius: [35, 200],
+          center: ['75%', '65%'],
+          roseType: 'area',
+          data: [
+            {value: 500, name: '蔬菜'},
+            {value: 300, name: '主食'},
+            {value: 150, name: '奶制品'},
+            {value: 800, name: '肉类'},
+            {value: 400, name: '冷冻类'},
+            {value: 150, name: '火锅食品'},
+            {value: 200, name: '干货'},
+            {value: 350, name: '水果'}
+          ]
+        }
+      ]
+    }
   }
 }
