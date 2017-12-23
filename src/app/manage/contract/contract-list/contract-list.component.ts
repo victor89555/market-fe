@@ -7,6 +7,8 @@ import {Contract} from "../shared/contract.model";
 import {Page} from "../../../thurder-ng/models/page.model";
 import {Shop} from "../../shop/shared/shop.model";
 import {ShopService} from "../../shop/shared/shop.service";
+import {Market} from "../../market/shared/market.model";
+import {MarketService} from "../../market/shared/market.service";
 
 @Component({
   selector: 'app-contract-list',
@@ -23,18 +25,22 @@ export class ContractListComponent implements OnInit {
   editing = {}
   page: Page<any> = new Page()
   shops: Shop[]
-  shopId: number
+  shopId: number = null
+  marketId: number = null
   shopName: string = ""
+  markets: Market[] = []
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private contractService: ContractService,
-              private shopService: ShopService) {
+              private shopService: ShopService,
+              private marketService: MarketService) {
   }
 
   ngOnInit(): void {
     this.query()
     this.queryShops()
+    this.getMarkets()
   }
 
   queryShops() {
@@ -54,7 +60,7 @@ export class ContractListComponent implements OnInit {
   }
 
   query() {
-    this.contractService.query(this.shopId, 1, 10).subscribe(
+    this.contractService.query(1, 10, this.shopId, this.shopName, this.marketId).subscribe(
       (page) => {
         this.page = page
       }
@@ -70,6 +76,15 @@ export class ContractListComponent implements OnInit {
     this.shopId = null
     this.shopName = ""
     this.query()
+  }
+
+  getMarkets() {
+    this.marketService.getAll().subscribe(
+      (markets)=>{
+        console.log(markets)
+        this.markets = markets;
+      }
+    )
   }
 
   add() {

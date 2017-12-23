@@ -19,6 +19,12 @@
     <div class="col-xs-12">
       <form class="form-inline">
         <div class="form-group">
+          <select type="text" class="form-control" name="market" [(ngModel)]="marketId">
+            <option [value]="null">-市场-</option>
+            <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
           <input type="text" class="form-control"  [minLength]="0"
                  reAutoComplete  [dataSource]="shops" placeholder="商户"
                  [formatter]="shopNameFormatter" name="shop" [value]="shopName"
@@ -50,10 +56,13 @@
         [rows]="page?.items"
         (page)='setPage($event)'
       >
-        <ngx-datatable-column name="商户" prop="shop_name"></ngx-datatable-column>
         <ngx-datatable-column name="市场" prop="market_name"></ngx-datatable-column>
-        <ngx-datatable-column name="开始时间" prop="sign_time"></ngx-datatable-column>
-        <ngx-datatable-column name="结束时间" prop="validity_time"></ngx-datatable-column>
+        <ngx-datatable-column name="商户" prop="shop_name"></ngx-datatable-column>
+        <ngx-datatable-column name="开始时间">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            {{row.sign_time}} ~ {{row.validity_time}}
+          </ng-template>
+        </ngx-datatable-column>
         <ngx-datatable-column name="合同总金额" prop="total_amount"></ngx-datatable-column>
         <ngx-datatable-column name="状态" prop="status">
           <ng-template ngx-datatable-cell-template let-value="value">

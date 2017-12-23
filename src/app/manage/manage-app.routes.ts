@@ -17,7 +17,8 @@ import {OrderStatisticsComponent} from "./order/order-statistics/order-statistic
 import {StallHistoryComponent} from "./stall/stall-history/stall-history.component";
 import {ShopStatisticsComponent} from "./shop/shop-statistics/shop-statistics.component";
 import {MarketStatisticsComponent} from "./market/market-statistics/market-statistics.component";
-
+import {ElectronicScaleHistoryComponent} from "./electronicScale/electronic-scale-history/electronic-scale-history.component";
+import {MounthReportComponent} from "./report/mounth-report/mounth-report.component";
 export const ROUTER_CONFIG: Routes = [
   {
     path: 'manage',
@@ -37,12 +38,14 @@ export const ROUTER_CONFIG: Routes = [
       {path: 'shops', component: ShopListComponent},
       {path: 'shops/statistics/:shopId', component: ShopStatisticsComponent},
       {path: 'electronicScales', component: ElectronicScaleListComponent},
+      {path: 'electronicScalesHistory/:id', component: ElectronicScaleHistoryComponent},
       {path: 'contracts', component: ContractListComponent},
       {path: 'shopForm/:id', component: ShopFormComponent},
       {path: 'orderLines/:id', component: OrderFormComponent},
       {path: 'members', component: MemberListComponent},
       {path: 'users', component:UserListComponent},
-      {path: 'roles', component:RoleListComponent}
+      {path: 'roles', component:RoleListComponent},
+      {path: 'mounthReport', component:MounthReportComponent,}
     ]
   }
 ];

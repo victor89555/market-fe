@@ -254,7 +254,7 @@ export class ShopFormComponent implements OnInit {
   }
 
   loadContractor() { // 获取合同
-    this.contractService.query(this.shopId, 1, 100).subscribe(
+    this.contractService.query(1, 100, this.shopId).subscribe(
       (page) => {
         console.log(page)
         this.contracts = page.items

@@ -27,14 +27,14 @@
       <form class="form-horizontal">
         <!-- 商户名 -->
         <div class="form-group">
-          <label for="shopname" class="col-sm-2 control-label">商户名</label>
+          <label for="shopname" class="col-sm-2 control-label">商户名称：</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" name="shop" id="shopname" [(ngModel)]="shop.name" />
           </div>
         </div>
         <!-- 经营者 -->
         <div class="form-group">
-          <label class="col-sm-2 control-label">经营者</label>
+          <label class="col-sm-2 control-label">经营者：</label>
           <div class="col-sm-10">
             <div class="input-group">
               <input type="text" class="form-control"  [minLength]="0"
@@ -53,9 +53,16 @@
         </div>
         <!-- 功能区域 -->
         <div class="form-group">
-          <label class="col-sm-2 control-label">功能区域</label>
+          <label class="col-sm-2 control-label">功能区域：</label>
           <div class="col-sm-10">
             <tg-dict-select dictName="FUNC_TYPE" name="func" [(ngModel)]="shop.funcType" (ngModelChange)="onFuncTypeChange($event)"></tg-dict-select>
+          </div>
+        </div>
+        <!-- 经营开始时间 -->
+        <div class="form-group" *ngIf="!pageComponent.newShop">
+          <label class="col-sm-2 control-label">经营开始时间：</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" disabled [value]="shop.beginTime || '无'">
           </div>
         </div>
       </form>
@@ -64,7 +71,7 @@
       <form class="form-horizontal">
         <!-- 市场 -->
         <div class="form-group">
-          <label class="col-sm-2 control-label">市场:</label>
+          <label class="col-sm-2 control-label">市场：</label>
           <div class="col-sm-10">
             <select type="text" class="form-control" name="market" [(ngModel)]="shop.marketId" (ngModelChange)="onMarketChange($event)">
               <option *ngFor="let item of markets" [value]="item.id">{{item.name}}</option>
@@ -73,7 +80,7 @@
         </div>
         <!-- 摊位 -->
         <div class="form-group">
-          <label class="col-sm-2 control-label">摊位</label>
+          <label class="col-sm-2 control-label">摊位：</label>
           <div class="col-sm-10">
             <div class="input-group">
               <!--<ng-template *ngIf="shopId !=0" #stallItemTemplate let-item="item" let-formatter="formatter" let-$index="$index"
@@ -107,9 +114,16 @@
         </div>
         <!-- 状态 -->
         <div class="form-group">
-          <label class="col-sm-2 control-label">状态</label>
+          <label class="col-sm-2 control-label">状态：</label>
           <div class="col-sm-10">
             <tg-dict-select dictName="SHOP_STATUS" name="state" [(ngModel)]="shop.status" (ngModelChange)="onStatusChange($event)"></tg-dict-select>
+          </div>
+        </div>
+        <!-- 经营结束时间 -->
+        <div class="form-group" *ngIf="!pageComponent.newShop">
+          <label class="col-sm-2 control-label">经营结束时间：</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" disabled [value]="shop.endTime || '无'">
           </div>
         </div>
       </form>

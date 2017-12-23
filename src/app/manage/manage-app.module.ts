@@ -46,7 +46,8 @@ import { ContractViewComponent } from './contract/contract-view/contract-view.co
 import { StallHistoryComponent } from './stall/stall-history/stall-history.component';
 import { MarketStatisticsComponent } from './market/market-statistics/market-statistics.component'
 import { ShopStatisticsComponent } from './shop/shop-statistics/shop-statistics.component';
-import { ElectronicScaleHistoryComponent } from './electronicScale/electronic-scale-history/electronic-scale-history.component'
+import { ElectronicScaleHistoryComponent } from './electronicScale/electronic-scale-history/electronic-scale-history.component';
+import { MounthReportComponent } from './report/mounth-report/mounth-report.component'
 
 
 @NgModule({
@@ -86,7 +87,8 @@ import { ElectronicScaleHistoryComponent } from './electronicScale/electronic-sc
     StallHistoryComponent,
     ShopStatisticsComponent,
     MarketStatisticsComponent,
-    ElectronicScaleHistoryComponent
+    ElectronicScaleHistoryComponent,
+    MounthReportComponent
   ],
   entryComponents: [
     OrderFormComponent,
