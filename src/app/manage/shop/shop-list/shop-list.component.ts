@@ -20,7 +20,7 @@ import {Shop} from "../shared/shop.model";
 export class ShopListComponent implements OnInit {
 
   page: Page<any> = new Page()
-  qry = {market:null,shop:'',stall:'',status:''}
+  qry = {marketId: null, shopName: '', stallName: '', status: ''}
   shop_state: boolean
   markets: Market[]
   stalls: Stall[] //摊位列表
@@ -41,7 +41,7 @@ export class ShopListComponent implements OnInit {
 
   query() { //条件搜索商户
     // console.log(this.qry)
-    this.shopService.query(this.qry.market, this.qry.shop, this.qry.stall, this.qry.status, this.page.pageNo).subscribe(
+    this.shopService.query(this.qry.marketId, this.qry.shopName, this.qry.stallName, this.qry.status, this.page.pageNo).subscribe(
       (page) => {
         this.page = page
         // console.log(page);
@@ -49,9 +49,9 @@ export class ShopListComponent implements OnInit {
     )
   }
 
-  getAllMarkets(){
+  getAllMarkets() {
     this.marketService.getAll().subscribe(
-      (markets)=>{
+      (markets) => {
         this.markets = markets;
       }
     )
@@ -75,9 +75,9 @@ export class ShopListComponent implements OnInit {
   }
 
   reset() {
-    this.qry.market = null
-    this.qry.shop = ''
-    this.qry.stall = ''
+    this.qry.marketId = null
+    this.qry.shopName = ''
+    this.qry.stallName = ''
     this.qry.status = ''
     this.query()
   }

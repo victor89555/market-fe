@@ -42,12 +42,12 @@ import {RoleService} from "./role/shared/role.service";
 import {ResourceService} from "./resource/shared/resource.service";
 import {OrderStatisticsComponent} from './order/order-statistics/order-statistics.component'
 import {NgxEchartsModule} from "ngx-echarts";
-import { ContractViewComponent } from './contract/contract-view/contract-view.component'
-import { StallHistoryComponent } from './stall/stall-history/stall-history.component';
-import { MarketStatisticsComponent } from './market/market-statistics/market-statistics.component'
-import { ShopStatisticsComponent } from './shop/shop-statistics/shop-statistics.component';
-import { ElectronicScaleHistoryComponent } from './electronicScale/electronic-scale-history/electronic-scale-history.component';
-import { MounthReportComponent } from './report/mounth-report/mounth-report.component'
+import {ContractViewComponent} from './contract/contract-view/contract-view.component'
+import {StallHistoryComponent} from './stall/stall-history/stall-history.component';
+import {MarketStatisticsComponent} from './market/market-statistics/market-statistics.component'
+import {ShopStatisticsComponent} from './shop/shop-statistics/shop-statistics.component';
+import {ElectronicScaleHistoryComponent} from './electronicScale/electronic-scale-history/electronic-scale-history.component';
+import {MonthReportComponent} from './report/month-report/month-report.component'
 import {ReportService} from "./report/shared/report.service";
 
 
@@ -89,7 +89,7 @@ import {ReportService} from "./report/shared/report.service";
     ShopStatisticsComponent,
     MarketStatisticsComponent,
     ElectronicScaleHistoryComponent,
-    MounthReportComponent
+    MonthReportComponent
   ],
   entryComponents: [
     OrderFormComponent,

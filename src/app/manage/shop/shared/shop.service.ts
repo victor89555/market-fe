@@ -1,4 +1,4 @@
-import {Body, GET, Path, POST, Query, RebirthHttp,PUT} from "rebirth-http";
+import {Body, GET, Path, POST, PUT, Query, RebirthHttp} from "rebirth-http";
 import {Observable} from "rxjs/Observable";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
@@ -13,14 +13,14 @@ export class ShopService extends RebirthHttp {
   }
 
   @GET("shops")
-  query(@Query("_filter_eq_market") market = "",@Query("_filter_like_shop") shop = "",
-        @Query("_filter_like_stall") stall = "", @Query("_filter_eq_state") state = "",
+  query(@Query("_filter_eq_market_id-long") market = "", @Query("_filter_like_name") shopName = "",
+        @Query("_filter_like_stall_name") stallName = "", @Query("_filter_eq_status-int") status = null,
         @Query("pageNo") pageNo = 1, @Query("pageSize") pageSize = 10): Observable<Page<any>> {
     return null;
   }
 
   getAll(marketId): Observable<Shop[]> {
-    return this.query(marketId, null, null, null, 1, 10000).map((page)=> {
+    return this.query(marketId, null, null, null, 1, 10000).map((page) => {
       return page.items || []
     })
   }
@@ -36,7 +36,7 @@ export class ShopService extends RebirthHttp {
   }
 
   @PUT('shops/:id')
-  save(@Path("id") id:number, @Body shop: Shop): Observable<Shop> {
+  save(@Path("id") id: number, @Body shop: Shop): Observable<Shop> {
     return null;
   }
 
