@@ -8,6 +8,7 @@ import {Market} from "../../market/shared/market.model";
 import {Shop} from "../../shop/shared/shop.model";
 import {MarketService} from "../../market/shared/market.service";
 import {ShopService} from "../../shop/shared/shop.service";
+import {RouterModule} from "@angular/router";
 
 @Component({
   selector: 'app-electronicScale-list',
@@ -32,7 +33,8 @@ export class ElectronicScaleListComponent implements OnInit {
               private componentFactoryResolver: ComponentFactoryResolver,
               private electronicScaleService: ElectronicScaleService,
               private marketService: MarketService,
-              private shopService: ShopService) {
+              private shopService: ShopService,
+              private router: RouterModule) {
   }
 
   ngOnInit(): void {
@@ -123,5 +125,9 @@ export class ElectronicScaleListComponent implements OnInit {
     this.electronicScaleService.delete(id).subscribe(() => {
       this.query()
     })
+  }
+
+  checkHistory(id: number) {
+
   }
 }

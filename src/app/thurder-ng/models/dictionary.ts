@@ -55,7 +55,8 @@ export const dicts = {
 
   "ELECTRONICSCALE_STATUS":{
     0: "正常",
-    1: "损坏"
+    1: "损坏",
+    2: "报废"
   },
 
   "EQUIPMENT_NAME":{

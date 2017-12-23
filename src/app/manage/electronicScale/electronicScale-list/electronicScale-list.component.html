@@ -82,10 +82,11 @@
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="编辑" prop="id" *ngIf="false">
+        <ngx-datatable-column name="编辑" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="market">
-            <button class="btn btn-default" (click)="edit(value);">修改</button>
-            <button class="btn btn-default" (click)="delete(value);">删除</button>
+            <button hidden class="btn btn-default" (click)="edit(value);">修改</button>
+            <button hidden class="btn btn-default" (click)="delete(value);">删除</button>
+            <button class="btn btn-default" routerLink="/manage/electronicScalesHistory/{{value}}">历史纪录</button>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>

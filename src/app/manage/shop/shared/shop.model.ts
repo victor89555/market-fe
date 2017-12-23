@@ -7,6 +7,8 @@ export class Shop {
   operatorId: number
   status: number
   stallName: string
+  beginTime: string
+  endTime: string
   creatTime: string
   updateKey: string
 }

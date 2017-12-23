@@ -5,7 +5,21 @@
         电子秤历史纪录
       </h1>
     </div>
+    <div class="page-toolbar">
+      <div class="pull-right tooltips" >
+        <a href="javascript:;" class="btn btn-info" (click)="goBack()">
+          <i class="glyphicon glyphicon-backward"></i> 返回
+        </a>
+      </div>
+    </div>
   </div>
+  
+  <div class="row">
+    <div class="col-xs-12">
+      <p style="padding: .9rem 1.2rem;">电子秤序列号：{{scaleInfo.sequenceNo}}</p>
+    </div>
+  </div>
+  
   <div class="row">
     <div class="col-xs-12">
       <ngx-datatable
@@ -13,13 +27,13 @@
         class="material"
         [headerHeight]="50"
         [footerHeight]="50"
-        [limit]="page?.pageSize"
+        [limit]="historyList?.pageSize"
         [columnMode]="'force'"
         [rowHeight]="'auto'"
         [externalPaging]="true"
-        [count]="page?.totalCount"
-        [offset]="page?.pageNo-1"
-        [rows]="page?.items"
+        [count]="historyList?.totalCount"
+        [offset]="historyList?.pageNo-1"
+        [rows]="historyList?.items"
         (page)='setPage($event)'
       >
         <ngx-datatable-column name="商户" prop="shop_name"></ngx-datatable-column>

@@ -81,6 +81,11 @@
           {{value|dictConvert:"FUNC_TYPE"}}
         </ng-template>
       </ngx-datatable-column>
+      <ngx-datatable-column name="经营期限">
+        <ng-template ngx-datatable-cell-template let-row="row">
+          {{row.begin_time}} ~ {{row.end_time}}
+        </ng-template>a
+      </ngx-datatable-column>
       <ngx-datatable-column name="状态" prop="status" cellClass="outOfDate">
         <ng-template ngx-datatable-cell-template let-value="value">
           <div [ngClass]="{'outOfDate': value ==2}">
@@ -89,9 +94,9 @@
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="操作" prop="id">
-        <ng-template ngx-datatable-cell-template let-value="value" let-row="shop">
-          <a class="btn btn-default" routerLink="/manage/shops/statistics/{{value}}">统计</a>
+        <ng-template ngx-datatable-cell-template let-value="value">
           <button class="btn btn-default" routerLink="/manage/shopForm/{{value}}">修改</button>
+          <a class="btn btn-default" routerLink="/manage/shops/statistics/{{value}}">统计</a>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>
