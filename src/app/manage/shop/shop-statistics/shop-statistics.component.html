@@ -1,5 +1,28 @@
 <div id="page1" class="page-content">
-  <div echarts [options]="kindsOption" [loading]="isLoading" [merge]="updateOptions"  class="demo-chart"></div>
-  <div echarts [options]="categoryOption" [loading]="isLoading" [merge]="updateOptions"  class="demo-chart"></div>
+  <form class="form-inline find-condition">
+    <div class="form-group">
+      <div class="input-group">
+        <input class="form-control" placeholder="开始时间"
+               name="dp" [(ngModel)]="queryShopStage.beginTime" reDatePicker #datePicker1="datePicker">
+        <div class="input-group-addon" (click)="datePicker1.toggle($event)">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <input class="form-control" placeholder="结束时间"
+               name="dp" [(ngModel)]="queryShopStage.endTime" reDatePicker #datePicker2="datePicker">
+        <div class="input-group-addon" (click)="datePicker2.toggle($event)">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="query(true)">查询</button>
+  </form>
+  <div echarts [options]="shopSellOption" [loading]="isLoading" [merge]="updateOptions"  class="demo-chart"></div>
   <div echarts [options]="distributionOption" [loading]="isLoading" [merge]="updateOptions"  class="demo-chart"></div>
+  <div echarts [options]="memberOption" class="demo-chart"></div>
+  <!--<div echarts [options]="kindsOption" [loading]="isLoading" [merge]="updateOptions"  class="demo-chart"></div>-->
+  <!--<div echarts [options]="categoryOption" [loading]="isLoading" [merge]="updateOptions"  class="demo-chart"></div>-->
 </div>
