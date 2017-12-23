@@ -11,15 +11,14 @@
     <div class="col-xs-12">
       <form class="form-inline">
         <div class="form-group">
-          <select type="text" class="form-control" name="market" [(ngModel)]="queryOrder.marketId">
+          <select type="text" class="form-control" name="market" [(ngModel)]="marketId">
             <option [value]="null">-市场-</option>
             <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
           </select>
         </div>
         <div class="form-group">
-          
           <button class="btn btn-info">2017-01</button>
-          <button class="btn btn-default">2017-02</button>
+          <button class="btn btn-default" disabled>2017-02</button>
           <button class="btn btn-info">2017-03</button>
         </div>
       </form>
@@ -27,7 +26,20 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-    
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <td>商户\日期</td>
+          <td *ngFor="let date of report.days">{{date}}</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let shop of report.shops">
+          <td>{{shop.shopName}}</td>
+          <td *ngFor="let value of shop.amounts">{{value}}</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

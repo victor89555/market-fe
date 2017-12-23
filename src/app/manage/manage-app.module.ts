@@ -48,6 +48,7 @@ import { MarketStatisticsComponent } from './market/market-statistics/market-sta
 import { ShopStatisticsComponent } from './shop/shop-statistics/shop-statistics.component';
 import { ElectronicScaleHistoryComponent } from './electronicScale/electronic-scale-history/electronic-scale-history.component';
 import { MounthReportComponent } from './report/mounth-report/mounth-report.component'
+import {ReportService} from "./report/shared/report.service";
 
 
 @NgModule({
@@ -116,7 +117,8 @@ import { MounthReportComponent } from './report/mounth-report/mounth-report.comp
     MemberService,
     UserService,
     RoleService,
-    ResourceService
+    ResourceService,
+    ReportService
   ]
 })
 export class ManageAppModule {
