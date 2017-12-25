@@ -8,6 +8,7 @@ import {MarketService} from "../../market/shared/market.service";
 import {Market} from "../../market/shared/market.model";
 import {Shop} from "../../shop/shared/shop.model";
 import {ShopService} from "../../shop/shared/shop.service";
+import {ActivatedRoute, Params} from "@angular/router";
 
 @Component({
   selector: 'app-order-list',
@@ -28,15 +29,22 @@ export class OrderListComponent implements OnInit {
   shops: Shop[]
   shopName: string = ""
   dateFormat: any = {"beginDate": "", "endDate": ""}
+  shopId: number = null
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private orderService: OrderService,
               private marketService: MarketService,
-              private shopService: ShopService) {
+              private shopService: ShopService,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(
+      (params: Params) => {
+        console.log(params)
+      }
+    )
     this.query(false)
     this.getAllMarkets()
     this.queryShops()

@@ -44,7 +44,7 @@
               <i class="glyphicon glyphicon-menu-down"></i>
             </div>
           </div>-->
-          <input type="text" class="form-control" name="shopName"  [(ngModel)]="qry.shopName" placeholder="摊位编号">
+          <input type="text" class="form-control" name="shopName"  [(ngModel)]="qry.shopName" placeholder="商户名称">
         </div>
         <div class="form-group">
           <input type="text" class="form-control" name="stallName"  [(ngModel)]="qry.stallName" placeholder="摊位编号">
@@ -96,9 +96,9 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="操作" prop="id">
         <ng-template ngx-datatable-cell-template let-value="value">
-          <button class="btn btn-default" routerLink="/manage/shopForm/{{value}}">修改</button>
-          <a class="btn btn-default" routerLink="/manage/shops/statistics/{{value}}">统计</a>
-          <a class="btn"></a>
+          <button class="btn btn-sm btn-default" routerLink="/manage/shopForm/{{value}}">修改</button>
+          <button class="btn btn-sm btn-default" routerLink="/manage/shops/statistics/{{value}}">统计</button>
+          <button class="btn btn-sm btn-default" (click)="goWaterOrder(value)">流水</button>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>
