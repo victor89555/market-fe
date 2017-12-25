@@ -127,7 +127,24 @@ export class ElectronicScaleListComponent implements OnInit {
     })
   }
 
-  checkHistory(id: number) {
+  //修改维修状态
+  doRepair(scale) {
+    let status = scale.status == 0 ? 1 : 0
+    this.electronicScaleService.setStatus(scale.id, status).subscribe(
+      (res) => {
+        console.log(res)
+        this.query()
+      }
+    )
+  }
 
+  //标记报废状态
+  doScrap(scale) {
+    this.electronicScaleService.setStatus(scale.id, 2).subscribe(
+      (res) => {
+        console.log(res)
+        this.query()
+      }
+    )
   }
 }

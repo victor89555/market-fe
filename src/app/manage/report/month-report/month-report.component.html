@@ -17,9 +17,9 @@
           </select>
         </div>
         <div class="form-group">
-          <button class="btn btn-info">2017-01</button>
-          <button class="btn btn-default" disabled>2017-02</button>
-          <button class="btn btn-info">2017-03</button>
+          <button class="btn btn-info" (click)="setDay(pre)">{{preDay}}</button>
+          <button class="btn btn-default" disabled>{{nowDay}}</button>
+          <button class="btn btn-info" (click)="setDay(next)">{{nextDay}}</button>
         </div>
       </form>
     </div>

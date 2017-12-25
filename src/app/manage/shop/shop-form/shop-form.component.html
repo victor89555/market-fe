@@ -180,16 +180,17 @@
             <th>到期时间</th>
             <th>合同总金额</th>
             <th>合同状态</th>
-            <th>操作</th>
-            <th>操作</th>
+            <th colspan="2">操作</th>
           </tr>
           <tr *ngFor="let con of contracts">
             <td>{{con.sign_time}}</td>
             <td>{{con.validity_time}}</td>
             <td>{{con.total_amount}}</td>
             <td>{{shopStatus[con.status]}}</td>
-            <td><a href="javascript:;" (click)="editContract(con.id)">修改</a></td>
-            <td><a href="javascript:;" (click)="deleteContract(con.id)">删除</a></td>
+            <td>
+              <a href="javascript:;" class="btn btn-xs btn-info" (click)="editContract(con.id)">修改</a>
+              <a href="javascript:;" class="btn btn-xs btn-danger" (click)="deleteContract(con.id)">删除</a>
+            </td>
           </tr>
         </table>
       </ng-template>
