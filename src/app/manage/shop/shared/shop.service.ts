@@ -40,6 +40,11 @@ export class ShopService extends RebirthHttp {
     return null;
   }
 
+  @PUT('shops/:id/changeStall')
+  changeStall(@Path("id") id: number, @Query("stallId") stallId: number): Observable<Shop> {
+    return null;
+  }
+
   /*@PUT('shops/:id')
   edit(@Path('id') id: number): Observable<Shop> {
     return null;

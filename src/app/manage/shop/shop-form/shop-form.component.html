@@ -12,7 +12,7 @@
             <button type="button" class="btn btn-primary" (click)="addShop()">保存</button>
           </div>
           <div class="form-group" *ngIf="!pageComponent.newShop">
-            <button type="button" class="btn btn-info" (click)="editShop()">修改</button>
+            <button type="button" class="btn btn-info" (click)="editShop()">保存</button>
           </div>
           <div class="form-group">
             <button type="button" class="btn btn-warning" (click)="cancel()">取消</button>
@@ -82,17 +82,11 @@
         <div class="form-group">
           <label class="col-sm-2 control-label">摊位：</label>
           <div class="col-sm-10">
-            <div class="input-group">
-              <!--<ng-template *ngIf="shopId !=0" #stallItemTemplate let-item="item" let-formatter="formatter" let-$index="$index"
+            <div class="input-group" *ngIf="stallChange">
+              <ng-template #stallItemTemplate let-item="item" let-$index="$index"
                            let-source="source"
                            let-term="term">
-                <span>{{item.name}}:{{formatter(item.name)}}</span>
-              </ng-template>-->
-
-              <ng-template *ngIf="shopId!=0" #stallItemTemplate let-item="item" let-$index="$index"
-                           let-source="source"
-                           let-term="term">
-                <span class="list-gap">{{item.name}}</span><button class="btn btn-info">保存</button><button class="btn btn-warning">取消</button>
+                <span class="list-gap">{{item.name}}</span>
               </ng-template>
               <ng-template #noResultItemTemplate let-term="term">
                 <span>没有符合条件的记录</span>
@@ -103,11 +97,21 @@
                      [formatter]="stallNameFormatter"
                      (selectValueChange)="onStallNameChange($event)"
                      #autoComplete1="autoComplete"/>
-              <div *ngIf="shopId==0" class="input-group-addon" (click)="autoComplete1.toggle($event)">
+              <div class="input-group-addon" (click)="autoComplete1.toggle($event)">
                 <i class="glyphicon glyphicon-menu-down"></i>
               </div>
-              <div *ngIf="shopId!=0" class="input-group-addon" (click)="autoComplete1.toggle($event)">
-                 变更
+              <div class="input-group-addon btn btn-info" (click)="saveChangeStall();" *ngIf="shopId!=0">
+                 保存
+              </div>
+              <div class="input-group-addon btn btn-warning" (click)="stallChange=!stallChange" *ngIf="shopId!=0">
+                 取消
+              </div>
+
+            </div>
+            <div class="input-group" *ngIf="!stallChange">
+              <input type="text" class="form-control"  [value]="stallName" disabled/>
+              <div class="input-group-addon btn btn-danger" (click)="stallChange=!stallChange">
+                变更
               </div>
             </div>
           </div>

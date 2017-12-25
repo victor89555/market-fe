@@ -62,6 +62,7 @@ export class ShopFormComponent implements OnInit {
   market: Market //市场
   stalls: Stall[] //摊位列表
   stallName: string = "请选择摊位"
+  stallChange:boolean
   contracts: Contract[] //合同列表
   allotableElectronicScales = [] //可分配的电子秤列表
   allotedElectronicScales = [] //已分配的电子秤列表
@@ -80,6 +81,8 @@ export class ShopFormComponent implements OnInit {
     }else{
       this.initAddShop();
     }
+    // 用于判断保存与修改摊位的展示
+    this.stallChange = this.shopId==0
   }
 
   // 初始化添加商户
@@ -361,5 +364,18 @@ export class ShopFormComponent implements OnInit {
     )
   }
 
+  saveChangeStall(){
+     this.shopService.changeStall(this.shopId,this.shop.stallId).subscribe(
+       (res)=>{
+         if(res){
+           this.stallService.get(this.shop.stallId).subscribe(
+             (resStall)=>{
+               this.stallName = resStall.name
+               this.stallChange = false
+             }
+           )
+         }
+       })
+  }
 }
 
