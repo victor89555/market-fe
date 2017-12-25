@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-3 control-label">市场摊位总数:</label>
+      <label class="col-sm-3 control-label">摊位总数:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="market.stallLimit" />
       </div>
@@ -26,10 +26,29 @@
     <div class="form-group">
       <label class="col-sm-3 control-label">已入驻摊位数:</label>
       <div class="col-sm-9">
-        <input type="text" disabled class="form-control" [(ngModel)]="market.stallNum" />
+        <input *ngIf="context.add" type="text" class="form-control" [(ngModel)]="market.stallNum" />
+        <input *ngIf="!context.add" type="text" disabled class="form-control" [(ngModel)]="market.stallNum" />
       </div>
     </div>
     <div class="form-group">
+      <label class="col-sm-3 control-label">店铺总数:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" [(ngModel)]="market.storeNum" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">已入驻店铺数:</label>
+      <div class="col-sm-9">
+        <input *ngIf="context.add" type="text" class="form-control" [(ngModel)]="market.enterStoreNum" />
+        <input *ngIf="!context.add" type="text" disabled class="form-control" [(ngModel)]="market.enterStoreNum" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">区域:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" [(ngModel)]="market.addr" />
+      </div>
+    </div><div class="form-group">
       <label class="col-sm-3 control-label">地址:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="market.addr" />

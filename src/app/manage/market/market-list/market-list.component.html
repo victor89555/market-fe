@@ -54,8 +54,21 @@
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="市场代码" prop="code"></ngx-datatable-column>
-        <ngx-datatable-column name="市场摊位总数" prop="stall_limit"></ngx-datatable-column>
-        <ngx-datatable-column name="已入驻摊位数" prop="stall_num"></ngx-datatable-column>
+        <ngx-datatable-column name="摊位总数/已入驻">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+            {{row.stall_limit}}/{{row.stall_num ? row.stall_num : 0}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="店铺总数/已入驻">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+            {{row.store_num}}/{{row. enter_store_num ?  enter_store_num : 0}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="区域">
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+            {{row. province_code}}{{row. city_code}}
+          </ng-template>
+        </ngx-datatable-column>
         <ngx-datatable-column name="地址" prop="addr"></ngx-datatable-column>
         <ngx-datatable-column name="经营状态" prop="status">
           <ng-template ngx-datatable-cell-template let-value="value">

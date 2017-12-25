@@ -19,6 +19,12 @@ export class StallService extends RebirthHttp {
         @Query("pageSize") pageSize = 10): Observable<Page<any>> {
     return null;
   }
+  @GET("stallHis")
+  queryHistory(  @Query("pageNo") pageNo = null, @Query("pageSize") pageSize = null,
+                  @Query("_filter_eq_stall_id-long") stallId:number,@Query("_filter_like_name") shopName = "",
+              ): Observable<Page<any>> {
+    return null;
+  }
 
   getStalls(marketId): Observable<Stall[]> {
     return this.query(marketId, null, null, null, null, 1, 1000).map((page)=>{

@@ -1,5 +1,32 @@
 <div id="page1" class="page-content">
-  <p>
-    stall-history works!
-  </p>
+  <div class="page-head">
+    <div class="page-title">
+      <h1><span class="glyphicon glyphicon-shopping-cart"></span>
+        摊位历史信息
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <ngx-datatable
+        #mydatatable
+        class="material"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [limit]="page?.pageSize"
+        [columnMode]="'force'"
+        [rowHeight]="'auto'"
+        [externalPaging]="true"
+        [count]="page?.totalCount"
+        [offset]="page?.pageNo-1"
+        [rows]="page?.items"
+        (page)='setPage($event)'
+      >
+        <ngx-datatable-column name="商户名称" prop="shop_name"></ngx-datatable-column>
+        <ngx-datatable-column name="创建时间" prop="create_time"></ngx-datatable-column>
+        <ngx-datatable-column name="开始时间" prop="check_in_time"></ngx-datatable-column>
+        <ngx-datatable-column name="截至时间" prop="check_out_time"></ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
 </div>
