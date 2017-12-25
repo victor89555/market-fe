@@ -283,12 +283,12 @@ export class MonthReportComponent implements OnInit {
   }
 
   formatDateTOString() {
-    this.preDay = this.getYear(this.pre) + "-" + this.getMounth(this.pre)
-    this.nowDay = this.getYear(this.now) + "-" + this.getMounth(this.now)
-    this.nextDay = this.getYear(this.next) + "-" + this.getMounth(this.next)
+    this.preDay = this.getYear(this.pre) + "-" + this.getMonth(this.pre)
+    this.nowDay = this.getYear(this.now) + "-" + this.getMonth(this.now)
+    this.nextDay = this.getYear(this.next) + "-" + this.getMonth(this.next)
   }
 
-  getMounth(ts) {
+  getMonth(ts) {
     let m = (new Date(ts).getMonth() + 1).toString()
     m = m.length == 1 ? "0" + m : m
     return m
@@ -306,8 +306,12 @@ export class MonthReportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.setDay(new Date().getTime())
-    this.getAllMarkets()
+    this.getAllMarkets().subscribe(
+      (markets) => {
+        this.marketId = markets[0].id
+        this.setDay(new Date().getTime())
+      }
+    )
   }
 
   queryReport() {
@@ -319,11 +323,17 @@ export class MonthReportComponent implements OnInit {
   }
 
   getAllMarkets() {
-    this.marketService.getAll().subscribe(
+    let marketOb = this.marketService.getAll()
+    marketOb.subscribe(
       (markets) => {
         this.markets = markets;
       }
     )
+    return marketOb
+  }
+
+  changeMarket() {
+    this.queryReport()
   }
 
 }

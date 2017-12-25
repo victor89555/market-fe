@@ -14,7 +14,7 @@ export class ReportService extends RebirthHttp {
   }
 
   @GET("reports/month")
-  query(@Query("_filter_eq_market_id-long") marketId = null, @Query("mounth") mounth = ""): Observable<MounthReport> {
+  query(@Query("marketId") marketId = null, @Query("month") month = ""): Observable<MounthReport> {
     return null;
   }
 

@@ -11,7 +11,7 @@
     <div class="col-xs-12">
       <form class="form-inline">
         <div class="form-group">
-          <select type="text" class="form-control" name="market" [(ngModel)]="marketId">
+          <select type="text" class="form-control" name="market" [(ngModel)]="marketId" (change)="changeMarket()">
             <option [value]="null">-市场-</option>
             <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
           </select>
