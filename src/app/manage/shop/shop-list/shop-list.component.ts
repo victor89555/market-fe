@@ -6,6 +6,7 @@ import {Market} from "../../market/shared/market.model";
 import {MarketService} from "../../market/shared/market.service";
 import {Stall} from "../../stall/shared/stall.model";
 import {Shop} from "../shared/shop.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-shop-list',
@@ -30,7 +31,8 @@ export class ShopListComponent implements OnInit {
               private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private shopService: ShopService,
-              private marketService: MarketService) {
+              private marketService: MarketService,
+              private router:Router) {
   }
 
   ngOnInit(): void {
@@ -87,4 +89,7 @@ export class ShopListComponent implements OnInit {
     this.query()
   }
 
+  goWaterOrder(value) {
+    this.router.navigate(['manage/order'],{ queryParams: { shopId: value } });
+  }
 }
