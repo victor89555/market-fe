@@ -75,7 +75,7 @@ export class AppComponent {
           this.alertBoxService.placement("top")
           this.alertBoxService.open({
             type: 'danger',
-            html: res.error.msg
+            html: res.error.msg || "Error！"
           }, 5000 );
         }
       });

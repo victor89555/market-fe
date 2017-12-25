@@ -8,3 +8,5 @@ export class Shop {
   shopName: string
   amounts: number[]
 }
+
+

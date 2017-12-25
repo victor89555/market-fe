@@ -64,7 +64,13 @@ export class ElectronicScaleService extends RebirthHttp {
 
   @GET("electronicScaleHis")
   getElectronicScaleHis(@Query("pageNo") pageNo = 1, @Query("pageSize") pageSize = 10,
-                        @Query("_filter_eq_scale_id-long") id = ""): Observable<Page<any>> {
+                        @Query("_filter_eq_scale_id-long") id:number): Observable<Page<any>> {
     return null
+  }
+
+  //修改状态
+  @PUT("electronicScales/:id/changeStatus")
+  setStatus(@Path("id") id: number,@Query("status") status: number){
+    return null;
   }
 }

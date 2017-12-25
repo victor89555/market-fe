@@ -28,7 +28,7 @@ export class ElectronicScaleHistoryComponent implements OnInit {
   }
 
   getHistory() {
-    this.electronicScaleService.getElectronicScaleHis(this.scaleId).subscribe(
+    this.electronicScaleService.getElectronicScaleHis(1, 10, this.scaleId).subscribe(
       (page) => {
         console.log(page)
         this.historyList = page
