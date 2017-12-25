@@ -90,6 +90,6 @@ export class ShopListComponent implements OnInit {
   }
 
   goWaterOrder(value) {
-    this.router.navigate(['manage/order'],{ queryParams: { shopId: value } });
+    this.router.navigate(['manage/orders'],{ queryParams: { shopId: value } });
   }
 }

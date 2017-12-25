@@ -10,7 +10,12 @@ import {Pipe, PipeTransform} from '@angular/core'
 export class EntrysPipe implements PipeTransform {
   transform(value, args: string[]): any {
     let entrys = [];
-    for (let key in value) {
+    for (let k in value) {
+      let key: any = k
+      try {
+        key = parseInt(key)
+      } catch (e) {
+      }
       entrys.push({key: key, value: value[key]});
     }
     return entrys;

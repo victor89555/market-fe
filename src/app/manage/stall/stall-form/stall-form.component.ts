@@ -13,7 +13,7 @@ export class StallFormComponent implements Modal, OnInit {
   context: { id: number, add: boolean, marketId: number };
   dismiss: EventEmitter<Stall>;
 
-  stall: any = {}
+  stall: Stall = new Stall()
   markets: Market[]
   test: any
   marketId:number=null

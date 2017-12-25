@@ -30,7 +30,7 @@ export const dicts = {
   },
 
   "PAY_WAY": {
-    1:"现金",
+    1: "现金",
     2: "支付宝",
     3: "微信支付"
   },
@@ -43,23 +43,23 @@ export const dicts = {
   },
 
   "MARKET_STATUS": {
-     0: "未开业",
-     1: "经营中"
+    0: "未开业",
+    1: "经营中"
   },
 
-  "STALL_STATUS":{
-    0:"未使用",
-    1:"在使用",
-    2:"注销"
+  "STALL_STATUS": {
+    0: "未使用",
+    1: "在使用",
+    2: "注销"
   },
 
-  "ELECTRONICSCALE_STATUS":{
+  "ELECTRONICSCALE_STATUS": {
     0: "正常",
     1: "损坏",
     2: "报废"
   },
 
-  "EQUIPMENT_NAME":{
+  "EQUIPMENT_NAME": {
     1: "电子秤",
     2: "不锈钢架",
     3: "PC垫板",
