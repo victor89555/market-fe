@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import {MounthReport,Shop} from "../shared/report.model";
+import {Component, OnInit} from '@angular/core';
+import {MounthReport} from "../shared/report.model";
 import {Market} from "../../market/shared/market.model";
 import {MarketService} from "../../market/shared/market.service";
 import {ReportService} from "../shared/report.service"
 
 @Component({
-  selector: 'app-mounth-report',
-  templateUrl: './mounth-report.component.html',
-  styleUrls: ['./mounth-report.component.scss']
+  selector: 'app-month-report',
+  templateUrl: './month-report.component.html',
+  styleUrls: ['./month-report.component.scss']
 })
-export class MounthReportComponent implements OnInit {
+export class MonthReportComponent implements OnInit {
 
 
   constructor(private marketService:MarketService,

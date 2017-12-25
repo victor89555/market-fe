@@ -19,13 +19,13 @@
     <div class="col-xs-12">
       <form class="form-inline">
         <div class="form-group">
-          <select type="text" class="form-control" name="market" [(ngModel)]="qry.market">
+          <select type="text" class="form-control" name="marketId" [(ngModel)]="qry.marketId">
             <option [value]="null">-市场-</option>
             <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
           </select>
         </div>
         <div class="form-group">
-          <div class="input-group">
+          <!--<div class="input-group">
             <ng-template #shopItemTemplate let-item="item" let-$index="$index"
                          let-source="source"
                          let-term="term">
@@ -43,10 +43,11 @@
             <div class="input-group-addon" (click)="autoComplete1.toggle($event)">
               <i class="glyphicon glyphicon-menu-down"></i>
             </div>
-          </div>
+          </div>-->
+          <input type="text" class="form-control" name="shopName"  [(ngModel)]="qry.shopName" placeholder="摊位编号">
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" name="stall"  [(ngModel)]="qry.stall" placeholder="摊位编号">
+          <input type="text" class="form-control" name="stallName"  [(ngModel)]="qry.stallName" placeholder="摊位编号">
         </div>
         <div class="form-group">
           <tg-dict-select dictName="STALL_STATUS" [emptyText]="'-请选择状态-'" [(ngModel)]="qry.status" name="status"></tg-dict-select>
