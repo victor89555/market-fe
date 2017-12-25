@@ -13,7 +13,7 @@ export class ReportService extends RebirthHttp {
     super(http);
   }
 
-  @GET("reports/month")
+  @GET("reports/statistics")
   query(@Query("marketId") marketId = null, @Query("month") month = ""): Observable<MounthReport> {
     return null;
   }

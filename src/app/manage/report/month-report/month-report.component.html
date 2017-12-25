@@ -25,16 +25,16 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12">
-      <table class="table table-bordered">
+    <div class="col-xs-12" style="overflow-x: scroll">
+      <table class="table table-bordered" style="table-layout:fixed">
         <thead>
         <tr>
-          <td>商户\日期</td>
-          <td *ngFor="let date of report.days">{{date}}</td>
+          <td style="width: 120px">商户\日期</td>
+          <td *ngFor="let date of report.days" style="width: 60px">{{date}}</td>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let shop of report.shops">
+        <tr *ngFor="let shop of report.shopAmounts">
           <td>{{shop.shopName}}</td>
           <td *ngFor="let value of shop.amounts">{{value}}</td>
         </tr>
