@@ -23,11 +23,10 @@
         <input type="text" class="form-control" [(ngModel)]="market.stallLimit" />
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" *ngIf="!context.add">
       <label class="col-sm-3 control-label">已入驻摊位数:</label>
       <div class="col-sm-9">
-        <input *ngIf="context.add" type="text" class="form-control" [(ngModel)]="market.stallNum" />
-        <input *ngIf="!context.add" type="text" disabled class="form-control" [(ngModel)]="market.stallNum" />
+        <input type="text" disabled class="form-control" [(ngModel)]="market.stallNum" />
       </div>
     </div>
     <div class="form-group">

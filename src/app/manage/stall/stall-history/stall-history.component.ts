@@ -29,7 +29,6 @@ export class StallHistoryComponent implements OnInit {
       }
     )
   }
-  
   setPage(pageInfo) {
     this.page.pageNo = pageInfo.offset + 1
     this.query()

@@ -24,7 +24,7 @@ export class StallListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  queryStall = {"marketId": null, "shopId": null, "func": "", "status": "", "name": ""}
+  queryStall = {"marketId": null, "shopId": null, "func": "", "status": "", "name": "","shopName":""}
   markets: Market[] = []
   marketName = ""
   shops: Shop[]
@@ -91,6 +91,7 @@ export class StallListComponent implements OnInit {
     this.queryStall.shopId = null
     this.queryStall.func = ""
     this.queryStall.name = ""
+    this.queryStall.shopName = ""
     this.query()
   }
 

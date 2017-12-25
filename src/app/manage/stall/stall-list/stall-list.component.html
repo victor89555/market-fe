@@ -17,12 +17,7 @@
   <div class="row">
     <div class="col-xs-12">
       <form class="form-inline">
-        <!--<div class="form-group">
-          <select type="text" class="form-control" name="market" [(ngModel)]="queryStall.marketId">
-            <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
-          </select>
-        </div>-->
-        <div class="form-group">
+       <!-- <div class="form-group">
           <div class="input-group">
             <ng-template #shopItemTemplate let-item="item" let-$index="$index"
                          let-source="source"
@@ -42,7 +37,7 @@
               <i class="glyphicon glyphicon-menu-down"></i>
             </div>
           </div>
-        </div>
+        </div>-->
         <div class="form-group">
           <tg-dict-select dictName="FUNC_TYPE" [emptyText]="'-请选择功能-'" [(ngModel)]="queryStall.func" name="func"></tg-dict-select>
         </div>
@@ -51,6 +46,9 @@
         </div>
         <div class="form-group">
           <input type="text" class="form-control" name="stall" [(ngModel)]="queryStall.name" placeholder="摊位名称查询">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="stall" [(ngModel)]="queryStall.shopName" placeholder="商户名称">
         </div>
         <button type="submit" class="btn btn-primary" (click)="query()">查询</button>
         <button type="submit" class="btn btn-primary" (click)="reset()">重置</button>
@@ -87,16 +85,12 @@
             {{value|dictConvert:"STALL_STATUS"}}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="历史信息" prop="id">
-          <ng-template ngx-datatable-cell-template let-value="value">
-            <a routerLink="/manage/stalls/history/{{value}}">历史信息</a>
-          </ng-template>
-        </ngx-datatable-column>
 
         <ngx-datatable-column name="操作" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="stall">
             <button class="btn btn-default" (click)="edit(value);">修改</button>
             <button class="btn btn-default" (click)="delete(value);">删除</button>
+            <a class="btn btn-default" routerLink="/manage/stalls/history/{{value}}">历史信息</a>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>

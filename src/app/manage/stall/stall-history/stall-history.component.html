@@ -23,9 +23,13 @@
         (page)='setPage($event)'
       >
         <ngx-datatable-column name="商户名称" prop="shop_name"></ngx-datatable-column>
-        <ngx-datatable-column name="创建时间" prop="create_time"></ngx-datatable-column>
-        <ngx-datatable-column name="开始时间" prop="check_in_time"></ngx-datatable-column>
-        <ngx-datatable-column name="截至时间" prop="check_out_time"></ngx-datatable-column>
+        <ngx-datatable-column name="入驻时间" prop="check_in_time"></ngx-datatable-column>
+        <ngx-datatable-column name="截止时间" prop="check_out_time"></ngx-datatable-column>
+        <ngx-datatable-column name="操作" prop="shop_id">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            <a class="btn btn-default"  routerLink="/manage/shopForm/{{value}}">查看</a>
+          </ng-template>
+        </ngx-datatable-column>
       </ngx-datatable>
     </div>
   </div>
