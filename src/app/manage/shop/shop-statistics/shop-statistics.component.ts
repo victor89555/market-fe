@@ -145,7 +145,7 @@ export class ShopStatisticsComponent implements OnInit {
   getDistributionStatistics() {
     this.distributionOption = {
       title: {
-        text: '销售金额前十',
+        text: '商品销售金额前十',
         top:'5%',
         subtext: '',
         x: 'center'
