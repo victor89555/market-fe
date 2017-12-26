@@ -8,7 +8,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 export class AreaComponent implements OnInit {
 
   constructor() { }
-  market:any={}
+  area:any={}
   provinceCity={
     "provinces": [
       {
@@ -623,13 +623,6 @@ export class AreaComponent implements OnInit {
   }
   provinces=[]
   cities=[]
- /* @Input()
-  set province( province:string){
-    this.province = province
-  }
-  get province() {
-    return this.province;
-  }*/
   @Input() empty:boolean = false
   @Input()  province:string
   @Input() city:string
@@ -639,11 +632,11 @@ export class AreaComponent implements OnInit {
   ngOnInit() {
     this.getProvinces()
     if(this.empty){
-      this.market.provinceCode = null
-      this.market.cityCode = null
+      this.area.provinceCode = null
+      this.area.cityCode = null
     }else {
-      this.market.provinceCode=this.province
-      this.market.cityCode = this.city
+      this.area.provinceCode=this.province
+      this.area.cityCode = this.city
     }
   }
   getProvinces(){
@@ -653,16 +646,16 @@ export class AreaComponent implements OnInit {
   }
   getCities(){
     for(let i=0;i<this.provinceCity.provinces.length;i++){
-      if(this.provinceCity.provinces[i].name==this.market.provinceCode){
+      if(this.provinceCity.provinces[i].name==this.area.provinceCode){
         this.cities=this.provinceCity.provinces[i].citys
       }
     }
   }
   selectedProvinceChange(){
     this.getCities()
-    this.proviceChange.emit(this.market.provinceCode)
+    this.proviceChange.emit(this.area.provinceCode)
   }
   selectedCityChange(){
-    this.cityChange.emit(this.market.cityCode)
+    this.cityChange.emit(this.area.cityCode)
   }
 }
