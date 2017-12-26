@@ -92,7 +92,7 @@ export class OrderFormComponent implements Modal, OnInit {
       }
     )
   }
-  
+
   goBack() {
     window.history.back()
   }

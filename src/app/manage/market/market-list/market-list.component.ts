@@ -19,7 +19,7 @@ export class MarketListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  queryMarket = {'name': '', 'address': '', 'state': ''};
+  queryMarket = {'name': '', 'address': '', 'state': '','province':'','city':''};
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
@@ -31,7 +31,8 @@ export class MarketListComponent implements OnInit {
   }
 
   query() {
-    this.marketService.query(this.queryMarket.name, this.queryMarket.address, this.queryMarket.state, this.page.pageNo).subscribe(
+    this.marketService.query(this.queryMarket.name, this.queryMarket.address, this.queryMarket.state,
+      this.page.pageNo, 10).subscribe(
       (page) => {
         this.page = page
       }
@@ -90,5 +91,10 @@ export class MarketListComponent implements OnInit {
 
     })
   }
-
+  onProvinceChange(province){
+    this.queryMarket.province = province
+  }
+  onCityChange(city){
+    this.queryMarket.city = city
+  }
 }

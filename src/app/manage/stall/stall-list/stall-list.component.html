@@ -52,10 +52,7 @@
           <tg-dict-select dictName="STALL_STATUS" [emptyText]="'-请选择状态-'" [(ngModel)]="queryStall.status" name="status"></tg-dict-select>
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" name="stall" [(ngModel)]="queryStall.name" placeholder="摊位名称查询">
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" name="stall" [(ngModel)]="queryStall.shopName" placeholder="商户名称名称">
+          <input type="text" class="form-control" name="stall" [(ngModel)]="queryStall.name" placeholder="摊位/商户名称查询">
         </div>
         <button type="submit" class="btn btn-primary" (click)="query()">查询</button>
         <button type="submit" class="btn btn-primary" (click)="reset()">重置</button>
