@@ -45,7 +45,16 @@
     <div class="form-group">
       <label class="col-sm-3 control-label">区域:</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" [(ngModel)]="market.addr" />
+        <div class="form-inline">
+        <select type="text" class="form-control" name="province" [(ngModel)]="market.provinceCode" (ngModelChange)="selectedProvinceChange()">
+          <option [value]="null">-省份-</option>
+          <option *ngFor="let province of provinces" [value]="province">{{province}}</option>
+        </select>
+        <select type="text" class="form-control" name="city" [(ngModel)]="market.cityCode">
+          <option [value]="null">-市区-</option>
+          <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+        </select>
+        </div>
       </div>
     </div><div class="form-group">
       <label class="col-sm-3 control-label">地址:</label>
