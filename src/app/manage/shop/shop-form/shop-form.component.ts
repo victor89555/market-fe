@@ -323,7 +323,7 @@ export class ShopFormComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/manage/shops']);
+    window.history.back()
   }
 
   addContract() { //增加合同
