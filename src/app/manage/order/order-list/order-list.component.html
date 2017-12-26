@@ -94,7 +94,7 @@
         <ngx-datatable-column name="交易时间" prop="trading_time"></ngx-datatable-column>
         <ngx-datatable-column name="操作" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="order">
-            <a routerLink="/manage/orderLines/{{value}}">查看</a>
+            <a class="btn btn-sm btn-default" routerLink="/manage/orderLines/{{value}}">查看</a>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
