@@ -133,4 +133,7 @@ export class StallListComponent implements OnInit {
     })
   }
 
+  goBack() {
+    window.history.back()
+  }
 }

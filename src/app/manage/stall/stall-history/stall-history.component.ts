@@ -33,4 +33,8 @@ export class StallHistoryComponent implements OnInit {
     this.page.pageNo = pageInfo.offset + 1
     this.query()
   }
+
+  goBack() {
+    window.history.back()
+  }
 }

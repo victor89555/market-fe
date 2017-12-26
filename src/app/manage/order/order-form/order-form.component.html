@@ -87,6 +87,12 @@
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-warning"><a routerLink="/manage/orders">返回</a></button>
+    <div class="page-toolbar">
+      <div class="pull-right tooltips" >
+        <a href="javascript:;" class="btn btn-info" (click)="goBack()">
+          <i class="glyphicon glyphicon-backward"></i> 返回
+        </a>
+      </div>
+    </div>
   </div>
 </div>
