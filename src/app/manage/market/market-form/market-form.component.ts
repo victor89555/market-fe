@@ -19,6 +19,9 @@ export class MarketFormComponent implements Modal, OnInit {
     console.log('ModalTestComponent init....');
     if(!this.context.add){
       this.getMarket();
+    }else{
+      this.market.provinceCode = null
+      this.market.cityCode = null
     }
     this.getProvinces()
   }

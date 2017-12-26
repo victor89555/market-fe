@@ -623,6 +623,13 @@ export class AreaComponent implements OnInit {
   }
   provinces=[]
   cities=[]
+ /* @Input()
+  set province( province:string){
+    this.province = province
+  }
+  get province() {
+    return this.province;
+  }*/
   @Input() empty:boolean = false
   @Input()  province:string
   @Input() city:string
@@ -634,6 +641,9 @@ export class AreaComponent implements OnInit {
     if(this.empty){
       this.market.provinceCode = null
       this.market.cityCode = null
+    }else {
+      this.market.provinceCode=this.province
+      this.market.cityCode = this.city
     }
   }
   getProvinces(){
