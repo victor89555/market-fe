@@ -29,6 +29,7 @@ export class OrderListComponent implements OnInit {
   shops: Shop[]
   shopName: string = ""
   dateFormat: any = {"beginDate": "", "endDate": ""}
+  hasBack: boolean = false
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
@@ -42,7 +43,10 @@ export class OrderListComponent implements OnInit {
     //获取前一个页面传过来的参数
     this.activatedRoute.queryParams.subscribe(
       (params) => {
-        this.queryOrder.shopId = params["shopId"]
+        if(params["shopId"]){
+          this.hasBack = true
+          this.queryOrder.shopId = params["shopId"]
+        }
       }
     )
     this.query(false)
@@ -146,4 +150,7 @@ export class OrderListComponent implements OnInit {
     })
   }
 
+  goBack() {
+    window.history.back()
+  }
 }

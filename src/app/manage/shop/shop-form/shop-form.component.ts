@@ -298,7 +298,7 @@ export class ShopFormComponent implements OnInit {
 
   //添加商户
   addShop() {
-    console.log(this.shop);
+    this.validateShop()
     this.shopService.add(this.shop).subscribe(
       (shop) => {
         this.router.navigate(['/manage/shops']);
@@ -308,7 +308,7 @@ export class ShopFormComponent implements OnInit {
 
   //编辑保存商户
   editShop() {
-    console.log(this.shop);
+    this.validateShop()
     this.shopService.save(this.shopId, this.shop).subscribe(
       (shop) => {
         this.router.navigate(['/manage/shops']);
@@ -316,8 +316,14 @@ export class ShopFormComponent implements OnInit {
     )
   }
 
+  //验证商户表单
+  validateShop() {
+    console.log(this.shop)
+
+  }
+
   cancel() {
-    this.router.navigate(['/manage/shops']);
+    window.history.back()
   }
 
   addContract() { //增加合同

@@ -6,12 +6,19 @@
         <!--<small>dashboard &amp; statistics</small>-->
       </h1>
     </div>
+    <div class="page-toolbar">
+      <div class="pull-right tooltips" >
+        <a href="javascript:;" class="btn btn-info" (click)="goBack()" *ngIf="hasBack">
+          <i class="glyphicon glyphicon-backward"></i> 返回
+        </a>
+      </div>
+    </div>
   </div>
 
   <div class="row">
     <div class="col-xs-12">
       <form class="form-inline">
-          <div class="form-group">
+          <div class="form-group" *ngIf="queryOrder.shopId == null || queryOrder.shopId == undefined">
               <select type="text" class="form-control" name="market" [(ngModel)]="queryOrder.marketId">
                 <option [value]="null">-市场-</option>
                 <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
@@ -94,7 +101,7 @@
         <ngx-datatable-column name="交易时间" prop="trading_time"></ngx-datatable-column>
         <ngx-datatable-column name="操作" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="order">
-            <a routerLink="/manage/orderLines/{{value}}">查看</a>
+            <a class="btn btn-sm btn-default" routerLink="/manage/orderLines/{{value}}">查看</a>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
