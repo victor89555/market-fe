@@ -1,66 +1,14 @@
-import {Component, EventEmitter, OnInit} from "@angular/core";
-import {Modal} from "rebirth-ng";
-import {Market} from "../shared/market.model";
-import {MarketService} from "../shared/market.service";
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-market-form',
-  templateUrl: "./market-form.component.html"
+  selector: 'tg-area',
+  templateUrl: './area.component.html',
+  styleUrls: ['./area.component.scss']
 })
-export class MarketFormComponent implements Modal, OnInit {
-  context: { id: number, add:boolean };
-  dismiss: EventEmitter<Market>;
+export class AreaComponent implements OnInit {
 
-  market: any = {}
-  constructor(private marketService: MarketService) {
-  }
-
-  ngOnInit(): void {
-    console.log('ModalTestComponent init....');
-    if(!this.context.add){
-      this.getMarket();
-    }
-    this.getProvinces()
-  }
-  // 获取市场
-  getMarket(){
-    this.marketService.get(this.context.id).subscribe(
-      (market) => {
-        this.market = market
-        this.getCities()
-      }
-    )
-  }
-  save() {
-    this.marketService.save(this.market).subscribe(
-      (market) => {
-        this.dismiss.emit(market);
-      }
-    )
-  }
-
-  update() {
-    this.market.id = this.context.id;
-    console.log(this.market);
-    this.marketService.update(this.context.id,this.market).subscribe(
-      (market) => {
-        this.dismiss.emit(market);
-      }
-    )
-  }
-
-  cancel() {
-    this.dismiss.error(this.market);
-  }
-
-  onProvinceChange(province){
-    this.market.provinceCode = province
-  }
-
-  onCityChange(city){
-    this.market.cityCode = city
-  }
-
+  constructor() { }
+  market:any={}
   provinceCity={
     "provinces": [
       {
@@ -675,6 +623,19 @@ export class MarketFormComponent implements Modal, OnInit {
   }
   provinces=[]
   cities=[]
+  @Input() empty:boolean = false
+  @Input()  province:string
+  @Input() city:string
+  @Output() proviceChange = new EventEmitter<string>();
+  @Output() cityChange = new EventEmitter<string>();
+
+  ngOnInit() {
+    this.getProvinces()
+    if(this.empty){
+      this.market.provinceCode = null
+      this.market.cityCode = null
+    }
+  }
   getProvinces(){
     for(let i =0;i<this.provinceCity.provinces.length;i++){
       this.provinces.push(this.provinceCity.provinces[i].name )
@@ -689,6 +650,9 @@ export class MarketFormComponent implements Modal, OnInit {
   }
   selectedProvinceChange(){
     this.getCities()
+    this.proviceChange.emit(this.market.provinceCode)
+  }
+  selectedCityChange(){
+    this.cityChange.emit(this.market.cityCode)
   }
 }
-

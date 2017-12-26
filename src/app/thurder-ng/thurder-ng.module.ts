@@ -13,7 +13,8 @@ import {DictConvertPipe} from './pipes/dict-convert.pipe'
 import {LoggerService} from "./services/logger.service"
 import {DictSelectComponent} from "./components/dict/dict-select.component"
 import {CommonModule} from "@angular/common"
-import {EntrysPipe} from "./pipes/entrys.pipe"
+import {EntrysPipe} from "./pipes/entrys.pipe";
+import { AreaComponent } from './components/area/area.component'
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import {EntrysPipe} from "./pipes/entrys.pipe"
     OverlayComponent,
     OverlayContentComponent,
     ModalBackdropComponent,
+    AreaComponent,
   ],
   entryComponents: [
     OverlayComponent,
@@ -38,6 +40,7 @@ import {EntrysPipe} from "./pipes/entrys.pipe"
     EntrysPipe,
     FoursquareDirective,
     DictSelectComponent,
+    AreaComponent,
   ],
   providers: [
     WindowRef,
