@@ -17,7 +17,7 @@
                 <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
               </select>
           </div>
-          <div class="form-group">
+          <div class="form-group" *ngIf="queryOrder.shopId == null || queryOrder.shopId == undefined">
             <div class="input-group">
               <ng-template #shopItemTemplate let-item="item" let-$index="$index"
                            let-source="source"
