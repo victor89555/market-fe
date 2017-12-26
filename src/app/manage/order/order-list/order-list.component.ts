@@ -29,7 +29,6 @@ export class OrderListComponent implements OnInit {
   shops: Shop[]
   shopName: string = ""
   dateFormat: any = {"beginDate": "", "endDate": ""}
-  shopId: number = null
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
@@ -40,9 +39,10 @@ export class OrderListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(
-      (params: Params) => {
-        console.log(params)
+    //获取前一个页面传过来的参数
+    this.activatedRoute.queryParams.subscribe(
+      (params) => {
+        this.queryOrder.shopId = params["shopId"]
       }
     )
     this.query(false)
@@ -77,6 +77,8 @@ export class OrderListComponent implements OnInit {
     this.orderService.query(this.queryOrder.marketId, this.queryOrder.shopId,
       this.queryOrder.payWay, this.dateFormat.beginDate, this.dateFormat.endDate, 1, 10).subscribe(
       (page) => {
+        // console.log(this.shopId)
+        console.log(page)
         this.page = page
       }
     )
