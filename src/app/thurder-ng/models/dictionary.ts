@@ -24,9 +24,9 @@ export const dicts = {
   },
 
   "SHOP_STATUS": {
-    0: "注销",
-    1: "正常",
-    2: "超期"
+    0: "正常",
+    1: "超期",
+    2: "注销"
   },
 
   "PAY_WAY": {
@@ -51,6 +51,12 @@ export const dicts = {
     0: "未使用",
     1: "在使用",
     2: "注销"
+  },
+
+  "CONTRACT_STATUS": {
+    0: "过期",
+    1: "有效",
+    2: "作废"
   },
 
   "ELECTRONICSCALE_STATUS": {
