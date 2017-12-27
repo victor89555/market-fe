@@ -18,7 +18,8 @@ export class MarketService extends RebirthHttp {
 
   @GET("markets")
   query(@Query("_filter_like_name") name = "", @Query("_filter_like_addr") addr = "", @Query("_filter_eq_status-int") status = null,
-        @Query("pageNo") pageNo = 1, @Query("pageSize") pageSize = 10): Observable<Page<any>> {
+        @Query("pageNo") pageNo = 1, @Query("pageSize") pageSize = 10, @Query("_filter_like_provinceCode") province = null,
+        @Query("_filter_like_cityCode") city = null,): Observable<Page<any>> {
     return null;
   }
 

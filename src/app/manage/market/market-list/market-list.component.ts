@@ -32,7 +32,7 @@ export class MarketListComponent implements OnInit {
 
   query() {
     this.marketService.query(this.queryMarket.name, this.queryMarket.address, this.queryMarket.state,
-      this.page.pageNo, 10).subscribe(
+      this.page.pageNo, 10,this.queryMarket.province, this.queryMarket.city).subscribe(
       (page) => {
         this.page = page
       }
