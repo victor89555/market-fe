@@ -1,7 +1,7 @@
 import {Component, ViewContainerRef} from '@angular/core';
 import {environment} from '../environments/environment';
 import {RebirthHttpProvider} from 'rebirth-http';
-import {NotifyService, RebirthNGConfig} from 'rebirth-ng';
+import {NotifyService, RebirthNGConfig, REBIRTH_NG_I18N_ZHCN} from 'rebirth-ng';
 import 'rxjs/add/operator/do';
 import {AuthorizationService} from 'rebirth-permission';
 import {LoadingService} from './core/loading/loading.service';
@@ -29,6 +29,7 @@ export class AppComponent {
 
   private applicationSetup() {
     this.rebirthNGConfig.rootContainer = this.viewContainerRef; // this.rebirthNGConfig.extend(REBIRTH_UI_I18N_ZHCN); i18n
+    this.rebirthNGConfig.datePicker = REBIRTH_NG_I18N_ZHCN.datePicker
     this.apiSetup();
   }
 
