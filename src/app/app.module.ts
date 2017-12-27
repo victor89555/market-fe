@@ -8,7 +8,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CoreModule} from "./core/core.module";
 import {FormsModule} from "@angular/forms";
 import {ManageAppModule} from "./manage/manage-app.module";
-import {CustomFormsModule} from "ng2-validation";
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import {CustomFormsModule} from "ng2-validation";
     FormsModule,
     ManageAppModule,
     RouterModule.forRoot(ROUTER_CONFIG),
-    CustomFormsModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
