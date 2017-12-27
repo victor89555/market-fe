@@ -8,79 +8,61 @@
     <div class="form-group">
       <label class="col-sm-3 control-label">市场名:</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" [(ngModel)]="market.name" />
+        <input type="text" class="form-control" [(ngModel)]="market.name"/>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-3 control-label">市场代码:</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" [(ngModel)]="market.code" />
+        <input type="text" class="form-control" [(ngModel)]="market.code"/>
       </div>
     </div>
     <div class="form-group">
-      <label for="stallLimit" class="col-sm-3 control-label">摊位总数：</label>
+      <label class="col-sm-3 control-label">摊位总数:</label>
       <div class="col-sm-9">
-        <input type="text" id="stallLimit" name="stallLimit" class="form-control" [(ngModel)]="market['stallLimit']"
-               reNumber #stallLimit="ngModel"/>
-
-        <re-alert-box *ngIf="stallLimit.errors &&  stallLimit.touched" type="danger">
-          <div *ngIf="stallLimit.errors.reNumber">摊位总数必须是数字！</div>
-        </re-alert-box>
+        <input type="text" class="form-control" [(ngModel)]="market.stallLimit"/>
       </div>
     </div>
     <div class="form-group" *ngIf="!context.add">
-      <label for="stallNum" class="col-sm-3 control-label">已入驻摊位数：</label>
+      <label class="col-sm-3 control-label">已入驻摊位数:</label>
       <div class="col-sm-9">
-        <input type="text" disabled id="stallNum" name="stallNum" class="form-control" [(ngModel)]="market['stallNum']"
-               reNumber #stallNum="ngModel"/>
-
-        <re-alert-box *ngIf="stallNum.errors &&  stallNum.touched" type="danger">
-          <div *ngIf="stallNum.errors.reNumber">已入驻摊位数必须是数字！</div>
-        </re-alert-box>
+        <input type="text" disabled class="form-control" [(ngModel)]="market.stallNum"/>
       </div>
     </div>
     <div class="form-group">
-      <label for="storeNum" class="col-sm-3 control-label">店铺总数：</label>
+      <label class="col-sm-3 control-label">店铺总数:</label>
       <div class="col-sm-9">
-        <input type="text" id="storeNum" name="storeNum" class="form-control" [(ngModel)]="market['storeNum']"
-               reNumber #storeNum="ngModel"/>
-
-        <re-alert-box *ngIf="storeNum.errors &&  storeNum.touched" type="danger">
-          <div *ngIf="storeNum.errors.reNumber">店铺总数必须是数字！</div>
-        </re-alert-box>
+        <input type="text" class="form-control" [(ngModel)]="market.storeNum"/>
       </div>
     </div>
     <div class="form-group">
-      <label for="enterStoreNum" class="col-sm-3 control-label">已入驻店铺数：</label>
+      <label class="col-sm-3 control-label">已入驻店铺数:</label>
       <div class="col-sm-9">
-        <input  type="text" id="enterStoreNum" name="enterStoreNum" class="form-control" [(ngModel)]="market['enterStoreNum']"
-               reNumber #enterStoreNum="ngModel"/>
-        <re-alert-box *ngIf="enterStoreNum.errors &&  enterStoreNum.touched" type="danger">
-          <div *ngIf="enterStoreNum.errors.reNumber">已入驻店铺数必须是数字！</div>
-        </re-alert-box>
+        <input *ngIf="context.add" type="text" class="form-control" [(ngModel)]="market.enterStoreNum"/>
+        <input *ngIf="!context.add" type="text" disabled class="form-control" [(ngModel)]="market.enterStoreNum"/>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-3 control-label">区域:</label>
       <div class="col-sm-9">
         <div class="form-inline">
-          <select type="text" class="form-control" name="province" [(ngModel)]="market.provinceCode" (ngModelChange)="selectedProvinceChange()">
+          <!--<select type="text" class="form-control" name="province" [(ngModel)]="market.provinceCode" (ngModelChange)="selectedProvinceChange()">
             <option [value]="null">-省份-</option>
             <option *ngFor="let province of provinces" [value]="province">{{province}}</option>
           </select>
           <select type="text" class="form-control" name="city" [(ngModel)]="market.cityCode">
             <option [value]="null">-市区-</option>
             <option *ngFor="let city of cities" [value]="city">{{city}}</option>
-          </select>
+          </select>-->
+          <tg-area-select (proviceChange)="onProvinceChange($event)" (cityChange)="onCityChange($event)"
+                          [(ngModel)]="marketArea"></tg-area-select>
         </div>
       </div>
-      <!--<tg-area (proviceChange)="onProvinceChange($event)" (cityChange)="onCityChange($event)"
-               [empty]="context.add" [province]="market.provinceCode" [city]="market.cityCode"></tg-area>-->
     </div>
     <div class="form-group">
       <label class="col-sm-3 control-label">地址:</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" [(ngModel)]="market.addr" />
+        <input type="text" class="form-control" [(ngModel)]="market.addr"/>
       </div>
     </div>
   </div>

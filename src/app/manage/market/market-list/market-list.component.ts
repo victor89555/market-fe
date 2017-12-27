@@ -4,6 +4,7 @@ import {MarketFormComponent} from "../market-form/market-form.component";
 import {MarketService} from "../shared/market.service";
 import {Market} from "../shared/market.model";
 import {Page} from "../../../thurder-ng/models/page.model";
+import {Area} from "../../../thurder-ng/components/area/area.mode"
 
 @Component({
   selector: 'app-market-list',
@@ -19,7 +20,8 @@ export class MarketListComponent implements OnInit {
 
   editing = {}
   page: Page<any> = new Page()
-  queryMarket = {'name': '', 'address': '', 'state': '','province':'','city':''};
+  queryArea: Area = new Area()
+  queryMarket = {name: null, address: null, status: null, provinceCode: null, cityCode: null, addr: null};
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
@@ -31,8 +33,7 @@ export class MarketListComponent implements OnInit {
   }
 
   query() {
-    this.marketService.query(this.queryMarket.name, this.queryMarket.address, this.queryMarket.state,
-      this.page.pageNo, 10,this.queryMarket.province, this.queryMarket.city).subscribe(
+    this.marketService.simpleQuery(this.queryMarket, this.page.pageNo, 10).subscribe(
       (page) => {
         this.page = page
       }
@@ -47,7 +48,7 @@ export class MarketListComponent implements OnInit {
   reset() {
     this.queryMarket.name = ""
     this.queryMarket.address = ""
-    this.queryMarket.state = ""
+    this.queryMarket.status = null
     this.query()
   }
 
@@ -57,9 +58,11 @@ export class MarketListComponent implements OnInit {
       this.query()
     })
   }
+
   delete1(name) {
     console.log(name);
   }
+
   add() {
     this.modalService.open<Market>({
       component: MarketFormComponent,
@@ -91,10 +94,12 @@ export class MarketListComponent implements OnInit {
 
     })
   }
-  onProvinceChange(province){
-    this.queryMarket.province = province
+
+  onProvinceChange(province) {
+    this.queryMarket.provinceCode = province
   }
-  onCityChange(city){
-    this.queryMarket.city = city
+
+  onCityChange(city) {
+    this.queryMarket.cityCode = city
   }
 }

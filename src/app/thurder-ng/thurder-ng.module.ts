@@ -14,7 +14,7 @@ import {LoggerService} from "./services/logger.service"
 import {DictSelectComponent} from "./components/dict/dict-select.component"
 import {CommonModule} from "@angular/common"
 import {EntrysPipe} from "./pipes/entrys.pipe";
-import { AreaComponent } from './components/area/area.component'
+import {AreaSelectComponent} from './components/area/area-select.component'
 
 @NgModule({
   imports: [
@@ -30,7 +30,7 @@ import { AreaComponent } from './components/area/area.component'
     OverlayComponent,
     OverlayContentComponent,
     ModalBackdropComponent,
-    AreaComponent,
+    AreaSelectComponent,
   ],
   entryComponents: [
     OverlayComponent,
@@ -40,7 +40,7 @@ import { AreaComponent } from './components/area/area.component'
     EntrysPipe,
     FoursquareDirective,
     DictSelectComponent,
-    AreaComponent,
+    AreaSelectComponent,
   ],
   providers: [
     WindowRef,

@@ -21,8 +21,8 @@ export class DictSelectComponent implements OnInit, ControlValueAccessor {
   private _selectedVal: any = ""
   dictCodes: any[]
 
-  private onChange = (_: any) => null;
-  private onTouched = () => null;
+  private onChange = (_: any) => null
+  private onTouched = () => null
 
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2) {

@@ -12,14 +12,14 @@ export class MarketService extends RebirthHttp {
     super(http);
   }
 
-  simpleQuery(params: { name: string, addr: string, status: number }, pageNo: number = 1, pageSize: number = 10) {
-    this.query(params.name, params.addr, params.status, pageNo, pageSize)
+  simpleQuery(params: { name: string, addr: string, status: number, provinceCode: string, cityCode: string }, pageNo: number = 1, pageSize: number = 10) {
+    return this.query(params.name, params.addr, params.status, params.provinceCode, params.cityCode, pageNo, pageSize)
   }
 
   @GET("markets")
   query(@Query("_filter_like_name") name = "", @Query("_filter_like_addr") addr = "", @Query("_filter_eq_status-int") status = null,
-        @Query("pageNo") pageNo = 1, @Query("pageSize") pageSize = 10, @Query("_filter_like_provinceCode") province = null,
-        @Query("_filter_like_cityCode") city = null,): Observable<Page<any>> {
+        @Query("_filter_like_provinceCode") provinceCode = null, @Query("_filter_like_cityCode") cityCode = null,
+        @Query("pageNo") pageNo = 1, @Query("pageSize") pageSize = 10): Observable<Page<any>> {
     return null;
   }
 
