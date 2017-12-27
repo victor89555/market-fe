@@ -54,6 +54,10 @@ export class ShopStatisticsComponent implements OnInit {
     this.query(false)
   }
 
+  goBack() {
+    window.history.back()
+  }
+
  //商户营业额走势
   getShopSall(){
     this.shopSellOption = {

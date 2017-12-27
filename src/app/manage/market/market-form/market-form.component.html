@@ -18,28 +18,46 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-3 control-label">摊位总数:</label>
+      <label for="stallLimit" class="col-sm-3 control-label">摊位总数：</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" [(ngModel)]="market.stallLimit" />
+        <input type="text" id="stallLimit" name="stallLimit" class="form-control" [(ngModel)]="market['stallLimit']"
+               reNumber #stallLimit="ngModel"/>
+
+        <re-alert-box *ngIf="stallLimit.errors &&  stallLimit.touched" type="danger">
+          <div *ngIf="stallLimit.errors.reNumber">摊位总数必须是数字！</div>
+        </re-alert-box>
       </div>
     </div>
     <div class="form-group" *ngIf="!context.add">
-      <label class="col-sm-3 control-label">已入驻摊位数:</label>
+      <label for="stallNum" class="col-sm-3 control-label">已入驻摊位数：</label>
       <div class="col-sm-9">
-        <input type="text" disabled class="form-control" [(ngModel)]="market.stallNum" />
+        <input type="text" disabled id="stallNum" name="stallNum" class="form-control" [(ngModel)]="market['stallNum']"
+               reNumber #stallNum="ngModel"/>
+
+        <re-alert-box *ngIf="stallNum.errors &&  stallNum.touched" type="danger">
+          <div *ngIf="stallNum.errors.reNumber">已入驻摊位数必须是数字！</div>
+        </re-alert-box>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-3 control-label">店铺总数:</label>
+      <label for="storeNum" class="col-sm-3 control-label">店铺总数：</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" [(ngModel)]="market.storeNum" />
+        <input type="text" id="storeNum" name="storeNum" class="form-control" [(ngModel)]="market['storeNum']"
+               reNumber #storeNum="ngModel"/>
+
+        <re-alert-box *ngIf="storeNum.errors &&  storeNum.touched" type="danger">
+          <div *ngIf="storeNum.errors.reNumber">店铺总数必须是数字！</div>
+        </re-alert-box>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-3 control-label">已入驻店铺数:</label>
+      <label for="enterStoreNum" class="col-sm-3 control-label">已入驻店铺数：</label>
       <div class="col-sm-9">
-        <input *ngIf="context.add" type="text" class="form-control" [(ngModel)]="market.enterStoreNum" />
-        <input *ngIf="!context.add" type="text" disabled class="form-control" [(ngModel)]="market.enterStoreNum" />
+        <input  type="text" id="enterStoreNum" name="enterStoreNum" class="form-control" [(ngModel)]="market['enterStoreNum']"
+               reNumber #enterStoreNum="ngModel"/>
+        <re-alert-box *ngIf="enterStoreNum.errors &&  enterStoreNum.touched" type="danger">
+          <div *ngIf="enterStoreNum.errors.reNumber">已入驻店铺数必须是数字！</div>
+        </re-alert-box>
       </div>
     </div>
     <div class="form-group">
@@ -56,8 +74,8 @@
           </select>
         </div>
       </div>
-      <tg-area (proviceChange)="onProvinceChange($event)" (cityChange)="onCityChange($event)"
-               [empty]="context.add" [province]="market.provinceCode" [city]="market.cityCode"></tg-area>
+      <!--<tg-area (proviceChange)="onProvinceChange($event)" (cityChange)="onCityChange($event)"
+               [empty]="context.add" [province]="market.provinceCode" [city]="market.cityCode"></tg-area>-->
     </div>
     <div class="form-group">
       <label class="col-sm-3 control-label">地址:</label>

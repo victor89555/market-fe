@@ -638,16 +638,13 @@ export class AreaComponent implements OnInit {
   ngOnInit() {
     this.getProvinces()
     if(this.empty){
-      debugger
       this.area.provinceCode = null
       this.area.cityCode = null
     }else {
-      debugger
       this.area.provinceCode=this.province
       this.area.cityCode = this.city
       this.getCities()
     }
-    debugger
   }
   getProvinces(){
     for(let i =0;i<this.provinceCity.provinces.length;i++){

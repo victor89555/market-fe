@@ -6,6 +6,13 @@
         订单详情
       </h1>
     </div>
+    <div class="page-toolbar">
+      <div class="pull-right tooltips" >
+        <a href="javascript:;" class="btn btn-info" (click)="goBack()">
+          <i class="glyphicon glyphicon-backward"></i> 返回
+        </a>
+      </div>
+    </div>
   </div>
 
   <div class="row">
@@ -84,15 +91,5 @@
         <td>{{orderLine.price}}</td>
       </tr>
     </table>
-  </div>
-
-  <div class="modal-footer">
-    <div class="page-toolbar">
-      <div class="pull-right tooltips" >
-        <a href="javascript:;" class="btn btn-info" (click)="goBack()">
-          <i class="glyphicon glyphicon-backward"></i> 返回
-        </a>
-      </div>
-    </div>
   </div>
 </div>
