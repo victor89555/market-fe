@@ -159,12 +159,14 @@
         <table id="table2" class="table">
           <tr>
             <th>序列号</th>
-            <th>版本</th>
+            <th>软件版本</th>
+            <th>状态</th>
             <th>操作</th>
           </tr>
           <tr *ngFor="let sc of allotedElectronicScales">
             <td>{{sc.sequence_no}}</td>
             <td>{{sc.soft_version}}</td>
+            <td>{{sc.status|dictConvert:"ELECTRONICSCALE_STATUS"}}</td>
             <td><a href="JavaScript:;" (click)="unbindElectronicScale(sc.id)">解绑</a></td>
           </tr>
         </table>
