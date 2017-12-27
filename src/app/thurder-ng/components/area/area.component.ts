@@ -623,6 +623,12 @@ export class AreaComponent implements OnInit {
   }
   provinces=[]
   cities=[]
+  _province:string
+ /* @Input()
+  set province(province: string) {
+    this._province = province;
+  }
+  get province(): string { return this._province; }*/
   @Input() empty:boolean = false
   @Input()  province:string
   @Input() city:string
@@ -632,12 +638,16 @@ export class AreaComponent implements OnInit {
   ngOnInit() {
     this.getProvinces()
     if(this.empty){
+      debugger
       this.area.provinceCode = null
       this.area.cityCode = null
     }else {
+      debugger
       this.area.provinceCode=this.province
       this.area.cityCode = this.city
+      this.getCities()
     }
+    debugger
   }
   getProvinces(){
     for(let i =0;i<this.provinceCity.provinces.length;i++){
