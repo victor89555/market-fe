@@ -38,8 +38,7 @@
     <div class="form-group">
       <label class="col-sm-3 control-label">已入驻店铺数:</label>
       <div class="col-sm-9">
-        <input *ngIf="context.add" type="text" class="form-control" [(ngModel)]="market.enterStoreNum"/>
-        <input *ngIf="!context.add" type="text" disabled class="form-control" [(ngModel)]="market.enterStoreNum"/>
+        <input type="text" class="form-control" [(ngModel)]="market.enterStoreNum"/>
       </div>
     </div>
     <div class="form-group">
