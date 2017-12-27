@@ -79,7 +79,7 @@ export class OrderListComponent implements OnInit {
       }
     }
     this.orderService.query(this.queryOrder.marketId, this.queryOrder.shopId,
-      this.queryOrder.payWay, this.dateFormat.beginDate, this.dateFormat.endDate, 1, 10).subscribe(
+      this.queryOrder.payWay, this.dateFormat.beginDate, this.dateFormat.endDate, this.page.pageNo, 10).subscribe(
       (page) => {
         // console.log(this.shopId)
         console.log(page)

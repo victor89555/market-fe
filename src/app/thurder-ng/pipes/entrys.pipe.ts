@@ -21,7 +21,6 @@ export class EntrysPipe implements PipeTransform {
       }
       entrys.push({key: key, value: value[key]});
     }
-    debugger
     return entrys;
   }
 }
