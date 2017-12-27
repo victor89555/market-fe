@@ -189,7 +189,7 @@
             <td>{{con.sign_time}}</td>
             <td>{{con.validity_time}}</td>
             <td>{{con.total_amount}}</td>
-            <td>{{shopStatus[con.status]}}</td>
+            <td>{{con.status|dictConvert:"CONTRACT_STATUS"}}</td>
             <td>
               <a href="javascript:;" class="btn btn-xs btn-info" (click)="editContract(con.id)">修改</a>
               <a href="javascript:;" class="btn btn-xs btn-danger" (click)="deleteContract(con.id)">删除</a>

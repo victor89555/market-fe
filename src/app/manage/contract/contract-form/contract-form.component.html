@@ -45,11 +45,11 @@
         </div>
       </div>
     </div>
-    
+
     <div class="form-group">
       <label class="col-sm-3 control-label">状态:</label>
       <div class="col-sm-9">
-        <tg-dict-select dictName="SHOP_STATUS" [(ngModel)]="contract.status"></tg-dict-select>
+        <tg-dict-select dictName="CONTRACT_STATUS" [(ngModel)]="contract.status"></tg-dict-select>
       </div>
     </div>
     <div class="form-group">
@@ -130,7 +130,7 @@
       <button type="button" class="btn btn-primary" (click)="add()">保存</button>
     </div>
     <div class="form-group" *ngIf="!context.add">
-      <button type="button" class="btn btn-info" (click)="update()">修改</button>
+      <button type="button" class="btn btn-info" (click)="update()">保存</button>
     </div>
     <div class="form-group">
       <button type="button" class="btn btn-warning" (click)="cancel()">取消</button>

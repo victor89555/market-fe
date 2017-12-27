@@ -5,7 +5,7 @@ export class Shop {
   name: string
   funcType: number
   operatorId: number
-  status: number
+  status: string
   stallName: string
   beginTime: string
   endTime: string

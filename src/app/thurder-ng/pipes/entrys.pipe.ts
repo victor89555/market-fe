@@ -16,8 +16,12 @@ export class EntrysPipe implements PipeTransform {
         key = parseInt(key)
       } catch (e) {
       }
+      if (isNaN(key)) {
+        key = k
+      }
       entrys.push({key: key, value: value[key]});
     }
+    debugger
     return entrys;
   }
 }
