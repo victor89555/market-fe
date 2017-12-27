@@ -25,13 +25,21 @@ import {ElectronicScale} from "../../electronicScale/shared/electronicScale.mode
 import {OperatorFormComponent} from "../../operator/operator-form/operator-form.component";
 import {dicts} from "../../../thurder-ng/models/dictionary"
 
+// 1. 引入forms中的组件
+import {FormGroup, FormControl} from '@angular/forms';
+// 2. 引入ng2-validation中的组件
+import {CustomValidators} from 'ng2-validation';
+
 @Component({
   selector: 'app-shop-form',
   templateUrl: "./shop-form.component.html",
   styleUrls: ['./shop-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShopFormComponent implements OnInit {
+
+  // 3. 定义表单组
+  form:FormGroup;
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private shopService: ShopService,
@@ -46,9 +54,16 @@ export class ShopFormComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router
   ) {
+    // 4. 初始化表达组里面的内容
+    this.form = new FormGroup({
+      // 定义form.field 是一个区间
+      shopName: new FormControl(this.shop.name, CustomValidators.range([5, 9])),
+      // 定义form.num 是数字类型
+      num: new FormControl('', CustomValidators.number)
+    });
   }
 
-  dismiss: EventEmitter<Shop>;
+  dismiss: EventEmitter<Shop>
 
   shopId: number//商户ID
   // 页面组件
@@ -68,6 +83,7 @@ export class ShopFormComponent implements OnInit {
   allotedElectronicScales = [] //已分配的电子秤列表
   selectedScale: ElectronicScale
   shopStatus = dicts["SHOP_STATUS"]
+
 
   ngOnInit(): void {
     console.log('ModalTestComponent init....');

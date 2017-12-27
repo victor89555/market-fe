@@ -90,7 +90,7 @@
             <button class="btn btn-sm btn-info"  (click)="doRepair(row)"
                     *ngIf="row.status == 0 && row.status != 2">维修</button>
             <button class="btn btn-sm btn-success"  (click)="doRepair(row)"
-                    *ngIf="row.status == 1 && row.status != 2">已修复</button>
+                    *ngIf="row.status == 1 && row.status != 2">修复</button>
             <button class="btn btn-sm btn-danger"  (click)="doScrap(row)"
                     *ngIf="row.status != 2">报废</button>
           </ng-template>
