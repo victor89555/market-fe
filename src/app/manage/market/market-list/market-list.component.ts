@@ -49,6 +49,10 @@ export class MarketListComponent implements OnInit {
     this.queryMarket.name = ""
     this.queryMarket.address = ""
     this.queryMarket.status = null
+    this.queryMarket.provinceCode = null
+    this.queryMarket.cityCode = null
+    this.queryArea.cityCode = null
+    this.queryArea.provinceCode = null
     this.query()
   }
 
