@@ -49,6 +49,7 @@ import {ShopStatisticsComponent} from './shop/shop-statistics/shop-statistics.co
 import {ElectronicScaleHistoryComponent} from './electronicScale/electronic-scale-history/electronic-scale-history.component';
 import {MonthReportComponent} from './report/month-report/month-report.component'
 import {ReportService} from "./report/shared/report.service";
+import {AttachmentService} from "./shared/attachment.service"
 
 
 @NgModule({
@@ -119,7 +120,8 @@ import {ReportService} from "./report/shared/report.service";
     UserService,
     RoleService,
     ResourceService,
-    ReportService
+    ReportService,
+    AttachmentService,
   ]
 })
 export class ManageAppModule {
