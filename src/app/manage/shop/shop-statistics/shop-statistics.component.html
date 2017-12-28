@@ -19,14 +19,14 @@
       </div>
     </div>
     <button type="submit" class="btn btn-primary" (click)="query(true)">查询</button>
-    <div class="pull-right tooltips" >
+    <div class="pull-right tooltips">
       <a href="javascript:;" class="btn btn-info" (click)="goBack()">
         <i class="glyphicon glyphicon-backward"></i> 返回
       </a>
     </div>
   </form>
-  <div echarts [options]="shopSellOption" [loading]="isLoading" [merge]="updateOptions"  class="demo-chart"></div>
-  <div echarts [options]="distributionOption" [loading]="isLoading" [merge]="updateOptions"  class="demo-chart"></div>
+  <div echarts [options]="shopSellOption" class="demo-chart"></div>
+  <div echarts [options]="distributionOption" class="demo-chart"></div>
   <div echarts [options]="memberOption" class="demo-chart"></div>
   <!--<div echarts [options]="kindsOption" [loading]="isLoading" [merge]="updateOptions"  class="demo-chart"></div>-->
   <!--<div echarts [options]="categoryOption" [loading]="isLoading" [merge]="updateOptions"  class="demo-chart"></div>-->

@@ -5,6 +5,8 @@ export class Market {
   code: string
   stallLimit: number
   stallNum: number
+  storeNum:number
+  enterStoreNum:number
   provinceCode: string
   cityCode: string
 }

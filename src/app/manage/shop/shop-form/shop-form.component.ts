@@ -44,8 +44,7 @@ export class ShopFormComponent implements OnInit {
               private dialogService: DialogService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private route: ActivatedRoute,
-              private router: Router
-  ) {
+              private router: Router) {
   }
 
   dismiss: EventEmitter<Shop>
@@ -56,13 +55,13 @@ export class ShopFormComponent implements OnInit {
     newShop: true
   }
   shop: Shop = new Shop() //商户信息
-  operatorName : string = "请选择经营者"
+  operatorName: string = "请选择经营者"
   operators: Operator[] //操作者列表
   markets: Market[] //市场列表
   market: Market //市场
   stalls: Stall[] //摊位列表
   stallName: string = "请选择摊位"
-  stallChange:boolean
+  stallChange: boolean
   contracts: Contract[] //合同列表
   allotableElectronicScales = [] //可分配的电子秤列表
   allotedElectronicScales = [] //已分配的电子秤列表
@@ -79,11 +78,11 @@ export class ShopFormComponent implements OnInit {
     // 判断是添加商户还是修改商户
     if (this.shopId > 0) {
       this.initEditShop();
-    }else{
+    } else {
       this.initAddShop();
     }
     // 用于判断保存与修改摊位的展示
-    this.stallChange = this.shopId==0
+    this.stallChange = this.shopId == 0
   }
 
   // 初始化添加商户
@@ -142,7 +141,7 @@ export class ShopFormComponent implements OnInit {
   }
 
   loadStalls() {  //摊位列表
-    this.stallService.getStalls(this.shop.marketId).subscribe(
+    this.stallService.getUsableStalls(this.shop.marketId).subscribe(
       (stalls) => {
         // console.log(stalls)
         this.stalls = stalls  //摊位对象
@@ -168,7 +167,7 @@ export class ShopFormComponent implements OnInit {
         // console.log(markets)
         this.markets = markets
         this.loadStalls();
-        if(this.shopId>0){
+        if (this.shopId > 0) {
           this.loadElectronicScale()
         }
         this.changeDetectorRef.markForCheck()
@@ -196,7 +195,7 @@ export class ShopFormComponent implements OnInit {
     this.shop.funcType = this.shop.funcType ? this.shop.funcType : stall.funcType
   }
 
-  onScaleSelected(scale:any) {
+  onScaleSelected(scale: any) {
     this.selectedScale = new ElectronicScale()
     this.selectedScale.id = scale.id
     this.selectedScale.lastUpdateUser = scale.last_update_user
@@ -285,7 +284,7 @@ export class ShopFormComponent implements OnInit {
   allotElectronicScale() {
     // console.log(this.selectedScale)
     this.selectedScale.shopId = this.shopId;
-    this.electronicScaleService.bind(this.selectedScale.id, this.selectedScale).subscribe(()=>{
+    this.electronicScaleService.bind(this.selectedScale.id, this.selectedScale).subscribe(() => {
       this.loadElectronicScale()
     })
   }
@@ -371,18 +370,19 @@ export class ShopFormComponent implements OnInit {
     )
   }
 
-  saveChangeStall(){
-     this.shopService.changeStall(this.shopId,this.shop.stallId).subscribe(
-       (res)=>{
-         if(res){
-           this.stallService.get(this.shop.stallId).subscribe(
-             (resStall)=>{
-               this.stallName = resStall.name
-               this.stallChange = false
-             }
-           )
-         }
-       })
+  changeStall() {
+    this.shopService.changeStall(this.shopId, this.shop.stallId).subscribe(
+      (res) => {
+        if (res) {
+          this.stallService.get(this.shop.stallId).subscribe(
+            (resStall) => {
+              this.stallName = resStall.name
+              this.stallChange = false
+              this.changeDetectorRef.markForCheck()
+            }
+          )
+        }
+      })
   }
 }
 

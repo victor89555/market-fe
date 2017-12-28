@@ -1,6 +1,6 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import { ContractService } from "../shared/contract.service";
-import { Contract } from "../shared/contract.model";
+import {ChangeDetectorRef, Component, EventEmitter, OnInit} from '@angular/core';
+import {ContractService} from "../shared/contract.service";
+import {Contract} from "../shared/contract.model";
 import {MarketService} from "../../market/shared/market.service";
 import {ShopService} from "../../shop/shared/shop.service";
 import {Market} from "../../market/shared/market.model";
@@ -14,7 +14,8 @@ import {dicts} from "../../../thurder-ng/models/dictionary";
 })
 export class ContractViewComponent implements OnInit {
 
-  context: {id: number}
+  context: { id: number }
+  dismiss: EventEmitter<Contract>
   contract: Contract = new Contract()
   attachments: any[] = []
   market: Market = new Market()
@@ -22,10 +23,12 @@ export class ContractViewComponent implements OnInit {
   shopStatus = dicts["SHOP_STATUS"]
   hireEquipments: string = ""
   equipmentName = dicts["EQUIPMENT_NAME"]
+
   constructor(private contractService: ContractService,
               private changeDetectorRef: ChangeDetectorRef,
               private marketService: MarketService,
-              private shopService: ShopService) { }
+              private shopService: ShopService) {
+  }
 
   ngOnInit() {
     this.loadContractInfo()
@@ -75,6 +78,10 @@ export class ContractViewComponent implements OnInit {
       arr.push(this.equipmentName[item])
     })
     this.hireEquipments = arr.join(", ")
+  }
+
+  cancel() {
+    this.dismiss.error(this.contract)
   }
 
 }

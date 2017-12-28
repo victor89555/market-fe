@@ -104,13 +104,12 @@
               <div class="input-group-addon" (click)="autoComplete1.toggle($event)">
                 <i class="glyphicon glyphicon-menu-down"></i>
               </div>
-              <div class="input-group-addon btn btn-info" (click)="saveChangeStall();" *ngIf="shopId!=0">
+              <div class="input-group-addon btn btn-info" (click)="changeStall();" *ngIf="shopId!=0">
                  保存
               </div>
               <div class="input-group-addon btn btn-warning" (click)="stallChange=!stallChange" *ngIf="shopId!=0">
                  取消
               </div>
-
             </div>
             <div class="input-group" *ngIf="!stallChange">
               <input type="text" class="form-control"  [value]="stallName" disabled/>

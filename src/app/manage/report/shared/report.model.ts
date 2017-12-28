@@ -1,6 +1,6 @@
 export class MounthReport {
   days: any[]
-  shops: Shop[]
+  shopAmounts: Shop[]
 }
 
 export class Shop {
