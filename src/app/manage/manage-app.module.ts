@@ -7,7 +7,7 @@ import {ROUTER_CONFIG} from "./manage-app.routes";
 import {MenuService} from "./menu.service";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 // import {NgxDatatableModule} from "@swimlane/ngx-datatable/src";  // ng build打包时需要使用这个路径
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {OrderFormComponent} from "./order/order-form/order-form.component";
 import {OrderListComponent} from "./order/order-list/order-list.component";
 import {OrderService} from "./order/shared/order.service";
@@ -54,6 +54,7 @@ import {ReportService} from "./report/shared/report.service";
 @NgModule({
   imports: [
     FormsModule,
+    ReactiveFormsModule,
     SharedModule,
     ThurderNGModule,
     RouterModule.forChild(ROUTER_CONFIG),

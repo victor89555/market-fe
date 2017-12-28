@@ -44,8 +44,8 @@ export class ShopFormComponent implements OnInit {
               private dialogService: DialogService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private route: ActivatedRoute,
-              private router: Router) {
-  }
+              private router: Router
+  ) {}
 
   dismiss: EventEmitter<Shop>
 
@@ -55,19 +55,27 @@ export class ShopFormComponent implements OnInit {
     newShop: true
   }
   shop: Shop = new Shop() //商户信息
-  operatorName: string = "请选择经营者"
+  operatorName : string = "请选择经营者"
   operators: Operator[] //操作者列表
   markets: Market[] //市场列表
   market: Market //市场
   stalls: Stall[] //摊位列表
   stallName: string = "请选择摊位"
-  stallChange: boolean
+  stallChange:boolean
   contracts: Contract[] //合同列表
   allotableElectronicScales = [] //可分配的电子秤列表
   allotedElectronicScales = [] //已分配的电子秤列表
   selectedScale: ElectronicScale
   shopStatus = dicts["SHOP_STATUS"]
 
+  shopForm = {
+    shopName: true,
+    marketId: true,
+    operatorId: true,
+    stallId: true,
+    funcType: true,
+    status: true
+  }
 
   ngOnInit(): void {
     console.log('ModalTestComponent init....');
@@ -78,7 +86,7 @@ export class ShopFormComponent implements OnInit {
     // 判断是添加商户还是修改商户
     if (this.shopId > 0) {
       this.initEditShop();
-    } else {
+    }else{
       this.initAddShop();
     }
     // 用于判断保存与修改摊位的展示
@@ -141,7 +149,7 @@ export class ShopFormComponent implements OnInit {
   }
 
   loadStalls() {  //摊位列表
-    this.stallService.getUsableStalls(this.shop.marketId).subscribe(
+    this.stallService.getStalls(this.shop.marketId).subscribe(
       (stalls) => {
         // console.log(stalls)
         this.stalls = stalls  //摊位对象
@@ -167,7 +175,7 @@ export class ShopFormComponent implements OnInit {
         // console.log(markets)
         this.markets = markets
         this.loadStalls();
-        if (this.shopId > 0) {
+        if(this.shopId>0){
           this.loadElectronicScale()
         }
         this.changeDetectorRef.markForCheck()
@@ -178,24 +186,27 @@ export class ShopFormComponent implements OnInit {
 
   onMarketChange(marketId) {
     this.shop.marketId = marketId
+    this.validateMarketId()
     this.loadStalls();
   }
 
   onFuncTypeChange(funcType) {
     this.shop.funcType = funcType
-    // console.log(this.shop)
+    this.validateFuncType()
   }
 
   onStatusChange(status) {
     this.shop.status = status
+    this.validateStatus()
   }
 
   onStallNameChange(stall: Stall) { // 摊位内容改变时调用
     this.shop.stallId = stall.id
     this.shop.funcType = this.shop.funcType ? this.shop.funcType : stall.funcType
+    this.validateStallId()
   }
 
-  onScaleSelected(scale: any) {
+  onScaleSelected(scale:any) {
     this.selectedScale = new ElectronicScale()
     this.selectedScale.id = scale.id
     this.selectedScale.lastUpdateUser = scale.last_update_user
@@ -212,6 +223,7 @@ export class ShopFormComponent implements OnInit {
 
   onOperatorNameChange = (operator: Operator) => { // 经营者内容改变时调用
     this.shop.operatorId = operator.id
+    this.validateOperatorId()
   }
 
   addOperator() { //添加经营者
@@ -226,6 +238,7 @@ export class ShopFormComponent implements OnInit {
       this.operatorName = operator.name + "（" + operator.mobile + "）"
       this.shop.operatorId = operator.id
       this.loadOperators()
+      this.validateOperatorId()
     }, error => {
 
     })
@@ -284,7 +297,7 @@ export class ShopFormComponent implements OnInit {
   allotElectronicScale() {
     // console.log(this.selectedScale)
     this.selectedScale.shopId = this.shopId;
-    this.electronicScaleService.bind(this.selectedScale.id, this.selectedScale).subscribe(() => {
+    this.electronicScaleService.bind(this.selectedScale.id, this.selectedScale).subscribe(()=>{
       this.loadElectronicScale()
     })
   }
@@ -298,28 +311,66 @@ export class ShopFormComponent implements OnInit {
 
   //添加商户
   addShop() {
-    this.validateShop()
-    this.shopService.add(this.shop).subscribe(
-      (shop) => {
-        this.router.navigate(['/manage/shops']);
-      }
-    )
+    if(this.validateShop()) {
+      this.shopService.add(this.shop).subscribe(
+        (shop) => {
+          this.router.navigate(['/manage/shops']);
+        }
+      )
+    }
   }
 
   //编辑保存商户
   editShop() {
-    this.validateShop()
-    this.shopService.save(this.shopId, this.shop).subscribe(
-      (shop) => {
-        this.router.navigate(['/manage/shops']);
-      }
-    )
+    if(this.validateShop()) {
+      this.shopService.save(this.shopId, this.shop).subscribe(
+        (shop) => {
+          this.router.navigate(['/manage/shops']);
+        }
+      )
+    }
   }
 
   //验证商户表单
   validateShop() {
     console.log(this.shop)
+    //验证商户名称
+    this.validateShopName()
+    //验证市场Id
+    this.validateMarketId()
+    //验证经营者
+    this.validateOperatorId()
+    //验证摊位
+    this.validateStallId()
+    //验证功能区
+    this.validateFuncType()
+    //验证状态
+    this.validateStatus()
 
+    return this.shopForm.shopName &&
+      this.shopForm.marketId &&
+      this.shopForm.operatorId &&
+      this.shopForm.stallId &&
+      this.shopForm.funcType &&
+      this.shopForm.status
+  }
+  validateShopName(){
+    this.shopForm.shopName = this.shop.name ? true : false
+  }
+  validateMarketId(){
+    this.shopForm.marketId = this.shop.marketId ? true : false
+  }
+  validateOperatorId(){
+    this.shopForm.operatorId = this.shop.operatorId ? true : false
+  }
+  validateStallId(){
+    this.shopForm.stallId = this.shop.stallId ? true : false
+  }
+  validateFuncType(){
+    this.shopForm.funcType = this.shop.funcType ? true : false
+  }
+  validateStatus(){
+    this.shopForm.status = typeof this.shop.status == "number" ? true : false
   }
 
   cancel() {
@@ -370,19 +421,19 @@ export class ShopFormComponent implements OnInit {
     )
   }
 
-  changeStall() {
-    this.shopService.changeStall(this.shopId, this.shop.stallId).subscribe(
-      (res) => {
-        if (res) {
-          this.stallService.get(this.shop.stallId).subscribe(
-            (resStall) => {
-              this.stallName = resStall.name
-              this.stallChange = false
-              this.changeDetectorRef.markForCheck()
-            }
-          )
-        }
-      })
+  saveChangeStall(){
+     this.shopService.changeStall(this.shopId,this.shop.stallId).subscribe(
+       (res)=>{
+         if(res){
+           this.stallService.get(this.shop.stallId).subscribe(
+             (resStall)=>{
+               this.stallName = resStall.name
+               this.stallChange = false
+               this.validateStallId()
+             }
+           )
+         }
+       })
   }
 }
 
