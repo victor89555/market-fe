@@ -29,7 +29,7 @@ export class AppComponent {
 
   private applicationSetup() {
     this.rebirthNGConfig.rootContainer = this.viewContainerRef; // this.rebirthNGConfig.extend(REBIRTH_UI_I18N_ZHCN); i18n
-    this.rebirthNGConfig.datePicker = REBIRTH_NG_I18N_ZHCN.datePicker
+    this.rebirthNGConfig.datePicker = REBIRTH_NG_I18N_ZHCN.datePicker;
     this.apiSetup();
   }
 

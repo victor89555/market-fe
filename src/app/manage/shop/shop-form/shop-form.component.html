@@ -22,16 +22,17 @@
     </div>
   </div>
 
-  <form class="row" #forma="ngForm">
+  <form class="row">
     <div class="col-xs-6">
       <div class="form-horizontal">
         <!-- 商户名 -->
-        <div class="form-group">
+        <div class="form-group" [ngClass]="{'has-error': shopName.invalid && (shopName.dirty || shopName.touched)}">
           <label for="shopname" class="col-sm-2 control-label">商户名称：</label>
           <div class="col-sm-10">
-            <input #shopname="ngModel" type="text" class="form-control"
-                   name="shop" id="shopname" [(ngModel)]="shop.name" required/>
-            <div [hidden]="shopname.valid || shopname.pristine" class="alert alert-danger">请输入商户名称</div>
+            <input type="text" class="form-control" name="shopname" id="shopname" required [(ngModel)]="shop.name" #shopName="ngModel"/>
+            <div *ngIf="shopName.invalid && (shopName.dirty || shopName.touched)" class="text-error">
+              <div *ngIf="shopName.errors.required">商户名称不为空</div>
+            </div>
           </div>
         </div>
 
@@ -136,6 +137,7 @@
       </div>
     </div>
   </form>
+  
   <re-tabs *ngIf="!pageComponent.newShop">
     <re-tab id="tab1" title="电子秤">
       <ng-template reTabContent>
