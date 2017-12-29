@@ -41,11 +41,12 @@
           <label class="col-sm-2 control-label">经营者：</label>
           <div class="col-sm-10">
             <div class="input-group">
-              <input type="text" class="form-control"  [minLength]="0"
+              <input type="text" class="form-control"  [ngClass]="{'require-field':operatorRequired}"  [minLength]="0"
                      reAutoComplete  [dataSource]="operators" [value]="operatorName"
                      [formatter]="operatorNameFormatter"
                      (selectValueChange)="onOperatorNameChange($event)"
-                     #operatorList="autoComplete"/>
+                     #operatorList="autoComplete" #operatorN  (blur)="operatorsBlur(operatorN.value)"/>
+
               <div class="input-group-addon" (click)="operatorList.toggle($event)">
                 <i class="glyphicon glyphicon-menu-down"></i>
               </div>
@@ -53,6 +54,7 @@
                 <i class="glyphicon glyphicon-plus"></i>
               </div>
             </div>
+            <div *ngIf="operatorRequired" [ngClass]="{'require-field':operatorRequired}">请选择或增加经营者！</div>
           </div>
         </div>
         <!-- 功能区域 -->
@@ -137,7 +139,7 @@
       </div>
     </div>
   </form>
-  
+
   <re-tabs *ngIf="!pageComponent.newShop">
     <re-tab id="tab1" title="电子秤">
       <ng-template reTabContent>

@@ -68,7 +68,7 @@ export class ShopFormComponent implements OnInit {
   allotedElectronicScales = [] //已分配的电子秤列表
   selectedScale: ElectronicScale
   shopStatus = dicts["SHOP_STATUS"]
-
+  operatorRequired:boolean = false
 
   ngOnInit(): void {
     console.log('ModalTestComponent init....');
@@ -213,6 +213,7 @@ export class ShopFormComponent implements OnInit {
 
   onOperatorNameChange = (operator: Operator) => { // 经营者内容改变时调用
     this.shop.operatorId = operator.id
+    this.operatorRequired = false
   }
 
   addOperator() { //添加经营者
@@ -231,7 +232,6 @@ export class ShopFormComponent implements OnInit {
 
     })
   }
-
   stallNameFormatter = (stall: Stall) => { // 摊位输入显示数据
     return stall.name
   }
@@ -383,6 +383,12 @@ export class ShopFormComponent implements OnInit {
            )
          }
        })
+  }
+  operatorsBlur(value){
+    console.log(this.shop.operatorId)
+    if(this.shop.operatorId==null){
+      this.operatorRequired = true
+    }
   }
 }
 
