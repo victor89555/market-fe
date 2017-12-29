@@ -45,8 +45,7 @@ export class ShopFormComponent implements OnInit {
               private componentFactoryResolver: ComponentFactoryResolver,
               private route: ActivatedRoute,
               private router: Router
-  ) {
-  }
+  ) {}
 
   dismiss: EventEmitter<Shop>
 
@@ -68,7 +67,17 @@ export class ShopFormComponent implements OnInit {
   allotedElectronicScales = [] //已分配的电子秤列表
   selectedScale: ElectronicScale
   shopStatus = dicts["SHOP_STATUS"]
+
   operatorRequired:boolean = false
+
+  shopForm = {
+    shopName: true,
+    marketId: true,
+    operatorId: true,
+    stallId: true,
+    funcType: true,
+    status: true
+  }
 
   ngOnInit(): void {
     console.log('ModalTestComponent init....');
@@ -83,7 +92,7 @@ export class ShopFormComponent implements OnInit {
       this.initAddShop();
     }
     // 用于判断保存与修改摊位的展示
-    this.stallChange = this.shopId==0
+    this.stallChange = this.shopId == 0
   }
 
   // 初始化添加商户
@@ -142,7 +151,7 @@ export class ShopFormComponent implements OnInit {
   }
 
   loadStalls() {  //摊位列表
-    this.stallService.getStalls(this.shop.marketId).subscribe(
+    this.stallService.getUsableStalls(this.shop.marketId).subscribe(
       (stalls) => {
         // console.log(stalls)
         this.stalls = stalls  //摊位对象
@@ -179,21 +188,24 @@ export class ShopFormComponent implements OnInit {
 
   onMarketChange(marketId) {
     this.shop.marketId = marketId
+    this.validateMarketId()
     this.loadStalls();
   }
 
   onFuncTypeChange(funcType) {
     this.shop.funcType = funcType
-    // console.log(this.shop)
+    this.validateFuncType()
   }
 
   onStatusChange(status) {
     this.shop.status = status
+    this.validateStatus()
   }
 
   onStallNameChange(stall: Stall) { // 摊位内容改变时调用
     this.shop.stallId = stall.id
     this.shop.funcType = this.shop.funcType ? this.shop.funcType : stall.funcType
+    this.validateStallId()
   }
 
   onScaleSelected(scale:any) {
@@ -214,6 +226,7 @@ export class ShopFormComponent implements OnInit {
   onOperatorNameChange = (operator: Operator) => { // 经营者内容改变时调用
     this.shop.operatorId = operator.id
     this.operatorRequired = false
+    this.validateOperatorId()
   }
 
   addOperator() { //添加经营者
@@ -228,6 +241,7 @@ export class ShopFormComponent implements OnInit {
       this.operatorName = operator.name + "（" + operator.mobile + "）"
       this.shop.operatorId = operator.id
       this.loadOperators()
+      this.validateOperatorId()
     }, error => {
 
     })
@@ -299,28 +313,66 @@ export class ShopFormComponent implements OnInit {
 
   //添加商户
   addShop() {
-    this.validateShop()
-    this.shopService.add(this.shop).subscribe(
-      (shop) => {
-        this.router.navigate(['/manage/shops']);
-      }
-    )
+    if(this.validateShop()) {
+      this.shopService.add(this.shop).subscribe(
+        (shop) => {
+          this.router.navigate(['/manage/shops']);
+        }
+      )
+    }
   }
 
   //编辑保存商户
   editShop() {
-    this.validateShop()
-    this.shopService.save(this.shopId, this.shop).subscribe(
-      (shop) => {
-        this.router.navigate(['/manage/shops']);
-      }
-    )
+    if(this.validateShop()) {
+      this.shopService.save(this.shopId, this.shop).subscribe(
+        (shop) => {
+          this.router.navigate(['/manage/shops']);
+        }
+      )
+    }
   }
 
   //验证商户表单
   validateShop() {
     console.log(this.shop)
+    //验证商户名称
+    this.validateShopName()
+    //验证市场Id
+    this.validateMarketId()
+    //验证经营者
+    this.validateOperatorId()
+    //验证摊位
+    this.validateStallId()
+    //验证功能区
+    this.validateFuncType()
+    //验证状态
+    this.validateStatus()
 
+    return this.shopForm.shopName &&
+      this.shopForm.marketId &&
+      this.shopForm.operatorId &&
+      this.shopForm.stallId &&
+      this.shopForm.funcType &&
+      this.shopForm.status
+  }
+  validateShopName(){
+    this.shopForm.shopName = this.shop.name ? true : false
+  }
+  validateMarketId(){
+    this.shopForm.marketId = this.shop.marketId ? true : false
+  }
+  validateOperatorId(){
+    this.shopForm.operatorId = this.shop.operatorId ? true : false
+  }
+  validateStallId(){
+    this.shopForm.stallId = this.shop.stallId ? true : false
+  }
+  validateFuncType(){
+    this.shopForm.funcType = this.shop.funcType ? true : false
+  }
+  validateStatus(){
+    this.shopForm.status = typeof this.shop.status == "number" ? true : false
   }
 
   cancel() {
@@ -379,6 +431,7 @@ export class ShopFormComponent implements OnInit {
              (resStall)=>{
                this.stallName = resStall.name
                this.stallChange = false
+               this.validateStallId()
              }
            )
          }
