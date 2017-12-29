@@ -23,7 +23,7 @@ import {ContractFormComponent} from "../../contract/contract-form/contract-form.
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ElectronicScale} from "../../electronicScale/shared/electronicScale.model";
 import {OperatorFormComponent} from "../../operator/operator-form/operator-form.component";
-import {dicts} from "../../../thurder-ng/models/dictionary"
+import {dicts} from "../../../thurder-ng/models/dictionary";
 
 @Component({
   selector: 'app-shop-form',

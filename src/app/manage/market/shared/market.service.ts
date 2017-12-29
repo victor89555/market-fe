@@ -30,7 +30,7 @@ export class MarketService extends RebirthHttp {
 
   @GET("markets/:id")
   get(@Path("id") id: number): Observable<Market> {
-    return null
+    return null;
   }
 
   @POST('markets')

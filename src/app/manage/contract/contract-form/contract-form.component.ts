@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit} from "@angular/core";
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, ViewChild} from "@angular/core";
 import {Modal} from "rebirth-ng";
 import {Contract} from "../shared/contract.model";
 import {ContractService} from "../shared/contract.service";
@@ -7,6 +7,15 @@ import {MarketService} from "../../market/shared/market.service";
 import {Shop} from "../../shop/shared/shop.model";
 import {ShopService} from "../../shop/shared/shop.service";
 import {dicts} from "../../../thurder-ng/models/dictionary";
+import {
+  ReactiveFormsModule,
+  FormsModule,
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder
+} from '@angular/forms';
+import { CustomValidators } from 'ng2-validation';
 
 @Component({
   selector: 'app-contract-form',
@@ -25,6 +34,13 @@ export class ContractFormComponent implements Modal, OnInit {
   equipmentsLabel: string[]
   equipmentName = dicts["EQUIPMENT_NAME"]
   uploadUrl: string = "http://market-bus.djws.com.cn/api/contracts/attachments"
+  @ViewChild("contractForm")
+  contractForm:FormControl
+
+  //提交
+  onSubmitTest() {
+    console.log(this.contractForm)
+  }
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private contractService: ContractService,
