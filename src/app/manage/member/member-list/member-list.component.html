@@ -51,6 +51,7 @@
         [offset]="page?.pageNo-1"
         [rows]="page?.items"
         (page)='setPage($event)'
+        [messages]="{emptyMessage: '暂无会员数据！',totalMessage: '条',selectedMessage: '选中'}"
       >
         <ngx-datatable-column name="会员卡号" prop="card_no"></ngx-datatable-column>
         <ngx-datatable-column name="姓名" prop="name"></ngx-datatable-column>

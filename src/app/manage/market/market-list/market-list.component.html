@@ -52,6 +52,7 @@
         [offset]="page?.pageNo-1"
         [rows]="page?.items"
         (page)='setPage($event)'
+        [messages]="{emptyMessage: '暂无市场数据！',totalMessage: '条',selectedMessage: '选中'}"
       >
         <ngx-datatable-column name="市场名称" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="row">

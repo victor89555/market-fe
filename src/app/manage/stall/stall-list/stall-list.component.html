@@ -74,6 +74,7 @@
         [offset]="page?.pageNo-1"
         [rows]="page?.items"
         (page)='setPage($event)'
+        [messages]="{emptyMessage: '暂无摊位数据！',totalMessage: '条',selectedMessage: '选中'}"
       >
         <ngx-datatable-column name="摊位号" prop="name"></ngx-datatable-column>
         <ngx-datatable-column name="所属商户" prop="shop_name"></ngx-datatable-column>
