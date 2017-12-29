@@ -71,15 +71,35 @@ export class RoleFormComponent implements OnInit, Modal {
       return node.id
     })
     this.role.resourceIds = checkedResourceIds
-    this.roleService.save(this.role).subscribe(
-      (role) => {
-        this.dismiss.emit(role)
-      }
-    )
+    if(this.validateRole()){
+      this.roleService.save(this.role).subscribe(
+        (role) => {
+          this.dismiss.emit(role)
+        }
+      )
+    }
   }
 
   cancel() {
     this.dismiss.error(this.role)
   }
 
+  // 角色表单验证
+  roleForm = {
+    name : true,
+    code : true
+  }
+  validateName(){
+    this.roleForm.name = this.role.name ? true : false
+  }
+  validateCode(){
+    this.roleForm.code = this.role.code ? true : false
+  }
+
+  validateRole(){
+    this.validateName()
+    this.validateCode()
+    return this.roleForm.code &&
+        this.roleForm.name
+  }
 }

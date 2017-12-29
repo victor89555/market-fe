@@ -1,4 +1,4 @@
-export interface Operator {
+export class Operator {
   id: number
   idCardNo: string
   mobile: string

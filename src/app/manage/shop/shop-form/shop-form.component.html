@@ -46,7 +46,7 @@
                      reAutoComplete  [dataSource]="operators" [value]="operatorName"
                      [formatter]="operatorNameFormatter"
                      (selectValueChange)="onOperatorNameChange($event)"
-                     #operatorList="autoComplete" #operatorN  (blur)="operatorsBlur(operatorN.value)"/>
+                     #operatorList="autoComplete" #operatorN />
 
               <div class="input-group-addon" (click)="operatorList.toggle($event)">
                 <i class="glyphicon glyphicon-menu-down"></i>

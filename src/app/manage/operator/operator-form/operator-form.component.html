@@ -5,10 +5,11 @@
 </div>
 <div class="modal-body">
   <div class="form-horizontal">
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': !operatorForm.name}">
       <label class="col-sm-2 control-label">姓名:</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" [(ngModel)]="operator.name" />
+        <div class="text-error" *ngIf="!operatorForm.name">经营者姓名不为空</div>
       </div>
     </div>
     <div class="form-group">
@@ -17,22 +18,25 @@
         <input type="text" class="form-control" [(ngModel)]="operator.nickName" />
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': !operatorForm.sex}">
       <label class="col-sm-2 control-label">性别:</label>
       <div class="col-sm-10">
         <tg-dict-select dictName="SEX" [(ngModel)]="operator.sex"></tg-dict-select>
+        <div class="text-error" *ngIf="!operatorForm.sex">经营者性别不为空</div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': !operatorForm.idCardNo}">
       <label class="col-sm-2 control-label">身份证:</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" [(ngModel)]="operator.idCardNo" />
+        <div class="text-error" *ngIf="!operatorForm.idCardNo">经营者身份证号不为空</div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': !operatorForm.mobile}">
       <label class="col-sm-2 control-label">手机号:</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" [(ngModel)]="operator.mobile" />
+        <div class="text-error" *ngIf="!operatorForm.mobile">经营者手机号不为空</div>
       </div>
     </div>
     <div class="form-group">

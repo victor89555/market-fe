@@ -28,22 +28,57 @@ export class MemberFormComponent implements OnInit, Modal {
     )
   }
   save() {
-    this.memberService.save(this.member).subscribe(
-      (member) => {
-        this.dismiss.emit(member);
-      }
-    )
+    if(this.validateMember()){
+      this.memberService.save(this.member).subscribe(
+        (member) => {
+          this.dismiss.emit(member);
+        }
+      )
+    }
   }
   update() {
-    console.log(this.member);
-    this.memberService.update(this.context.id, this.member).subscribe(
-      (member) => {
-        this.dismiss.emit(member);
-      }
-    )
+    if(this.validateMember()){
+      console.log(this.member);
+      this.memberService.update(this.context.id, this.member).subscribe(
+        (member) => {
+          this.dismiss.emit(member);
+        }
+      )
+    }
   }
   cancel() {
     this.dismiss.error(this.member);
   }
 
+  //页面验证
+  memberForm = {
+    cardNo:true,
+    name : true,
+    mobile: true,
+    idCardNo: true
+  }
+
+  validateCardNo(){
+    this.memberForm.cardNo = this.member.cardNo ? true : false
+  }
+  validateName(){
+    this.memberForm.name = this.member.name ? true : false
+  }
+  validateMobile(){
+    this.memberForm.mobile = this.member.mobile ? true : false
+  }
+  validateIdCardNo(){
+    this.memberForm.idCardNo = this.member.idCardNo ? true : false
+  }
+
+  validateMember(){
+    this.validateCardNo()
+    this.validateIdCardNo()
+    this.validateMobile()
+    this.validateName()
+    return this.memberForm.cardNo &&
+        this.memberForm.name &&
+        this.memberForm.mobile &&
+        this.memberForm.idCardNo
+  }
 }

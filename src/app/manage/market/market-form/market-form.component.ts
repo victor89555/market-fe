@@ -36,21 +36,26 @@ export class MarketFormComponent implements Modal, OnInit {
   }
 
   save() {
-    this.marketService.save(this.market).subscribe(
-      (market) => {
-        this.dismiss.emit(market);
-      }
-    )
+    if( this.validatemarket()){
+      this.marketService.save(this.market).subscribe(
+        (market) => {
+          this.dismiss.emit(market);
+        }
+      )
+    }
+
   }
 
   update() {
-    this.market.id = this.context.id;
-    console.log(this.market);
-    this.marketService.update(this.context.id, this.market).subscribe(
-      (market) => {
-        this.dismiss.emit(market);
-      }
-    )
+    if( this.validatemarket()) {
+      this.market.id = this.context.id;
+      console.log(this.market);
+      this.marketService.update(this.context.id, this.market).subscribe(
+        (market) => {
+          this.dismiss.emit(market);
+        }
+      )
+    }
   }
 
   cancel() {
@@ -63,6 +68,69 @@ export class MarketFormComponent implements Modal, OnInit {
 
   onCityChange(city) {
     this.market.cityCode = city
+  }
+
+  marketForm = {
+    marketName: true,
+    marketCode: true,
+    stallLimit: true,
+    stallNum: true,
+    storeNum: true,
+    enterStoreNum:true,
+    provinceCode: true,
+    cityCode: true,
+    addr:true
+  }
+
+  //验证市场表单
+  validatemarket() {
+    console.log(this.market)
+    this.validateMarketName()
+    this.validateMarketCode()
+    this.validateCityCode()
+    this.validateProvinceCode()
+    this.validateStallLimit()
+    this.validateStallNum()
+    this.validateStoreNum()
+    this.validateEnterStoreNum()
+    this.validateAddr()
+    return this.marketForm.marketName &&
+      this.marketForm.stallLimit &&
+      this.marketForm.stallNum &&
+      this.marketForm.storeNum &&
+      this.marketForm.provinceCode &&
+      this.marketForm.cityCode &&
+      this.marketForm.enterStoreNum &&
+      this.marketForm.marketCode&&
+      this.marketForm.addr
+
+  }
+  validateMarketName(){
+    this.marketForm.marketName = this.market.name ? true : false
+  }
+  validateMarketCode(){
+    this.marketForm.marketCode = this.market.code ? true : false
+  }
+  validateStallLimit(){
+    this.marketForm.stallLimit = this.market.stallLimit ? true : false
+  }
+  validateStallNum(){
+    this.marketForm.stallNum = this.market.stallNum ? true : false
+  }
+  validateStoreNum(){
+    this.marketForm.storeNum = this.market.storeNum ? true : false
+  }
+  validateEnterStoreNum(){
+    this.marketForm.enterStoreNum = this.market.enterStoreNum ? true : false
+  }
+  validateProvinceCode(){
+    this.marketForm.provinceCode = this.market.provinceCode ? true : false
+  }
+  validateCityCode(){
+    this.marketForm.cityCode = this.market.cityCode ? true : false
+  }
+  validateAddr(){
+    this.marketForm.addr = this.market.addr ? true : false
   }
 
 }

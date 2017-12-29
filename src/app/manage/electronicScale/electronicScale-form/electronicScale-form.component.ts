@@ -16,7 +16,7 @@ export class ElectronicScaleFormComponent implements Modal, OnInit {
   context: { id: number, add: boolean };
   dismiss: EventEmitter<ElectronicScale>;
 
-  electronicScale: any = {}
+  electronicScale: ElectronicScale = new ElectronicScale()
   markets: Market[]
   marketId: number = null
   marketName: string
@@ -94,29 +94,68 @@ export class ElectronicScaleFormComponent implements Modal, OnInit {
   }
 
   save() {
-    this.electronicScale.shopId = this.shopId
-    this.electronicScale.marketId = this.marketId
-    this.electronicScaleService.save(this.electronicScale).subscribe(
-      (electronicScale) => {
-        this.dismiss.emit(electronicScale);
-      }
-    )
+    if (this.validateElectronic()) {
+      this.electronicScale.shopId = this.shopId
+      this.electronicScale.marketId = this.marketId
+      this.electronicScaleService.save(this.electronicScale).subscribe(
+        (electronicScale) => {
+          this.dismiss.emit(electronicScale);
+        }
+      )
+    }
   }
 
   update() {
-    this.electronicScale.shopId = this.shopId
-    this.electronicScale.marketId = this.marketId
-    this.electronicScale.id = this.context.id;
-    console.log(this.electronicScale);
-    this.electronicScaleService.update(this.context.id, this.electronicScale).subscribe(
-      (electronicScale) => {
-        this.dismiss.emit(electronicScale);
-      }
-    )
+    if (this.validateElectronic()) {
+      this.electronicScale.shopId = this.shopId
+      this.electronicScale.marketId = this.marketId
+      this.electronicScale.id = this.context.id;
+      console.log(this.electronicScale);
+      this.electronicScaleService.update(this.context.id, this.electronicScale).subscribe(
+        (electronicScale) => {
+          this.dismiss.emit(electronicScale);
+        }
+      )
+    }
   }
 
   cancel() {
     this.dismiss.error(this.electronicScale);
+  }
+
+  // 检验电子秤
+  elecScaleForm = {
+    sequenceNo: true,
+    shopId: true,
+    marketId: true,
+    status: true
+  }
+
+  validateElectronic() {
+    this.validateElecSequenceNo()
+    this.validateMarketId()
+    this.validateShopId()
+    this.validateStatus()
+    return this.elecScaleForm.status &&
+      this.elecScaleForm.marketId &&
+      this.elecScaleForm.shopId &&
+      this.elecScaleForm.sequenceNo
+  }
+
+  validateElecSequenceNo() {
+    this.elecScaleForm.sequenceNo = this.electronicScale.sequenceNo ? true : false
+  }
+
+  validateShopId() {
+    this.elecScaleForm.shopId = this.electronicScale.shopId ? true : false
+  }
+
+  validateMarketId() {
+    this.elecScaleForm.marketId = this.electronicScale.marketId ? true : false
+  }
+
+  validateStatus() {
+    this.elecScaleForm.status = this.electronicScale.status ? true : false
   }
 }
 

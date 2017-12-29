@@ -11,7 +11,7 @@ export class OperatorFormComponent implements Modal, OnInit {
   context: { id: number,add:boolean };
   dismiss: EventEmitter<Operator>;
 
-  operator: any = {}
+  operator: Operator = new Operator();
 
   constructor(private operatorService: OperatorService) {
   }
@@ -30,25 +30,58 @@ export class OperatorFormComponent implements Modal, OnInit {
     )
   }
   save() {
-    console.log("save")
-    this.operatorService.save(this.operator).subscribe(
-      (operator) => {
-        this.dismiss.emit(operator);
-      }
-    )
+    if(this.validateOperator()){
+      console.log("save")
+      this.operatorService.save(this.operator).subscribe(
+        (operator) => {
+          this.dismiss.emit(operator);
+        }
+      )
+    }
   }
 
   update() {
-    console.log(this.operator);
-    this.operatorService.update(this.context.id, this.operator).subscribe(
-      (operator) => {
-        this.dismiss.emit(operator);
-      }
-    )
+    if(this.validateOperator()){
+      console.log(this.operator);
+      this.operatorService.update(this.context.id, this.operator).subscribe(
+        (operator) => {
+          this.dismiss.emit(operator);
+        }
+      )
+    }
   }
   cancel() {
     this.dismiss.error(this.operator);
   }
 
+  operatorForm = {
+    name:true,
+    sex:true,
+    idCardNo:true,
+    mobile:true
+  }
+
+  validateOperator() {
+    this.validateOperatorIdCarNo()
+    this.validateOperatorMobile()
+    this.validateOperatorName()
+    this.validateOperatorSex()
+    return this.operatorForm.mobile &&
+        this.operatorForm.idCardNo &&
+        this.operatorForm.sex &&
+        this.operatorForm.name
+  }
+  validateOperatorName(){
+    this.operatorForm.name = this.operator.name ? true : false
+  }
+  validateOperatorSex(){
+    this.operatorForm.sex = this.operator.sex ? true : false
+  }
+  validateOperatorIdCarNo(){
+    this.operatorForm.idCardNo = this.operator.idCardNo ? true : false
+  }
+  validateOperatorMobile(){
+    this.operatorForm.mobile = this.operator.tel ? true : false
+  }
 }
 

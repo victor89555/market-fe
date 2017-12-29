@@ -5,40 +5,46 @@
 </div>
 <div class="modal-body">
   <div class="form-horizontal">
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': !marketForm.marketName}">
       <label class="col-sm-3 control-label">市场名:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="market.name"/>
+        <div class="text-error" *ngIf="!marketForm.marketName">市场名称不为空</div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': !marketForm.marketCode}">
       <label class="col-sm-3 control-label">市场代码:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="market.code"/>
+        <div class="text-error" *ngIf="!marketForm.marketCode">市场代码不为空</div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': !marketForm.stallLimit}">
       <label class="col-sm-3 control-label">摊位总数:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="market.stallLimit"/>
+        <div class="text-error" *ngIf="!marketForm.stallLimit">摊位总数不为空</div>
       </div>
     </div>
-    <div class="form-group" *ngIf="!context.add">
+    <div class="form-group" *ngIf="!context.add" [ngClass]="{'has-error': !marketForm.stallNum}">
       <label class="col-sm-3 control-label">已入驻摊位数:</label>
       <div class="col-sm-9">
         <input type="text" disabled class="form-control" [(ngModel)]="market.stallNum"/>
+        <div class="text-error" *ngIf="!marketForm.stallNum">已入驻摊位不为空</div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': !marketForm.storeNum}">
       <label class="col-sm-3 control-label">店铺总数:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="market.storeNum"/>
+        <div class="text-error" *ngIf="!marketForm.storeNum">店铺总数不为空</div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': !marketForm.enterStoreNum}">
       <label class="col-sm-3 control-label">已入驻店铺数:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="market.enterStoreNum"/>
+        <div class="text-error" *ngIf="!marketForm.enterStoreNum">已入驻店铺数不为空</div>
       </div>
     </div>
     <div class="form-group">
@@ -55,13 +61,17 @@
           </select>-->
           <tg-area-select (proviceChange)="onProvinceChange($event)" (cityChange)="onCityChange($event)"
                           [(ngModel)]="marketArea"></tg-area-select>
+          <div class="text-error" *ngIf="!marketForm.provinceCode">市场省份不为空</div>
+          <div class="text-error" *ngIf="!marketForm.cityCode">市场市区不为空</div>
         </div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': !marketForm.addr}">
       <label class="col-sm-3 control-label">地址:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="market.addr"/>
+        <div class="text-error" *ngIf="!marketForm.addr">市场市区不为空</div>
+
       </div>
     </div>
   </div>

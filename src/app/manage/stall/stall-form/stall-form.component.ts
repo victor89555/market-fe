@@ -64,24 +64,66 @@ export class StallFormComponent implements Modal, OnInit {
   }
   save() {
     this.stall.marketId = this.marketId
-    this.stallService.save(this.stall).subscribe(
-      (stall) => {
-        this.dismiss.emit(stall);
-      }
-    )
+    if(this.validateStall()){
+      this.stallService.save(this.stall).subscribe(
+        (stall) => {
+          this.dismiss.emit(stall);
+        }
+      )
+    }
   }
   update() {
     this.stall.id = this.context.id;
     this.stall.marketId = this.marketId
-    console.log(this.stall);
-    this.stallService.update(this.context.id,this.stall).subscribe(
-      (stall) => {
-        this.dismiss.emit(this.stall);
-      }
-    )
+    if(this.validateStall()){
+      console.log(this.stall);
+      this.stallService.update(this.context.id,this.stall).subscribe(
+        (stall) => {
+          this.dismiss.emit(this.stall);
+        }
+      )
+    }
   }
   cancel() {
     this.dismiss.error(this.stall);
+  }
+
+  //摊位验证
+  stallForm = {
+    marketId: true,
+    name :true,
+    funcType : true,
+    area : true,
+    status:true
+  }
+
+  validateMarketId(){
+    this.stallForm.marketId = this.stall.marketId ? true : false
+  }
+  validateName(){
+    this.stallForm.name = this.stall.name ? true : false
+  }
+  validateFuncType(){
+    this.stallForm.funcType = this.stall.funcType ? true : false
+  }
+  validateArea(){
+    this.stallForm.area = this.stall.area ? true : false
+  }
+  validateStatus(){
+    this.stallForm.status = this.stall.status ? true : false
+  }
+
+  validateStall(){
+    this.validateName()
+    this.validateStatus()
+    this.validateMarketId()
+    this.validateArea()
+    this.validateFuncType()
+    return this.stallForm.status &&
+        this.stallForm.area &&
+        this.stallForm.funcType &&
+        this.stallForm.name &&
+        this.stallForm.marketId
   }
 }
 

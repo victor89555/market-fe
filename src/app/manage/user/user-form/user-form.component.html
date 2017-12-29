@@ -5,10 +5,11 @@
 </div>
 <div class="modal-body">
   <div class="form-horizontal">
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': !userForm.name}">
       <label class="col-sm-3 control-label">姓名:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="user.name" />
+        <div class="text-error" *ngIf="!userForm.name">用户姓名不为空</div>
       </div>
     </div>
     <div class="form-group">
@@ -17,10 +18,12 @@
         <input type="text" class="form-control" [(ngModel)]="user.nick_name" />
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': !userForm.mobile}">
       <label class="col-sm-3 control-label">手机号:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="user.mobile" />
+        <div class="text-error" *ngIf="!userForm.mobile">手机号不为空</div>
+
       </div>
     </div>
     <div class="form-group">
@@ -35,22 +38,25 @@
         <input type="text" class="form-control" [(ngModel)]="user.email" />
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': !userForm.manager}">
       <label class="col-sm-3 control-label">是否管理员:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="user.manager" />
+        <div class="text-error" *ngIf="!userForm.manager">请选择是否管理员！</div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': !userForm.sex}">
       <label class="col-sm-3 control-label">性别:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="user.sex" />
+        <div class="text-error" *ngIf="!userForm.sex">性别不为空</div>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" [ngClass]="{'has-error': !userForm.enable}">
       <label class="col-sm-3 control-label">是否可用:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="user.enable" />
+        <div class="text-error" *ngIf="!userForm.enable">请选择是否可用！</div>
       </div>
     </div>
     <div class="form-group">
