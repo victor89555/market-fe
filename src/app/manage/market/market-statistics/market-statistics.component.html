@@ -1,3 +1,37 @@
 <div id="page1" class="page-content">
-  <div echarts [options]="options" [merge]="updateOptions" class="demo-chart"></div>
+  <form class="form-inline find-condition" >
+    <div class="form-group">
+      <select type="text" class="form-control" name="market" [(ngModel)]="queryMarket.marketId">
+        <option [value]="null">-市场-</option>
+        <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <input class="form-control" placeholder="开始时间"
+               name="dp" [(ngModel)]="queryMarket.beginTime" reDatePicker #datePicker1="datePicker">
+        <div class="input-group-addon" (click)="datePicker1.toggle($event)">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <input class="form-control" placeholder="结束时间"
+               name="dp" [(ngModel)]="queryMarket.endTime" reDatePicker #datePicker2="datePicker">
+        <div class="input-group-addon" (click)="datePicker2.toggle($event)">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="query(true)">查询</button>
+    <button type="submit" class="btn btn-primary" (click)="reset()">重置</button>
+  </form>
+
+  <div echarts [options]="businessOption" [loading]="isLoading" [merge]="businessOptionMerge"  class="demo-chart"></div>
+  <!--<button (click)="getAsyncData()">获取水产类</button>-->
+  <p class="cutOff-rule"></p>
+  <div echarts [options]="greensOption" [merge]="greensOptionMerge" class="demo-chart"></div>
+  <p class="cutOff-rule"></p>
+  <div echarts [options]="shopOption" class="demo-chart"></div>
 </div>

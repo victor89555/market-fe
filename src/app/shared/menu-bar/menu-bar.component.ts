@@ -62,7 +62,7 @@ export class MenuBarComponent implements OnInit {
       children: [
         {title: "会员管理", link: "/manage/members", active: false, icon: "profile"},
         {title: "交易信息查询", link: "/manage/orders", active: false, icon: "pages"},
-        {title: "交易情况统计", link: "/manage/orderStatistics", active: false, icon: "plot"},
+        {title: "交易情况统计", link: "/manage/marketStatistics", active: false, icon: "plot"},
         {title: "月度报表", link: "/manage/monthReport", active: false, icon: "order"},
         {title: "检测信息溯源", link: "JavaScript:;", active: false, icon: "text"}
       ]

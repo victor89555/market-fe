@@ -31,7 +31,7 @@ export const ROUTER_CONFIG: Routes = [
       {path: 'orders', component: OrderListComponent},
       {path: 'orderStatistics', component: OrderStatisticsComponent},
       {path: 'markets', component: MarketListComponent},
-      {path: 'markets/statistics/:marketId', component: MarketStatisticsComponent},
+      {path: 'marketStatistics', component: MarketStatisticsComponent},
       {path: 'stalls', component: StallListComponent},
       {path: 'stalls/:marketId', component: StallListComponent},
       {path: 'stalls/history/:stallId', component: StallHistoryComponent},

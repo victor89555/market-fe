@@ -47,4 +47,10 @@ export class MarketService extends RebirthHttp {
   delete(@Path("id") id: number): Observable<any> {
     return null;
   }
+
+ //时间维度获取市场营业额统计
+  @GET("reports/market")
+  getMarketStatistics(@Query("beginTime") beginTime = "",@Query("endTime") endTime = "",@Query("dimension") dimension:number): Observable<any> {
+    return null;
+  }
 }
