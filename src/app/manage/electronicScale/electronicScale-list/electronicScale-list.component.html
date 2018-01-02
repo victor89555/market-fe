@@ -36,7 +36,7 @@
             <input type="text" class="form-control" name="language"  [minLength]="0"
                    reAutoComplete  [dataSource]="shops"
                    [itemTemplate]="shopItemTemplate" [noResultItemTemplate]="noResultItemTemplate"
-                   [formatter]="shopNameFormatter"  placeholder="商户"
+                   [formatter]="shopNameFormatter"  placeholder="-请选择商户-"
                    (selectValueChange)="onShopNameChange($event)"
                    #autoComplete1="autoComplete"/>
             <div class="input-group-addon" (click)="autoComplete1.toggle($event)">

@@ -47,6 +47,10 @@ export class ElectronicScaleListComponent implements OnInit {
     this.shopService.getAll(null).subscribe(
       (shops) => {
         this.shops = shops
+        // 添加一个空的选项
+        let emptyShop = new Shop()
+        emptyShop.name = '-请选择商户-'
+        this.shops.unshift(emptyShop)
       }
     )
   }
