@@ -15,10 +15,8 @@ export class MarketStatisticsComponent implements OnInit {
   greensOption:any
   greensOptionMerge:any
   shopOption:any
-  shopOptionMerge:any
   isLoading:boolean = false
   markets: Market[]
-  updateOptions:any
   queryMarket={'marketId':null,'beginTime':"", 'endTime': ""}
   dateFormat: any = {"beginDate": "", "endDate": ""}
   sale:any  // 市场营业额
@@ -28,9 +26,19 @@ export class MarketStatisticsComponent implements OnInit {
   ngOnInit() {
     /*this.getBusinessStatistics()
     this.getGreensSellStatistic()
-    this.getShopSellStatistic()
-    this.getAllMarkets()*/
-    this.query(false)
+    this.getShopSellStatistic()*/
+    this.getAllMarkets()
+  }
+
+// 获取所有市场
+  getAllMarkets(){
+    this.marketService.getAll().subscribe(
+      (markets)=>{
+        this.markets = markets;
+        this.queryMarket.marketId = markets[0].id
+        this.query(false)
+      }
+    )
   }
 
   query(second: boolean) {
@@ -38,22 +46,36 @@ export class MarketStatisticsComponent implements OnInit {
       this.dateFormat.beginDate = this.formatDateTime(this.queryMarket.beginTime)
       this.dateFormat.endDate = this.formatDateTime(this.queryMarket.endTime)
       if (this.dateFormat.beginDate == "1970-01-01") {
-        this.dateFormat.beginDate = null
-        this.dateFormat.endDate = null
+        this.dateFormat.beginDate='2017-01-01'
+        this.dateFormat.endDate='2018-01-01'
       }
     }else {
-      this.dateFormat.beginDate='2017-01-01'
+      this.dateFormat.beginDate='2017-12-01'
       this.dateFormat.endDate='2018-01-01'
     }
     this.getBusinessStatistics()
     this.getGreensSellStatistic()
     this.getShopSellStatistic()
-    this.getAllMarkets()
   }
+ /* query(second: boolean) {
+    this.queryMarket.endTime = this.formatDateTime(this.queryMarket.endTime)
+    this.queryMarket.endTime = this.formatDateTime(this.queryMarket.endTime)
+    if (this.queryMarket.beginTime == "1970-01-01") {
+      let date = new Date()
+      let year = date.getFullYear()
+      let month = date.getMonth()+1
+      let today = date.getDate()
+      this.queryMarket.beginTime=`${year}-${month}-01`
+      this.queryMarket.endTime=`${year}-${month}-${today}`
+    }
+    this.getBusinessStatistics()
+    this.getGreensSellStatistic()
+    this.getShopSellStatistic()
+  }*/
 
 // 获取营业额统计
   getBusinessStatistics(){
-    this.marketService.getMarketStatistics(this.dateFormat.beginDate,this.dateFormat.endDate,2)
+    this.marketService.getMarketStatistics(this.queryMarket.marketId,this.dateFormat.beginDate,this.dateFormat.endDate,2)
       .subscribe((sale)=>{
         this.sale = sale
         for(let i = 0;i<this.sale.length;i++){
@@ -141,7 +163,7 @@ export class MarketStatisticsComponent implements OnInit {
 
 //获取菜品销量统计
   getGreensSellStatistic(){
-    this.marketService.getMarketStatistics(this.dateFormat.beginDate,this.dateFormat.endDate,1)
+    this.marketService.getMarketStatistics(this.queryMarket.marketId,this.dateFormat.beginDate,this.dateFormat.endDate,1)
       .subscribe((greens)=>{
         console.log(greens)
        for(let i=0;i<greens.length;i++){
@@ -206,9 +228,10 @@ export class MarketStatisticsComponent implements OnInit {
     };
   }
 
+
 //获取商户销量排名
   getShopSellStatistic(){
-    this.marketService.getMarketStatistics(this.dateFormat.beginDate,this.dateFormat.endDate,0)
+    this.marketService.getMarketStatistics(this.queryMarket.marketId,this.dateFormat.beginDate,this.dateFormat.endDate,0)
       .subscribe((shops)=>{
       console.log(shops)
       })
@@ -271,16 +294,6 @@ export class MarketStatisticsComponent implements OnInit {
   }
 
 
-// 获取所有市场
-  getAllMarkets(){
-    this.marketService.getAll().subscribe(
-      (markets)=>{
-        this.markets = markets;
-      }
-    )
-  }
-
-
   formatDateTime(timeStamp) { // 时间格式化
     let date = new Date();
     date.setTime(timeStamp);
@@ -293,7 +306,6 @@ export class MarketStatisticsComponent implements OnInit {
   };
 
   reset() {
-    this.queryMarket.marketId=null
     this.queryMarket.endTime = null
     this.queryMarket.beginTime = null
     this.dateFormat.beginDate = null

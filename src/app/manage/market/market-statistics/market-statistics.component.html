@@ -9,7 +9,7 @@
     <div class="form-group">
       <div class="input-group">
         <input class="form-control" placeholder="开始时间"
-               name="dp" [(ngModel)]="queryMarket.beginTime" reDatePicker #datePicker1="datePicker">
+               name="dp1" [(ngModel)]="queryMarket.beginTime" reDatePicker #datePicker1="datePicker">
         <div class="input-group-addon" (click)="datePicker1.toggle($event)">
           <i class="glyphicon glyphicon-calendar"></i>
         </div>
@@ -18,7 +18,7 @@
     <div class="form-group">
       <div class="input-group">
         <input class="form-control" placeholder="结束时间"
-               name="dp" [(ngModel)]="queryMarket.endTime" reDatePicker #datePicker2="datePicker">
+               name="dp2" [(ngModel)]="queryMarket.endTime" reDatePicker #datePicker2="datePicker">
         <div class="input-group-addon" (click)="datePicker2.toggle($event)">
           <i class="glyphicon glyphicon-calendar"></i>
         </div>
