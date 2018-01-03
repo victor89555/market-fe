@@ -40,11 +40,15 @@ export class MarketStatisticsComponent implements OnInit {
       }
     )
   }
-
-  query(second: boolean) {
+  isString(str){
+    return (typeof str=='string')&&str.constructor==String;
+  }
+ /* query(second: boolean) {
     if (second) {
+      console.log(this.isString(this.queryMarket.beginTime))
       this.dateFormat.beginDate = this.formatDateTime(this.queryMarket.beginTime)
       this.dateFormat.endDate = this.formatDateTime(this.queryMarket.endTime)
+      console.log(this.isString(this.dateFormat.beginDate))
       if (this.dateFormat.beginDate == "1970-01-01") {
         this.dateFormat.beginDate='2017-01-01'
         this.dateFormat.endDate='2018-01-01'
@@ -56,11 +60,15 @@ export class MarketStatisticsComponent implements OnInit {
     this.getBusinessStatistics()
     this.getGreensSellStatistic()
     this.getShopSellStatistic()
-  }
- /* query(second: boolean) {
-    this.queryMarket.endTime = this.formatDateTime(this.queryMarket.endTime)
-    this.queryMarket.endTime = this.formatDateTime(this.queryMarket.endTime)
-    if (this.queryMarket.beginTime == "1970-01-01") {
+  }*/
+  query(second: boolean) {
+    if(!this.isString( this.queryMarket.beginTime )){
+      this.queryMarket.beginTime = this.formatDateTime(this.queryMarket.beginTime)
+    }
+    if(!this.isString(this.queryMarket.endTime)){
+      this.queryMarket.endTime = this.formatDateTime(this.queryMarket.endTime)
+    }
+    if (this.queryMarket.beginTime == "") {
       let date = new Date()
       let year = date.getFullYear()
       let month = date.getMonth()+1
@@ -71,11 +79,11 @@ export class MarketStatisticsComponent implements OnInit {
     this.getBusinessStatistics()
     this.getGreensSellStatistic()
     this.getShopSellStatistic()
-  }*/
+  }
 
 // 获取营业额统计
   getBusinessStatistics(){
-    this.marketService.getMarketStatistics(this.queryMarket.marketId,this.dateFormat.beginDate,this.dateFormat.endDate,2)
+    this.marketService.getMarketStatistics(this.queryMarket.marketId,this.queryMarket.beginTime,this.queryMarket.endTime,2)
       .subscribe((sale)=>{
         this.sale = sale
         for(let i = 0;i<this.sale.length;i++){
@@ -163,7 +171,7 @@ export class MarketStatisticsComponent implements OnInit {
 
 //获取菜品销量统计
   getGreensSellStatistic(){
-    this.marketService.getMarketStatistics(this.queryMarket.marketId,this.dateFormat.beginDate,this.dateFormat.endDate,1)
+    this.marketService.getMarketStatistics(this.queryMarket.marketId,this.queryMarket.beginTime,this.queryMarket.endTime,1)
       .subscribe((greens)=>{
         console.log(greens)
        for(let i=0;i<greens.length;i++){
@@ -231,7 +239,7 @@ export class MarketStatisticsComponent implements OnInit {
 
 //获取商户销量排名
   getShopSellStatistic(){
-    this.marketService.getMarketStatistics(this.queryMarket.marketId,this.dateFormat.beginDate,this.dateFormat.endDate,0)
+    this.marketService.getMarketStatistics(this.queryMarket.marketId,this.queryMarket.beginTime,this.queryMarket.endTime,0)
       .subscribe((shops)=>{
       console.log(shops)
       })
