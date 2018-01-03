@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit} from "@angular/core";
 import {Modal} from "rebirth-ng";
 import {Operator} from "../shared/operator.model";
 import {OperatorService} from "../shared/operator.service";
+import { Validator } from "../../../shared/validator"
 
 @Component({
   selector: 'app-operator-form',
@@ -13,7 +14,9 @@ export class OperatorFormComponent implements Modal, OnInit {
 
   operator: Operator = new Operator();
 
-  constructor(private operatorService: OperatorService) {
+  constructor(private operatorService: OperatorService,
+               private validator: Validator
+  ) {
   }
 
   ngOnInit(): void {
@@ -58,7 +61,9 @@ export class OperatorFormComponent implements Modal, OnInit {
     name:true,
     sex:true,
     idCardNo:true,
-    mobile:true
+    idCardNoFormat:true,
+    mobile:true,
+    mobileFormat:true
   }
 
   validateOperator() {
@@ -69,7 +74,9 @@ export class OperatorFormComponent implements Modal, OnInit {
     return this.operatorForm.mobile &&
         this.operatorForm.idCardNo &&
         this.operatorForm.sex &&
-        this.operatorForm.name
+        this.operatorForm.name &&
+        this.operatorForm.idCardNoFormat &&
+        this.operatorForm.mobileFormat
   }
   validateOperatorName(){
     this.operatorForm.name = this.operator.name ? true : false
@@ -79,9 +86,11 @@ export class OperatorFormComponent implements Modal, OnInit {
   }
   validateOperatorIdCarNo(){
     this.operatorForm.idCardNo = this.operator.idCardNo ? true : false
+    this.operatorForm.idCardNoFormat = this.validator.isCardNo(this.operator.idCardNo)
   }
   validateOperatorMobile(){
-    this.operatorForm.mobile = this.operator.tel ? true : false
+    this.operatorForm.mobile = this.operator.mobile ? true : false
+    this.operatorForm.mobileFormat = this.validator.isMobile(this.operator.mobile)
   }
 }
 

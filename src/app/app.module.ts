@@ -9,6 +9,7 @@ import {CoreModule} from "./core/core.module";
 import {FormsModule} from "@angular/forms";
 import { CustomFormsModule } from 'ng2-validation'
 import {ManageAppModule} from "./manage/manage-app.module";
+import { Validator } from "./shared/validator"
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import {ManageAppModule} from "./manage/manage-app.module";
     ManageAppModule,
     RouterModule.forRoot(ROUTER_CONFIG),
   ],
-  providers: [],
+  providers: [Validator],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
