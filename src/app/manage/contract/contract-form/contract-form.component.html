@@ -5,7 +5,7 @@
 </div>
 <div class="modal-body">
   <form #contractForm="ngForm">
-    <button type="submit" (click)="onSubmitTest()">提交</button>
+    <!--<button type="submit" (click)="onSubmitTest()">提交</button>-->
     <div class="form-horizontal">
       <div class="form-group" *ngIf="!context.isShopForm">
         <label class="col-sm-3 control-label">商户:</label>
@@ -23,44 +23,40 @@
           </select>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" [ngClass]="{'has-error': !contractValidateForm.startTime.status}">
         <label class="col-sm-3 control-label">签约时间:</label>
         <div class="col-sm-9">
           <div class="input-group">
             <input class="form-control" [showTimePicker]="false" [(ngModel)]="contract.signTime"
-                   reDatePicker #datePicker1="datePicker" name="startTime" required/>
+                   reDatePicker #datePicker1="datePicker" name="startTime" required
+                   (selectedDate)="changeStartTime()" (onChangeFromInput)="changeStartTime()"/>
             <div class="input-group-addon" (click)="datePicker1.toggle($event)">
               <i class="glyphicon glyphicon-calendar"></i>
             </div>
           </div>
-          <p class="text-error"
-             *ngIf="contractForm.controls.startTime.touched &&
-             contractForm.controls.startTime.errors?.required">请输入签约时间</p>
+          <p class="text-error" *ngIf="!contractValidateForm.startTime.status">{{contractValidateForm.startTime.errText}}</p>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" [ngClass]="{'has-error': !contractValidateForm.endTime.status}">
         <label class="col-sm-3 control-label">到期时间:</label>
         <div class="col-sm-9">
           <div class="input-group">
             <input class="form-control" [showTimePicker]="false" [(ngModel)]="contract.validityTime"
-                   reDatePicker #datePicker2="datePicker" name="endTime" required/>
+                   reDatePicker #datePicker2="datePicker" name="endTime" required
+                   (selectedDate)="changeEndTime()" (onChangeFromInput)="changeEndTime()"/>
             <div class="input-group-addon" (click)="datePicker2.toggle($event)">
               <i class="glyphicon glyphicon-calendar"></i>
             </div>
           </div>
-          <p class="text-error"
-             *ngIf="contractForm.controls.endTime.touched &&
-             contractForm.controls.endTime.errors?.required">请输入到期时间</p>
+          <p class="text-error" *ngIf="!contractValidateForm.endTime.status">{{contractValidateForm.endTime.errText}}</p>
         </div>
       </div>
     
-      <div class="form-group">
+      <div class="form-group" [ngClass]="{'has-error': !contractValidateForm.status.status}">
         <label class="col-sm-3 control-label">状态:</label>
         <div class="col-sm-9">
           <tg-dict-select dictName="CONTRACT_STATUS" [(ngModel)]="contract.status" name="status" required></tg-dict-select>
-          <p class="text-error"
-             *ngIf="contractForm.controls.status.touched &&
-             contractForm.controls.status.errors?.required">请选择状态</p>
+          <p class="text-error" *ngIf="!contractValidateForm.status.status">{{contractValidateForm.status.errText}}</p>
         </div>
       </div>
       <div class="form-group">

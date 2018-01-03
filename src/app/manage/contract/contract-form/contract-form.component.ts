@@ -35,11 +35,11 @@ export class ContractFormComponent implements Modal, OnInit {
   equipmentName = dicts["EQUIPMENT_NAME"]
   uploadUrl: string = "http://market-bus.djws.com.cn/api/contracts/attachments"
   @ViewChild("contractForm")
-  contractForm:FormControl
+  contractForm: FormControl
 
   //提交
   onSubmitTest() {
-    console.log(this.contractForm)
+    this.validateForm();
   }
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
@@ -108,29 +108,33 @@ export class ContractFormComponent implements Modal, OnInit {
   }
 
   add() {
-    // console.log(this.attachments)
-    this.attachments.map((e)=> {
-      this.contract.attachmentIds.push(e.id)
-    })
-    this.contractService.add(this.contract).subscribe(
-      (contract) => {
-        this.dismiss.emit(contract);
-      }
-    )
+    if(this.validateForm()) {
+      // console.log(this.attachments)
+      this.attachments.map((e)=> {
+        this.contract.attachmentIds.push(e.id)
+      })
+      this.contractService.add(this.contract).subscribe(
+        (contract) => {
+          this.dismiss.emit(contract);
+        }
+      )
+    }
   }
 
   update() {
-    console.log(this.attachments)
-    this.attachments.map((e)=> {
-      this.contract.attachmentIds.push(e.id)
-    })
-    this.formatLabel(this.equipmentsLabel)
-    console.log(this.contract)
-    this.contractService.update(this.context.id, this.contract).subscribe(
-      (contract) => {
-        this.dismiss.emit(contract)
-      }
-    )
+    if(this.validateForm()){
+      // console.log(this.attachments)
+      this.attachments.map((e)=> {
+        this.contract.attachmentIds.push(e.id)
+      })
+      this.formatLabel(this.equipmentsLabel)
+      console.log(this.contract)
+      this.contractService.update(this.context.id, this.contract).subscribe(
+        (contract) => {
+          this.dismiss.emit(contract)
+        }
+      )
+    }
   }
 
   cancel() {
@@ -173,6 +177,163 @@ export class ContractFormComponent implements Modal, OnInit {
       }
     }
     this.contract.hireEquipments = arr.join(',')
+  }
+
+
+  //验证表单
+  contractValidateForm = {
+    startTime: {
+      status: true,
+      errText: ''
+    },
+    endTime: {
+      status: true,
+      errText: ''
+    },
+    status: {
+      status: true,
+      errText: ''
+    },
+    totalAmount: {
+      status: true,
+      errText: ''
+    },
+    scaleDeposit: {
+      status: true,
+      errText: ''
+    },
+    manageFee: {
+      status: true,
+      errText: ''
+    },
+    equipmentDeposit: {
+      status: true,
+      errText: ''
+    },
+    remark: {
+      status: true,
+      errText: ''
+    },
+    equipmentsLabel: {
+      status: true,
+      errText: ''
+    },
+    attachments: {
+      status: true,
+      errText: ''
+    }
+  }
+  validateForm() {
+    this.validateStartTime()
+    this.validateEndTime()
+    this.validateStatus()
+    this.validateTotalAmount()
+    this.validateScaleDeposit()
+    this.validateManageFee()
+    this.validateRemark()
+    this.validateEquipmentsLabel()
+    this.validateAttachments()
+
+    return this.contractValidateForm.startTime.status &&
+      this.contractValidateForm.endTime.status &&
+      this.contractValidateForm.status.status &&
+      this.contractValidateForm.totalAmount.status &&
+      this.contractValidateForm.scaleDeposit.status &&
+      this.contractValidateForm.manageFee.status &&
+      this.contractValidateForm.remark.status &&
+      this.contractValidateForm.equipmentsLabel.status &&
+      this.contractValidateForm.attachments.status
+  }
+  //验证签约时间
+  validateStartTime() {
+    let e = this.contractValidateForm.startTime
+    //验证为空
+    if(this.isEmpty(this.contract.signTime)) {
+      e.status = false
+      e.errText = "签约时间不为空"
+    }else {
+      e.status = true
+    }
+    return true
+  }
+  changeStartTime() {
+    console.log(1)
+    this.validateStartTime()
+  }
+  //验证到期时间
+  validateEndTime() {
+    let e = this.contractValidateForm.endTime
+    //验证为空
+    if(this.isEmpty(this.contract.validityTime)) {
+      e.status = false
+      e.errText = "到期时间不为空"
+      return false
+    }else {
+      e.status = true
+    }
+    //验证到期时间大于签约时间
+    let st = new Date(this.contract.signTime).getTime()
+    let et = new Date(this.contract.validityTime).getTime()
+    if(et - st > 0) {
+      e.status = true
+    }else {
+      e.status = false
+      e.errText = "到期时间不能小于签约时间"
+      return false
+    }
+    return true
+  }
+  changeEndTime() {
+    console.log(2)
+    this.validateEndTime()
+  }
+  //验证状态
+  validateStatus() {
+    let e = this.contractValidateForm.status
+    //验证不为空
+    if(this.isEmpty(this.contract.status)) {
+      e.status = false
+      e.errText = '请选择状态'
+      return false
+    }else {
+      e.status = true
+    }
+    return true
+  }
+  //验证店铺租金
+  validateTotalAmount() {
+    let e = this.contractValidateForm.totalAmount
+
+  }
+  //验证电子称押金
+  validateScaleDeposit() {
+    let e = this.contractValidateForm.scaleDeposit
+
+  }
+  //验证市场管理费
+  validateManageFee() {
+    let e = this.contractValidateForm.manageFee
+
+  }
+  //验证备注
+  validateRemark() {
+    let e = this.contractValidateForm.remark
+  }
+  //验证租用设备
+  validateEquipmentsLabel() {
+    let e = this.contractValidateForm.equipmentsLabel
+  }
+  //验证附件
+  validateAttachments() {
+    let e = this.contractValidateForm.attachments
+  }
+  //判断值为空
+  isEmpty(val) {
+    if(typeof val == "undefined" || val == null || val == ""){
+      return true;
+    }else{
+      return false;
+    }
   }
 }
 
