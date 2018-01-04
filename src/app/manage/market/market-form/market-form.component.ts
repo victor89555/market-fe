@@ -3,7 +3,7 @@ import {Modal} from "rebirth-ng";
 import {Market} from "../shared/market.model";
 import {MarketService} from "../shared/market.service";
 import {Area} from "../../../thurder-ng/components/area/area.mode"
-
+import {Validator} from "../../../shared/validator"
 @Component({
   selector: 'app-market-form',
   templateUrl: "./market-form.component.html"
@@ -15,7 +15,8 @@ export class MarketFormComponent implements Modal, OnInit {
   marketArea: Area = new Area()
   market: Market = new Market()
 
-  constructor(private marketService: MarketService) {
+  constructor(private marketService: MarketService,
+              private validator: Validator) {
   }
 
   ngOnInit(): void {
@@ -36,7 +37,7 @@ export class MarketFormComponent implements Modal, OnInit {
   }
 
   save() {
-    if( this.validatemarket()){
+    if (this.validatemarket()) {
       this.marketService.save(this.market).subscribe(
         (market) => {
           this.dismiss.emit(market);
@@ -47,7 +48,7 @@ export class MarketFormComponent implements Modal, OnInit {
   }
 
   update() {
-    if( this.validatemarket()) {
+    if (this.validatemarket()) {
       this.market.id = this.context.id;
       console.log(this.market);
       this.marketService.update(this.context.id, this.market).subscribe(
@@ -74,12 +75,14 @@ export class MarketFormComponent implements Modal, OnInit {
     marketName: true,
     marketCode: true,
     stallLimit: true,
-    stallNum: true,
+    stallLimitFormat: true,
     storeNum: true,
-    enterStoreNum:true,
+    storeNumFormat: true,
+    enterStoreNum: true,
+    enterStoreNumFormat: true,
     provinceCode: true,
     cityCode: true,
-    addr:true
+    addr: true
   }
 
   //验证市场表单
@@ -90,46 +93,55 @@ export class MarketFormComponent implements Modal, OnInit {
     this.validateCityCode()
     this.validateProvinceCode()
     this.validateStallLimit()
-    this.validateStallNum()
     this.validateStoreNum()
     this.validateEnterStoreNum()
     this.validateAddr()
     return this.marketForm.marketName &&
       this.marketForm.stallLimit &&
-      this.marketForm.stallNum &&
       this.marketForm.storeNum &&
       this.marketForm.provinceCode &&
       this.marketForm.cityCode &&
       this.marketForm.enterStoreNum &&
-      this.marketForm.marketCode&&
-      this.marketForm.addr
+      this.marketForm.marketCode &&
+      this.marketForm.addr &&
+      this.marketForm.stallLimitFormat &&
+      this.marketForm.storeNumFormat &&
+      this.marketForm.enterStoreNumFormat
 
   }
-  validateMarketName(){
+
+  validateMarketName() {
     this.marketForm.marketName = this.market.name ? true : false
   }
-  validateMarketCode(){
+
+  validateMarketCode() {
     this.marketForm.marketCode = this.market.code ? true : false
   }
-  validateStallLimit(){
+
+  validateStallLimit() {
     this.marketForm.stallLimit = this.market.stallLimit ? true : false
+    this.marketForm.stallLimitFormat = this.validator.isNum(this.market.stallLimit)
   }
-  validateStallNum(){
-    this.marketForm.stallNum = this.market.stallNum ? true : false
-  }
-  validateStoreNum(){
+
+  validateStoreNum() {
     this.marketForm.storeNum = this.market.storeNum ? true : false
+    this.marketForm.storeNumFormat = this.validator.isNum(this.market.storeNum)
   }
-  validateEnterStoreNum(){
+
+  validateEnterStoreNum() {
     this.marketForm.enterStoreNum = this.market.enterStoreNum ? true : false
+    this.marketForm.enterStoreNumFormat = this.validator.isNum(this.market.enterStoreNum)
   }
-  validateProvinceCode(){
+
+  validateProvinceCode() {
     this.marketForm.provinceCode = this.market.provinceCode ? true : false
   }
-  validateCityCode(){
+
+  validateCityCode() {
     this.marketForm.cityCode = this.market.cityCode ? true : false
   }
-  validateAddr(){
+
+  validateAddr() {
     this.marketForm.addr = this.market.addr ? true : false
   }
 

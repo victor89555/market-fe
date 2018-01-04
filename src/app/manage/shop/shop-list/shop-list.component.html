@@ -97,7 +97,7 @@
       <ngx-datatable-column name="操作" prop="id">
         <ng-template ngx-datatable-cell-template let-value="value">
           <button class="btn btn-sm btn-default" routerLink="/manage/shopForm/{{value}}">修改</button>
-          <button class="btn btn-sm btn-default" routerLink="/manage/shops/statistics/{{value}}">统计</button>
+          <button class="btn btn-sm btn-default" routerLink="/manage/shops/{{value}}/statistics">统计</button>
           <!--<button class="btn btn-sm btn-default" (click)="goWaterOrder(value)">流水</button>-->
           <button class="btn btn-sm btn-default" routerLink="/manage/orders" [queryParams]="{'shopId': value}">流水</button>
         </ng-template>

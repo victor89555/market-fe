@@ -3,7 +3,7 @@
     <div class="form-group">
       <div class="input-group">
         <input class="form-control" placeholder="开始时间"
-               name="dp" [(ngModel)]="queryShopStage.beginTime" reDatePicker #datePicker1="datePicker">
+               name="dp1" [(ngModel)]="queryShop.beginTime" reDatePicker #datePicker1="datePicker">
         <div class="input-group-addon" (click)="datePicker1.toggle($event)">
           <i class="glyphicon glyphicon-calendar"></i>
         </div>
@@ -12,22 +12,22 @@
     <div class="form-group">
       <div class="input-group">
         <input class="form-control" placeholder="结束时间"
-               name="dp" [(ngModel)]="queryShopStage.endTime" reDatePicker #datePicker2="datePicker">
+               name="dp2" [(ngModel)]="queryShop.endTime" reDatePicker #datePicker2="datePicker">
         <div class="input-group-addon" (click)="datePicker2.toggle($event)">
           <i class="glyphicon glyphicon-calendar"></i>
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary" (click)="query(true)">查询</button>
+    <button type="submit" class="btn btn-primary" (click)="query()">查询</button>
     <div class="pull-right tooltips">
       <a href="javascript:;" class="btn btn-info" (click)="goBack()">
         <i class="glyphicon glyphicon-backward"></i> 返回
       </a>
     </div>
   </form>
-  <div echarts [options]="shopSellOption" class="demo-chart"></div>
-  <div echarts [options]="distributionOption" class="demo-chart"></div>
-  <div echarts [options]="memberOption" class="demo-chart"></div>
+  <div echarts [options]="sallOption" [merge]="sallOptionMerge" class="demo-chart"></div>
+  <div echarts [options]="greensOption" [merge]="greensOptionMerge" class="demo-chart"></div>
+  <!--<div echarts [options]="memberOption" [merge]="memberOptionMerge" class="demo-chart"></div>-->
   <!--<div echarts [options]="kindsOption" [loading]="isLoading" [merge]="updateOptions"  class="demo-chart"></div>-->
   <!--<div echarts [options]="categoryOption" [loading]="isLoading" [merge]="updateOptions"  class="demo-chart"></div>-->
 </div>
