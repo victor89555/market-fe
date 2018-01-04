@@ -29,7 +29,8 @@
         <div class="form-group" [ngClass]="{'has-error': !shopForm.shopName}">
           <label for="shopname" class="col-sm-2 control-label">商户名称：</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" name="shopname" id="shopname" required [(ngModel)]="shop.name" #shopName="ngModel"/>
+            <input type="text" class="form-control" name="shopname" id="shopname" required
+                   [(ngModel)]="shop.name" #shopName="ngModel" (input)="validateShopName()"/>
             <div class="text-error" *ngIf="!shopForm.shopName">商户名称不为空</div>
           </div>
         </div>
