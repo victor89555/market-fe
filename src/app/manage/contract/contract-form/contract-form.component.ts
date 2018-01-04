@@ -35,11 +35,12 @@ export class ContractFormComponent implements Modal, OnInit {
   equipmentName = dicts["EQUIPMENT_NAME"]
   uploadUrl: string = "http://market-bus.djws.com.cn/api/contracts/attachments"
   @ViewChild("contractForm")
-  contractForm: FormControl
+  contractForm: FormControl = new FormControl()
 
   //提交
   onSubmitTest() {
-    this.validateForm();
+    console.log(this.contractForm)
+    // this.validateForm()
   }
 
   constructor(private changeDetectorRef: ChangeDetectorRef,
@@ -284,7 +285,6 @@ export class ContractFormComponent implements Modal, OnInit {
     return true
   }
   changeEndTime() {
-    console.log(2)
     this.validateEndTime()
   }
   //验证状态

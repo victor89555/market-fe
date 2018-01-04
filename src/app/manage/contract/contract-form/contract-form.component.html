@@ -28,8 +28,7 @@
         <div class="col-sm-9">
           <div class="input-group">
             <input class="form-control" [showTimePicker]="false" [(ngModel)]="contract.signTime"
-                   reDatePicker #datePicker1="datePicker" name="startTime" required
-                   (selectedDate)="changeStartTime()" (onChangeFromInput)="changeStartTime()"/>
+                   reDatePicker #datePicker1="datePicker" name="startTime" required/>
             <div class="input-group-addon" (click)="datePicker1.toggle($event)">
               <i class="glyphicon glyphicon-calendar"></i>
             </div>
@@ -42,8 +41,7 @@
         <div class="col-sm-9">
           <div class="input-group">
             <input class="form-control" [showTimePicker]="false" [(ngModel)]="contract.validityTime"
-                   reDatePicker #datePicker2="datePicker" name="endTime" required
-                   (selectedDate)="changeEndTime()" (onChangeFromInput)="changeEndTime()"/>
+                   reDatePicker #datePicker2="datePicker" name="endTime" required/>
             <div class="input-group-addon" (click)="datePicker2.toggle($event)">
               <i class="glyphicon glyphicon-calendar"></i>
             </div>
