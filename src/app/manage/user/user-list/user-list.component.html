@@ -54,8 +54,16 @@
         <!--<ngx-datatable-column name="邮箱" prop="email"></ngx-datatable-column>-->
         <ngx-datatable-column name="手机号" prop="mobile"></ngx-datatable-column>
         <!--<ngx-datatable-column name="是否管理员" prop="manager"></ngx-datatable-column>-->
-        <ngx-datatable-column name="性别" prop="sex"></ngx-datatable-column>
-        <ngx-datatable-column name="是否可用" prop="enable"></ngx-datatable-column>
+        <ngx-datatable-column name="性别" prop="sex">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{value|dictConvert:"SEX"}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="是否可用" prop="enable">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{value|dictConvert:"WHETHER"}}
+          </ng-template>
+        </ngx-datatable-column>
         <!--<ngx-datatable-column name="是可登录" prop="loginable"></ngx-datatable-column>-->
         <ngx-datatable-column name="编辑" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="market">

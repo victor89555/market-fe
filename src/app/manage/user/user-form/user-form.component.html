@@ -5,6 +5,12 @@
 </div>
 <div class="modal-body">
   <div class="form-horizontal">
+    <div class="form-group" *ngIf="!context.add">
+      <label class="col-sm-3 control-label">登录名:</label>
+      <div class="col-sm-9">
+        <input type="text" disabled class="form-control" [(ngModel)]="user.loginName"/>
+      </div>
+    </div>
     <div class="form-group" [ngClass]="{'has-error': !userForm.name}">
       <label class="col-sm-3 control-label">姓名:</label>
       <div class="col-sm-9">
@@ -41,32 +47,32 @@
     <div class="form-group" [ngClass]="{'has-error': !userForm.manager}">
       <label class="col-sm-3 control-label">是否管理员:</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" [(ngModel)]="user.manager" />
-        <!--<tg-dict-select dictName="WHETHER" [(ngModel)]="user.manager"></tg-dict-select>-->
+        <!--<input type="text" class="form-control" [(ngModel)]="user.manager" />-->
+        <tg-dict-select dictName="WHETHER" [(ngModel)]="user.manager"></tg-dict-select>
         <div class="text-error" *ngIf="!userForm.manager">请选择是否管理员！</div>
       </div>
     </div>
     <div class="form-group" [ngClass]="{'has-error': !userForm.sex}">
       <label class="col-sm-3 control-label">性别:</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" [(ngModel)]="user.sex" />
-        <!--<tg-dict-select dictName="SEX" [(ngModel)]="user.sex"></tg-dict-select>-->
+        <!--<input type="text" class="form-control" [(ngModel)]="user.sex" />-->
+        <tg-dict-select dictName="SEX" [(ngModel)]="user.sex"></tg-dict-select>
         <div class="text-error" *ngIf="!userForm.sex">性别不为空</div>
       </div>
     </div>
     <div class="form-group" [ngClass]="{'has-error': !userForm.enable}">
       <label class="col-sm-3 control-label">是否可用:</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" [(ngModel)]="user.enable" />
-        <!--<tg-dict-select dictName="WHETHER" [(ngModel)]="user.enable"></tg-dict-select>-->
+        <!--<input type="text" class="form-control" [(ngModel)]="user.enable" />-->
+        <tg-dict-select dictName="WHETHER" [(ngModel)]="user.enable"></tg-dict-select>
         <div class="text-error" *ngIf="!userForm.enable">请选择是否可用！</div>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-3 control-label">是否登入:</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" [(ngModel)]="user.loginable" />
-        <!--<tg-dict-select dictName="WHETHER" [(ngModel)]="user.loginable"></tg-dict-select>-->
+        <!--<input type="text" class="form-control" [(ngModel)]="user.loginable" />-->
+        <tg-dict-select dictName="WHETHER" [(ngModel)]="user.loginable"></tg-dict-select>
       </div>
     </div>
   </div>
