@@ -306,9 +306,19 @@ export class ShopFormComponent implements OnInit {
 
   //解绑电子秤
   unbindElectronicScale(id) {
-    this.electronicScaleService.unbind(id).subscribe(() => {
-      this.loadElectronicScale()
+    this.dialogService.confirm({
+      title: '提示',
+      content: '是否解绑该电子秤',
+      html: false,
     })
+      .subscribe(
+        data => {
+          this.electronicScaleService.unbind(id).subscribe(() => {
+            this.loadElectronicScale()
+          })
+        },
+        error => {}
+      );
   }
 
   //添加商户
