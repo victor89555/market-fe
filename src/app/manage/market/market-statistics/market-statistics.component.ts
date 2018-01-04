@@ -55,8 +55,10 @@ export class MarketStatisticsComponent implements OnInit {
     if (this.queryMarket.beginTime == "") { //没有选择日期时，默认当前月
       let date = new Date()
       let year = date.getFullYear()
-      let month = date.getMonth()+1
-      let today = date.getDate()
+      let month:number|string = date.getMonth() + 1
+      month = month<10 ? `0${month}` : month
+      let today:number|string = date.getDate()
+      today = today<10 ? `0${today}` : today
       // this.queryMarket.beginTime="2017-12-01" //测试数据，实际用当前月1号
       this.queryMarket.beginTime=`${year}-${month}-01`
       this.queryMarket.endTime=`${year}-${month}-${today}`

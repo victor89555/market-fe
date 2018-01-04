@@ -4,6 +4,7 @@ import {Stall} from "../shared/stall.model";
 import {StallService} from "../shared/stall.service";
 import {Market} from "../../market/shared/market.model"
 import {MarketService} from "../../market/shared/market.service"
+import {Validator} from "../../../shared/validator";
 
 @Component({
   selector: 'app-stall-form',
@@ -16,44 +17,48 @@ export class StallFormComponent implements Modal, OnInit {
   stall: Stall = new Stall()
   markets: Market[]
   test: any
-  marketId:number=null
-  marketName:string =""
+  marketId: number = null
+  marketName: string = ""
   closed = true
-  disable:boolean = false// 用于判断市场下拉框是否可用
+  disable: boolean = false// 用于判断市场下拉框是否可用
   close() {
     this.closed = true;
   }
 
-  constructor(private stallService: StallService, private marketService: MarketService) {
+  constructor(private stallService: StallService, private marketService: MarketService,
+              private validator: Validator) {
   }
 
   ngOnInit(): void {
     console.log('ModalTestComponent init....');
-   if(!this.context.add){
-     this.getStall()
-   }else{
-     this.marketId = this.context.marketId;
-     this.getMarket(this.marketId)
-     this.disable = true
-   }
-   this.getAllMarkets()
+    if (!this.context.add) {
+      this.getStall()
+    } else {
+      this.marketId = this.context.marketId;
+      this.getMarket(this.marketId)
+      this.disable = true
+    }
+    this.getAllMarkets()
   }
-  getAllMarkets(){
+
+  getAllMarkets() {
     this.marketService.getAll().subscribe(
-      (markets)=>{
+      (markets) => {
         this.markets = markets;
       }
     )
   }
+
   // 第一次打开页面时显示的市场名称
-  getMarket(marketId){
+  getMarket(marketId) {
     this.marketService.get(marketId).subscribe(
-      (market)=>{
+      (market) => {
         this.marketName = market.name;
       }
     )
   }
-  getStall(){  // 修改时执行
+
+  getStall() {  // 修改时执行
     this.stallService.get(this.context.id).subscribe(
       (stall) => {
         this.stall = stall
@@ -62,9 +67,10 @@ export class StallFormComponent implements Modal, OnInit {
       }
     )
   }
+
   save() {
     this.stall.marketId = this.marketId
-    if(this.validateStall()){
+    if (this.validateStall()) {
       this.stallService.save(this.stall).subscribe(
         (stall) => {
           this.dismiss.emit(stall);
@@ -72,18 +78,20 @@ export class StallFormComponent implements Modal, OnInit {
       )
     }
   }
+
   update() {
     this.stall.id = this.context.id;
     this.stall.marketId = this.marketId
-    if(this.validateStall()){
+    if (this.validateStall()) {
       console.log(this.stall);
-      this.stallService.update(this.context.id,this.stall).subscribe(
+      this.stallService.update(this.context.id, this.stall).subscribe(
         (stall) => {
           this.dismiss.emit(this.stall);
         }
       )
     }
   }
+
   cancel() {
     this.dismiss.error(this.stall);
   }
@@ -91,39 +99,45 @@ export class StallFormComponent implements Modal, OnInit {
   //摊位验证
   stallForm = {
     marketId: true,
-    name :true,
-    funcType : true,
-    area : true,
-    status:true
+    name: true,
+    funcType: true,
+    area: true,
+    areaFormat: true,
+    status: true
   }
 
-  validateMarketId(){
+  validateMarketId() {
     this.stallForm.marketId = this.stall.marketId ? true : false
   }
-  validateName(){
+
+  validateName() {
     this.stallForm.name = this.stall.name ? true : false
   }
-  validateFuncType(){
+
+  validateFuncType() {
     this.stallForm.funcType = this.stall.funcType ? true : false
   }
-  validateArea(){
+
+  validateArea() {
     this.stallForm.area = this.stall.area ? true : false
+    this.stallForm.areaFormat = this.validator.isNum(this.stall.area)
   }
-  validateStatus(){
+
+  validateStatus() {
     this.stallForm.status = this.stall.status ? true : false
   }
 
-  validateStall(){
+  validateStall() {
     this.validateName()
     this.validateStatus()
     this.validateMarketId()
     this.validateArea()
     this.validateFuncType()
     return this.stallForm.status &&
-        this.stallForm.area &&
-        this.stallForm.funcType &&
-        this.stallForm.name &&
-        this.stallForm.marketId
+      this.stallForm.area &&
+      this.stallForm.funcType &&
+      this.stallForm.name &&
+      this.stallForm.marketId
   }
 }
 

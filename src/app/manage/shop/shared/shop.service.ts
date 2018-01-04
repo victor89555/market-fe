@@ -47,7 +47,7 @@ export class ShopService extends RebirthHttp {
 
   //获取商户相关的统计
   @GET("reports/shop")
-  getMarketStatistics(@Query("shopId") shopId = null,@Query("beginTime") beginTime = "",@Query("endTime") endTime = "",
+  getShopStatistics(@Query("shopId") shopId = null,@Query("beginTime") beginTime = "",@Query("endTime") endTime = "",
                       @Query("dimension") dimension:number): Observable<any> {
     return null;
   }
