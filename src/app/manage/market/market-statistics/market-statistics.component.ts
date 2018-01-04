@@ -57,8 +57,8 @@ export class MarketStatisticsComponent implements OnInit {
       let year = date.getFullYear()
       let month = date.getMonth()+1
       let today = date.getDate()
-      this.queryMarket.beginTime="2017-12-01" //测试数据，实际用当前月1号
-      // this.queryMarket.beginTime=`${year}-${month}-01`
+      // this.queryMarket.beginTime="2017-12-01" //测试数据，实际用当前月1号
+      this.queryMarket.beginTime=`${year}-${month}-01`
       this.queryMarket.endTime=`${year}-${month}-${today}`
     }
     this.getBusinessStatistics()
