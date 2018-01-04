@@ -15,10 +15,10 @@ export class MarketStatisticsComponent implements OnInit {
   greensOption:any
   greensOptionMerge:any
   shopOption:any
+  shopOptionMerge:any
   isLoading:boolean = false
   markets: Market[]
   queryMarket={'marketId':null,'beginTime':"", 'endTime': ""}
-  dateFormat: any = {"beginDate": "", "endDate": ""}
   sale:any  // 市场营业额
   constructor(private marketService:MarketService) {
   }
@@ -40,42 +40,35 @@ export class MarketStatisticsComponent implements OnInit {
       }
     )
   }
+  // 判断是否字符串
+  isString(str){
+    return (typeof str=='string')&&str.constructor==String;
+  }
 
   query(second: boolean) {
-    if (second) {
-      this.dateFormat.beginDate = this.formatDateTime(this.queryMarket.beginTime)
-      this.dateFormat.endDate = this.formatDateTime(this.queryMarket.endTime)
-      if (this.dateFormat.beginDate == "1970-01-01") {
-        this.dateFormat.beginDate='2017-01-01'
-        this.dateFormat.endDate='2018-01-01'
-      }
-    }else {
-      this.dateFormat.beginDate='2017-12-01'
-      this.dateFormat.endDate='2018-01-01'
+    if(!this.isString( this.queryMarket.beginTime )){
+      this.queryMarket.beginTime = this.formatDateTime(this.queryMarket.beginTime)
     }
-    this.getBusinessStatistics()
-    this.getGreensSellStatistic()
-    this.getShopSellStatistic()
-  }
- /* query(second: boolean) {
-    this.queryMarket.endTime = this.formatDateTime(this.queryMarket.endTime)
-    this.queryMarket.endTime = this.formatDateTime(this.queryMarket.endTime)
-    if (this.queryMarket.beginTime == "1970-01-01") {
+    if(!this.isString(this.queryMarket.endTime)){
+      this.queryMarket.endTime = this.formatDateTime(this.queryMarket.endTime)
+    }
+    if (this.queryMarket.beginTime == "") { //没有选择日期时，默认当前月
       let date = new Date()
       let year = date.getFullYear()
       let month = date.getMonth()+1
       let today = date.getDate()
+      // this.queryMarket.beginTime="2017-12-01" //测试数据，实际用当前月1号
       this.queryMarket.beginTime=`${year}-${month}-01`
       this.queryMarket.endTime=`${year}-${month}-${today}`
     }
     this.getBusinessStatistics()
     this.getGreensSellStatistic()
     this.getShopSellStatistic()
-  }*/
+  }
 
 // 获取营业额统计
   getBusinessStatistics(){
-    this.marketService.getMarketStatistics(this.queryMarket.marketId,this.dateFormat.beginDate,this.dateFormat.endDate,2)
+    this.marketService.getMarketStatistics(this.queryMarket.marketId,this.queryMarket.beginTime,this.queryMarket.endTime,2)
       .subscribe((sale)=>{
         this.sale = sale
         for(let i = 0;i<this.sale.length;i++){
@@ -163,9 +156,8 @@ export class MarketStatisticsComponent implements OnInit {
 
 //获取菜品销量统计
   getGreensSellStatistic(){
-    this.marketService.getMarketStatistics(this.queryMarket.marketId,this.dateFormat.beginDate,this.dateFormat.endDate,1)
+    this.marketService.getMarketStatistics(this.queryMarket.marketId,this.queryMarket.beginTime,this.queryMarket.endTime,1)
       .subscribe((greens)=>{
-        console.log(greens)
        for(let i=0;i<greens.length;i++){
          this.greensOption.legend.data.push(greens[i].productName)
          this.greensOption.series[0].data.push({value:greens[i].totalQty,name:greens[i].productName})
@@ -228,12 +220,18 @@ export class MarketStatisticsComponent implements OnInit {
     };
   }
 
-
 //获取商户销量排名
   getShopSellStatistic(){
-    this.marketService.getMarketStatistics(this.queryMarket.marketId,this.dateFormat.beginDate,this.dateFormat.endDate,0)
+    this.marketService.getMarketStatistics(this.queryMarket.marketId,this.queryMarket.beginTime,this.queryMarket.endTime,0)
       .subscribe((shops)=>{
-      console.log(shops)
+        for(let i=0;i<shops.length;i++){
+          this.shopOption.xAxis.data.push(shops[i].shopName)
+          this.shopOption.series[0].data.push(shops[i].totalMoneyAmount)
+        }
+        this.shopOptionMerge={
+          xAxis:this.shopOption.xAxis,
+          series:this.shopOption.series
+        }
       })
 
     this.shopOption = {
@@ -270,12 +268,10 @@ export class MarketStatisticsComponent implements OnInit {
         bottom: '10%',
         containLabel: true
       },
-      xAxis : [
-        {
+      xAxis : {
           type : 'category',
-          data : ['金商户','李商户','王商户','陈商户','黄商户','蓝陈商户','赵成商户','徐商户','许商户','钟商户']
-        }
-      ],
+          data : []
+        },
       yAxis : [
         {
           type : 'value',
@@ -286,8 +282,8 @@ export class MarketStatisticsComponent implements OnInit {
         {
           name:'销售金额',
           type:'bar',
-          barWidth: '50%',
-          data:[320, 310, 295, 267, 234, 221, 220, 215,198,193]
+          barWidth: 30,
+          data:[]
         }
       ]
     };
@@ -306,10 +302,8 @@ export class MarketStatisticsComponent implements OnInit {
   };
 
   reset() {
-    this.queryMarket.endTime = null
-    this.queryMarket.beginTime = null
-    this.dateFormat.beginDate = null
-    this.dateFormat.endDate = null
+    this.queryMarket.endTime = ""
+    this.queryMarket.beginTime = ""
     this.query(false)
   }
 }
