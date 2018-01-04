@@ -7,15 +7,7 @@ import {MarketService} from "../../market/shared/market.service";
 import {Shop} from "../../shop/shared/shop.model";
 import {ShopService} from "../../shop/shared/shop.service";
 import {dicts} from "../../../thurder-ng/models/dictionary";
-import {
-  ReactiveFormsModule,
-  FormsModule,
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from '@angular/forms';
-import { CustomValidators } from 'ng2-validation';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-contract-form',
@@ -23,14 +15,14 @@ import { CustomValidators } from 'ng2-validation';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContractFormComponent implements Modal, OnInit {
-  context: { id: number,isShopForm: boolean,marketId: number, shopId: number, add:boolean, onlyRead: true}
+  context: { id: number, isShopForm: boolean, marketId: number, shopId: number, add: boolean, onlyRead: true }
   dismiss: EventEmitter<Contract>
   uploadFiles: any[]
   contract: Contract = new Contract()
   attachments: any[] = []
   markets: Market[]
   shops: Shop[]
-  equipmentsOptions = ["电子秤","不锈钢架", "PC垫板","PPP占板","三防罩","操作交易台","上墙货架","展示架","交易台","宰杀操作台","蓄养池"];
+  equipmentsOptions = ["电子秤", "不锈钢架", "PC垫板", "PPP占板", "三防罩", "操作交易台", "上墙货架", "展示架", "交易台", "宰杀操作台", "蓄养池"];
   equipmentsLabel: string[]
   equipmentName = dicts["EQUIPMENT_NAME"]
   uploadUrl: string = "http://market-bus.djws.com.cn/api/contracts/attachments"
@@ -52,13 +44,13 @@ export class ContractFormComponent implements Modal, OnInit {
   ngOnInit(): void {
     console.log('ModalTestComponent init....');
     //判断添加合同（合同管理里添加，商户管理里添加），修改合同
-    if(this.context.add) {
-      if(this.context.isShopForm){
+    if (this.context.add) {
+      if (this.context.isShopForm) {
         this.contract.marketId = this.context.marketId
         this.contract.shopId = this.context.shopId
       }
-    }else {
-      if(this.context.id){
+    } else {
+      if (this.context.id) {
         this.loadContract();
       }
     }
@@ -69,7 +61,7 @@ export class ContractFormComponent implements Modal, OnInit {
   }
 
   //加载市场信息列表
-  loadMarkets(){
+  loadMarkets() {
     this.marketService.getAll().subscribe(
       (markets) => {
         this.markets = markets
@@ -79,7 +71,7 @@ export class ContractFormComponent implements Modal, OnInit {
   }
 
   //加载商户信息列表
-  loadShops(){
+  loadShops() {
     this.shopService.getAll(null).subscribe(
       (shops) => {
         this.shops = shops
@@ -89,7 +81,7 @@ export class ContractFormComponent implements Modal, OnInit {
   }
 
   //加载合同信息
-  loadContract(){
+  loadContract() {
     this.contractService.get(this.context.id).subscribe(
       (contract) => {
         console.log("加载合同信息")
@@ -109,9 +101,9 @@ export class ContractFormComponent implements Modal, OnInit {
   }
 
   add() {
-    if(this.validateForm()) {
+    if (this.validateForm()) {
       // console.log(this.attachments)
-      this.attachments.map((e)=> {
+      this.attachments.map((e) => {
         this.contract.attachmentIds.push(e.id)
       })
       this.contractService.add(this.contract).subscribe(
@@ -123,9 +115,9 @@ export class ContractFormComponent implements Modal, OnInit {
   }
 
   update() {
-    if(this.validateForm()){
+    if (this.validateForm()) {
       // console.log(this.attachments)
-      this.attachments.map((e)=> {
+      this.attachments.map((e) => {
         this.contract.attachmentIds.push(e.id)
       })
       this.formatLabel(this.equipmentsLabel)
@@ -151,7 +143,7 @@ export class ContractFormComponent implements Modal, OnInit {
   }
 
   onDeleteAttachments(idx) {
-    this.attachments.splice(idx,1);
+    this.attachments.splice(idx, 1);
   }
 
   onUploadSuccess($event) {
@@ -169,9 +161,9 @@ export class ContractFormComponent implements Modal, OnInit {
 
   formatLabel(e) {
     let arr = []
-    for(let i=0; i < e.length; i++) {
-      for(let key in this.equipmentName) {
-        if(e[i] == this.equipmentName[key]) {
+    for (let i = 0; i < e.length; i++) {
+      for (let key in this.equipmentName) {
+        if (e[i] == this.equipmentName[key]) {
           arr.push(key)
           continue
         }
@@ -224,6 +216,7 @@ export class ContractFormComponent implements Modal, OnInit {
       errText: ''
     }
   }
+
   validateForm() {
     this.validateStartTime()
     this.validateEndTime()
@@ -245,93 +238,105 @@ export class ContractFormComponent implements Modal, OnInit {
       this.contractValidateForm.equipmentsLabel.status &&
       this.contractValidateForm.attachments.status
   }
+
   //验证签约时间
   validateStartTime() {
     let e = this.contractValidateForm.startTime
     //验证为空
-    if(this.isEmpty(this.contract.signTime)) {
+    if (this.isEmpty(this.contract.signTime)) {
       e.status = false
       e.errText = "签约时间不为空"
-    }else {
+    } else {
       e.status = true
     }
     return true
   }
+
   changeStartTime() {
     console.log(1)
     this.validateStartTime()
   }
+
   //验证到期时间
   validateEndTime() {
     let e = this.contractValidateForm.endTime
     //验证为空
-    if(this.isEmpty(this.contract.validityTime)) {
+    if (this.isEmpty(this.contract.validityTime)) {
       e.status = false
       e.errText = "到期时间不为空"
       return false
-    }else {
+    } else {
       e.status = true
     }
     //验证到期时间大于签约时间
     let st = new Date(this.contract.signTime).getTime()
     let et = new Date(this.contract.validityTime).getTime()
-    if(et - st > 0) {
+    if (et - st > 0) {
       e.status = true
-    }else {
+    } else {
       e.status = false
       e.errText = "到期时间不能小于签约时间"
       return false
     }
     return true
   }
+
   changeEndTime() {
     this.validateEndTime()
   }
+
   //验证状态
   validateStatus() {
     let e = this.contractValidateForm.status
     //验证不为空
-    if(this.isEmpty(this.contract.status)) {
+    if (this.isEmpty(this.contract.status)) {
       e.status = false
       e.errText = '请选择状态'
       return false
-    }else {
+    } else {
       e.status = true
     }
     return true
   }
+
   //验证店铺租金
   validateTotalAmount() {
     let e = this.contractValidateForm.totalAmount
 
   }
+
   //验证电子称押金
   validateScaleDeposit() {
     let e = this.contractValidateForm.scaleDeposit
 
   }
+
   //验证市场管理费
   validateManageFee() {
     let e = this.contractValidateForm.manageFee
 
   }
+
   //验证备注
   validateRemark() {
     let e = this.contractValidateForm.remark
   }
+
   //验证租用设备
   validateEquipmentsLabel() {
     let e = this.contractValidateForm.equipmentsLabel
   }
+
   //验证附件
   validateAttachments() {
     let e = this.contractValidateForm.attachments
   }
+
   //判断值为空
   isEmpty(val) {
-    if(typeof val == "undefined" || val == null || val == ""){
+    if (typeof val == "undefined" || val == null || val == "") {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
