@@ -15,10 +15,9 @@ export class UserFormComponent implements OnInit, Modal {
   constructor(private userService: UserService) {
   }
 
-  user: any = {}
+  user: User = new User()
 
   ngOnInit() {
-    console.log('ModalTestComponent init....');
     if (!this.context.add) {
       this.getUser();
     }
@@ -33,7 +32,7 @@ export class UserFormComponent implements OnInit, Modal {
   }
 
   save() {
-    if(this.validateUser()){
+    if (this.validateUser()) {
       this.userService.save(this.user).subscribe(
         (user) => {
           this.dismiss.emit(user);
@@ -44,7 +43,7 @@ export class UserFormComponent implements OnInit, Modal {
   }
 
   update() {
-    if(this.validateUser()){
+    if (this.validateUser()) {
       this.user.id = this.context.id;
       console.log(this.user);
       this.userService.update(this.context.id, this.user).subscribe(
@@ -61,41 +60,44 @@ export class UserFormComponent implements OnInit, Modal {
 
   // 用户表单验证
   userForm = {
-    name:true,
-    mobile:true,
-    manager:true,
-    sex:true,
-    enable:true
+    name: true,
+    mobile: true,
+    manager: true,
+    sex: true,
+    enable: true
   }
 
-  validateName(){
+  validateName() {
     this.userForm.name = this.user.name ? true : false
   }
-  validateMobile(){
+
+  validateMobile() {
     this.userForm.mobile = this.user.mobile ? true : false
   }
 
-  validateManager(){
-    this.userForm.manager = this.user.manager !=null
-  }
-  validateSex(){
-    this.userForm.sex = this.user.sex !=null
-  }
-  validateEnable(){
-    this.userForm.enable = this.user.enable !=null
+  validateManager() {
+    this.userForm.manager = this.user.manager != null
   }
 
-  validateUser(){
+  validateSex() {
+    this.userForm.sex = this.user.sex != null
+  }
+
+  validateEnable() {
+    this.userForm.enable = this.user.enable != null
+  }
+
+  validateUser() {
     this.validateName()
     this.validateMobile()
     this.validateEnable()
     this.validateManager()
     this.validateSex()
     return this.userForm.name &&
-        this.userForm.mobile &&
-        this.userForm.manager &&
-        this.userForm.sex &&
-        this.userForm.enable
+      this.userForm.mobile &&
+      this.userForm.manager &&
+      this.userForm.sex &&
+      this.userForm.enable
 
   }
 }

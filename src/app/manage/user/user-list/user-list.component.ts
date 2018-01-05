@@ -1,9 +1,10 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
-import {ModalService, DialogService} from "rebirth-ng";
+import {DialogService, ModalService} from "rebirth-ng";
 import {UserFormComponent} from "../user-form/user-form.component";
 import {UserService} from "../shared/user.service";
 import {User} from "../shared/user.model";
 import {Page} from "../../../thurder-ng/models/page.model";
+import {UserAuthorizeComponent} from "../user-authorize/user-authorize.component"
 
 @Component({
   selector: 'app-user-list',
@@ -74,24 +75,34 @@ export class UserListComponent implements OnInit {
     })
   }
 
-  delete(id: number,name:string) {
+  authorize(id: number) {
+    this.modalService.open<User>({
+      component: UserAuthorizeComponent,
+      componentFactoryResolver: this.componentFactoryResolver,
+      resolve: {
+        id: id
+      }
+    }).subscribe(() => {
+    }, error => {
+    })
+  }
+
+  delete(id: number, name: string) {
     this.dialogService.confirm({
       title: '提示',
       content: `确定要删除用户：${name}？`,
       html: false,
-
       yes: '确定',
       no: '取消'
-    })
-      .subscribe(
-        data => {
-          this.userService.delete(id).subscribe(() => {
-            this.query()
-          })
-        },
-        error => {
-        }
-      );
+    }).subscribe(
+      data => {
+        this.userService.delete(id).subscribe(() => {
+          this.query()
+        })
+      },
+      error => {
+      }
+    );
   }
 
 }

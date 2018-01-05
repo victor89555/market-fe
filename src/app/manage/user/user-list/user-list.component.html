@@ -68,8 +68,8 @@
         <ngx-datatable-column name="编辑" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
             <button class="btn btn-sm btn-default" (click)="edit(value);">修改</button>
+            <button class="btn btn-sm btn-default" (click)="authorize(value);">授权</button>
             <button class="btn btn-sm btn-default" (click)="delete(value,row.name);">删除</button>
-
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
