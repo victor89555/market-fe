@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit} from '@angular/core';
 import {Modal} from "rebirth-ng";
 import {UserService} from "../shared/user.service";
 import {User} from "../shared/user.model";
+import {Validator} from "../../../shared/validator"
 
 @Component({
   selector: 'app-user-form',
@@ -12,7 +13,8 @@ export class UserFormComponent implements OnInit, Modal {
   context: { id: number, add: boolean };
   dismiss: EventEmitter<User>;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,
+              private validator: Validator) {
   }
 
   user: User = new User()
@@ -62,6 +64,7 @@ export class UserFormComponent implements OnInit, Modal {
   userForm = {
     name: true,
     mobile: true,
+    mobileFormat:true,
     manager: true,
     sex: true,
     enable: true
@@ -73,6 +76,7 @@ export class UserFormComponent implements OnInit, Modal {
 
   validateMobile() {
     this.userForm.mobile = this.user.mobile ? true : false
+    this.userForm.mobileFormat = this.validator.isMobile(this.user.mobile)
   }
 
   validateManager() {
@@ -97,7 +101,8 @@ export class UserFormComponent implements OnInit, Modal {
       this.userForm.mobile &&
       this.userForm.manager &&
       this.userForm.sex &&
-      this.userForm.enable
+      this.userForm.enable &&
+      this.userForm.mobileFormat
 
   }
 }

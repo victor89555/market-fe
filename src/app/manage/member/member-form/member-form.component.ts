@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import {Modal} from "rebirth-ng";
 import {Member} from "../shared/member.model";
 import {MemberService} from "../shared/member.service";
+import { Validator } from "../../../shared/validator"
 
 @Component({
   selector: 'app-member-form',
@@ -11,7 +12,8 @@ import {MemberService} from "../shared/member.service";
 export class MemberFormComponent implements OnInit, Modal {
   context: { id: number, add: boolean };
   dismiss: EventEmitter<Member>;
-  constructor(private memberService:MemberService) { }
+  constructor(private memberService:MemberService,
+  private validator:Validator) { }
   member: any = {}
 
   ngOnInit() {
@@ -55,7 +57,9 @@ export class MemberFormComponent implements OnInit, Modal {
     cardNo:true,
     name : true,
     mobile: true,
-    idCardNo: true
+    mobileFormat: true,
+    idCardNo: true,
+    idCardNoFormat: true
   }
 
   validateCardNo(){
@@ -66,9 +70,11 @@ export class MemberFormComponent implements OnInit, Modal {
   }
   validateMobile(){
     this.memberForm.mobile = this.member.mobile ? true : false
+    this.memberForm.mobileFormat = this.validator.isMobile(this.member.mobile)
   }
   validateIdCardNo(){
     this.memberForm.idCardNo = this.member.idCardNo ? true : false
+    this.memberForm.idCardNoFormat = this.validator.isCardNo(this.member.idCardNo)
   }
 
   validateMember(){
@@ -79,6 +85,8 @@ export class MemberFormComponent implements OnInit, Modal {
     return this.memberForm.cardNo &&
         this.memberForm.name &&
         this.memberForm.mobile &&
-        this.memberForm.idCardNo
+        this.memberForm.idCardNo &&
+        this.memberForm.mobileFormat &&
+        this.memberForm.idCardNoFormat
   }
 }
