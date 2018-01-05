@@ -427,12 +427,24 @@ export class ShopFormComponent implements OnInit {
   }
 
   deleteContract(id: number) { //删除合同
-    this.contractService.deleteContract(id).subscribe(
-      (res) => {
-        console.log(res)
-        this.loadContractor()
-      }
-    )
+    this.dialogService.confirm({
+      title: '提示',
+      content: '是否删除该合同',
+      html: false,
+      yes: '确定',
+      no: '取消'
+    })
+      .subscribe(
+        data => {
+          this.contractService.deleteContract(id).subscribe(
+            (res) => {
+              console.log(res)
+              this.loadContractor()
+            }
+          )
+        },
+        error => {}
+      );
   }
 
   saveChangeStall(){
