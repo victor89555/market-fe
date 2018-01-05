@@ -1,5 +1,5 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
-import {ModalService} from "rebirth-ng";
+import {ModalService, DialogService} from "rebirth-ng";
 import {MarketFormComponent} from "../market-form/market-form.component";
 import {MarketService} from "../shared/market.service";
 import {Market} from "../shared/market.model";
@@ -25,7 +25,8 @@ export class MarketListComponent implements OnInit {
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
-              private marketService: MarketService) {
+              private marketService: MarketService,
+              private dialogService: DialogService) {
   }
 
   ngOnInit(): void {
@@ -56,15 +57,24 @@ export class MarketListComponent implements OnInit {
     this.query()
   }
 
-  delete(id: number) {
-    this.marketService.delete(id).subscribe(() => {
-      debugger
-      this.query()
-    })
-  }
+  delete(id: number,name:string) {
+    this.dialogService.confirm({
+      title: '提示',
+      content:`确定要删除 ${name} ？`,
+      html: false,
 
-  delete1(name) {
-    console.log(name);
+      yes:'确定',
+      no:'取消'
+    })
+      .subscribe(
+        data => {
+          this.marketService.delete(id).subscribe(() => {
+            this.query()
+          })
+        },
+        error => {
+        }
+      );
   }
 
   add() {
