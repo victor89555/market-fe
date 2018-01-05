@@ -310,6 +310,8 @@ export class ShopFormComponent implements OnInit {
       title: '提示',
       content: '是否解绑该电子秤',
       html: false,
+      yes: '确定',
+      no: '取消'
     })
       .subscribe(
         data => {
