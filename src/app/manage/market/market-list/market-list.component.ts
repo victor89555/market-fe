@@ -60,7 +60,7 @@ export class MarketListComponent implements OnInit {
   delete(id: number,name:string) {
     this.dialogService.confirm({
       title: '提示',
-      content:`确定要删除 ${name} ？`,
+      content:`确定要删除市场：${name}？`,
       html: false,
 
       yes:'确定',

@@ -1,5 +1,5 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
-import {ModalService, NotifyService} from "rebirth-ng";
+import {ModalService, NotifyService, DialogService} from "rebirth-ng";
 import {OperatorFormComponent} from "../operator-form/operator-form.component";
 import {OperatorService} from "../shared/operator.service";
 import {Operator} from "../shared/operator.model";
@@ -25,7 +25,8 @@ export class OperatorListComponent implements OnInit {
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private operatorService: OperatorService,
-              private alertBoxService: NotifyService) {
+              private alertBoxService: NotifyService,
+              private dialogService: DialogService) {
   }
 
   ngOnInit(): void {
@@ -82,10 +83,24 @@ export class OperatorListComponent implements OnInit {
     })
   }
 
-  delete(id: number) {
-    this.operatorService.delete(id).subscribe(() => {
-      this.query()
+  delete(id: number,name:string) {
+    this.dialogService.confirm({
+      title: '提示',
+      content: `确定要删除经营者：${name}？`,
+      html: false,
+
+      yes: '确定',
+      no: '取消'
     })
+      .subscribe(
+        data => {
+          this.operatorService.delete(id).subscribe(() => {
+            this.query()
+          })
+        },
+        error => {
+        }
+      );
   }
 
   //测试用Alert
@@ -93,7 +108,7 @@ export class OperatorListComponent implements OnInit {
     this.alertBoxService.placement("top")
     this.alertBoxService.open({
       type: 'danger',
-      html: '<strong>err!</strong>it\'s a test error message!(' + this.index++ +')'
-    }, 2000 );
+      html: '<strong>err!</strong>it\'s a test error message!(' + this.index++ + ')'
+    }, 2000);
   }
 }

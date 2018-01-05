@@ -1,7 +1,7 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from '@angular/core';
 import {Page} from "../../../thurder-ng/models/page.model";
 import {MemberService} from "../shared/member.service";
-import {ModalService} from "rebirth-ng";
+import {ModalService, DialogService} from "rebirth-ng";
 import {Member} from "../shared/member.model";
 import {MemberFormComponent} from "../member-form/member-form.component";
 
@@ -15,7 +15,8 @@ export class MemberListComponent implements OnInit {
 
   constructor(private memberService: MemberService,
               private modalService: ModalService,
-              private componentFactoryResolver: ComponentFactoryResolver) {
+              private componentFactoryResolver: ComponentFactoryResolver,
+  private dialogService:DialogService) {
   }
 
   ngOnInit() {
@@ -76,9 +77,23 @@ export class MemberListComponent implements OnInit {
     })
   }
 
-  delete(id: number) {
-    this.memberService.delete(id).subscribe(() => {
-      this.query()
+  delete(id: number,name:string) {
+    this.dialogService.confirm({
+      title: '提示',
+      content: `确定要删除会员：${name}？`,
+      html: false,
+
+      yes: '确定',
+      no: '取消'
     })
+      .subscribe(
+        data => {
+          this.memberService.delete(id).subscribe(() => {
+            this.query()
+          })
+        },
+        error => {
+        }
+      );
   }
 }

@@ -1,5 +1,5 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
-import {ModalService} from "rebirth-ng";
+import {ModalService, DialogService} from "rebirth-ng";
 import {UserFormComponent} from "../user-form/user-form.component";
 import {UserService} from "../shared/user.service";
 import {User} from "../shared/user.model";
@@ -24,7 +24,8 @@ export class UserListComponent implements OnInit {
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
-              private userService: UserService) {
+              private userService: UserService,
+              private dialogService: DialogService) {
   }
 
   ngOnInit(): void {
@@ -73,10 +74,24 @@ export class UserListComponent implements OnInit {
     })
   }
 
-  delete(id: number) {
-    this.userService.delete(id).subscribe(() => {
-      this.query()
+  delete(id: number,name:string) {
+    this.dialogService.confirm({
+      title: '提示',
+      content: `确定要删除用户：${name}？`,
+      html: false,
+
+      yes: '确定',
+      no: '取消'
     })
+      .subscribe(
+        data => {
+          this.userService.delete(id).subscribe(() => {
+            this.query()
+          })
+        },
+        error => {
+        }
+      );
   }
 
 }

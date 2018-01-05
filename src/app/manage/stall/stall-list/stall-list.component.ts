@@ -1,5 +1,5 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
-import {ModalService} from "rebirth-ng";
+import {ModalService, DialogService} from "rebirth-ng";
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {StallFormComponent} from "../stall-form/stall-form.component";
 import {StallService} from "../shared/stall.service";
@@ -34,7 +34,8 @@ export class StallListComponent implements OnInit {
               private marketService: MarketService,
               private shopService: ShopService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+  private dialogService:DialogService) {
   }
 
   ngOnInit(): void {
@@ -126,11 +127,24 @@ export class StallListComponent implements OnInit {
     })
   }
 
-  delete(id: number) {
-    this.stallService.delete(id).subscribe(() => {
-      debugger
-      this.query()
+  delete(id: number,name:string) {
+    this.dialogService.confirm({
+      title: '提示',
+      content: `确定要删除摊位：${name}？`,
+      html: false,
+
+      yes: '确定',
+      no: '取消'
     })
+      .subscribe(
+        data => {
+          this.stallService.delete(id).subscribe(() => {
+            this.query()
+          })
+        },
+        error => {
+        }
+      );
   }
 
   goBack() {

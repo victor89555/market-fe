@@ -1,5 +1,5 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
-import {ModalService} from "rebirth-ng";
+import {ModalService, DialogService} from "rebirth-ng";
 import {RoleFormComponent} from "../role-form/role-form.component";
 import {Role} from "../shared/role.model";
 import {RoleService} from "../shared/role.service";
@@ -24,7 +24,8 @@ export class RoleListComponent implements OnInit {
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
-              private roleService: RoleService) {
+              private roleService: RoleService,
+              private dialogService: DialogService) {
   }
 
   ngOnInit(): void {
@@ -54,7 +55,7 @@ export class RoleListComponent implements OnInit {
     this.modalService.open<Role>({
       component: RoleFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
-      resolve: { "add": true}
+      resolve: {"add": true}
     }).subscribe(user => {
       this.query()
     })
@@ -72,10 +73,24 @@ export class RoleListComponent implements OnInit {
     })
   }
 
-  delete(id: number) {
-    this.roleService.delete(id).subscribe(() => {
-      this.query()
+  delete(id: number, name: string) {
+    this.dialogService.confirm({
+      title: '提示',
+      content: `确定要删除角色：${name}？`,
+      html: false,
+
+      yes: '确定',
+      no: '取消'
     })
+      .subscribe(
+        data => {
+          this.roleService.delete(id).subscribe(() => {
+            this.query()
+          })
+        },
+        error => {
+        }
+      );
   }
 
 }
