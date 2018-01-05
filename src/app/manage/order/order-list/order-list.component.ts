@@ -30,6 +30,7 @@ export class OrderListComponent implements OnInit {
   shopName: string = ""
   dateFormat: any = {"beginDate": "", "endDate": ""}
   hasBack: boolean = false
+  hasShopId: boolean = false
 
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
@@ -46,6 +47,7 @@ export class OrderListComponent implements OnInit {
         if(params["shopId"]){
           this.hasBack = true
           this.queryOrder.shopId = params["shopId"]
+          this.hasShopId = this.queryOrder.shopId ? true : false
         }
       }
     )
