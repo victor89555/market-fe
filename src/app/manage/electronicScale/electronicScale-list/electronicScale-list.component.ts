@@ -1,5 +1,5 @@
 import {Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
-import {ModalService} from "rebirth-ng";
+import {DialogService, ModalService} from "rebirth-ng";
 import {ElectronicScaleService} from "../shared/electronicScale.service";
 import {ElectronicScale} from "../shared/electronicScale.model";
 import {Page} from "../../../thurder-ng/models/page.model";
@@ -34,7 +34,8 @@ export class ElectronicScaleListComponent implements OnInit {
               private electronicScaleService: ElectronicScaleService,
               private marketService: MarketService,
               private shopService: ShopService,
-              private router: RouterModule) {
+              private router: RouterModule,
+              private dialogService: DialogService) {
   }
 
   ngOnInit(): void {
@@ -144,11 +145,23 @@ export class ElectronicScaleListComponent implements OnInit {
 
   //标记报废状态
   doScrap(scale) {
-    this.electronicScaleService.setStatus(scale.id, 2).subscribe(
-      (res) => {
-        console.log(res)
-        this.query()
-      }
-    )
+    this.dialogService.confirm({
+      title: '提示',
+      content: '是否报废该电子秤',
+      html: false,
+      yes: '确定',
+      no: '取消'
+    })
+      .subscribe(
+        data => {
+          this.electronicScaleService.setStatus(scale.id, 2).subscribe(
+            (res) => {
+              console.log(res)
+              this.query()
+            }
+          )
+        },
+        error => {}
+      );
   }
 }
