@@ -27,7 +27,7 @@
         <span class="text-error" *ngIf="!marketForm.stallLimitFormat">请输入数字</span>
       </div>
     </div>
-    <div class="form-group" *ngIf="!context.add" [ngClass]="{'has-error': !marketForm.stallNum}">
+    <div class="form-group" *ngIf="!context.add">
       <label class="col-sm-3 control-label">已入驻摊位数:</label>
       <div class="col-sm-9">
         <input type="text" disabled class="form-control" [(ngModel)]="market.stallNum"/>

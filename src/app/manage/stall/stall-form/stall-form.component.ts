@@ -115,7 +115,7 @@ export class StallFormComponent implements Modal, OnInit {
   }
 
   validateFuncType() {
-    this.stallForm.funcType = this.stall.funcType ? true : false
+    this.stallForm.funcType = this.stall.funcType !=null
   }
 
   validateArea() {
@@ -124,7 +124,7 @@ export class StallFormComponent implements Modal, OnInit {
   }
 
   validateStatus() {
-    this.stallForm.status = this.stall.status ? true : false
+    this.stallForm.status = this.stall.status !=null
   }
 
   validateStall() {

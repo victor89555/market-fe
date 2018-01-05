@@ -155,7 +155,7 @@ export class ElectronicScaleFormComponent implements Modal, OnInit {
   }
 
   validateStatus() {
-    this.elecScaleForm.status = this.electronicScale.status ? true : false
+    this.elecScaleForm.status = this.electronicScale.status !=null
   }
 }
 

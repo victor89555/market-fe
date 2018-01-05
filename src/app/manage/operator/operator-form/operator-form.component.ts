@@ -82,7 +82,7 @@ export class OperatorFormComponent implements Modal, OnInit {
     this.operatorForm.name = this.operator.name ? true : false
   }
   validateOperatorSex(){
-    this.operatorForm.sex = this.operator.sex ? true : false
+    this.operatorForm.sex = this.operator.sex != null
   }
   validateOperatorIdCarNo(){
     this.operatorForm.idCardNo = this.operator.idCardNo ? true : false

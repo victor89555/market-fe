@@ -76,13 +76,13 @@ export class UserFormComponent implements OnInit, Modal {
   }
 
   validateManager(){
-    this.userForm.manager = this.user.manager ? true : false
+    this.userForm.manager = this.user.manager !=null
   }
   validateSex(){
-    this.userForm.sex = this.user.sex ? true : false
+    this.userForm.sex = this.user.sex !=null
   }
   validateEnable(){
-    this.userForm.enable = this.user.enable ? true : false
+    this.userForm.enable = this.user.enable !=null
   }
 
   validateUser(){
