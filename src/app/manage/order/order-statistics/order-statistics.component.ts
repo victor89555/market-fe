@@ -182,7 +182,6 @@ export class OrderStatisticsComponent implements OnInit {
       ]
     };
   }
-
 //获取商户销量排名
   getShopSellStatistic(){
 

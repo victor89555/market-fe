@@ -35,6 +35,7 @@
         [offset]="page?.pageNo-1"
         [rows]="page?.items"
         (page)="setPage($event)"
+        [messages]="{emptyMessage: '暂无电子称历史记录！',totalMessage: '条',selectedMessage: '选中'}"
       >
         <ngx-datatable-column name="商户" prop="shop_name"></ngx-datatable-column>
         <ngx-datatable-column name="记录时间" prop="create_time"></ngx-datatable-column>
