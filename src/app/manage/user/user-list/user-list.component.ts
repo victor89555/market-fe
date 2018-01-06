@@ -55,7 +55,7 @@ export class UserListComponent implements OnInit {
     this.modalService.open<User>({
       component: UserFormComponent,
       componentFactoryResolver: this.componentFactoryResolver,
-      resolve: {}
+      resolve: {add: true}
     }).subscribe(user => {
       this.query()
     }, error => {

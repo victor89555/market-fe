@@ -5,10 +5,11 @@
 </div>
 <div class="modal-body">
   <div class="form-horizontal">
-    <div class="form-group" *ngIf="!context.add">
+    <div class="form-group">
       <label class="col-sm-3 control-label">登录名:</label>
       <div class="col-sm-9">
-        <input type="text" disabled class="form-control" [(ngModel)]="user.loginName"/>
+        <input type="text" *ngIf="!context.add" disabled class="form-control" [(ngModel)]="user.loginName"/>
+        <input type="text" *ngIf="context.add" class="form-control" [(ngModel)]="user.loginName"/>
       </div>
     </div>
     <div class="form-group" [ngClass]="{'has-error': !userForm.name}">

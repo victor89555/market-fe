@@ -11,7 +11,7 @@ import {ResourceService} from "../../resource/shared/resource.service"
 })
 export class RoleFormComponent implements OnInit, Modal {
 
-  @ViewChild("checkedTreeView")
+  @ViewChild("resourceTreeView")
   treeViewComponent: TreeViewComponent
 
   context: { id: number, add: boolean }
@@ -23,18 +23,7 @@ export class RoleFormComponent implements OnInit, Modal {
   }
 
   ngOnInit() {
-    console.log('ModalTestComponent init....')
     this.getResourceTree()
-  }
-
-  getRole() {
-    let roleOb = this.roleService.get(this.context.id)
-    roleOb.subscribe(
-      (role) => {
-        this.role = role
-      }
-    )
-    return roleOb
   }
 
   getResourceTree() {
@@ -42,7 +31,8 @@ export class RoleFormComponent implements OnInit, Modal {
     treeDataOb.subscribe(
       (treeData) => {
         if (!this.context.add) {
-          this.getRole().subscribe(() => {
+          this.roleService.get(this.context.id).subscribe((role) => {
+            this.role = role
             this.setChecked(treeData, this.role.resourceIds)
             this.resourceTreeData = treeData
           })
@@ -71,7 +61,7 @@ export class RoleFormComponent implements OnInit, Modal {
       return node.id
     })
     this.role.resourceIds = checkedResourceIds
-    if(this.validateRole()){
+    if (this.validateRole()) {
       this.roleService.save(this.role).subscribe(
         (role) => {
           this.dismiss.emit(role)
@@ -86,20 +76,22 @@ export class RoleFormComponent implements OnInit, Modal {
 
   // 角色表单验证
   roleForm = {
-    name : true,
-    code : true
+    name: true,
+    code: true
   }
-  validateName(){
+
+  validateName() {
     this.roleForm.name = this.role.name ? true : false
   }
-  validateCode(){
+
+  validateCode() {
     this.roleForm.code = this.role.code ? true : false
   }
 
-  validateRole(){
+  validateRole() {
     this.validateName()
     this.validateCode()
     return this.roleForm.code &&
-        this.roleForm.name
+      this.roleForm.name
   }
 }

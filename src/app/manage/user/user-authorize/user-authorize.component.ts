@@ -1,6 +1,8 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
 import {User} from "../shared/user.model"
 import {UserService} from "../shared/user.service"
+import {RoleService} from "../../role/shared/role.service"
+import {Role} from "../../role/shared/role.model"
 
 @Component({
   selector: 'app-user-authorize',
@@ -12,12 +14,16 @@ export class UserAuthorizeComponent implements OnInit {
   dismiss: EventEmitter<User>;
 
   user: User = new User()
+  roles: Role[] = []
+  checkedRoles: Role[] = []
+  labelFormatter = (item) => item && item.name;
+  valueParser = (item) => item && item.id;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private roleService: RoleService) {
   }
 
   ngOnInit() {
-    this.getUser()
+    this.getRoles()
   }
 
   getUser() {
@@ -28,7 +34,23 @@ export class UserAuthorizeComponent implements OnInit {
     )
   }
 
+  getRoles() {
+    this.roleService.getAll().subscribe(
+      (roles) => {
+        this.roles = roles
+        this.userService.get(this.context.id).subscribe(
+          (user) => {
+            this.user = user;
+            this.checkedRoles = this.roles.filter(role => user.roleIds.find(id => id == role.id))
+          })
+      }
+    )
+  }
+
   save() {
+    this.user.roleIds = this.checkedRoles.map(role => {
+      return role.id
+    })
     this.userService.save(this.user).subscribe(
       (user) => {
         this.dismiss.emit(user);

@@ -21,7 +21,7 @@ export class RoleService extends RebirthHttp {
   }
 
   @GET("roles")
-  getAll(@Query("name") name = ""): Observable<Role[]> {
+  getAll(): Observable<Role[]> {
     return null;
   }
 
@@ -36,7 +36,7 @@ export class RoleService extends RebirthHttp {
   }
 
   @PUT("roles/:id")
-  update( @Path("id") id: number, @Body role: Role): Observable<Role> {
+  update(@Path("id") id: number, @Body role: Role): Observable<Role> {
     return null;
   }
 
