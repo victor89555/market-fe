@@ -19,6 +19,14 @@
         <div class="text-error" *ngIf="!userForm.name">用户姓名不为空</div>
       </div>
     </div>
+    <div class="form-group" [ngClass]="{'has-error': !userForm.sex}">
+      <label class="col-sm-3 control-label">性别:</label>
+      <div class="col-sm-9">
+        <!--<input type="text" class="form-control" [(ngModel)]="user.sex" />-->
+        <tg-dict-select dictName="SEX" [(ngModel)]="user.sex"></tg-dict-select>
+        <div class="text-error" *ngIf="!userForm.sex">性别不为空</div>
+      </div>
+    </div>
     <div class="form-group">
       <label class="col-sm-3 control-label">昵称:</label>
       <div class="col-sm-9">
@@ -52,14 +60,6 @@
         <!--<input type="text" class="form-control" [(ngModel)]="user.manager" />-->
         <tg-dict-select dictName="WHETHER" [(ngModel)]="user.manager"></tg-dict-select>
         <div class="text-error" *ngIf="!userForm.manager">请选择是否管理员！</div>
-      </div>
-    </div>
-    <div class="form-group" [ngClass]="{'has-error': !userForm.sex}">
-      <label class="col-sm-3 control-label">性别:</label>
-      <div class="col-sm-9">
-        <!--<input type="text" class="form-control" [(ngModel)]="user.sex" />-->
-        <tg-dict-select dictName="SEX" [(ngModel)]="user.sex"></tg-dict-select>
-        <div class="text-error" *ngIf="!userForm.sex">性别不为空</div>
       </div>
     </div>
     <div class="form-group" [ngClass]="{'has-error': !userForm.enable}">
