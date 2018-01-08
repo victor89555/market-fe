@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h4 class="modal-title">个人设置</h4>
+</div>
+<div class="modal-body">
+  <div class="form-horizontal">
+    <div class="form-group" [ngClass]="{'has-error': !validateForm.name}">
+      <label class="col-sm-2 control-label">姓名:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="personage.name" />
+        <div class="text-error" *ngIf="!validateForm.name">姓名不为空</div>
+      </div>
+    </div>
+    <div class="form-group" [ngClass]="{'has-error': !validateForm.sex}">
+      <label class="col-sm-2 control-label">性别:</label>
+      <div class="col-sm-10">
+        <tg-dict-select dictName="SEX" [(ngModel)]="personage.sex"></tg-dict-select>
+        <div class="text-error" *ngIf="!validateForm.sex">性别不为空</div>
+      </div>
+    </div>
+    <div class="form-group" [ngClass]="{'has-error': !validateForm.mobile || !validateForm.mobileFormat}">
+      <label class="col-sm-2 control-label">手机号:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="personage.mobile"/>
+        <span class="text-error" *ngIf="!validateForm.mobile">手机号不为空</span>
+        <span class="text-error" *ngIf="!validateForm.mobileFormat">请输入正确手机号</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">邮箱:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" [(ngModel)]="personage.email"  />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="update()">保存</button>
+  <button type="button" class="btn btn-warning" (click)="cancel()">取消</button>
+</div>

@@ -7,6 +7,7 @@ import { AuthorizationService, RebirthPermissionModule } from 'rebirth-permissio
 import { ReStorageService } from './storage/storage.service';
 import { GuidService } from './guid/guid.service';
 import { LoadingService } from './loading/loading.service';
+import {BrowserModule} from '@angular/platform-browser'
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { LoadingService } from './loading/loading.service';
     RebirthEventSourceModule,
     RebirthNGModule.forRoot(),
     RebirthPermissionModule.forRoot({ loginPage: '/login' }),
+    BrowserModule,
   ],
   providers: [
     LoadingService,

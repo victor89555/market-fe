@@ -1,5 +1,4 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core'
-import {BrowserModule} from '@angular/platform-browser'
 import {FormsModule} from '@angular/forms'
 import {FoursquareDirective} from '../thurder-ng/directives/foursquare.directive'
 import {ThurderNgConfig} from './support/thurder-ng-config'
@@ -19,7 +18,6 @@ import {AreaSelectComponent} from './components/area/area-select.component'
 @NgModule({
   imports: [
     CommonModule,
-    BrowserModule,
     FormsModule,
   ],
   declarations: [
