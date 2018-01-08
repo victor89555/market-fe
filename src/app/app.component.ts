@@ -1,7 +1,7 @@
 import {Component, ViewContainerRef} from '@angular/core';
 import {environment} from '../environments/environment';
 import {RebirthHttpProvider} from 'rebirth-http';
-import {NotifyService, RebirthNGConfig, REBIRTH_NG_I18N_ZHCN} from 'rebirth-ng';
+import {NotifyService, REBIRTH_NG_I18N_ZHCN, RebirthNGConfig} from 'rebirth-ng';
 import 'rxjs/add/operator/do';
 import {AuthorizationService} from 'rebirth-permission';
 import {LoadingService} from './core/loading/loading.service';
@@ -67,17 +67,16 @@ export class AppComponent {
         }
       })
       .addResponseErrorInterceptor((res: HttpErrorResponse) => {
-        if ([401, 403, 0].includes(res.status)) {
+        if ([401, 0].includes(res.status)) {
           this.router.navigateByUrl('/login');
         }
         if ([400].indexOf(res.status) !== -1) {
           console.log(res.error.msg)
-
           this.alertBoxService.placement("top")
           this.alertBoxService.open({
             type: 'danger',
             html: res.error.msg || "Error！"
-          }, 5000 );
+          }, 5000);
         }
       });
   }
