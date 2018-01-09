@@ -49,7 +49,7 @@
           <p class="text-error" *ngIf="!contractValidateForm.endTime.status">{{contractValidateForm.endTime.errText}}</p>
         </div>
       </div>
-    
+
       <div class="form-group" [ngClass]="{'has-error': !contractValidateForm.status.status}">
         <label class="col-sm-3 control-label">状态:</label>
         <div class="col-sm-9">
@@ -111,8 +111,8 @@
             <tr *ngFor="let att of attachments; let i = index">
               <td>{{att.fileName}}</td>
               <td>{{att.fileType}}</td>
-              <td>{{att.fileSize}}</td>
-              <td><a href="{{att.filePath}}" download="filename" style="cursor: pointer">下载</a></td>
+              <td>{{att.fileSize/1000}}kb</td>
+              <td><a (click)="downloadAttachment(att.id, att.fileName)" download="filename" style="cursor: pointer">下载</a></td>
               <td><a (click)="onDeleteAttachments(i)" style="cursor: pointer">删除</a></td>
             </tr>
             </tbody>
@@ -124,7 +124,7 @@
         <div class="col-sm-9">
           <re-file-upload [multiple]="true" (removeFiles)="onRemoveDone($event)" uploadParamName="file"
                           (uploadFilesChange)="uploadFilesChange($event)" chooseButton="选择附件" uploadButton="上传附件" cancelButton="清空"
-                          [uploadUrl]="uploadUrl" (fileUploadSuccess)="onUploadSuccess($event)"></re-file-upload>
+                          [uploadUrl]="uploadUrl" [uploadRequestOptions]="uploadRequestHeaders" (fileUploadSuccess)="onUploadSuccess($event)"></re-file-upload>
         </div>
       </div>
     </div>

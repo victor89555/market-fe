@@ -8,6 +8,9 @@ import {Shop} from "../../shop/shared/shop.model";
 import {ShopService} from "../../shop/shared/shop.service";
 import {dicts} from "../../../thurder-ng/models/dictionary";
 import {FormControl} from '@angular/forms';
+import {AttachmentService} from "../../shared/attachment.service"
+import {AuthorizationService} from "rebirth-permission"
+import {environment} from "../../../../environments/environment"
 
 @Component({
   selector: 'app-contract-form',
@@ -25,7 +28,8 @@ export class ContractFormComponent implements Modal, OnInit {
   equipmentsOptions = ["电子秤", "不锈钢架", "PC垫板", "PPP占板", "三防罩", "操作交易台", "上墙货架", "展示架", "交易台", "宰杀操作台", "蓄养池"];
   equipmentsLabel: string[]
   equipmentName = dicts["EQUIPMENT_NAME"]
-  uploadUrl: string = "http://market-bus.djws.com.cn/api/contracts/attachments"
+  uploadUrl: string = environment.api.host + "/contracts/attachments"
+  uploadRequestHeaders: any
   @ViewChild("contractForm")
   contractForm: FormControl = new FormControl()
 
@@ -38,11 +42,16 @@ export class ContractFormComponent implements Modal, OnInit {
   constructor(private changeDetectorRef: ChangeDetectorRef,
               private contractService: ContractService,
               private marketService: MarketService,
-              private shopService: ShopService) {
+              private shopService: ShopService,
+              private attachmentService: AttachmentService,
+              private authorizationService: AuthorizationService) {
   }
 
   ngOnInit(): void {
-    console.log('ModalTestComponent init....');
+    const currentUser = this.authorizationService.getCurrentUser()
+    if (currentUser) {
+      this.uploadRequestHeaders = {headers: {Authorization: `Bearer ${currentUser.token }`}}
+    }
     //判断添加合同（合同管理里添加，商户管理里添加），修改合同
     if (this.context.add) {
       if (this.context.isShopForm) {
@@ -140,6 +149,10 @@ export class ContractFormComponent implements Modal, OnInit {
 
   uploadFilesChange($event) {
     this.uploadFiles = $event.map(item => item.uploadResponse.path)
+  }
+
+  downloadAttachment(id, fileName) {
+    this.attachmentService.download(id, fileName)
   }
 
   onDeleteAttachments(idx) {

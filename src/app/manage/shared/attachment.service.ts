@@ -5,11 +5,12 @@ import {Injectable} from "@angular/core"
 import {GET, Path, RebirthHttp} from "rebirth-http"
 import {HttpClient} from "@angular/common/http"
 import {Observable} from "rxjs/Observable"
+import {environment} from "../../../environments/environment"
 
 @Injectable()
 export class AttachmentService extends RebirthHttp {
   constructor(http: HttpClient) {
-    super(http);
+    super(http)
   }
 
   @GET("attachments/:id/download")
@@ -17,17 +18,23 @@ export class AttachmentService extends RebirthHttp {
     return null
   }
 
-  download(id) {
-    this._download(id).subscribe(data => this.downloadFile(data)),//console.log(data),
+  download(id, fileName) {
+    const apiHost = environment.api.host
+    this.http.get(`${apiHost}/attachments/${id}/download`, {
+      responseType: "blob"
+    }).subscribe((data: Blob) => this.downloadFile(data, fileName)),//console.log(data),
       error => console.log("文件下载出错"),
-      () => console.info("文件下载完成");
+      () => console.info("文件下载完成")
   }
 
-  downloadFile(data: Response) {
-    var blob = new Blob([data]);
-    // var blob = new Blob([data], {type: 'text/csv'});
-    var url = window.URL.createObjectURL(blob);
-    window.open(url);
+  private downloadFile(data: Blob, fileName) {
+    // var blob = new Blob([data], {type: 'text/csv'})
+    // var url = URL.createObjectURL(data)
+    // window.open(url)
+    var link = document.createElement('a');
+    link.href = window.URL.createObjectURL(data);
+    link.download = fileName;
+    link.click();
   }
 
 }
