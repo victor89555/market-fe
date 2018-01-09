@@ -45,6 +45,7 @@ export class PageHeaderComponent implements OnInit{
   }
 
   updateInfo() {
+    this.onUserClick()
     this.modalService.open<any>({
       component: UpdateInfoComponent,
       componentFactoryResolver: this.componentFactoryResolver,
@@ -58,6 +59,7 @@ export class PageHeaderComponent implements OnInit{
   }
 
   updatePassword() {
+    this.onUserClick()
     this.modalService.open<any>({
       component: UpdatePasswordComponent,
       componentFactoryResolver: this.componentFactoryResolver,

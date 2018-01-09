@@ -50,10 +50,10 @@ export class ShopStatisticsComponent implements OnInit {
       month = month < 10 ? `0${month}` : month
       let today: number | string = date.getDate()
       today = today < 10 ? `0${today}` : today
-      this.queryShop.beginTime="2017-12-01" //测试数据，实际用当前月1号
-      this.queryShop.endTime="2018-01-04"
-      // this.queryShop.beginTime = `${year}-${month}-01`
-      // this.queryShop.endTime = `${year}-${month}-${today}`
+      // this.queryShop.beginTime="2017-12-01" //测试数据，实际用当前月1号
+      // this.queryShop.endTime="2018-01-04"
+      this.queryShop.beginTime = `${year}-${month}-01`
+      this.queryShop.endTime = `${year}-${month}-${today}`
     }
     this.getShopSall()
     this.getGreensStatistics()

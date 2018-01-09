@@ -40,10 +40,10 @@
       <h2 class="text-center">登录</h2>
     </div>
     <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
-      <re-alert-box type="danger" *ngIf="showError">
+     <!-- <re-alert-box type="danger" *ngIf="showError">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         输入的用户名或者密码无效!
-      </re-alert-box>
+      </re-alert-box>-->
       <div class="login-bd">
         <div class="form-horizontal">
           <div class="form-group" [ngClass]="{'has-error': loginForm.controls['loginName'].touched && loginForm.controls['loginName'].invalid}">
