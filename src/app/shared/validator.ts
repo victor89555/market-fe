@@ -19,7 +19,7 @@ export class Validator implements OnInit {
   }
   // 手机号码的验证
   isMobile(mobile){
-    let reg =/^1[3|4|5|8][0-9]\d{4,8}$/
+    let reg =/^1[3|4|5|8][0-9]\d{8}$/
     if(reg.test(mobile)){
       return true
     }else {
