@@ -50,7 +50,8 @@ import {ElectronicScaleHistoryComponent} from './electronicScale/electronic-scal
 import {MonthReportComponent} from './report/month-report/month-report.component'
 import {ReportService} from "./report/shared/report.service";
 import {UserAuthorizeComponent} from './user/user-authorize/user-authorize.component'
-import {AttachmentService} from "./shared/attachment.service"
+import {AttachmentService} from './shared/attachment.service';
+import { ResourceListComponent } from './resource/resource-list/resource-list.component'
 
 @NgModule({
   imports: [
@@ -92,7 +93,8 @@ import {AttachmentService} from "./shared/attachment.service"
     MarketStatisticsComponent,
     ElectronicScaleHistoryComponent,
     MonthReportComponent,
-    UserAuthorizeComponent
+    UserAuthorizeComponent,
+    ResourceListComponent
   ],
   entryComponents: [
     OrderFormComponent,
