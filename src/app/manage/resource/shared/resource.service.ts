@@ -1,4 +1,4 @@
-import {BaseUrl, Body, GET, Path, POST, PUT, Query, RebirthHttp} from "rebirth-http";
+import {BaseUrl, Body, GET, Path, POST, PUT, Query,DELETE, RebirthHttp} from "rebirth-http";
 import {Observable} from "rxjs/Observable";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
@@ -6,6 +6,7 @@ import "rxjs/add/operator/map";
 import {Page} from "../../../thurder-ng/models/page.model"
 import {environment} from "../../../../environments/environment"
 import {Resource} from "./resource.model"
+import {ResourceNode} from "./resourceNode.model"
 
 @Injectable()
 @BaseUrl(environment.auth.host)
@@ -40,4 +41,19 @@ export class ResourceService extends RebirthHttp {
     return null;
   }
 
+
+  @POST('resources')
+  saveNode(@Body resourceNode: ResourceNode): Observable<ResourceNode> {
+    return null;
+  }
+
+  @DELETE("resources/:id")
+  deleteNode( @Path("id") id: number): Observable<any> {
+    return null;
+  }
+
+  @PUT("resources/:id")
+  updateNode( @Path("id") id: number, @Body resourceNode: ResourceNode): Observable<ResourceNode> {
+    return null;
+  }
 }
