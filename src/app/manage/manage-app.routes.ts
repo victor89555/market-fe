@@ -19,6 +19,7 @@ import {ShopStatisticsComponent} from "./shop/shop-statistics/shop-statistics.co
 import {MarketStatisticsComponent} from "./market/market-statistics/market-statistics.component";
 import {ElectronicScaleHistoryComponent} from "./electronicScale/electronic-scale-history/electronic-scale-history.component";
 import {MonthReportComponent} from "./report/month-report/month-report.component";
+import { ResourceListComponent } from "./resource/resource-list/resource-list.component"
 
 export const ROUTER_CONFIG: Routes = [
   {
@@ -46,7 +47,8 @@ export const ROUTER_CONFIG: Routes = [
       {path: 'members', component: MemberListComponent},
       {path: 'users', component:UserListComponent},
       {path: 'roles', component:RoleListComponent},
-      {path: 'monthReport', component:MonthReportComponent,}
+      {path: 'monthReport', component:MonthReportComponent},
+      {path:'resources',component:ResourceListComponent}
     ]
   }
 ];

@@ -1,0 +1,41 @@
+<div id="page1" class="page-content">
+  <div class="row resource-header">
+    <div class="col-xs-5">
+      <ng-template #nodeItemTemplate let-node="" let-parentNode="parentNode">
+        <!--<span class="node-text">{{node.id}}: {{node.name}}</span>-->
+        <i class="glyphicon glyphicon-plus" (click)="addNode(node,parentNode)"></i>
+        <i class="glyphicon glyphicon-remove" (click)="removeNode(node,parentNode)"></i>
+      </ng-template>
+      <re-tree-view [treeData]="resourceTreeData" textField="name" valueFeild="id" iconField="icon"
+                    [nodeItemToolbarTemplate]="nodeItemTemplate" leafIcon></re-tree-view>
+    </div>
+    <div class="col-xs-7" *ngIf="show">
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label for="upResource" class="col-sm-4 control-label">上一级资源：</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" name="shopname" id="upResource" disabled/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="resourceName" class="col-sm-4 control-label">名称：</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" name="shopname" id="resourceName" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="resourceName" class="col-sm-4 control-label">编码：</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" name="shopname" id="resourceCode" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="resourceNo" class="col-sm-4 control-label">序号：</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" name="shopname" id="resourceNo" required/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
