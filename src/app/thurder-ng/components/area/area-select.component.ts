@@ -24,11 +24,11 @@ export class AreaSelectComponent implements OnInit, ControlValueAccessor {
   areaData = AREA_DATA
   provinces = []
   cities = []
-  @Input() area: Area = new Area({ "code": null, "region": null }, { "code": null, "region": null })
+  @Input() area: Area = new Area()
   private onChange = (_: any) => null
   private onTouched = () => null
-  @Output() proviceChange = new EventEmitter<any>();
-  @Output() cityChange = new EventEmitter<any>();
+  @Output() proviceChange = new EventEmitter<string>();
+  @Output() cityChange = new EventEmitter<string>();
 
   ngOnInit() {
     this.getProvinces()
@@ -36,14 +36,14 @@ export class AreaSelectComponent implements OnInit, ControlValueAccessor {
 
   getProvinces() {
     for (let i = 0; i < this.areaData.provinces.length; i++) {
-      this.provinces.push({code:this.areaData.provinces[i].code,region:this.areaData.provinces[i].region})
+      this.provinces.push(this.areaData.provinces[i].name)
     }
   }
 
   getCities() {
     for (let i = 0; i < this.areaData.provinces.length; i++) {
-      if (this.areaData.provinces[i].code == this.area.provinceCode.code) {
-        this.cities = this.areaData.provinces[i].regionEntitys
+      if (this.areaData.provinces[i].name == this.area.provinceCode) {
+        this.cities = this.areaData.provinces[i].citys
       }
     }
   }

@@ -1,12 +1,12 @@
 <div class="form-inline">
-  <select type="text" class="form-control" name="province" [(ngModel)]="area.provinceCode.code"
+  <select type="text" class="form-control" name="province" [(ngModel)]="area.provinceCode"
           (ngModelChange)="selectedProvinceChange()">
     <option [value]="null">-省份-</option>
-    <option *ngFor="let province of provinces" [ngValue]="province.code">{{province.region}}</option>
+    <option *ngFor="let province of provinces" [ngValue]="province">{{province}}</option>
   </select>
-  <select type="text" class="form-control" name="city" [(ngModel)]="area.cityCode.code"
+  <select type="text" class="form-control" name="city" [(ngModel)]="area.cityCode"
           (ngModelChange)="selectedCityChange()">
     <option [value]="null">-市区-</option>
-    <option *ngFor="let city of cities" [ngValue]="city.code">{{city.region}}</option>
+    <option *ngFor="let city of cities" [ngValue]="city">{{city}}</option>
   </select>
 </div>
