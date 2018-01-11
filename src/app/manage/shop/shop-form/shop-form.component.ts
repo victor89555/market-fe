@@ -251,7 +251,7 @@ export class ShopFormComponent implements OnInit {
   }
 
   scaleNameFormatter = (scale: any) => { // 电子秤输入显示数据
-    return scale.sequence_no
+    return scale.sequence_no || ""
   }
 
   loadElectronicScale() { // 电子秤
