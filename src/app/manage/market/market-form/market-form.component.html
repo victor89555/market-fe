@@ -9,21 +9,21 @@
       <label class="col-sm-3 control-label">市场名:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="market.name"/>
-        <div class="text-error" *ngIf="!marketForm.marketName">市场名称不为空</div>
+        <div class="text-error" *ngIf="!marketForm.marketName">市场名称不能为空</div>
       </div>
     </div>
     <div class="form-group" [ngClass]="{'has-error': !marketForm.marketCode}">
       <label class="col-sm-3 control-label">市场代码:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="market.code"/>
-        <div class="text-error" *ngIf="!marketForm.marketCode">市场代码不为空</div>
+        <div class="text-error" *ngIf="!marketForm.marketCode">市场代码不能为空</div>
       </div>
     </div>
     <div class="form-group" [ngClass]="{'has-error': !marketForm.stallLimit || !marketForm.stallLimitFormat}">
       <label class="col-sm-3 control-label">摊位总数:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="market.stallLimit"/>
-        <span class="text-error" *ngIf="!marketForm.stallLimit">摊位总数不为空</span>
+        <span class="text-error" *ngIf="!marketForm.stallLimit">摊位总数不能为空</span>
         <span class="text-error" *ngIf="!marketForm.stallLimitFormat">请输入数字</span>
       </div>
     </div>
@@ -37,7 +37,7 @@
       <label class="col-sm-3 control-label">店铺总数:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="market.storeNum"/>
-        <span class="text-error" *ngIf="!marketForm.storeNum">店铺总数不为空</span>
+        <span class="text-error" *ngIf="!marketForm.storeNum">店铺总数不能为空</span>
         <span class="text-error" *ngIf="!marketForm.storeNumFormat">请输入数字</span>
       </div>
     </div>
@@ -45,7 +45,7 @@
       <label class="col-sm-3 control-label">已入驻店铺数:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="market.enterStoreNum"/>
-        <span class="text-error" *ngIf="!marketForm.enterStoreNum">已入驻店铺数不为空</span>
+        <span class="text-error" *ngIf="!marketForm.enterStoreNum">已入驻店铺数不能为空</span>
         <span class="text-error" *ngIf="!marketForm.enterStoreNumFormat">请输入数字</span>
       </div>
     </div>
@@ -63,8 +63,8 @@
           </select>-->
           <tg-area-select (proviceChange)="onProvinceChange($event)" (cityChange)="onCityChange($event)"
                           [(ngModel)]="marketArea"></tg-area-select>
-          <div class="text-error" *ngIf="!marketForm.provinceCode">市场省份不为空</div>
-          <div class="text-error" *ngIf="!marketForm.cityCode">市场市区不为空</div>
+          <div class="text-error" *ngIf="!marketForm.provinceCode">省份不能为空</div>
+          <div class="text-error" *ngIf="!marketForm.cityCode">城市不能为空</div>
         </div>
       </div>
     </div>
@@ -72,7 +72,7 @@
       <label class="col-sm-3 control-label">地址:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="market.addr"/>
-        <div class="text-error" *ngIf="!marketForm.addr">市场市区不为空</div>
+        <div class="text-error" *ngIf="!marketForm.addr">详细地址不能为空</div>
 
       </div>
     </div>

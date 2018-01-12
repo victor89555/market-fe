@@ -16,7 +16,7 @@
       <label class="col-sm-3 control-label">姓名:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="user.name" />
-        <div class="text-error" *ngIf="!userForm.name">用户姓名不为空</div>
+        <div class="text-error" *ngIf="!userForm.name">用户姓名不能为空</div>
       </div>
     </div>
     <div class="form-group" [ngClass]="{'has-error': !userForm.sex}">
@@ -24,7 +24,7 @@
       <div class="col-sm-9">
         <!--<input type="text" class="form-control" [(ngModel)]="user.sex" />-->
         <tg-dict-select dictName="SEX" [(ngModel)]="user.sex"></tg-dict-select>
-        <div class="text-error" *ngIf="!userForm.sex">性别不为空</div>
+        <div class="text-error" *ngIf="!userForm.sex">性别不能为空</div>
       </div>
     </div>
     <div class="form-group">
@@ -37,7 +37,7 @@
       <label class="col-sm-3 control-label">手机号:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="user.mobile" />
-        <span class="text-error" *ngIf="!userForm.mobile">手机号不为空</span>
+        <span class="text-error" *ngIf="!userForm.mobile">手机号不能为空</span>
         <span class="text-error" *ngIf="!userForm.mobileFormat">请输入正确手机号</span>
 
       </div>

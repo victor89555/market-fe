@@ -9,7 +9,7 @@
       <label class="col-sm-3 control-label">序列号:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" [(ngModel)]="electronicScale.sequenceNo" />
-        <div class="text-error" *ngIf="!elecScaleForm.sequenceNo">电子秤序列号不为空</div>
+        <div class="text-error" *ngIf="!elecScaleForm.sequenceNo">电子秤序列号不能为空</div>
       </div>
     </div>
     <div class="form-group" [ngClass]="{'has-error': !elecScaleForm.shopId}">
@@ -34,7 +34,7 @@
             <i class="glyphicon glyphicon-menu-down"></i>
           </div>
         </div>
-        <div class="text-error" *ngIf="!elecScaleForm.shopId">商户不为空</div>
+        <div class="text-error" *ngIf="!elecScaleForm.shopId">商户不能为空</div>
       </div>
     </div>
     <div class="form-group" [ngClass]="{'has-error': !elecScaleForm.marketId}">
@@ -43,7 +43,7 @@
         <select type="text" class="form-control" [(ngModel)]="marketId">
           <option *ngFor="let market of markets" [value]="market.id" (click)="queryShops(market.id, null, null, null, 1, 500)">{{market.name}}</option>
         </select>
-        <div class="text-error" *ngIf="!elecScaleForm.marketId">市场不为空</div>
+        <div class="text-error" *ngIf="!elecScaleForm.marketId">市场不能为空</div>
       </div>
     </div>
     <div class="form-group">
@@ -62,7 +62,7 @@
       <label class="col-sm-3 control-label">状态:</label>
       <div class="col-sm-9">
         <tg-dict-select dictName="ELECTRONICSCALE_STATUS" [(ngModel)]="electronicScale.status"></tg-dict-select>
-        <div class="text-error" *ngIf="!elecScaleForm.status">电子秤状态不为空</div>
+        <div class="text-error" *ngIf="!elecScaleForm.status">电子秤状态不能为空</div>
       </div>
     </div>
   </div>

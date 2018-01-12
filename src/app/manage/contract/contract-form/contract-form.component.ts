@@ -258,7 +258,7 @@ export class ContractFormComponent implements Modal, OnInit {
     //验证为空
     if (this.isEmpty(this.contract.signTime)) {
       e.status = false
-      e.errText = "签约时间不为空"
+      e.errText = "签约时间不能为空"
     } else {
       e.status = true
     }
@@ -276,7 +276,7 @@ export class ContractFormComponent implements Modal, OnInit {
     //验证为空
     if (this.isEmpty(this.contract.validityTime)) {
       e.status = false
-      e.errText = "到期时间不为空"
+      e.errText = "到期时间不能为空"
       return false
     } else {
       e.status = true
@@ -301,7 +301,7 @@ export class ContractFormComponent implements Modal, OnInit {
   //验证状态
   validateStatus() {
     let e = this.contractValidateForm.status
-    //验证不为空
+    //验证不能为空
     if (this.isEmpty(this.contract.status)) {
       e.status = false
       e.errText = '请选择状态'
