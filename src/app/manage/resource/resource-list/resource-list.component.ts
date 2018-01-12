@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ResourceService} from "../../resource/shared/resource.service"
 import {DialogService} from "rebirth-ng";
-import { ResourceNode } from "../shared/resourceNode.model"
+import {ResourceNode} from "../shared/resourceNode.model"
 
 @Component({
   selector: 'app-resource-list',
@@ -12,7 +12,7 @@ export class ResourceListComponent implements OnInit {
   resourceTreeData: any[] = []          // 所有资源
   show = false
   urlShow = false
-  resourceNode:ResourceNode = new ResourceNode()
+  resourceNode: ResourceNode = new ResourceNode()
 
   constructor(private resourceService: ResourceService,
               private dialogService: DialogService) {
@@ -36,7 +36,6 @@ export class ResourceListComponent implements OnInit {
     this.show = true
     this.resourceNode.parentId = node.id
     this.resourceNode.pName = node.name
-    this.resourceNode.icoName= "glyphicon glyphicon-cog"
   }
 
   removeNode(node, parentNode) {
@@ -51,7 +50,7 @@ export class ResourceListComponent implements OnInit {
       .subscribe(
         data => {
           this.resourceService.deleteNode(node.id).subscribe((res) => {
-             this.getResourceTree()
+            this.getResourceTree()
           })
         },
         error => {
@@ -61,24 +60,34 @@ export class ResourceListComponent implements OnInit {
   }
 
   saveNode() {
-    this.resourceService.saveNode(this.resourceNode).subscribe((res)=>{
+    this.resourceService.saveNode(this.resourceNode).subscribe((res) => {
       console.log(res);
       this.getResourceTree();
     })
   }
 
-  updateNode(id:number){
+  updateNode(id: number) {
     this.resourceService.updateNode(id, this.resourceNode).subscribe(
       (resourceNode) => {
-         this.getResourceTree()
+        this.getResourceTree()
       }
     )
   }
-  typeChange(){
+
+  typeChange() {
     this.urlShow = false
     this.resourceNode.url = "resources"
-    if(this.resourceNode.resourceType==1){
-      this.urlShow=true
+    switch (this.resourceNode.resourceType) {
+      case 0:
+        this.resourceNode.icoName = "glyphicon glyphicon-th-large"
+        break
+      case 1:
+        this.resourceNode.icoName = "glyphicon glyphicon-book"
+        this.urlShow = true
+        break
+      case 2:
+        this.resourceNode.icoName = "glyphicon glyphicon-cog"
+        break
     }
   }
 }
