@@ -62,6 +62,9 @@ export class ResourceListComponent implements OnInit {
   saveNode() {
     this.resourceService.saveNode(this.resourceNode).subscribe((res) => {
       console.log(res);
+      for(let node in this.resourceNode){
+        console.log(node)
+      }
       this.getResourceTree();
     })
   }
@@ -76,7 +79,7 @@ export class ResourceListComponent implements OnInit {
 
   typeChange() {
     this.urlShow = false
-    this.resourceNode.url = "resources"
+    this.resourceNode.url = ""
     switch (this.resourceNode.resourceType) {
       case 0:
         this.resourceNode.icoName = "glyphicon glyphicon-th-large"
@@ -84,6 +87,7 @@ export class ResourceListComponent implements OnInit {
       case 1:
         this.resourceNode.icoName = "glyphicon glyphicon-book"
         this.urlShow = true
+        this.resourceNode.url = "resources"
         break
       case 2:
         this.resourceNode.icoName = "glyphicon glyphicon-cog"
