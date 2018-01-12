@@ -27,6 +27,7 @@ export class ResourceListComponent implements OnInit {
     treeDataOb.subscribe(
       (treeData) => {
         this.resourceTreeData = treeData
+        this.resourceTreeData[0].$expend = true
       }
     )
     return treeDataOb
@@ -61,10 +62,10 @@ export class ResourceListComponent implements OnInit {
 
   saveNode() {
     this.resourceService.saveNode(this.resourceNode).subscribe((res) => {
-      console.log(res);
       for(let node in this.resourceNode){
-        console.log(node)
+        this.resourceNode[node] == ''
       }
+      this.show = false
       this.getResourceTree();
     })
   }
@@ -82,12 +83,11 @@ export class ResourceListComponent implements OnInit {
     this.resourceNode.url = ""
     switch (this.resourceNode.resourceType) {
       case 0:
-        this.resourceNode.icoName = "glyphicon glyphicon-th-large"
+        this.resourceNode.icoName = "glyphicon glyphicon-book"
         break
       case 1:
-        this.resourceNode.icoName = "glyphicon glyphicon-book"
+        this.resourceNode.icoName = "glyphicon glyphicon-th-large"
         this.urlShow = true
-        this.resourceNode.url = "resources"
         break
       case 2:
         this.resourceNode.icoName = "glyphicon glyphicon-cog"
