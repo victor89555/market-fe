@@ -11,6 +11,7 @@ import { ResourceNode } from "../shared/resourceNode.model"
 export class ResourceListComponent implements OnInit {
   resourceTreeData: any[] = []          // 所有资源
   show = false
+  urlShow = false
   resourceNode:ResourceNode = new ResourceNode()
 
   constructor(private resourceService: ResourceService,
@@ -36,8 +37,6 @@ export class ResourceListComponent implements OnInit {
     this.resourceNode.parentId = node.id
     this.resourceNode.pName = node.name
     this.resourceNode.icoName= "glyphicon glyphicon-cog"
-    this.resourceNode.resourceType = 2
-    this.resourceNode.url = "resources"
   }
 
   removeNode(node, parentNode) {
@@ -74,5 +73,12 @@ export class ResourceListComponent implements OnInit {
          this.getResourceTree()
       }
     )
+  }
+  typeChange(){
+    this.urlShow = false
+    this.resourceNode.url = "resources"
+    if(this.resourceNode.resourceType==1){
+      this.urlShow=true
+    }
   }
 }

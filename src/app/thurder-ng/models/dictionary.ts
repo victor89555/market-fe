@@ -18,7 +18,7 @@ export const dicts = {
     1: "可用",
   },
 
-  "WHETHER":{
+  "WHETHER": {
     0: "否",
     1: "是"
   },
@@ -82,5 +82,11 @@ export const dicts = {
     9: "交易台",
     10: "宰杀操作台",
     11: "蓄养池"
+  },
+
+  "RESOURCE_TYPE": {
+    0: "模块",
+    1: "菜单",
+    2: "功能"
   }
 }
