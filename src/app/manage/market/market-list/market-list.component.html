@@ -7,8 +7,8 @@
       </h1>
     </div>
     <div class="page-toolbar">
-      <div class="pull-right tooltips">
-        <a href="javascript:;" class="btn btn-danger" (click)="add()" has-permission="FUC_ORDER_ADD">
+      <div class="pull-right tooltips" *reRole="['FUNC_ORDERS_ADD']">
+        <a href="javascript:;" class="btn btn-danger" (click)="add()">
           <i class="glyphicon glyphicon-plus"></i> 新增
         </a>
       </div>

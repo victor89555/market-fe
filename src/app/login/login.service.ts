@@ -14,12 +14,12 @@ export class LoginService {
   }
 
   login(loginInfo: { loginName: string; password: string }): Observable<CurrentUser> {
-    const authorizationService = this.authorizationService;
+    const authorizationService = this.authorizationService
     return this.innerLogin(loginInfo)
       .map(user => {
-        authorizationService.setCurrentUser(user);
-        return user;
-      });
+        authorizationService.setCurrentUser(user)
+        return user
+      })
   }
 
   innerLogin(loginInfo): Observable<CurrentUser> {
