@@ -37,7 +37,7 @@ export class ResourceListComponent implements OnInit {
     this.resourceNode.pName = node.name
     this.resourceNode.icoName= "glyphicon glyphicon-cog"
     this.resourceNode.resourceType = 2
-    this.resourceNode.url = "http://vito-uic.djws.com.cn/api/resources"
+    this.resourceNode.url = "resources"
   }
 
   removeNode(node, parentNode) {
@@ -75,5 +75,4 @@ export class ResourceListComponent implements OnInit {
       }
     )
   }
-
 }

@@ -6,7 +6,7 @@
         <i class="glyphicon glyphicon-plus" (click)="addNode(node,parentNode)"></i>
         <i class="glyphicon glyphicon-remove" (click)="removeNode(node,parentNode)"></i>
       </ng-template>
-      <re-tree-view [treeData]="resourceTreeData" textField="name" valueFeild="id" (click)="show=true" iconField="icon"
+      <re-tree-view [treeData]="resourceTreeData" textField="name" valueFeild="id" iconField="icon"
                     [nodeItemToolbarTemplate]="nodeItemTemplate" leafIcon></re-tree-view>
     </div>
     <div class="col-xs-7" *ngIf="show">
