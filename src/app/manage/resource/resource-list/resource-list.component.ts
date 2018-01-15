@@ -82,6 +82,13 @@ export class ResourceListComponent implements OnInit {
     })
   }
 
+  cancel(){
+    this.show = false
+    for(let node in this.resourceNode){
+      this.resourceNode[node] = ''
+    }
+  }
+  
   updateNode(id: number) {
     this.resourceService.updateNode(id, this.resourceNode).subscribe(
       (resourceNode) => {
