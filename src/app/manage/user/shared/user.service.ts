@@ -36,7 +36,7 @@ export class UserService extends RebirthHttp {
   }
 
   @PUT("users/:id")
-  update( @Path("id") id: number, @Body user: User): Observable<User> {
+  update(@Path("id") id: number, @Body user: User): Observable<User> {
     return null;
   }
 
