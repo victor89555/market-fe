@@ -51,7 +51,7 @@ export class UserAuthorizeComponent implements OnInit {
     this.user.roleIds = this.checkedRoles.map(role => {
       return role.id
     })
-    this.userService.save(this.user).subscribe(
+    this.userService.update(this.context.id, this.user).subscribe(
       (user) => {
         this.dismiss.emit(user);
       }
