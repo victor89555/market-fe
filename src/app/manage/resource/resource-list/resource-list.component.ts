@@ -12,6 +12,7 @@ export class ResourceListComponent implements OnInit {
   resourceTreeData: any[] = []          // 所有资源
   show = false
   urlShow = false
+  count =0
   resourceNode: ResourceNode = new ResourceNode()
 
   constructor(private resourceService: ResourceService,
@@ -28,9 +29,20 @@ export class ResourceListComponent implements OnInit {
       (treeData) => {
         this.resourceTreeData = treeData
         this.resourceTreeData[0].$expend = true
+        this.showTree(this.resourceTreeData[0].children)
       }
     )
     return treeDataOb
+  }
+
+  //递归方法展开树
+  showTree(childTree:any){
+      for(let i =0;i<childTree.length;i++){
+        if(childTree[i].children !=[]){
+          childTree[i].$expend = true
+          this.showTree(childTree[i].children)
+        }
+      }
   }
 
   addNode(node, parentNode) {
@@ -63,7 +75,7 @@ export class ResourceListComponent implements OnInit {
   saveNode() {
     this.resourceService.saveNode(this.resourceNode).subscribe((res) => {
       for(let node in this.resourceNode){
-        this.resourceNode[node] == ''
+        this.resourceNode[node] = ''
       }
       this.show = false
       this.getResourceTree();

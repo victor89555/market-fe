@@ -1,5 +1,9 @@
 <div id="page1" class="page-content">
   <div class="row resource-header">
+    <div class="resource-btn">
+      <button type="button" class="btn btn-primary" (click)="checkedTreeView.expendAllNodes()">全部展开</button>
+      <button type="button" class="btn btn-info" (click)="checkedTreeView.collapseAllNodes()">全部收起</button>
+    </div>
     <div class="col-xs-5">
       <ng-template #nodeItemTemplate let-node="" let-parentNode="parentNode">
         <!--<span class="node-text">{{node.id}}: {{node.name}}</span>-->
@@ -7,7 +11,7 @@
         <i class="glyphicon glyphicon-remove" (click)="removeNode(node,parentNode)"
            [ngStyle]="{'display':node.pid == null ? 'none' : 'inline'}"></i>
       </ng-template>
-      <re-tree-view [treeData]="resourceTreeData" textField="name" valueFeild="id" iconField="icon"
+      <re-tree-view #checkedTreeView [treeData]="resourceTreeData" textField="name" valueFeild="id" iconField="icon"
                     [nodeItemToolbarTemplate]="nodeItemTemplate" leafIcon></re-tree-view>
     </div>
     <div class="col-xs-7" *ngIf="show">

@@ -7,7 +7,7 @@
       </h1>
     </div>
     <div class="page-toolbar">
-      <div class="pull-right tooltips" *reRole="['FUNC_ORDERS_ADD']">
+      <div class="pull-right tooltips" *reRole="['FUNC_MARKET_ADD']">
         <a href="javascript:;" class="btn btn-danger" (click)="add()">
           <i class="glyphicon glyphicon-plus"></i> 新增
         </a>
@@ -84,7 +84,7 @@
         <ngx-datatable-column name="编辑" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
             <button class="btn btn-sm btn-default" (click)="edit(value);">修改</button>
-            <button class="btn btn-sm btn-default" (click)="delete(value,row.name);">删除</button>
+            <button class="btn btn-sm btn-default" (click)="delete(value,row.name);" *reRole="['FUNC_MARKET_DELETE']">删除</button>
             <!--<a class="btn btn-default" routerLink="/manage/markets/statistics/{{value}}">统计</a>-->
           </ng-template>
         </ngx-datatable-column>
