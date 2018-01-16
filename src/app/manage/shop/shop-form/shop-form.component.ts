@@ -7,7 +7,7 @@ import {
   OnInit
 } from "@angular/core";
 
-import {DialogService, ModalService} from "rebirth-ng";
+import {DialogService, ModalService, NotifyService} from "rebirth-ng";
 import {Shop} from "../shared/shop.model";
 import {ShopService} from "../shared/shop.service";
 import {Market} from "../../market/shared/market.model";
@@ -24,6 +24,8 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ElectronicScale} from "../../electronicScale/shared/electronicScale.model";
 import {OperatorFormComponent} from "../../operator/operator-form/operator-form.component";
 import {dicts} from "../../../thurder-ng/models/dictionary";
+import {environment} from "../../../../environments/environment";
+import {AttachmentService} from "../../shared/attachment.service";
 
 @Component({
   selector: 'app-shop-form',
@@ -44,8 +46,9 @@ export class ShopFormComponent implements OnInit {
               private dialogService: DialogService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private route: ActivatedRoute,
-              private router: Router
-  ) {}
+              private router: Router,
+              private alertBoxService:  NotifyService,
+              private attachmentService: AttachmentService) {}
 
   dismiss: EventEmitter<Shop>
 
@@ -67,6 +70,10 @@ export class ShopFormComponent implements OnInit {
   allotedElectronicScales = [] //已分配的电子秤列表
   selectedScale: ElectronicScale
   shopStatus = dicts["SHOP_STATUS"]
+  uploadUrl: string = environment.api.host + "/shops/attachments"
+  uploadRequestHeaders: any
+  uploadFiles: any[] = []
+  attachments: any[] = []
 
   operatorRequired:boolean = false
 
@@ -111,6 +118,7 @@ export class ShopFormComponent implements OnInit {
       this.loadOperators();
       this.loadMarket();
       this.loadContractor();
+      this.loadBusinessLicense()
     });
   }
 
@@ -251,7 +259,7 @@ export class ShopFormComponent implements OnInit {
   }
 
   scaleNameFormatter = (scale: any) => { // 电子秤输入显示数据
-    return scale.sequence_no || ""
+    return scale.sequence_no
   }
 
   loadElectronicScale() { // 电子秤
@@ -306,21 +314,9 @@ export class ShopFormComponent implements OnInit {
 
   //解绑电子秤
   unbindElectronicScale(id) {
-    this.dialogService.confirm({
-      title: '提示',
-      content: '是否解绑该电子秤',
-      html: false,
-      yes: '确定',
-      no: '取消'
+    this.electronicScaleService.unbind(id).subscribe(() => {
+      this.loadElectronicScale()
     })
-      .subscribe(
-        data => {
-          this.electronicScaleService.unbind(id).subscribe(() => {
-            this.loadElectronicScale()
-          })
-        },
-        error => {}
-      );
   }
 
   //添加商户
@@ -337,8 +333,16 @@ export class ShopFormComponent implements OnInit {
   //编辑保存商户
   editShop() {
     if(this.validateShop()) {
+      this.attachments.map((file)=>{
+        this.shop.attachmentIds.push(file.id)
+      })
       this.shopService.save(this.shopId, this.shop).subscribe(
         (shop) => {
+          this.alertBoxService.placement("top")
+          this.alertBoxService.open({
+            type: 'success',
+            html: "修改商户成功！"
+          }, 1500);
           this.router.navigate(['/manage/shops']);
         }
       )
@@ -427,24 +431,12 @@ export class ShopFormComponent implements OnInit {
   }
 
   deleteContract(id: number) { //删除合同
-    this.dialogService.confirm({
-      title: '提示',
-      content: '是否删除该合同',
-      html: false,
-      yes: '确定',
-      no: '取消'
-    })
-      .subscribe(
-        data => {
-          this.contractService.deleteContract(id).subscribe(
-            (res) => {
-              console.log(res)
-              this.loadContractor()
-            }
-          )
-        },
-        error => {}
-      );
+    this.contractService.deleteContract(id).subscribe(
+      (res) => {
+        console.log(res)
+        this.loadContractor()
+      }
+    )
   }
 
   saveChangeStall(){
@@ -466,6 +458,40 @@ export class ShopFormComponent implements OnInit {
     if(this.shop.operatorId==null){
       this.operatorRequired = true
     }
+  }
+
+  uploadFilesChange($event){
+    console.log("uploadFilesChange()")
+    console.log($event)
+  }
+
+  onRemoveDone($event) {
+    console.log("onRemoveDone()")
+    console.log($event)
+  }
+
+  onUploadSuccess($event) {
+    console.log("onUploadSuccess()")
+    this.attachments.push($event.uploadResponse)
+  }
+  //获取营业执照
+  loadBusinessLicense() {
+    this.shopService.getBusinessLicense(this.shopId).subscribe(
+      (files) => {
+        console.log(files)
+        this.attachments.push(...files)
+      }
+    )
+  }
+
+  //下载营业执照
+  downloadAttachment(id, fileName) {
+    this.attachmentService.download(id, fileName)
+  }
+  //删除营业执照附件
+  onDeleteAttachments(idx) {
+    console.log(idx)
+    this.attachments.splice(idx, 1);
   }
 }
 

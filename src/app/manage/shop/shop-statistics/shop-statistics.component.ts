@@ -62,7 +62,6 @@ export class ShopStatisticsComponent implements OnInit {
     this.getMemberRanking()
   }
 
-
   formatDateTime(timeStamp) { // 时间格式化
     let date = new Date();
     date.setTime(timeStamp);

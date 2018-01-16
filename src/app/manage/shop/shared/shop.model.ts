@@ -11,4 +11,5 @@ export class Shop {
   endTime: string
   creatTime: string
   updateKey: string
+  attachmentIds: number[]
 }
