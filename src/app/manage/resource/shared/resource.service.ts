@@ -56,4 +56,9 @@ export class ResourceService extends RebirthHttp {
   updateNode( @Path("id") id: number, @Body resourceNode: ResourceNode): Observable<ResourceNode> {
     return null;
   }
+
+  @GET("resources/:id")
+  getNode(@Path("id") id: number): Observable<ResourceNode> {
+    return null
+  }
 }

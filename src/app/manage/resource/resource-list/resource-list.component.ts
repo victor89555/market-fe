@@ -12,6 +12,8 @@ export class ResourceListComponent implements OnInit {
   resourceTreeData: any[] = []          // 所有资源
   show = false
   urlShow = false
+  parentShow = true
+  saveOrUpdate = true
   count =0
   resourceNode: ResourceNode = new ResourceNode()
 
@@ -44,9 +46,23 @@ export class ResourceListComponent implements OnInit {
         }
       }
   }
-
+  //查找一节点
+  findNode(id:number,childTree:any){
+    for(let i =0;i<childTree.length;i++){
+      if(childTree[i].id ==id){
+        this.resourceNode = childTree[i]
+      }else if(childTree[i].children!=[]){
+        this.findNode(id,childTree[i].children)
+      }
+    }
+  }
   addNode(node, parentNode) {
+    for(let node in this.resourceNode){
+      this.resourceNode[node] = ''
+    }
+    this.saveOrUpdate = true
     this.show = true
+    this.parentShow = true
     this.resourceNode.parentId = node.id
     this.resourceNode.pName = node.name
   }
@@ -88,9 +104,9 @@ export class ResourceListComponent implements OnInit {
       this.resourceNode[node] = ''
     }
   }
-  
-  updateNode(id: number) {
-    this.resourceService.updateNode(id, this.resourceNode).subscribe(
+
+  updateNode() {
+    this.resourceService.updateNode(this.resourceNode.id, this.resourceNode).subscribe(
       (resourceNode) => {
         this.getResourceTree()
       }
@@ -112,5 +128,16 @@ export class ResourceListComponent implements OnInit {
         this.resourceNode.icoName = "glyphicon glyphicon-cog"
         break
     }
+  }
+
+  nodeItem(node){
+    console.log(node)
+    this.saveOrUpdate = false
+    this.parentShow = false
+    this.show = true
+    // this.findNode(node.id,this.resourceTreeData[0].children)
+    this.resourceService.getNode(node.id).subscribe((node)=>{
+      this.resourceNode = node
+    })
   }
 }
