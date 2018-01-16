@@ -52,8 +52,9 @@ export class ShopService extends RebirthHttp {
     return null;
   }
 
-  /*@PUT('shops/:id')
-  edit(@Path('id') id: number): Observable<Shop> {
+  // 获取商户营业执照附件
+  @GET("shops/:id/attachments")
+  getBusinessLicense(@Path("id") id: number): Observable<any[]> {
     return null;
-  }*/
+  }
 }

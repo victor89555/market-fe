@@ -2,7 +2,8 @@
 <div class="page-sidebar-wrapper">
   <div class="page-sidebar">
     <ul class="page-sidebar-menu menu-top-border">
-      <li *ngFor="let menuItem of menuList" class="nav-item" [ngClass]="{'active': menuItem.active}">
+      <li *ngFor="let menuItem of menuList" class="nav-item"
+          [ngClass]="{'active': menuItem.active, 'hide': authorizationService.hasRight(menuItem.resource)}">
         <a href="javascript:;" class="nav-link" (click)="onToggleClick(menuItem)">
           <i class="svg-icon icon-{{menuItem.icon}}"></i>
           <span class="title"> {{menuItem.title}}</span>
@@ -10,7 +11,8 @@
           <span *ngIf="menuItem.children" class="arrow"  [ngClass]="{'open': menuItem.isOpen}"></span>
         </a>
         <ul *ngIf="menuItem.children" class="sub-menu" [ngClass]="{'hide': !menuItem.isOpen}">
-          <li *ngFor="let subItem of menuItem.children" class="nav-item" [ngClass]="{'active': subItem.active}" (click)="onSelect(subItem)">
+          <li *ngFor="let subItem of menuItem.children" class="nav-item" (click)="onSelect(subItem)"
+              [ngClass]="{'active': subItem.active, 'hide': authorizationService.hasRight(menuItem.resource)}">
             <a routerLink="{{subItem.link}}" class="nav-link">
               <i class="svg-icon icon-{{subItem.icon}}"></i>
               <span class="title"> {{subItem.title}}</span>
