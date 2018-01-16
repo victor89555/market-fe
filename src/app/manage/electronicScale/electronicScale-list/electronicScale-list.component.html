@@ -5,7 +5,7 @@
         电子秤信息
       </h1>
     </div>
-    <div class="page-toolbar">
+    <div class="page-toolbar" *reRole="['FUNC_ELEC_ADD']">
       <div class="pull-right tooltips" >
         <a href="javascript:;" class="btn btn-danger" (click)="add()">
           <i class="glyphicon glyphicon-plus"></i> 新增
@@ -87,13 +87,17 @@
           <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
             <!--<button hidden class="btn btn-default" (click)="edit(value);">修改</button>-->
             <!--<button hidden class="btn btn-default" (click)="delete(value);">删除</button>-->
-            <button class="btn btn-sm btn-default" routerLink="/manage/electronicScalesHistory/{{value}}">历史纪录</button>
-            <button class="btn btn-sm btn-info"  (click)="doRepair(row)"
-                    *ngIf="row.status == 0 && row.status != 2">维修</button>
+            <button class="btn btn-sm btn-default" routerLink="/manage/electronicScalesHistory/{{value}}" *reRole="['FUNC_ELEC_HISTORY']">历史纪录</button>
+            <span *reRole="['FUNC_ELEC_REPAIR']">
+              <button class="btn btn-sm btn-info"  (click)="doRepair(row)"
+                      *ngIf="row.status == 0 && row.status != 2">维修</button>
             <button class="btn btn-sm btn-success"  (click)="doRepair(row)"
                     *ngIf="row.status == 1 && row.status != 2">修复</button>
+            </span>
+            <span *reRole="['FUNC_ELEC_SCRAP']">
             <button class="btn btn-sm btn-danger"  (click)="doScrap(row)"
                     *ngIf="row.status != 2">报废</button>
+            </span>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>

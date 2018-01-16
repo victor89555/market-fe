@@ -6,7 +6,7 @@
         <!--<small>dashboard &amp; statistics</small>-->
       </h1>
     </div>
-    <div class="page-toolbar">
+    <div class="page-toolbar" *reRole="['FUNC_OPERATOR_ADD']">
       <div class="pull-right tooltips" >
         <a href="javascript:;" class="btn btn-danger" (click)="add()">
           <i class="glyphicon glyphicon-plus"></i> 新增
@@ -59,8 +59,8 @@
 
         <ngx-datatable-column name="操作" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-            <button class="btn btn-sm btn-default" (click)="edit(value);">修改</button>
-            <button class="btn btn-sm btn-default" (click)="delete(value,row.name);">删除</button>
+            <button class="btn btn-sm btn-default" (click)="edit(value);" *reRole="['FUNC_OPERATOR_UPDATE']">修改</button>
+            <button class="btn btn-sm btn-default" (click)="delete(value,row.name);" *reRole="['FUNC_OPERATOR_DELETE']">删除</button>
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>

@@ -6,7 +6,7 @@
         <!--<small>dashboard &amp; statistics</small>-->
       </h1>
     </div>
-    <div class="page-toolbar">
+    <div class="page-toolbar" *reRole="['FUNC_SHOP_ADD']">
       <div class="pull-right tooltips" >
         <a routerLink="/manage/shopForm/0" class="btn btn-danger">
           <i class="glyphicon glyphicon-plus"></i> 新增
@@ -96,10 +96,10 @@
       </ngx-datatable-column>
       <ngx-datatable-column name="操作" prop="id">
         <ng-template ngx-datatable-cell-template let-value="value">
-          <button class="btn btn-sm btn-default" routerLink="/manage/shopForm/{{value}}">修改</button>
-          <button class="btn btn-sm btn-default" routerLink="/manage/shops/{{value}}/statistics">统计</button>
+          <button class="btn btn-sm btn-default" routerLink="/manage/shopForm/{{value}}" *reRole="['FUNC_SHOP_UPDATE']">修改</button>
+          <button class="btn btn-sm btn-default" routerLink="/manage/shops/{{value}}/statistics" *reRole="['FUNC_SHOP_STATISTICS']">统计</button>
           <!--<button class="btn btn-sm btn-default" (click)="goWaterOrder(value)">流水</button>-->
-          <button class="btn btn-sm btn-default" routerLink="/manage/orders" [queryParams]="{'shopId': value}">流水</button>
+          <button class="btn btn-sm btn-default" routerLink="/manage/orders" [queryParams]="{'shopId': value}" *reRole="['FUNC_SHOP_FLOW']">流水</button>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>

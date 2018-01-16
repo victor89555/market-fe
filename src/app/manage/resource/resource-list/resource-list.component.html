@@ -1,10 +1,10 @@
 <div id="page1" class="page-content">
   <div class="row resource-header">
-    <div class="resource-btn">
-      <button type="button" class="btn btn-primary" (click)="checkedTreeView.expendAllNodes()">全部展开</button>
-      <button type="button" class="btn btn-info" (click)="checkedTreeView.collapseAllNodes()">全部收起</button>
-    </div>
     <div class="col-xs-5">
+      <div class="resource-btn">
+        <button type="button" class="btn btn-primary" (click)="checkedTreeView.expendAllNodes()">全部展开</button>
+        <button type="button" class="btn btn-info" (click)="checkedTreeView.collapseAllNodes()">全部收起</button>
+      </div>
       <ng-template #nodeItemTemplate let-node="" let-parentNode="parentNode">
         <!--<span class="node-text">{{node.id}}: {{node.name}}</span>-->
         <i class="glyphicon glyphicon-plus" (click)="addNode(node,parentNode)"></i>
@@ -15,6 +15,7 @@
                     [nodeItemToolbarTemplate]="nodeItemTemplate" leafIcon (nodeItemClicked)="nodeItem($event)"></re-tree-view>
     </div>
     <div class="col-xs-7" *ngIf="show">
+      <h4 class="text-center save-update-title">{{saveOrUpdate ? '新增资源节点' : '修改资源节点'}}</h4>
       <div class="form-horizontal">
         <div class="form-group" *ngIf="parentShow">
           <label for="upResource" class="col-sm-4 control-label">上一级资源：</label>
@@ -57,7 +58,7 @@
       </div>
       <div class="resource-footer">
         <button type="button" class="btn btn-primary" (click)="saveOrUpdate ? saveNode() : updateNode()">保存</button>
-        <button type="button" class="btn btn-danger" (click)="cancel()">取消</button>
+        <button type="button" class="btn btn-danger" (click)="cancel(false)">取消</button>
       </div>
     </div>
   </div>

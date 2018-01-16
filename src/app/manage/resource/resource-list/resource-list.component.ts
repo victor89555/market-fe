@@ -14,7 +14,6 @@ export class ResourceListComponent implements OnInit {
   urlShow = false
   parentShow = true
   saveOrUpdate = true
-  count =0
   resourceNode: ResourceNode = new ResourceNode()
 
   constructor(private resourceService: ResourceService,
@@ -90,32 +89,31 @@ export class ResourceListComponent implements OnInit {
 
   saveNode() {
     this.resourceService.saveNode(this.resourceNode).subscribe((res) => {
-      for(let node in this.resourceNode){
-        this.resourceNode[node] = ''
-      }
-      this.show = false
-      this.getResourceTree();
+      this.cancel(true)
     })
   }
 
-  cancel(){
-    this.show = false
+  cancel(getResource:boolean){
     for(let node in this.resourceNode){
       this.resourceNode[node] = ''
+    }
+    this.show = false
+    if(getResource){
+      this.getResourceTree();
     }
   }
 
   updateNode() {
     this.resourceService.updateNode(this.resourceNode.id, this.resourceNode).subscribe(
       (resourceNode) => {
-        this.getResourceTree()
+        this.cancel(true)
       }
     )
   }
 
   typeChange() {
     this.urlShow = false
-    this.resourceNode.url = ""
+    // this.resourceNode.url = ""
     switch (this.resourceNode.resourceType) {
       case 0:
         this.resourceNode.icoName = "glyphicon glyphicon-book"
