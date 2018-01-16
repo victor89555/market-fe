@@ -13,6 +13,7 @@ export interface menuItem {
   active: boolean;
   children?: menuItem[];
   isOpen?: boolean;
+  resource?: string;
 }
 
 export interface MenuConfig {
