@@ -531,7 +531,7 @@ input[type="checkbox"]:disabled:checked:after,
 .node-item-content .node-icon{margin-right:2px}
 .node-item-content .node-text{
   cursor:pointer;
-  padding:10px !important;
+  padding:3px 10px !important;
   border-radius:4px
 }
 .node-item-content .node-text:not(.bg-primary):hover{border:1px dashed #ddd}
