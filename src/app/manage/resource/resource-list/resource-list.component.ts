@@ -37,26 +37,28 @@ export class ResourceListComponent implements OnInit {
   }
 
   //递归方法展开树
-  showTree(childTree:any){
-      for(let i =0;i<childTree.length;i++){
-        if(childTree[i].children !=[]){
-          childTree[i].$expend = true
-          this.showTree(childTree[i].children)
-        }
-      }
-  }
-  //查找一节点
-  findNode(id:number,childTree:any){
-    for(let i =0;i<childTree.length;i++){
-      if(childTree[i].id ==id){
-        this.resourceNode = childTree[i]
-      }else if(childTree[i].children!=[]){
-        this.findNode(id,childTree[i].children)
+  showTree(childTree: any) {
+    for (let i = 0; i < childTree.length; i++) {
+      if (childTree[i].children != []) {
+        childTree[i].$expend = true
+        this.showTree(childTree[i].children)
       }
     }
   }
+
+  //查找一节点
+  findNode(id: number, childTree: any) {
+    for (let i = 0; i < childTree.length; i++) {
+      if (childTree[i].id == id) {
+        this.resourceNode = childTree[i]
+      } else if (childTree[i].children != []) {
+        this.findNode(id, childTree[i].children)
+      }
+    }
+  }
+
   addNode(node, parentNode) {
-    for(let node in this.resourceNode){
+    for (let node in this.resourceNode) {
       this.resourceNode[node] = ''
     }
     this.saveOrUpdate = true
@@ -88,27 +90,34 @@ export class ResourceListComponent implements OnInit {
   }
 
   saveNode() {
-    this.resourceService.saveNode(this.resourceNode).subscribe((res) => {
-      this.cancel(true)
-    })
+    if (this.validateResource()) {
+      this.resourceService.saveNode(this.resourceNode).subscribe((res) => {
+        this.cancel(true)
+      })
+    }
   }
 
-  cancel(getResource:boolean){
-    for(let node in this.resourceNode){
+  cancel(getResource: boolean) {
+    for (let node in this.resourceNode) {
       this.resourceNode[node] = ''
     }
     this.show = false
-    if(getResource){
+    if (getResource) {
       this.getResourceTree();
+    }
+    for(let res in this.resourceForm){
+      this.resourceForm[res] = true
     }
   }
 
   updateNode() {
-    this.resourceService.updateNode(this.resourceNode.id, this.resourceNode).subscribe(
-      (resourceNode) => {
-        this.cancel(true)
-      }
-    )
+    if (this.validateResource()) {
+      this.resourceService.updateNode(this.resourceNode.id, this.resourceNode).subscribe(
+        (resourceNode) => {
+          this.cancel(true)
+        }
+      )
+    }
   }
 
   typeChange() {
@@ -128,14 +137,39 @@ export class ResourceListComponent implements OnInit {
     }
   }
 
-  nodeItem(node){
+  nodeItem(node) {
     console.log(node)
     this.saveOrUpdate = false
     this.parentShow = false
     this.show = true
     // this.findNode(node.id,this.resourceTreeData[0].children)
-    this.resourceService.getNode(node.id).subscribe((node)=>{
+    this.resourceService.getNode(node.id).subscribe((node) => {
       this.resourceNode = node
     })
+  }
+
+  // 表单验证
+  resourceForm = {
+    name: true,
+    code: true,
+    resourceType: true,
+    url: true,
+    sortNo: true
+  }
+
+  validateResource() {
+    this.resourceForm.name = this.resourceNode.name ? true : false
+    this.resourceForm.code = this.resourceNode.code ? true : false
+    this.resourceForm.resourceType = this.resourceNode.resourceType != null
+    if (this.urlShow) {
+      this.resourceForm.url = this.resourceNode.url ? true : false
+    }
+    this.resourceForm.sortNo = this.resourceNode.sortNo ? true : false
+
+    return this.resourceForm.name &&
+      this.resourceForm.code &&
+      this.resourceForm.resourceType &&
+      this.resourceForm.url &&
+      this.resourceForm.sortNo
   }
 }
