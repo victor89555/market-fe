@@ -30,7 +30,7 @@ export class ResourceListComponent implements OnInit {
       (treeData) => {
         this.resourceTreeData = treeData
         this.resourceTreeData[0].$expend = true
-        this.showTree(this.resourceTreeData[0].children)
+        // this.showTree(this.resourceTreeData[0].children)
       }
     )
     return treeDataOb
