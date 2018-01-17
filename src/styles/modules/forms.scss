@@ -531,7 +531,7 @@ input[type="checkbox"]:disabled:checked:after,
 .node-item-content .node-icon{margin-right:2px}
 .node-item-content .node-text{
   cursor:pointer;
-  padding:10px !important;
+  padding:3px 10px !important;
   border-radius:4px
 }
 .node-item-content .node-text:not(.bg-primary):hover{border:1px dashed #ddd}
@@ -560,11 +560,9 @@ input[type="checkbox"]:disabled:checked:after,
 }
 .loading{-webkit-animation:loadingAnimation 1.5s infinite alternate;-moz-animation:loadingAnimation 1.5s infinite alternate;-ms-animation:loadingAnimation 1.5s infinite alternate;-o-animation:loadingAnimation 1.5s infinite alternate;animation:loadingAnimation 1.5s infinite alternate}
 @-webkit-keyframes loadingAnimation{50%{color:#ff9800}100%{color:#4caf50}}
-.glyphicon-plus:before {
-  content: "+";
+.node-item-panel .glyphicon-plus:before {
   color: #a5ddff;
 }
-.glyphicon-remove:before {
-  content: "\E014";
+.node-item-panel .glyphicon-remove:before {
   color: #fd8b8b;
 }
