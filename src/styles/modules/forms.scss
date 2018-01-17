@@ -524,3 +524,47 @@ input[type="checkbox"]:disabled:checked:after,
   background-color: transparent;
 }
 
+// treeview
+.node-item-panel{padding:5px 10px;}
+.node-item{position:relative}
+.node-item-content{display:inline-block}
+.node-item-content .node-icon{margin-right:2px}
+.node-item-content .node-text{
+  cursor:pointer;
+  padding:10px !important;
+  border-radius:4px
+}
+.node-item-content .node-text:not(.bg-primary):hover{border:1px dashed #ddd}
+.node-expend-icon{cursor:pointer}
+.drop-node-enter{border:1px solid #2196f3}
+.node-check-box,
+.toolbar{display:inline-block}
+.expend-icon{cursor:pointer}
+.node-check-box .checkbox{margin:0}
+.children-view{
+  display:block;
+  padding:0px 1.5rem !important;
+  border-left:1px dashed #ddd;
+  margin-left:16px !important;
+}
+.children-view .node-item{position:relative}
+.children-view .node-item:before{
+  content:' ';
+  position:absolute;
+  left:-1.5rem;
+  border-top:1px dashed #ddd;
+  display:inline-block;
+  width:2rem !important;
+  height:1px;
+  top:13px !important;
+}
+.loading{-webkit-animation:loadingAnimation 1.5s infinite alternate;-moz-animation:loadingAnimation 1.5s infinite alternate;-ms-animation:loadingAnimation 1.5s infinite alternate;-o-animation:loadingAnimation 1.5s infinite alternate;animation:loadingAnimation 1.5s infinite alternate}
+@-webkit-keyframes loadingAnimation{50%{color:#ff9800}100%{color:#4caf50}}
+.glyphicon-plus:before {
+  content: "+";
+  color: #a5ddff;
+}
+.glyphicon-remove:before {
+  content: "\E014";
+  color: #fd8b8b;
+}
