@@ -7,25 +7,13 @@ import {AuthorizationService} from "rebirth-permission";
 @Component({
   selector: 'app-menu-bar',
   templateUrl: './menu-bar.component.html',
-  // templateUrl: './menu-bar.component_bak.html',
   styleUrls: ['./menu-bar.component.scss'],
-  // host: {
-  //   '[class]': `getClassNames()`,
-  // },
   exportAs: 'menuBar'
 })
 export class MenuBarComponent implements OnInit {
 
   static MAX_MIDDLE_SCREEN = 768;
   static MIN_MIDDLE_SCREEN = 576;
-  // @Input() menuConfig: MenuConfig;
-  // @Input() isTextMenuBarOpen: boolean;
-  // isIconMenuBarOpen = false;
-  // windowResize = new EventEmitter<any>();
-  // listens: any[] = [];
-  // hide:boolean[] =[false,true];
-  // menuActive:boolean[]=new Array(15);
-  // arrowState:string[] =['arrow open','arrow closed'];
 
   menuList: menuItem[] = [
     {
@@ -36,7 +24,7 @@ export class MenuBarComponent implements OnInit {
       isOpen: true,
       resource: "BLOCK_MARKET",
       children: [
-        {title: "市场信息", link: "/manage/markets", active: true, icon: "more", resource: "MENU_MARKET_MARKET"},
+        {title: "市场信息", link: "/manage/markets", active: true, icon: "more", resource: "MENU_MARKET"},
         // {title: "摊位管理", link: "/manage/stalls", active: false, icon: "more", resource: "MENU_MARKET_STALL"}
       ]
     },
@@ -48,12 +36,12 @@ export class MenuBarComponent implements OnInit {
       isOpen: true,
       resource: "BLOCK_SHOP",
       children: [
-        {title: "商户信息", link: "/manage/shops", active: false, icon: "user1", resource: "MENU_SHOP_SHOP"},
-        {title: "经营者信息", link: "/manage/operators", active: false, icon: "user1", resource: "MENU_SHOP_OPERATOR"},
-        {title: "合同查询", link: "/manage/contracts", active: false, icon: "order", resource: "MENU_SHOP_CONTRACT"},
-        {title: "电子秤管理", link: "/manage/electronicScales", active: false, icon: "balance", resource: "MENU_SHOP_ELEC"},
+        {title: "商户信息", link: "/manage/shops", active: false, icon: "user1", resource: "MENU_SHOP"},
+        {title: "经营者信息", link: "/manage/operators", active: false, icon: "user1", resource: "MENU_OPERATOR"},
+        {title: "合同查询", link: "/manage/contracts", active: false, icon: "order", resource: "MENU_CONTRACT"},
+        {title: "电子秤管理", link: "/manage/electronicScales", active: false, icon: "balance", resource: "MENU_ELEC"},
         // {title: "商户台账查询",link:"/manage/orders",active: false,icon: "book"},
-        {title: "检测结果查询", link: "JavaScript:;", active: false, icon: "chem", resource: "MENU_SHOP_CHECK"}
+        {title: "检测结果查询", link: "JavaScript:;", active: false, icon: "chem", resource: "MENU_CHECK"}
       ]
     },
     {
@@ -64,17 +52,17 @@ export class MenuBarComponent implements OnInit {
       isOpen: true,
       resource: "BLOCK_OPERATION",
       children: [
-        {title: "会员管理", link: "/manage/members", active: false, icon: "profile", resource: "MENU_OPERATION_MEMBER"},
-        {title: "交易信息查询", link: "/manage/orders", active: false, icon: "pages", resource: "MENU_OPERATION_ORDER"},
+        {title: "会员管理", link: "/manage/members", active: false, icon: "profile", resource: "MENU_MEMBER"},
+        {title: "交易信息查询", link: "/manage/orders", active: false, icon: "pages", resource: "MENU_ORDER"},
         {
           title: "交易情况统计",
           link: "/manage/marketStatistics",
           active: false,
           icon: "plot",
-          resource: "MENU_OPERATION_STATISTICS"
+          resource: "MENU_STATISTICS"
         },
-        {title: "月度报表", link: "/manage/monthReport", active: false, icon: "order", resource: "MENU_OPERATION_REPORT"},
-        {title: "检测信息溯源", link: "JavaScript:;", active: false, icon: "text", resource: "MENU_OPERATION_TRACEABILITY"}
+        {title: "月度报表", link: "/manage/monthReport", active: false, icon: "order", resource: "MENU_REPORT"},
+        {title: "检测信息溯源", link: "JavaScript:;", active: false, icon: "text", resource: "MENU_TRACEABILITY"}
       ]
     },
     {
@@ -85,9 +73,9 @@ export class MenuBarComponent implements OnInit {
       isOpen: true,
       resource: "BLOCK_SYSTEM",
       children: [
-        {title: "用户管理", link: "/manage/users", active: false, icon: "user1", resource: "MENU_SYSTEM_USER"},
-        {title: "角色管理", link: "/manage/roles", active: false, icon: "profile", resource: "MENU_SYSTEM_USER"},
-        {title: "资源管理", link: "/manage/resources", active: false, icon: "box", resource: "MENU_SYSTEM_RESOURCE"}
+        {title: "用户管理", link: "/manage/users", active: false, icon: "user1", resource: "MENU_USER"},
+        {title: "角色管理", link: "/manage/roles", active: false, icon: "profile", resource: "MENU_ROLE"},
+        {title: "资源管理", link: "/manage/resources", active: false, icon: "box", resource: "MENU_RESOURCE"}
       ]
     }
   ]
