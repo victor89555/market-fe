@@ -21,7 +21,7 @@
       </div>
     </div>
   </div>
-  
+
   <form>
     <div class="row">
       <div class="col-xs-6">
@@ -35,7 +35,7 @@
               <div class="text-error" *ngIf="!shopForm.shopName">商户名称不为空</div>
             </div>
           </div>
-        
+
           <!-- 经营者 -->
           <div class="form-group">
             <label class="col-sm-2 control-label">经营者：</label>
@@ -57,7 +57,7 @@
           </div>
           <!-- 功能区域 -->
           <div class="form-group">
-            <label class="col-sm-2 control-label">功能区域：</label>
+            <label class="col-sm-2 control-label">品类：</label>
             <div class="col-sm-10">
               <tg-dict-select dictName="FUNC_TYPE" name="func" [(ngModel)]="shop.funcType" (ngModelChange)="onFuncTypeChange($event)"></tg-dict-select>
             </div>
@@ -110,7 +110,7 @@
                 <div class="input-group-addon btn btn-warning" (click)="stallChange=!stallChange" *ngIf="shopId!=0">
                   取消
                 </div>
-            
+
               </div>
               <div class="input-group" *ngIf="!stallChange">
                 <input type="text" class="form-control"  [value]="stallName" disabled/>
@@ -181,7 +181,7 @@
       </div>
     </div>
   </form>
-  
+
   <re-tabs *ngIf="!pageComponent.newShop">
     <re-tab id="tab1" title="电子秤">
       <ng-template reTabContent>
