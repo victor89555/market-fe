@@ -48,9 +48,15 @@ export class OrderFormComponent implements Modal, OnInit {
     this.orderService.get(this.order_id).subscribe(
       (order) => {
         this.order = order
-        this.getMarket(order.marketId)
-        this.getMember(order.memberId)
-        this.getShop(order.shopId)
+        if (order.marketId) {
+          this.getMarket(order.marketId)
+        }
+        if (order.memberId) {
+          this.getMember(order.memberId)
+        }
+        if (order.shopId) {
+          this.getShop(order.shopId)
+        }
         this.changeDetectorRef.markForCheck()
       }
     )

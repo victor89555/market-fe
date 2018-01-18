@@ -4,6 +4,6 @@
     "host": "http://market-bus.djws.com.cn/api"
   },
   "auth": {
-    "host": "http://vito-uic.djws.com.cn/api"
+    "host": "http://market-uic.djws.com.cn/api"
   }
 }
