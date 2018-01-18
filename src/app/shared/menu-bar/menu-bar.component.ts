@@ -59,7 +59,7 @@ export class MenuBarComponent implements OnInit {
           link: "/manage/marketStatistics",
           active: false,
           icon: "plot",
-          resource: "MENU_OPERATION_STATISTICS"
+          resource: "MENU_STATISTICS"
         },
         {title: "月度报表", link: "/manage/monthReport", active: false, icon: "order", resource: "MENU_REPORT"},
         {title: "检测信息溯源", link: "JavaScript:;", active: false, icon: "text", resource: "MENU_TRACEABILITY"}
@@ -74,7 +74,7 @@ export class MenuBarComponent implements OnInit {
       resource: "BLOCK_SYSTEM",
       children: [
         {title: "用户管理", link: "/manage/users", active: false, icon: "user1", resource: "MENU_USER"},
-        {title: "角色管理", link: "/manage/roles", active: false, icon: "profile", resource: "MENU_RULE"},
+        {title: "角色管理", link: "/manage/roles", active: false, icon: "profile", resource: "MENU_ROLE"},
         {title: "资源管理", link: "/manage/resources", active: false, icon: "box", resource: "MENU_RESOURCE"}
       ]
     }
