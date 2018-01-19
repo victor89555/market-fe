@@ -5,6 +5,7 @@ import {MarketService} from "../shared/market.service";
 import {Market} from "../shared/market.model";
 import {Page} from "../../../thurder-ng/models/page.model";
 import {Area} from "../../../thurder-ng/components/area/area.mode"
+import {AuthorizationService} from "rebirth-permission";
 
 @Component({
   selector: 'app-market-list',
@@ -26,7 +27,8 @@ export class MarketListComponent implements OnInit {
   constructor(private modalService: ModalService,
               private componentFactoryResolver: ComponentFactoryResolver,
               private marketService: MarketService,
-              private dialogService: DialogService) {
+              private dialogService: DialogService,
+              private authorizationService:AuthorizationService ) {
   }
 
   ngOnInit(): void {

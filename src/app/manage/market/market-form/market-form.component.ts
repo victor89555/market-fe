@@ -124,12 +124,12 @@ export class MarketFormComponent implements Modal, OnInit {
   }
 
   validateStoreNum() {
-    this.marketForm.storeNum = this.market.storeNum ? true : false
+    this.marketForm.storeNum = this.market.storeNum !=null
     this.marketForm.storeNumFormat = this.validator.isNum(this.market.storeNum)
   }
 
   validateEnterStoreNum() {
-    this.marketForm.enterStoreNum = this.market.enterStoreNum ? true : false
+    this.marketForm.enterStoreNum = this.market.enterStoreNum !=null
     this.marketForm.enterStoreNumFormat = this.validator.isNum(this.market.enterStoreNum)
   }
 

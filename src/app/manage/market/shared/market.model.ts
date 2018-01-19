@@ -3,6 +3,7 @@ export class Market {
   name: string
   addr: string
   code: string
+  status:number
   stallLimit: number
   stallNum: number
   storeNum:number

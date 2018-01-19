@@ -134,7 +134,7 @@ export class ElectronicScaleFormComponent implements Modal, OnInit {
   validateElectronic() {
     this.validateElecSequenceNo()
     this.validateMarketId()
-    this.validateShopId()
+    // this.validateShopId()
     this.validateStatus()
     return this.elecScaleForm.status &&
       this.elecScaleForm.marketId &&

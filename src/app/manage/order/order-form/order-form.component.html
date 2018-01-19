@@ -74,21 +74,21 @@
     <table id="table">
       <tr>
         <th>产品</th>
-        <th>折扣率</th>
-        <th>原始金额</th>
-        <th>实收金额</th>
         <th>单位</th>
         <th>数量</th>
         <th>单价</th>
+        <th>折扣率</th>
+        <th>原始金额</th>
+        <th>实收金额</th>
       </tr>
       <tr *ngFor="let orderLine of orderLines">
         <td>{{orderLine.productName}}</td>
-        <td>{{orderLine.discount}}</td>
-        <td>{{orderLine.origAmount}}</td>
-        <td>{{orderLine.totalAmount}}</td>
         <td>{{orderLine.unitName}}</td>
         <td>{{orderLine.qty}}</td>
         <td>{{orderLine.price}}</td>
+        <td>{{orderLine.discount}}</td>
+        <td>{{orderLine.origAmount}}</td>
+        <td>{{orderLine.totalAmount}}</td>
       </tr>
     </table>
   </div>
