@@ -12,6 +12,15 @@
         <div class="text-error" *ngIf="!elecScaleForm.sequenceNo">电子秤序列号不能为空</div>
       </div>
     </div>
+    <div class="form-group" [ngClass]="{'has-error': !elecScaleForm.marketId}">
+      <label class="col-sm-3 control-label">市场:</label>
+      <div class="col-sm-9">
+        <select type="text" class="form-control" [(ngModel)]="marketId" (ngModelChange)="queryShops(marketId)">
+          <option *ngFor="let market of markets" [value]="market.id">{{market.name}}</option>
+        </select>
+        <div class="text-error" *ngIf="!elecScaleForm.marketId">市场不能为空</div>
+      </div>
+    </div>
     <div class="form-group" [ngClass]="{'has-error': !elecScaleForm.shopId}">
       <label class="col-sm-3 control-label">商户:</label>
       <div class="col-sm-9">
@@ -35,15 +44,6 @@
           </div>
         </div>
         <div class="text-error" *ngIf="!elecScaleForm.shopId">商户不能为空</div>
-      </div>
-    </div>
-    <div class="form-group" [ngClass]="{'has-error': !elecScaleForm.marketId}">
-      <label class="col-sm-3 control-label">市场:</label>
-      <div class="col-sm-9">
-        <select type="text" class="form-control" [(ngModel)]="marketId">
-          <option *ngFor="let market of markets" [value]="market.id" (click)="queryShops(market.id, null, null, null, 1, 500)">{{market.name}}</option>
-        </select>
-        <div class="text-error" *ngIf="!elecScaleForm.marketId">市场不能为空</div>
       </div>
     </div>
     <div class="form-group">
