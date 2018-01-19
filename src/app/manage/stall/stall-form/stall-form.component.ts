@@ -5,6 +5,8 @@ import {StallService} from "../shared/stall.service";
 import {Market} from "../../market/shared/market.model"
 import {MarketService} from "../../market/shared/market.service"
 import {Validator} from "../../../shared/validator";
+import {ShopService} from "../../shop/shared/shop.service";
+import {Shop} from "../../shop/shared/shop.model";
 
 @Component({
   selector: 'app-stall-form',
@@ -21,24 +23,29 @@ export class StallFormComponent implements Modal, OnInit {
   marketName: string = ""
   closed = true
   disable: boolean = false// 用于判断市场下拉框是否可用
+  shops: Shop[]
+  shopName = ""
+  shopId: number
   close() {
     this.closed = true;
   }
 
   constructor(private stallService: StallService, private marketService: MarketService,
-              private validator: Validator) {
+              private validator: Validator,private shopService: ShopService) {
   }
 
   ngOnInit(): void {
     console.log('ModalTestComponent init....');
     if (!this.context.add) {
       this.getStall()
+      this.queryShops(null)
     } else {
       this.marketId = this.context.marketId;
       this.getMarket(this.marketId)
       this.disable = true
     }
     this.getAllMarkets()
+    this.queryShops(this.context.marketId)
   }
 
   getAllMarkets() {
@@ -54,6 +61,7 @@ export class StallFormComponent implements Modal, OnInit {
     this.marketService.get(marketId).subscribe(
       (market) => {
         this.marketName = market.name;
+        this.queryShops(marketId)
       }
     )
   }
@@ -62,14 +70,17 @@ export class StallFormComponent implements Modal, OnInit {
     this.stallService.get(this.context.id).subscribe(
       (stall) => {
         this.stall = stall
-        this.marketId = stall.marketId;
+        this.marketId = stall.marketId
+        this.shopId = stall.shopId
         this.getMarket(this.marketId)
+        this.getShop(this.shopId)
       }
     )
   }
 
   save() {
     this.stall.marketId = this.marketId
+    this.stall.shopId = this.shopId
     if (this.validateStall()) {
       this.stallService.save(this.stall).subscribe(
         (stall) => {
@@ -82,6 +93,7 @@ export class StallFormComponent implements Modal, OnInit {
   update() {
     this.stall.id = this.context.id;
     this.stall.marketId = this.marketId
+    this.stall.shopId = this.shopId
     if (this.validateStall()) {
       console.log(this.stall);
       this.stallService.update(this.context.id, this.stall).subscribe(
@@ -96,9 +108,35 @@ export class StallFormComponent implements Modal, OnInit {
     this.dismiss.error(this.stall);
   }
 
+  queryShops(marketId) {
+    this.shopService.getAll(marketId).subscribe(
+      (shops) => {
+        this.shops = shops
+      }
+    )
+  }
+
+  // 第一次打开修改页面时显示的商户名称
+  getShop(shopId) {
+    if(shopId != null){
+      this.shopService.get(shopId).subscribe(
+        (shop) => {
+          this.shopName = shop.name
+        }
+      )
+    }
+  }
+
+  onShopNameChange = (shop: Shop) => { // 选中商户改变时调用
+    this.shopId = shop.id
+  }
+  shopNameFormatter = (shop: Shop) => { // 商户名称输入显示数据
+    return shop.name || ""
+  }
   //摊位验证
   stallForm = {
     marketId: true,
+    shopId:true,
     name: true,
     funcType: true,
     area: true,
@@ -127,17 +165,23 @@ export class StallFormComponent implements Modal, OnInit {
     this.stallForm.status = this.stall.status !=null
   }
 
+  validateShop() {
+    this.stallForm.shopId = this.stall.shopId ? true : false
+  }
+
   validateStall() {
     this.validateName()
     this.validateStatus()
     this.validateMarketId()
     this.validateArea()
     this.validateFuncType()
+    this.validateShop()
     return this.stallForm.status &&
       this.stallForm.area &&
       this.stallForm.funcType &&
       this.stallForm.name &&
-      this.stallForm.marketId
+      this.stallForm.marketId &&
+      this.stallForm.shopId
   }
 }
 
