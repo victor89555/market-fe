@@ -41,7 +41,7 @@ export class MenuBarComponent implements OnInit {
         {title: "合同查询", link: "/manage/contracts", active: false, icon: "order", resource: "MENU_CONTRACT"},
         {title: "电子秤管理", link: "/manage/electronicScales", active: false, icon: "balance", resource: "MENU_ELEC"},
         // {title: "商户台账查询",link:"/manage/orders",active: false,icon: "book"},
-        {title: "检测结果查询", link: "JavaScript:;", active: false, icon: "chem", resource: "MENU_CHECK"}
+        {title: "检测结果查询", link: "/manage/detections", active: false, icon: "chem", resource: "MENU_CHECK"}
       ]
     },
     {

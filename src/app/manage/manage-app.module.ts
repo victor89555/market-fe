@@ -51,7 +51,10 @@ import {MonthReportComponent} from './report/month-report/month-report.component
 import {ReportService} from "./report/shared/report.service";
 import {UserAuthorizeComponent} from './user/user-authorize/user-authorize.component'
 import {AttachmentService} from './shared/attachment.service';
-import { ResourceListComponent } from './resource/resource-list/resource-list.component'
+import { ResourceListComponent } from './resource/resource-list/resource-list.component';
+import { DetectionListComponent } from './detection/detection-list/detection-list.component';
+import { DetectionFormComponent } from './detection/detection-form/detection-form.component'
+import { DetectionService } from './detection/shared/detection.service'
 
 @NgModule({
   imports: [
@@ -94,7 +97,9 @@ import { ResourceListComponent } from './resource/resource-list/resource-list.co
     ElectronicScaleHistoryComponent,
     MonthReportComponent,
     UserAuthorizeComponent,
-    ResourceListComponent
+    ResourceListComponent,
+    DetectionListComponent,
+    DetectionFormComponent
   ],
   entryComponents: [
     OrderFormComponent,
@@ -126,6 +131,7 @@ import { ResourceListComponent } from './resource/resource-list/resource-list.co
     ResourceService,
     ReportService,
     AttachmentService,
+    DetectionService
   ]
 })
 export class ManageAppModule {

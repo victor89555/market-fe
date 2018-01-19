@@ -20,6 +20,8 @@ import {MarketStatisticsComponent} from "./market/market-statistics/market-stati
 import {ElectronicScaleHistoryComponent} from "./electronicScale/electronic-scale-history/electronic-scale-history.component";
 import {MonthReportComponent} from "./report/month-report/month-report.component";
 import { ResourceListComponent } from "./resource/resource-list/resource-list.component"
+import {DetectionListComponent} from "./detection/detection-list/detection-list.component"
+import { DetectionFormComponent} from "./detection/detection-form/detection-form.component"
 
 export const ROUTER_CONFIG: Routes = [
   {
@@ -48,7 +50,9 @@ export const ROUTER_CONFIG: Routes = [
       {path: 'users', component:UserListComponent},
       {path: 'roles', component:RoleListComponent},
       {path: 'monthReport', component:MonthReportComponent},
-      {path:'resources',component:ResourceListComponent}
+      {path:'resources',component:ResourceListComponent},
+      {path:'detections',component:DetectionListComponent},
+      {path:'detections/:id',component:DetectionFormComponent},
     ]
   }
 ];
