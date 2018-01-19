@@ -56,7 +56,7 @@
       >
         <ngx-datatable-column name="市场名称" prop="id">
           <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-            <a routerLink="/manage/stalls/{{value}}">{{row.name}}</a>
+            <a routerLink="/manage/markets/{{value}}/stalls">{{row.name}}</a>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="市场代码" prop="code"></ngx-datatable-column>

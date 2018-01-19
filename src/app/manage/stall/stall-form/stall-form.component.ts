@@ -175,7 +175,9 @@ export class StallFormComponent implements Modal, OnInit {
     this.validateMarketId()
     this.validateArea()
     this.validateFuncType()
-    this.validateShop()
+    if(!this.context.add){
+      this.validateShop()
+    }
     return this.stallForm.status &&
       this.stallForm.area &&
       this.stallForm.funcType &&
