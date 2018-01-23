@@ -1,3 +1,74 @@
-<p>
-  detection-form works!
-</p>
+<div class="modal-header">
+  <h4 class="modal-title">详情</h4>
+</div>
+<div class="modal-body">
+  <div class="form-horizontal">
+    <div class="form-group" *ngIf="detection.marketId!=null">
+      <label class="col-sm-3 control-label">市场:</label>
+      <div class="col-sm-9">
+        <p class="text">{{market?.name}}</p>
+      </div>
+    </div>
+    <div class="form-group" *ngIf="detection.shopId!=null">
+      <label class="col-sm-3 control-label">商户:</label>
+      <div class="col-sm-9">
+        <p class="text">{{shop?.name}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">摊位名称:</label>
+      <div class="col-sm-9">
+        <p class="text">{{detection.stallName}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">样品名称:</label>
+      <div class="col-sm-9">
+        <p class="text">{{detection.sampleName}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">样品编号:</label>
+      <div class="col-sm-9">
+        <p class="text">{{detection.sampleCode}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">检测时间:</label>
+      <div class="col-sm-9">
+        <p class="text">{{detection.detectTime}}</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-sm-3 control-label">重量:</label>
+      <div class="col-sm-9">
+        <p class="text">{{detection.weight}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">检测项目:</label>
+      <div class="col-sm-9">
+        <p class="text">{{detection.subjectName}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">检测值:</label>
+      <div class="col-sm-9">
+        <p class="text">{{detection.detectValue}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">检测结果:</label>
+      <div class="col-sm-9">
+        <p class="text">{{detection.detectResult}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">处理方式:</label>
+      <div class="col-sm-9">
+        <p class="text">{{detection.dealMethod}}</p>
+      </div>
+    </div>
+  </div>
+</div>
