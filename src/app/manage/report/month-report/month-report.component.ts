@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {MounthReport} from "../shared/report.model";
 import {Market} from "../../market/shared/market.model";
 import {MarketService} from "../../market/shared/market.service";
@@ -12,6 +12,8 @@ import {formatDate} from "../../../thurder-ng/utils/date-util";
 })
 export class MonthReportComponent implements OnInit {
 
+  @ViewChild('tableBox')
+  tableBox: ElementRef
 
   constructor(private marketService:MarketService,
               private reportService: ReportService) { }
@@ -21,264 +23,7 @@ export class MonthReportComponent implements OnInit {
   preDay: string
   nowDay: string = formatDate(new Date(), 'yyyy-MM-dd').slice(0, 7)
   nextDay: string
-  report: MounthReport = {
-    days: ['01/01','01/02','01/03','01/04','01/05','01/06','01/07','01/08','01/09','01/10','01/11','01/12','01/13'],
-    shopAmounts: [
-      {
-        shopId: 1,
-        shopName: "王二牛肉店",
-        amounts:[
-          1000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000
-        ]
-      },
-      {
-        shopId: 2,
-        shopName: "李四牛肉店",
-        amounts:[
-          1000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000
-        ]
-      }
-      ,
-      {
-        shopId: 3,
-        shopName: "李四牛肉店",
-        amounts:[
-          1000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000
-        ]
-      },
-      {
-        shopId: 2,
-        shopName: "李四牛肉店",
-        amounts:[
-          1000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000
-        ]
-      }
-      ,
-      {
-        shopId: 3,
-        shopName: "李四牛肉店",
-        amounts:[
-          1000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000
-        ]
-      },
-      {
-        shopId: 2,
-        shopName: "李四牛肉店",
-        amounts:[
-          1000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000
-        ]
-      }
-      ,
-      {
-        shopId: 3,
-        shopName: "李四牛肉店",
-        amounts:[
-          1000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000
-        ]
-      },
-      {
-        shopId: 2,
-        shopName: "李四牛肉店",
-        amounts:[
-          1000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000
-        ]
-      }
-      ,
-      {
-        shopId: 3,
-        shopName: "李四牛肉店",
-        amounts:[
-          1000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000
-        ]
-      },
-      {
-        shopId: 2,
-        shopName: "李四牛肉店",
-        amounts:[
-          1000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000
-        ]
-      }
-      ,
-      {
-        shopId: 3,
-        shopName: "李四牛肉店",
-        amounts:[
-          1000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000
-        ]
-      },
-      {
-        shopId: 2,
-        shopName: "李四牛肉店",
-        amounts:[
-          1000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000
-        ]
-      }
-      ,
-      {
-        shopId: 3,
-        shopName: "李四牛肉店",
-        amounts:[
-          1000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000,
-          2000,
-          1000,
-          2000,
-          2000,
-          1000
-        ]
-      }
-    ]
-  }
+  report: MounthReport
 
   setDay(str) {
     this.nowDay = str
@@ -325,4 +70,25 @@ export class MonthReportComponent implements OnInit {
     this.queryReport()
   }
 
+  doPrint() {
+    console.log(this.tableBox)
+    var headhtml = "<html><head><title></title></head><h3>月度报表</h3>"
+    var foothtml = "</body>"
+    // 获取div中的html内容
+    var newhtml = this.tableBox.nativeElement.innerHTML
+    // 获取div中的html内容，jquery写法如下
+    // var newhtml= $("#" + printpage).html()
+
+    // 获取原来的窗口界面body的html内容，并保存起来
+    var oldhtml = document.body.innerHTML
+
+    // 给窗口界面重新赋值，赋自己拼接起来的html内容
+    document.body.innerHTML = headhtml + newhtml + foothtml
+    // 调用window.print方法打印新窗口
+    window.print()
+
+    // 将原来窗口body的html值回填展示
+    document.body.innerHTML = oldhtml
+    return false
+  }
 }

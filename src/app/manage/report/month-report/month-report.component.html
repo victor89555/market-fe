@@ -5,6 +5,13 @@
         月度报表
       </h1>
     </div>
+    <div class="page-toolbar">
+      <div class="pull-right tooltips" >
+        <a href="javascript:;" class="btn btn-info" (click)="doPrint()">
+          <i class="glyphicon glyphicon-print"></i> 打印
+        </a>
+      </div>
+    </div>
   </div>
 
   <div class="row">
@@ -26,16 +33,16 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <div class="tableBox">
+      <div class="tableBox" #tableBox>
         <table class="table table-bordered" style="table-layout:fixed">
           <thead>
           <tr>
             <td style="width: 120px">商户\日期</td>
-            <td *ngFor="let date of report.days" style="width: 60px">{{date}}</td>
+            <td *ngFor="let date of report?.days" style="width: 60px">{{date}}</td>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let shop of report.shopAmounts">
+          <tr *ngFor="let shop of report?.shopAmounts">
             <td>{{shop.shopName}}</td>
             <td *ngFor="let value of shop.amounts">{{value}}</td>
           </tr>
