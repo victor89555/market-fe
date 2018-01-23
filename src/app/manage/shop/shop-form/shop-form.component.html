@@ -27,11 +27,11 @@
       <div class="col-xs-6">
         <div class="form-horizontal">
           <!-- 商户名 -->
-          <div class="form-group" [ngClass]="{'has-error': false}">
+          <div class="form-group" [ngClass]="{'has-error': !shopForm.shopName}">
             <label for="shopName" class="col-sm-2 control-label">商户名称：</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" name="shopname" id="shopname" required
-                     [(ngModel)]="shop.name" #shopName="ngModel" (input)="validateShopName()"/>
+                     [(ngModel)]="shop.name" #shopName="ngModel" (ngModelChange)="validateShopName()"/>
               <div class="text-error" *ngIf="!shopForm.shopName">商户名称不为空</div>
             </div>
           </div>
@@ -53,6 +53,7 @@
                   <i class="glyphicon glyphicon-plus"></i>
                 </div>
               </div>
+              <div class="text-error" *ngIf="!shopForm.operatorId">经营者不为空！</div>
             </div>
           </div>
           <!-- 功能区域 -->
@@ -60,6 +61,7 @@
             <label class="col-sm-2 control-label">品类：</label>
             <div class="col-sm-10">
               <tg-dict-select dictName="FUNC_TYPE" name="func" [(ngModel)]="shop.funcType" (ngModelChange)="onFuncTypeChange($event)"></tg-dict-select>
+              <div class="text-error" *ngIf="!shopForm.funcType">品类不为空！</div>
             </div>
           </div>
           <!-- 经营开始时间 -->
@@ -80,6 +82,7 @@
               <select type="text" class="form-control" name="market" [(ngModel)]="shop.marketId" (ngModelChange)="onMarketChange($event)">
                 <option *ngFor="let item of markets" [value]="item.id">{{item.name}}</option>
               </select>
+              <div class="text-error" *ngIf="!shopForm.marketId">所属市场不为空！</div>
             </div>
           </div>
           <!-- 摊位 -->
@@ -118,6 +121,7 @@
                   变更
                 </div>
               </div>
+              <div class="text-error" *ngIf="!shopForm.stallId">摊位不为空！</div>
             </div>
           </div>
           <!-- 状态 -->
@@ -125,6 +129,7 @@
             <label class="col-sm-2 control-label">状态：</label>
             <div class="col-sm-10">
               <tg-dict-select dictName="SHOP_STATUS" name="state" [(ngModel)]="shop.status" (ngModelChange)="onStatusChange($event)"></tg-dict-select>
+              <div class="text-error" *ngIf="!shopForm.status">商户状态不为空！</div>
             </div>
           </div>
           <!-- 经营结束时间 -->

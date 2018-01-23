@@ -15,6 +15,7 @@ import {environment} from "../../../../environments/environment"
 @Component({
   selector: 'app-contract-form',
   templateUrl: "./contract-form.component.html",
+  styleUrls:["./contract-form.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContractFormComponent implements Modal, OnInit {
