@@ -126,7 +126,7 @@ export class MarketStatisticsComponent implements OnInit {
       yAxis: {
         type: 'value',
         splitLine: {show: false},
-        name:'(万元/日)'
+        name:''
       },
       series: [
         {
@@ -277,7 +277,7 @@ export class MarketStatisticsComponent implements OnInit {
       yAxis : [
         {
           type : 'value',
-          name : '(万元/年)'
+          name : ''
         }
       ],
       series : [

@@ -140,7 +140,7 @@ export class ShopStatisticsComponent implements OnInit {
       yAxis: {
         type: 'value',
         splitLine: {show: false},
-        name: '(元/日)'
+        name: ''
       },
       series: [
         {
