@@ -7,9 +7,9 @@
     </div>
     <div class="page-toolbar">
       <div class="pull-right tooltips" >
-        <a href="javascript:;" class="btn btn-info" (click)="doPrint()">
+        <button class="btn btn-info" (click)="doPrint()">
           <i class="glyphicon glyphicon-print"></i> 打印
-        </a>
+        </button>
       </div>
     </div>
   </div>
@@ -51,4 +51,31 @@
       </div>
     </div>
   </div>
+  
+</div>
+
+<div class="printView" id="printView">
+  <table class="table">
+    <thead><tr><th>月度报表</th></tr></thead>
+    <tbody>
+    <tr>
+      <td>
+        <table class="table table-bordered" style="table-layout:fixed">
+          <thead>
+          <tr>
+            <td style="width: 120px">商户\日期</td>
+            <td *ngFor="let date of report?.days" style="width: 60px">{{date}}</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let shop of report?.shopAmounts">
+            <td>{{shop.shopName}}</td>
+            <td *ngFor="let value of shop.amounts">{{value}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
