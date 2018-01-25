@@ -21,10 +21,13 @@ export class RepairReportsComponent implements OnInit {
     console.log("memem")
     let bt = formatDate(new Date(this.repairModal.beginTime), "yyyy-MM-dd hh:mm:ss")
     let et = formatDate(new Date(this.repairModal.endTime), "yyyy-MM-dd hh:mm:ss")
+    bt = bt.substr(0,14)+"00:00"
+    et = et.substr(0,14)+"00:00"
     this.marketService.repair(bt, et)
       .subscribe((repair) => {
-        console.log(repair)
-        this.dismiss.emit(repair)
+        if(repair){
+          this.dismiss.emit(repair)
+        }
       })
   }
 
