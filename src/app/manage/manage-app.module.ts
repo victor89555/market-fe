@@ -54,7 +54,8 @@ import {AttachmentService} from './shared/attachment.service';
 import { ResourceListComponent } from './resource/resource-list/resource-list.component';
 import { DetectionListComponent } from './detection/detection-list/detection-list.component';
 import { DetectionFormComponent } from './detection/detection-form/detection-form.component'
-import { DetectionService } from './detection/shared/detection.service'
+import { DetectionService } from './detection/shared/detection.service';
+import { RepairReportsComponent } from './market/repair-reports/repair-reports.component'
 
 @NgModule({
   imports: [
@@ -99,7 +100,8 @@ import { DetectionService } from './detection/shared/detection.service'
     UserAuthorizeComponent,
     ResourceListComponent,
     DetectionListComponent,
-    DetectionFormComponent
+    DetectionFormComponent,
+    RepairReportsComponent
   ],
   entryComponents: [
     OrderFormComponent,
@@ -114,7 +116,8 @@ import { DetectionService } from './detection/shared/detection.service'
     UserAuthorizeComponent,
     RoleFormComponent,
     ContractViewComponent,
-    ElectronicScaleHistoryComponent
+    ElectronicScaleHistoryComponent,
+    RepairReportsComponent
   ],
   providers: [
     MenuService,

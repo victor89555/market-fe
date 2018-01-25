@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h4 class="modal-title">报表数据修复</h4>
+</div>
+<div class="modal-body">
+  <div class="form-horizontal form-repair">
+    <div class="form-group">
+      <div class="input-group">
+        <input class="form-control" placeholder="开始时间" [dateFormat]="'YYYY-MM-DD HH:mm:ss'" [showTimePicker]="true"
+               name="dp1" [(ngModel)]="repairModal.beginTime" reDatePicker #datePicker1="datePicker">
+        <div class="input-group-addon" (click)="datePicker1.toggle($event)">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group">
+        <input class="form-control" placeholder="结束时间" [dateFormat]="'YYYY-MM-DD HH:mm:ss'" [showTimePicker]="true"
+               name="dp2" [(ngModel)]="repairModal.endTime" reDatePicker #datePicker2="datePicker">
+        <div class="input-group-addon" (click)="datePicker2.toggle($event)">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="repair()">修复</button>
+  <button type="button" class="btn btn-warning" (click)="cancel()">取消</button>
+</div>

@@ -54,4 +54,10 @@ export class MarketService extends RebirthHttp {
                       @Query("dimension") dimension:number): Observable<any> {
     return null;
   }
+
+  //修复数据
+  @GET("reports/repair")
+  repair(@Query("beginTime")beginTime = "",@Query("endTime")endTime = ""): Observable<any> {
+    return null;
+  }
 }
