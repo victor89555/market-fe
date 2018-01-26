@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, ComponentFactoryResolver, OnInit, ViewEncapsulation} from "@angular/core";
-import {ModalService} from "rebirth-ng";
+import {DialogService, ModalService} from "rebirth-ng";
 import {ShopService} from "../shared/shop.service";
 import {Page} from "../../../thurder-ng/models/page.model";
 import {Market} from "../../market/shared/market.model";
@@ -32,7 +32,8 @@ export class ShopListComponent implements OnInit {
               private componentFactoryResolver: ComponentFactoryResolver,
               private shopService: ShopService,
               private marketService: MarketService,
-              private router:Router) {
+              private router:Router,
+              private dialogService: DialogService) {
   }
 
   ngOnInit(): void {
@@ -91,5 +92,23 @@ export class ShopListComponent implements OnInit {
 
   goWaterOrder(value) {
     this.router.navigate(['manage/orders'],{ queryParams: { shopId: value } });
+  }
+
+  delete(id: number, name: string) {
+    this.dialogService.confirm({
+      title: '提示',
+      content: `确定要删除商户：${name}？`,
+      html: false,
+      yes: '确定',
+      no: '取消'
+    }).subscribe(
+      data => {
+        this.shopService.delete(id).subscribe(() => {
+          this.query()
+        })
+      },
+      error => {
+      }
+    );
   }
 }

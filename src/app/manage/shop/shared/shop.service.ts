@@ -1,4 +1,4 @@
-import {Body, GET, Path, POST, PUT, Query, RebirthHttp} from "rebirth-http";
+import {Body, GET, Path, POST, PUT, Query, DELETE,RebirthHttp} from "rebirth-http";
 import {Observable} from "rxjs/Observable";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
@@ -55,6 +55,11 @@ export class ShopService extends RebirthHttp {
   // 获取商户营业执照附件
   @GET("shops/:id/attachments")
   getBusinessLicense(@Path("id") id: number): Observable<any[]> {
+    return null;
+  }
+
+  @DELETE("shops/:id")
+  delete(@Path("id") id: number): Observable<any> {
     return null;
   }
 }
